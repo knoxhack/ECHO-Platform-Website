@@ -1,0 +1,98 @@
+[
+  {
+    "id": "ashfall-gridfall-wasteland",
+    "title": "Ashfall Gridfall Wasteland",
+    "category": "Ashfall",
+    "description": "A hostile post-Gridfall survival landscape with broken relays, toxic storm haze, orbital wreckage, and radiation-lit ruins.",
+    "image": "/images/media/ashfall-gridfall-wasteland.png",
+    "alt": "Ashfall wasteland with ruined relay towers, orbital wreckage, storm clouds, and cyan signal lights",
+    "kind": "image",
+    "featured": true,
+    "relatedHref": "/ashfall",
+    "ctaLabel": "Explore Ashfall"
+  },
+  {
+    "id": "echo-launcher-portal",
+    "title": "ECHO Launcher Portal",
+    "category": "Launcher",
+    "description": "The launcher as a serious player gateway for install, update, repair, release channels, and official experience handoff.",
+    "image": "/images/media/echo-launcher-portal.png",
+    "alt": "Cyberglass ECHO Launcher portal with abstract install cards, channel rails, and diagnostic lights",
+    "kind": "image",
+    "featured": true,
+    "relatedHref": "/launcher",
+    "ctaLabel": "Open Launcher"
+  },
+  {
+    "id": "echo-terminal-interface",
+    "title": "Terminal Command Surface",
+    "category": "Interface",
+    "description": "A mission, intel, route, and reward command interface surface for ECHO experiences.",
+    "image": "/images/media/echo-terminal-interface.png",
+    "alt": "Dark cyberglass terminal command interface with mission-style panels and holographic signal displays",
+    "kind": "image",
+    "featured": false,
+    "relatedHref": "/docs/modules/terminal",
+    "ctaLabel": "Read Terminal Docs"
+  },
+  {
+    "id": "echo-holomap-overlay",
+    "title": "HoloMap Route Overlay",
+    "category": "Interface",
+    "description": "A holographic world-awareness surface for routes, crash sites, hazards, relays, missions, bases, and anomalies.",
+    "image": "/images/media/echo-holomap-overlay.png",
+    "alt": "Holographic map table showing routes, hazard rings, relay nodes, and anomaly markers over a ruined region",
+    "kind": "image",
+    "featured": false,
+    "relatedHref": "/docs/modules/holomap",
+    "ctaLabel": "Read HoloMap Docs"
+  },
+  {
+    "id": "echo-lens-scanner",
+    "title": "Lens Scanner Discovery",
+    "category": "Interface",
+    "description": "A scanner HUD for identifying blocks, machines, hazards, resources, and progression clues in-world.",
+    "image": "/images/media/echo-lens-scanner.png",
+    "alt": "Lens scanner HUD examining a damaged machine in an ashfall ruin with cyan scan beams and hazard glow",
+    "kind": "image",
+    "featured": false,
+    "relatedHref": "/docs/modules/lens",
+    "ctaLabel": "Read Lens Docs"
+  },
+  {
+    "id": "echo-index-archive",
+    "title": "Index Archive System",
+    "category": "Interface",
+    "description": "A discovery archive for items, recipes, usage paths, records, and recovered ECHO knowledge.",
+    "image": "/images/media/echo-index-archive.png",
+    "alt": "Cyberglass archive interface with floating item silhouettes, recipe cards, artifact records, and discovery nodes",
+    "kind": "image",
+    "featured": false,
+    "relatedHref": "/docs/modules/index",
+    "ctaLabel": "Read Index Docs"
+  },
+  {
+    "id": "echo-packos-validation",
+    "title": "PackOS Validation Layer",
+    "category": "Platform",
+    "description": "Package metadata, manifests, channels, checksums, lockfiles, release gates, and integrity validation as a platform surface.",
+    "image": "/images/media/echo-packos-validation.png",
+    "alt": "PackOS validation chamber with a glowing package cube, checksum beams, channel gates, and scan rings",
+    "kind": "image",
+    "featured": true,
+    "relatedHref": "/docs/platform/packos",
+    "ctaLabel": "Read PackOS Docs"
+  },
+  {
+    "id": "echo-devtalk-command-room",
+    "title": "ECHO Labs Dev Talk Room",
+    "category": "Dev Talks",
+    "description": "A platform command room visual for ECHO Labs updates, architecture talks, module showcases, and release explainers.",
+    "image": "/images/media/echo-devtalk-command-room.png",
+    "alt": "Dark ECHO Labs command room with holographic platform architecture screens and a central command table",
+    "kind": "image",
+    "featured": false,
+    "relatedHref": "/news",
+    "ctaLabel": "Watch Dev Talks"
+  }
+]

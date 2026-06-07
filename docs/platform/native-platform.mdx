@@ -1,0 +1,38 @@
+## What Native Platform Means
+
+ECHO Native Platform is the primary future loader direction for runtime-independent ECHO systems. It is the idea that ECHO contracts, modules, tooling, and player experiences should not be permanently trapped inside one compatibility target.
+
+This does not mean every native runtime surface is finished. It means new platform work should aim at Native Loader first, then use NeoForge as compatibility fallback and Standalone Runtime as the parity harness.
+
+## Current Position
+
+Native Loader is the main platform lane. NeoForge is the compatibility backend for Minecraft fallback. Standalone Runtime is the parity/runtime harness for behavior checks outside Minecraft.
+
+Native platform work should be described with exact evidence. A module is not loaded until its entrypoint class loads. Gameplay is not ready until AdapterCore reaches a Native Loader runtime host and the host records a real mutation.
+
+## Architecture Direction
+
+Native-ready ECHO work focuses on:
+
+- Runtime contracts for services, registries, events, and data ownership.
+- Adapter boundaries for Native Loader, NeoForge compatibility, Standalone parity, resources, and future targets.
+- Package metadata that can describe runtime expectations.
+- Launcher flows that can choose the correct runtime path.
+- Module APIs that avoid hard-coding one environment when a contract is available.
+- Save and data structures that can be reasoned about across versions.
+
+## What Not to Promise
+
+Do not say ECHO is leaving Minecraft soon.
+
+Do not say ECHO is already a finished standalone engine.
+
+Do not imply that existing worlds or modules automatically run natively.
+
+The stronger, accurate message is:
+
+> ECHO Native Loader is the primary future mod loader. NeoForge remains the compatibility backend, Standalone Runtime remains the parity harness, and gameplay readiness requires real Native Loader host mutation evidence.
+
+## Why It Matters
+
+Native ambition gives ECHO a direction bigger than pack assembly. Even before a native runtime ships, that direction improves current work: clearer contracts, cleaner module boundaries, better packaging, stronger validation, and fewer runtime-specific assumptions leaking through the system.

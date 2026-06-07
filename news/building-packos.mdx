@@ -1,0 +1,26 @@
+## Deterministic releases
+
+PackOS is the package and validation direction for ECHO. It gives official experiences a way to describe what should be installed, which channel is being used, which assets belong to a release, and which checks must pass before a launcher-managed install should be trusted.
+
+This video explains why ECHO needs more than a download link. Official packs should be understood, validated, repaired, and updated through structured metadata.
+
+## What PackOS connects
+
+- Release metadata.
+- Pack manifests.
+- Pack archives.
+- Channels and snapshots.
+- Checksums and integrity checks.
+- Future release gates.
+
+## Why it matters for players
+
+Players should not have to debug a pile of mismatched jars. PackOS gives the launcher a contract for what a valid official experience should look like.
+
+## Why it matters for developers
+
+Developers need repeatable release flows. A PackOS-aware process can make module versions, dependencies, manifests, and release notes easier to reason about before a public build reaches players.
+
+## Follow next
+
+The download portal now exposes release metadata, manifests, pack archives, module artifacts, and checksums from GitHub releases. The PackOS docs explain the longer-term validation model behind those assets.

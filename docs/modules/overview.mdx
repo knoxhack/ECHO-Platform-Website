@@ -1,0 +1,38 @@
+## What Modules Are
+
+ECHO modules are the building blocks of official experiences. A module can provide services, UI surfaces, progression systems, world vocabulary, scanners, overlays, recipes, data contracts, networking, rendering helpers, or Ashfall-specific content.
+
+Modules should feel like parts of one ecosystem, not disconnected files that happen to be installed together.
+
+## Module Categories
+
+The current public catalog uses these broad categories:
+
+- **Core Platform**: shared services, networking, data, missions, world state, rendering helpers.
+- **Player Interface**: Terminal, HoloMap, Lens, Index, and future screen systems.
+- **Ashfall Experience**: campaign, routes, survival systems, orbital remnants, Nexus systems, industry, logistics, armory, and content modules.
+- **Platform**: PackOS, AdapterCore, launcher architecture, and validation layers.
+- **Future Modules**: planned systems like ScreenCore, ThemeCore, SoundCore, WeatherCore, TutorialCore, RelicTech, TextureForge, and GuideCore.
+
+## Module Metadata
+
+Every public module should eventually expose:
+
+- Name and identifier.
+- Category and status.
+- Version or planned version.
+- Short description.
+- Dependencies.
+- Standalone support.
+- Whether Ashfall uses it.
+- Docs link.
+- GitHub path.
+- Release notes.
+
+This metadata powers the website catalog today and can feed a future module registry later.
+
+## Integration Surfaces
+
+Modules should integrate through shared ECHO systems where possible. For example, a survival module can expose scan data to Lens, route markers to HoloMap, entries to Index, and mission steps to Terminal without owning those interfaces directly.
+
+That is the platform idea in practice: reusable systems that understand each other.

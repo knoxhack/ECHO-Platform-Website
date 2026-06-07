@@ -1,0 +1,29 @@
+## Role
+
+ECHO: Terminal is the player command center. It is where missions, routes, intel, rewards, faction notices, inbox entries, and addon tabs can converge into one readable interface.
+
+Terminal should make ECHO feel like an operating platform inside the experience, not just a menu bolted onto a pack.
+
+## Player Uses
+
+Terminal can show:
+
+- Active missions and objectives.
+- Route progression.
+- Faction messages and intel.
+- Rewards and unlocks.
+- Inbox entries.
+- System warnings.
+- Module-provided tabs.
+
+## Developer Uses
+
+Developers should integrate Terminal through registered tabs, data providers, mission services, and shared contracts. A module should not need to fork the Terminal UI to add useful information.
+
+Good Terminal integrations are concise, state-aware, and connected to real gameplay. A tab should answer a player question: what am I doing, what changed, what is unlocked, what is dangerous, or where should I go next?
+
+## Ashfall Examples
+
+Ashfall can use Terminal for route objectives, signal fragments, faction intel, radiation warnings, recovered records, launcher news, and Nexus event state.
+
+Terminal is especially valuable when paired with Lens, HoloMap, and Index. The player scans something, maps a location, reads an archive, and then sees a coherent mission or route update.

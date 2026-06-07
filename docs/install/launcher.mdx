@@ -1,0 +1,36 @@
+## Purpose
+
+ECHO Launcher is the official gateway for ECHO experiences. Its job is to install, update, repair, validate, and prepare official packs so players do not have to manually assemble files.
+
+For the current Ashfall path, the launcher prepares a Minecraft/NeoForge-compatible setup and hands off to the supported launcher flow. As PackOS matures, this same launcher surface will also understand channels, manifests, lockfiles, snapshots, and integrity checks.
+
+## Recommended Install Flow
+
+1. Open the [Download](/download) page.
+2. Use the launcher setup path for your platform. Direct Windows or Linux installer buttons appear only when matching launcher assets are published.
+3. Launch ECHO Launcher.
+4. Select the official experience you want to install.
+5. Let the launcher download, update, and prepare the required files.
+6. Use the launcher handoff to start the experience.
+
+Players should use the launcher instead of manually copying jars whenever possible. Manual file work makes support harder because the launcher cannot reliably know which files were changed outside its control.
+
+## Update Flow
+
+When an update is available, the launcher should be the first place you check. The expected update path is:
+
+- Review the selected experience and release channel.
+- Let the launcher compare the local install to the expected pack state.
+- Download changed or missing files.
+- Repair stale, invalid, or incomplete files.
+- Prepare the runtime profile again if required.
+
+Until full PackOS release validation is public, download links may still point to GitHub release assets. The launcher remains the preferred player entry point.
+
+## Platform Notes
+
+Windows is the recommended player path for the first public releases once the installer asset is published.
+
+Linux support is expected through the AppImage path, with the expectation that dependency detection and edge-case docs will improve over time.
+
+If the launcher cannot find a dependency, cannot write to the install directory, or cannot prepare the runtime handoff, use [Troubleshooting](/docs/install/troubleshooting) before deleting files manually.

@@ -1,0 +1,43 @@
+## Purpose
+
+PackOS is the validation and package layer for ECHO experiences. It is designed to make official packs reproducible, inspectable, channel-aware, and safer to release.
+
+PackOS is not just a download list. It is the future contract between build outputs, release gates, launcher installs, and validated player experiences.
+
+## Core Concepts
+
+### Manifest
+
+The manifest describes package identity, target experience, modules, dependencies, versions, expected files, runtime target, and release channel.
+
+### Lockfile
+
+The lockfile records exact resolved versions and artifacts. It exists so the same release can be installed and repaired consistently.
+
+### Channel
+
+Channels separate stable, testing, preview, internal, and future experimental delivery paths. Players should not need to understand every channel, but the launcher should.
+
+### Snapshot
+
+Snapshots capture package state at a known point. They are useful for diagnostics, rollbacks, and reproducing a specific release.
+
+### Release Gate
+
+Release gates define checks a package must pass before it becomes public. Examples include required metadata, missing dependency detection, invalid version checks, and integrity validation.
+
+## Launcher Relationship
+
+ECHO Launcher is the player surface. PackOS is the package intelligence underneath it.
+
+The launcher should eventually answer questions like:
+
+- Is this install complete?
+- Are any files stale or missing?
+- Does this package match its lockfile?
+- Is this channel safe for a normal player?
+- Which runtime adapter should handle this experience?
+
+## Current Status
+
+PackOS is in progress. Until public PackOS release validation is complete, some download metadata may remain manually configured in the website and release data. The docs should still describe the intended architecture clearly, without implying that every validation feature is already shipped.

@@ -1,0 +1,136 @@
+## Purpose
+
+The module template is the expected shape for an ECHO module. It should make identity, dependencies, integration points, docs, and release readiness visible before a module is treated as part of the platform.
+
+The exact build files may evolve, but the information model should remain stable. A module that can be described consistently can later be validated by PackOS, listed in the website registry, packaged for ECHO Launcher, and reasoned about by other modules.
+
+## When to Use This Guide
+
+Use this guide when you are:
+
+- Creating a new ECHO module.
+- Moving an existing system into a first-party module shape.
+- Adding docs or release metadata to a module.
+- Preparing a module for launcher-managed packaging.
+- Checking whether a module has hidden dependencies.
+
+For the wider platform model, read [Module System](/docs/modules/overview), [Core Modules](/docs/modules/core), and [PackOS](/docs/platform/packos).
+
+## Required Module Identity
+
+Every public module should define:
+
+- Stable identifier.
+- Display name.
+- Category.
+- Status.
+- Version or planned version.
+- Short description.
+- Owner or package source.
+- GitHub path.
+- Docs path.
+- Release notes.
+- Whether it can run standalone.
+- Whether Ashfall uses it.
+
+Stable IDs matter. Changing a module ID should be treated as a compatibility event because docs, manifests, saves, dependencies, and release metadata may all reference it.
+
+## Example Module Descriptor
+
+The example below shows the intended metadata shape. Treat API names as examples until the SDK is formally locked.
+
+```ts
+import { defineEchoModule } from "@echo/sdk/module";
+
+export default defineEchoModule({
+  id: "echoterminal",
+  name: "ECHO: Terminal",
+  category: "Player Interface",
+  status: "Active",
+  version: "1.1.0",
+  description: "Mission, route, intel, reward, inbox, and addon-tab interface.",
+  dependsOn: ["echocore", "echonetcore", "echomissioncore"],
+  standalone: true,
+  usedByAshfall: true,
+  docs: "/docs/modules/terminal",
+  source: "https://github.com/knoxhack/ECHO/tree/main/addons/echoterminal"
+});
+```
+
+The descriptor should be boring, explicit, and machine-readable. PackOS and launcher tooling become stronger when module state is easy to inspect.
+
+## Dependencies
+
+Dependencies should be explicit. If a module consumes MissionCore, DataCore, Terminal, Lens, HoloMap, Index, NetCore, or RenderCore, that relationship belongs in metadata.
+
+Avoid hidden dependencies created by direct imports or runtime assumptions. Hidden dependencies make PackOS validation and launcher repair weaker because tools cannot explain what is missing.
+
+Use dependency metadata to answer:
+
+- What must load before this module?
+- Which services does this module consume?
+- Which optional integrations can be disabled safely?
+- Which modules are required by Ashfall?
+- Which modules are internal and not player-facing?
+
+## Integration Points
+
+A module template should leave obvious places for:
+
+- Service registration.
+- Event listeners.
+- Data providers.
+- Network messages.
+- Terminal tabs.
+- Index providers.
+- Lens providers.
+- HoloMap overlays.
+- PackOS metadata.
+
+Example integration shape:
+
+```ts
+export function registerRelicTech(context: EchoModuleContext) {
+  context.services.register("relictech.catalog", new RelicCatalogService());
+  context.integrations.index.addProvider(createRelicIndexProvider());
+  context.integrations.lens.addProvider(createRelicLensProvider());
+  context.packos.describe(createRelicTechPackageMetadata());
+}
+```
+
+This keeps integration visible. A reviewer should not have to search the entire codebase to find how a module enters the platform.
+
+## Docs and Release Notes
+
+Each module should include public-facing docs and release notes. A platform registry is more useful when users and developers can see what changed, not only the latest version number.
+
+Minimum docs should cover:
+
+- What the module owns.
+- Which modules it depends on.
+- Which player-facing systems it integrates with.
+- Whether it is stable, active, prototype, experimental, planned, deprecated, or internal.
+- What changed in the current release.
+
+## Implementation Checklist
+
+- The ID is lowercase, stable, and unique.
+- The category matches the module catalog.
+- Status is honest and not inflated.
+- Dependencies include both core and interface modules.
+- Optional integrations are marked as optional where possible.
+- Docs and GitHub paths are present.
+- Release notes are understandable.
+- PackOS metadata can describe the module without guessing.
+
+## Common Mistakes
+
+- Treating a module folder as the source of truth while metadata stays stale.
+- Marking a prototype module as stable because it builds.
+- Adding a UI integration without documenting which surface owns presentation.
+- Depending on another module's internal classes instead of using a contract.
+- Leaving planned modules with fake versions that imply release readiness.
+
+## Next Step
+
+After the descriptor exists, define the service boundary in [Service Contracts](/docs/developers/service-contracts). If the module has player-facing information, connect it through [UI Integration](/docs/developers/ui-integration).

@@ -1,0 +1,89 @@
+## Purpose
+
+The first developer milestone is simple: get the workspace building, understand the platform layers, and create a small module that integrates through ECHO contracts instead of private shortcuts.
+
+ECHO development should feel like building inside a platform, not assembling disconnected modifications. Today that platform targets Minecraft/NeoForge-compatible experiences. The long-term direction is runtime-independent, but player-facing work should still describe the current compatibility path honestly.
+
+## Before You Build
+
+Start by reading the platform shape, not only the code folders:
+
+- [Platform Overview](/docs/platform/overview) explains the launcher, PackOS, module, contract, adapter, and future runtime layers.
+- [Module System](/docs/modules/overview) explains how first-party modules should relate to each other.
+- [Service Contracts](/docs/developers/service-contracts) explains how modules avoid hard coupling.
+- [AdapterCore](/docs/platform/adaptercore) explains where Minecraft/NeoForge assumptions should be isolated.
+
+You do not need to understand every system before writing a first module. You do need to know which layer owns your idea.
+
+## Workspace to First Module
+
+Use this flow for the first pass:
+
+1. Install the workspace and dependencies.
+2. Build the core modules.
+3. Copy or create a module from the expected [Module Template](/docs/developers/module-template).
+4. Define module identity, category, status, and dependencies.
+5. Register services or providers through ECHO contracts.
+6. Integrate with Terminal, Index, Lens, or HoloMap if the module exposes player-facing information.
+7. Add PackOS-aware metadata.
+8. Validate with current build checks and future Command Center checks.
+9. Package for ECHO Launcher when the release path is ready.
+
+## Starter Module Shape
+
+The example below shows the intended shape of an ECHO module. Treat API names as developer-facing examples until the SDK is formally locked.
+
+```ts
+import { defineEchoModule } from "@echo/sdk/module";
+import { indexProvider, lensProvider } from "@echo/sdk/integration";
+
+export default defineEchoModule({
+  id: "echorelictech",
+  name: "ECHO: RelicTech",
+  category: "Progression",
+  status: "Prototype",
+  version: "0.1.0",
+  dependsOn: ["echocore", "echodatacore", "echoindex", "echolens"],
+
+  register(context) {
+    context.provide(indexProvider("relictech.entries", createRelicIndexEntries));
+    context.provide(lensProvider("relictech.scans", createRelicScanResults));
+  }
+});
+```
+
+The important part is not the exact import path. The important part is the behavior: the module declares identity, dependencies, and integration points in one visible place.
+
+## Good First Modules
+
+A good first module does one thing clearly:
+
+- Add an Index provider for a new content category.
+- Add a Lens scanner provider for one hazard type.
+- Add a Terminal tab that reads mission or route state.
+- Add HoloMap markers for a known world system.
+- Add PackOS metadata for an existing module.
+
+Avoid starting with a module that owns networking, persistent saves, custom UI, and world generation all at once. That hides the contract boundaries you are trying to learn.
+
+## Implementation Checklist
+
+- The module has a stable ID and clear display name.
+- The dependency list matches what the module actually consumes.
+- Player-facing information goes through Terminal, Index, Lens, or HoloMap where possible.
+- Persistent state has an owner and version plan.
+- Runtime-specific logic is isolated near AdapterCore or a runtime bridge.
+- PackOS metadata describes package intent, channel, dependency, and artifact expectations.
+- The module has docs and release notes before it is treated as public.
+
+## Common Mistakes
+
+- Importing another module's internals instead of using a service contract.
+- Saving data without an owner or version marker.
+- Adding a custom screen when an existing ECHO interface could carry the information.
+- Calling native or runtime-independent work finished before a shipped target exists.
+- Treating a GitHub release asset as the normal player install path instead of routing players through ECHO Launcher.
+
+## Next Step
+
+Create the module shape first, then choose one integration surface. If the module is mostly content or discovery, start with [Index](/docs/modules/index) or [Lens](/docs/modules/lens). If it is mission or route related, start with [Terminal](/docs/modules/terminal) and [MissionCore through service contracts](/docs/developers/service-contracts).

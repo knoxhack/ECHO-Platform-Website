@@ -1,0 +1,41 @@
+## Platform Shape
+
+ECHO Platform is the foundation behind official ECHO experiences. It connects player delivery, module systems, validation, developer tooling, runtime contracts, and compatibility adapters.
+
+Native Loader is the primary future platform lane. NeoForge remains the Minecraft compatibility backend, and Standalone Runtime remains the parity harness. ECHO systems are being separated into contracts, services, metadata, registries, and adapters so gameplay can run through the active runtime host instead of being hard-coded to one backend.
+
+## Layers
+
+ECHO can be understood as a stack:
+
+- **Official Experiences**: Ashfall and future ECHO worlds.
+- **Player Layer**: ECHO Launcher, downloads, updates, diagnostics, and repair.
+- **Pack Layer**: PackOS manifests, lockfiles, channels, snapshots, and release gates.
+- **Module Layer**: Core, interface, gameplay, world, survival, and progression modules.
+- **Runtime Contract Layer**: Services, registries, events, data ownership, networking, and save expectations.
+- **Adapter Layer**: Native Loader host bridges, NeoForge compatibility, Standalone parity, resources, registry bridges, content bridges, and future target adapters.
+- **Native Loader Runtime**: world, entity, item, UI, renderer, save, and networking foundations.
+
+## Why This Matters
+
+ECHO needs official experiences to be understood, validated, repaired, updated, extended, and eventually portable across better runtime boundaries.
+
+That is why the platform avoids depending only on loose file assembly. The launcher should know what it installed. PackOS should know what a valid release looks like. Modules should know which services they depend on. Adapters should isolate runtime-specific details.
+
+## Language to Use
+
+Use:
+
+> ECHO Native Loader is the primary future mod loader; NeoForge is compatibility fallback; Standalone Runtime is parity harness.
+
+Avoid:
+
+> ECHO is leaving Minecraft soon.
+
+Use:
+
+> ECHO is a modular game platform moving Native Loader first while keeping NeoForge fallback and Standalone parity.
+
+Avoid:
+
+> ECHO is already a standalone game engine.

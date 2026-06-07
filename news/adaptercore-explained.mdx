@@ -1,0 +1,21 @@
+## The Shared Gameplay Contract
+
+AdapterCore is the bridge between ECHO's platform contracts and the runtime that executes them. Native Loader is the primary future host, NeoForge remains compatibility fallback for Minecraft play, and Standalone Runtime remains the parity harness. Long term, ECHO systems should keep moving toward contracts that are not trapped inside one loader or one game's implementation details.
+
+This video is useful because it explains the difference between supporting Minecraft today and designing every system as if Minecraft is the only possible future.
+
+## What AdapterCore protects
+
+- Runtime-specific registries and resources.
+- Content bridge behavior.
+- Loader-specific entry points.
+- Data and save compatibility boundaries.
+- Native Loader host mutation evidence.
+
+## How to read the architecture
+
+AdapterCore is not a magic exit from Minecraft. It is a practical gameplay contract. ECHO still needs working gameplay, working packs, and working launcher flows now. The contract keeps those practical systems from hard-coding every future decision into the current compatibility layer.
+
+## Follow next
+
+Read the AdapterCore docs, then compare them with the platform overview to see how launcher, PackOS, modules, and runtime contracts fit together.

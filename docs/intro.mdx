@@ -1,0 +1,30 @@
+## What ECHO Is
+
+ECHO is a modular game platform for connected experiences. Native Loader is the primary future platform lane, NeoForge is the compatibility backend, and Standalone Runtime is the parity harness.
+
+The important distinction is scope: ECHO is not only a pack, and Ashfall is not the whole brand. ECHO Platform is the operating layer. Ashfall is the first official experience built to prove that layer through real play.
+
+## The Ecosystem
+
+ECHO has six public-facing pieces:
+
+- **ECHO Launcher** installs, updates, repairs, validates, and prepares official experiences.
+- **Ashfall** is the first official survival experience, set after the Gridfall.
+- **ECHO Modules** provide shared systems like Terminal, HoloMap, Lens, Index, mission services, world services, data, networking, and rendering helpers.
+- **PackOS** is the validation and package layer for manifests, channels, lockfiles, release gates, and future integrity checks.
+- **AdapterCore** is the shared gameplay contract for Native Loader, NeoForge fallback, Standalone parity, and future targets.
+- **Native Platform** is the Native Loader-first direction for runtime-independent ECHO systems.
+
+## Current Runtime Position
+
+ECHO now treats Native Loader as the main platform lane. NeoForge remains available as compatibility fallback for Minecraft play while Native Loader proof expands.
+
+Native readiness must be described carefully: descriptor discovery and activation markers are not gameplay proof. A native feature is ready only when module classes load, AdapterCore services register, and the active runtime host records real mutation evidence.
+
+## Where to Start
+
+Players should start with [Install ECHO Launcher](/docs/install/launcher), then [Play Ashfall](/docs/install/ashfall).
+
+Developers should start with [Developer Getting Started](/docs/developers/getting-started), then read [Module System](/docs/modules/overview) and [Service Contracts](/docs/developers/service-contracts).
+
+Contributors working on platform architecture should read [Platform Overview](/docs/platform/overview), [PackOS](/docs/platform/packos), and [AdapterCore](/docs/platform/adaptercore).

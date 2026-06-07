@@ -1,0 +1,48 @@
+## First Response
+
+If something breaks, start with repair before manual deletion. ECHO Launcher is designed to become the source of truth for official pack state, and manual changes can hide the real cause of an install problem.
+
+Use this order:
+
+1. Restart ECHO Launcher.
+2. Confirm you are on the intended release channel.
+3. Run the launcher repair or validation action.
+4. Check that the install path is writable.
+5. Confirm the required runtime launcher is available.
+6. Try the handoff again.
+
+## Common Problems
+
+### Missing Files
+
+Use repair. Missing files usually mean an interrupted download, a moved directory, or a local cleanup tool removing files that the launcher expected to manage.
+
+### Locked Files
+
+Close Minecraft, the Minecraft Launcher, file explorers, archive tools, and any editor that may be holding jars or config files. Then run repair again.
+
+### Invalid Path
+
+Move the install location to a normal user-writable folder. Avoid protected system folders, cloud-sync folders, and paths with unusual permissions.
+
+### Linux AppImage Issues
+
+Confirm the AppImage is executable and that required desktop/runtime dependencies are present. If the launcher cannot detect a dependency, record the exact message before changing the system.
+
+### Profile Handoff Fails
+
+Run repair, confirm the supported runtime launcher is installed, and make sure no old profile is locked or half-created. If the handoff still fails, report the launcher version and the exact step where it stops.
+
+## Support Report Checklist
+
+Include:
+
+- Operating system and version.
+- ECHO Launcher version.
+- Ashfall version or channel.
+- Install path.
+- Error message or screenshot.
+- Whether repair was run.
+- What changed immediately before the problem started.
+
+Good reports make launcher diagnostics better. ECHO is being built so future errors can become guided repair paths instead of guesswork.

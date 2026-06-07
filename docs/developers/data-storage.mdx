@@ -1,0 +1,119 @@
+## Role
+
+DataCore is responsible for persistent player and world data ownership. ECHO systems need to know who owns data, how it is stored, how it migrates, and how it survives updates.
+
+Data storage is a platform concern because bad persistence breaks progression, support, repair, and future runtime movement. PackOS and launcher validation can eventually detect incompatible package states, but modules still need responsible data evolution.
+
+## Ownership
+
+Every persistent field should have an owner. Ownership answers:
+
+- Which module writes this data?
+- Which systems may read it?
+- What happens if the module is missing?
+- How is the data migrated?
+- Can the data be rebuilt from other state?
+- Which UI surfaces expose it?
+- Which network actions can change it?
+
+If a module cannot answer those questions, the data model is not ready.
+
+## Player Data
+
+Player data can include discoveries, mission progress, unlocks, scanned targets, Index entries, route state, faction reputation, and tutorial state.
+
+Keep player data scoped and readable. A single unstructured blob is hard to migrate, debug, or validate.
+
+Example player state shape:
+
+```ts
+export type RelicTechPlayerState = {
+  schemaVersion: 2;
+  discoveredRelics: string[];
+  scannedTargets: Record<string, "unknown" | "partial" | "known">;
+  unlockedIndexEntries: string[];
+  lastTerminalNotice?: string;
+};
+```
+
+The version marker matters. Even small modules should assume their data may need to evolve.
+
+## World Data
+
+World data can include region state, hazard maps, discovered locations, relay networks, route unlocks, global events, and anomaly conditions.
+
+World data should avoid assuming that every chunk, entity, or marker is loaded at all times. A HoloMap overlay may need to show a route even when the underlying region is not loaded. A mission may need to reference a relay before the player visits it again.
+
+Example world state shape:
+
+```ts
+export type RelicTechWorldState = {
+  schemaVersion: 1;
+  knownVaults: Array<{
+    id: string;
+    regionId: string;
+    markerState: "hidden" | "rumored" | "confirmed";
+  }>;
+  activeSignalStorm?: {
+    regionId: string;
+    startedAtTick: number;
+    intensity: "low" | "medium" | "high";
+  };
+};
+```
+
+Prefer stable IDs and region references over direct runtime object references.
+
+## Migration
+
+Any versioned data should have a migration story. Even a small version marker is better than guessing later.
+
+Example migration shape:
+
+```ts
+dataCore.migrations.register("echorelictech.player", {
+  from: 1,
+  to: 2,
+  migrate(oldState) {
+    return {
+      schemaVersion: 2,
+      discoveredRelics: oldState.discoveredRelics ?? [],
+      scannedTargets: oldState.scannedTargets ?? {},
+      unlockedIndexEntries: [],
+      lastTerminalNotice: oldState.lastNotice
+    };
+  }
+});
+```
+
+Migration code should be boring and explicit. If a field cannot be migrated, document the fallback.
+
+## Storage Checklist
+
+- Every saved field has an owner.
+- Every saved object has a schema version.
+- Runtime references are stored as stable IDs when possible.
+- Missing modules have a defined fallback behavior.
+- UI surfaces read through services, not raw storage.
+- Network actions validate before mutating state.
+- Migrations are documented before release.
+
+## Common Mistakes
+
+- Storing direct runtime objects in long-lived ECHO state.
+- Letting UI modules mutate storage directly.
+- Combining player and world data in one unstructured blob.
+- Adding new fields without migration notes.
+- Treating missing data as impossible.
+
+## Related Docs
+
+- [Service Contracts](/docs/developers/service-contracts)
+- [Networking](/docs/developers/networking)
+- [PackOS](/docs/platform/packos)
+- [HoloMap](/docs/modules/holomap)
+- [Index](/docs/modules/index)
+
+## Next Step
+
+After defining ownership, document which services expose the data and which UI surfaces display it. Start with [Service Contracts](/docs/developers/service-contracts), then connect player-facing state through [UI Integration](/docs/developers/ui-integration).

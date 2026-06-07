@@ -1,0 +1,35 @@
+## Purpose
+
+Core modules provide the shared services that other ECHO systems build on. They are the least glamorous part of the platform, and also the most important for stability.
+
+## Core Module Set
+
+### ECHO: Core
+
+Shared contracts, service registration, platform bootstrap, utility APIs, and common vocabulary.
+
+### ECHO: NetCore
+
+Networking, packets, server actions, sync paths, rate limiting, diagnostics, and safety helpers.
+
+### ECHO: DataCore
+
+Persistent player and world data ownership. DataCore should make it clear which system owns which data and how that data survives updates.
+
+### ECHO: MissionCore
+
+Mission, objective, route, reward, faction intel, and feed backend services.
+
+### ECHO: WorldCore
+
+Regions, hazards, discoveries, markers, overlays, world vocabulary, and shared spatial meaning.
+
+### ECHO: RenderCore
+
+Rendering helpers, particles, glow systems, animation hooks, and overlay support.
+
+## Design Expectations
+
+Core modules should prefer boring reliability over flashy features. They should expose stable contracts, avoid unnecessary coupling, and make it easier for interface and gameplay modules to share state safely.
+
+When an Ashfall system needs missions, scans, map markers, persistent unlocks, or synchronized actions, it should use core services rather than inventing another private path.

@@ -1,0 +1,189 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  --echo-border: rgba(90, 210, 255, 0.22);
+  --echo-glass: rgba(12, 20, 28, 0.72);
+  --echo-glass-soft: rgba(18, 30, 42, 0.58);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(54, 217, 255, 0.13), transparent 34rem),
+    radial-gradient(circle at 82% 18%, rgba(255, 184, 77, 0.09), transparent 28rem),
+    linear-gradient(180deg, #05070a 0%, #080d12 52%, #05070a 100%);
+  color: #eaf6ff;
+  font-family: Inter, Geist, "IBM Plex Sans", system-ui, sans-serif;
+}
+
+body::before {
+  pointer-events: none;
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background-image:
+    linear-gradient(rgba(54, 217, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(54, 217, 255, 0.045) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.75), transparent 72%);
+}
+
+body::after {
+  pointer-events: none;
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.13;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 3px);
+  mix-blend-mode: screen;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: rgba(54, 217, 255, 0.32);
+  color: #ffffff;
+}
+
+@layer components {
+  .section-shell {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .cyber-panel {
+    background:
+      linear-gradient(135deg, rgba(12, 20, 28, 0.84), rgba(18, 30, 42, 0.48)),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent);
+    border: 1px solid var(--echo-border);
+    box-shadow: 0 16px 60px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(18px);
+  }
+
+  .cyber-button {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-[5px] border px-4 py-2 text-sm font-semibold transition;
+  }
+
+  .cyber-button-primary {
+    @apply border-echo-cyan bg-echo-cyan text-[#031018] shadow-glow hover:bg-[#70e7ff];
+  }
+
+  .cyber-button-secondary {
+    @apply border-white/15 bg-white/[0.045] text-echo-text hover:border-echo-cyan/60 hover:bg-echo-cyan/10;
+  }
+
+  .cyber-label {
+    @apply font-mono text-xs uppercase tracking-[0.18em] text-echo-cyan;
+  }
+
+  .scanline {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .scanline::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(180deg, transparent, rgba(54, 217, 255, 0.08), transparent);
+    transform: translateY(-100%);
+    animation: scanline 7s linear infinite;
+  }
+
+  .prose-echo {
+    @apply max-w-none text-echo-muted;
+  }
+
+  .prose-echo h2 {
+    @apply mt-10 border-t border-white/10 pt-8 font-display text-2xl font-bold text-echo-text;
+  }
+
+  .prose-echo h3 {
+    @apply mt-8 font-display text-xl font-bold text-echo-cyan;
+  }
+
+  .prose-echo p {
+    @apply mt-4 text-base leading-7 text-echo-muted;
+  }
+
+  .prose-echo a {
+    @apply text-echo-cyan underline decoration-echo-cyan/35 underline-offset-4 hover:text-[#70e7ff];
+  }
+
+  .prose-echo ul,
+  .prose-echo ol {
+    @apply mt-4 space-y-2 pl-5 text-base leading-7 text-echo-muted;
+  }
+
+  .prose-echo ul {
+    @apply list-disc;
+  }
+
+  .prose-echo ol {
+    @apply list-decimal;
+  }
+
+  .prose-echo li::marker {
+    @apply text-echo-cyan;
+  }
+
+  .prose-echo strong {
+    @apply font-semibold text-echo-text;
+  }
+
+  .prose-echo code {
+    @apply rounded-[4px] border border-white/10 bg-white/[0.06] px-1.5 py-0.5 font-mono text-sm text-echo-cyan;
+  }
+
+  .prose-echo pre {
+    @apply mt-5 overflow-x-auto rounded-[6px] border border-white/10 bg-[#030609] p-4;
+  }
+
+  .prose-echo pre code {
+    @apply border-0 bg-transparent p-0 text-sm text-echo-text;
+  }
+
+  .prose-echo blockquote {
+    @apply mt-6 border-l-2 border-echo-amber bg-echo-amber/10 px-5 py-4 text-echo-text;
+  }
+
+  .prose-echo table {
+    @apply mt-6 w-full border-collapse overflow-hidden text-sm;
+  }
+
+  .prose-echo th,
+  .prose-echo td {
+    @apply border border-white/10 px-3 py-2 text-left align-top;
+  }
+
+  .prose-echo th {
+    @apply bg-echo-cyan/10 font-mono text-xs uppercase tracking-[0.12em] text-echo-cyan;
+  }
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}

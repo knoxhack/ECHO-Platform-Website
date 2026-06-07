@@ -1,0 +1,40 @@
+## Purpose
+
+A PackOS manifest describes an official experience package in a way that can be validated, installed, repaired, and released through ECHO tooling.
+
+This reference is intentionally early. It captures the shape of the information PackOS should own without claiming every field is final.
+
+## Expected Areas
+
+- Package identity.
+- Experience name.
+- Release channel.
+- Runtime target.
+- Module list.
+- Dependency graph.
+- Artifact list.
+- Lockfile reference.
+- Snapshot reference.
+- Integrity data.
+- Release notes.
+- Known issues.
+- Launcher compatibility.
+
+## Example Shape
+
+```json
+{
+  "id": "ashfall",
+  "name": "Ashfall",
+  "channel": "public",
+  "runtime": "minecraft-neoforge",
+  "modules": ["echocore", "echoterminal", "echolens"],
+  "lockfile": "packos.lock.json"
+}
+```
+
+## Validation Intent
+
+PackOS should help answer whether a package is complete, compatible, expected, and safe for the selected channel.
+
+If a player install is broken, the manifest and lockfile should give the launcher enough information to repair or explain the problem.

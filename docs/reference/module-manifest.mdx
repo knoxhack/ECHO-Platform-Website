@@ -1,0 +1,35 @@
+## Purpose
+
+A module manifest describes a module in a way the website, PackOS, launcher tooling, and developers can understand.
+
+The current website module registry is JSON-based, but the same fields are useful for future package validation.
+
+## Recommended Fields
+
+```json
+{
+  "id": "echoterminal",
+  "name": "ECHO: Terminal",
+  "category": "Player Interface",
+  "status": "Active",
+  "version": "1.1.0",
+  "description": "Mission, route, intel, reward, inbox, and addon-tab interface.",
+  "dependencies": ["echocore", "echonetcore", "echomissioncore"],
+  "standalone": true,
+  "usedByAshfall": true,
+  "docs": "/docs/modules/terminal",
+  "github": "https://github.com/knoxhack/ECHO/tree/main/addons/echoterminal"
+}
+```
+
+## Field Guidance
+
+Use stable IDs. Changing an ID should be treated as a compatibility event.
+
+Use honest status values. Planned and prototype modules should not look production-ready.
+
+Keep descriptions short enough for cards and registries, then link to docs for detail.
+
+List dependencies explicitly. Hidden dependencies weaken validation and repair.
+
+Use `standalone` only when a module can make sense outside an official experience.

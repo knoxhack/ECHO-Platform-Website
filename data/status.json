@@ -1,0 +1,7 @@
+[
+  { "name": "Ashfall", "status": "Active Development" },
+  { "name": "Launcher", "status": "Public Releases" },
+  { "name": "PackOS", "status": "In Progress" },
+  { "name": "Native Platform", "status": "Foundation Phase" },
+  { "name": "NeoForge Adapter", "status": "Active" }
+]

@@ -1,0 +1,132 @@
+## Purpose
+
+Service contracts are the boundary between ECHO behavior and runtime-specific implementation. They let modules talk to shared systems without needing to know every detail of the current adapter.
+
+Contracts are one of the main ways ECHO grows beyond a single pack. Today, they still need to work well inside Minecraft/NeoForge-compatible experiences. Over time, they also create cleaner boundaries for AdapterCore and future runtime-independent systems.
+
+## When to Create a Contract
+
+Create a contract when more than one module needs the same behavior or when a player-facing surface needs data from another system.
+
+Good candidates include:
+
+- Mission state and objective progress.
+- Index entries and unlock state.
+- Lens scan results.
+- HoloMap markers and overlays.
+- Persistent player or world data.
+- Networked actions.
+- Package metadata used by PackOS or launcher tooling.
+
+Avoid creating a contract only to rename a private method. A contract should describe platform behavior, not implementation trivia.
+
+## Good Contract Traits
+
+A good service contract:
+
+- Names the behavior it provides.
+- Defines ownership and lifecycle.
+- Describes inputs and outputs.
+- Avoids leaking runtime-only types where possible.
+- Handles missing or unavailable services gracefully.
+- Can be tested without launching the full experience.
+- Makes failure states visible to diagnostics.
+
+## Example Contract Shape
+
+The example below shows the intended pattern. Treat names as examples until the SDK is formally locked.
+
+```ts
+export type ScanTarget = {
+  id: string;
+  runtimeRef: RuntimeTargetRef;
+  playerId: string;
+};
+
+export type ScanResult = {
+  title: string;
+  summary: string;
+  dangerLevel: "none" | "low" | "medium" | "high";
+  relatedIndexEntry?: string;
+};
+
+export interface LensScanProvider {
+  id: string;
+  supports(target: ScanTarget): boolean;
+  scan(target: ScanTarget, context: EchoServiceContext): Promise<ScanResult | null>;
+}
+```
+
+The contract does not require the UI to know how scan data is produced. It also does not require the provider to draw its own scanner screen. Lens owns presentation; the provider owns meaning.
+
+## Provider Registration
+
+Services should be registered through visible module entry points:
+
+```ts
+export function register(context: EchoModuleContext) {
+  context.services.require("echocore.lifecycle");
+  context.integrations.lens.addProvider({
+    id: "relictech.ancient-device-scan",
+    supports: isAncientDeviceTarget,
+    scan: scanAncientDevice
+  });
+}
+```
+
+This style makes dependencies reviewable. It also gives future PackOS and Command Center tooling a path to explain what a module contributes.
+
+## Adapter Boundary
+
+If a contract needs Minecraft, NeoForge, or future runtime-specific data, isolate the translation as close to [AdapterCore](/docs/platform/adaptercore) as possible.
+
+The goal is not abstraction for its own sake. The goal is to keep ECHO systems portable enough that PackOS, the launcher, docs, and modules can reason about them consistently.
+
+Runtime references should be narrow:
+
+- A block, entity, or item may enter through an adapter reference.
+- The service contract should describe ECHO meaning.
+- Player interfaces should receive already-normalized data.
+- Save data should avoid storing adapter-only objects directly.
+
+## Failure Behavior
+
+Contracts should define what happens when:
+
+- A dependency is missing.
+- A provider returns no data.
+- A feature is unsupported on the current runtime.
+- A runtime reference cannot be resolved.
+- Player progression does not allow full information yet.
+
+Silent failure makes diagnostics and launcher repair harder. Prefer explicit unknown, unavailable, locked, or unsupported states.
+
+## Implementation Checklist
+
+- The contract name describes behavior, not implementation.
+- Inputs and outputs are stable and documented.
+- Runtime-specific references are isolated.
+- Optional dependencies degrade cleanly.
+- Logging records enough context for support.
+- The contract has at least one provider and one consumer path.
+- Related docs link to the contract.
+
+## Common Mistakes
+
+- Passing Minecraft or NeoForge objects through every layer because it is convenient.
+- Letting a UI module own data that belongs to a gameplay module.
+- Returning `null` without a reason code or fallback state.
+- Registering providers in hidden static initializers.
+- Adding a contract without documenting who owns lifecycle and data.
+
+## Related Docs
+
+- [Module Template](/docs/developers/module-template)
+- [Networking](/docs/developers/networking)
+- [Data Storage](/docs/developers/data-storage)
+- [AdapterCore](/docs/platform/adaptercore)
+- [Core Modules](/docs/modules/core)
+
+## Next Step
+
+Once the contract exists, decide whether it needs network synchronization in [Networking](/docs/developers/networking) or persistent ownership in [Data Storage](/docs/developers/data-storage).

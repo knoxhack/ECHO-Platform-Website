@@ -1,0 +1,38 @@
+## Purpose
+
+AdapterCore is the shared gameplay contract between ECHO platform contracts and runtime-specific implementation details.
+
+Native Loader is the primary future backend. NeoForge is the compatibility fallback backend. Standalone Runtime is the parity harness. The goal is not to hide every difference, but to keep those differences in predictable runtime hosts.
+
+## What Belongs Behind AdapterCore
+
+AdapterCore should own or coordinate:
+
+- Runtime bootstrapping.
+- Registry bridges.
+- Resource and asset bridges.
+- Content loading boundaries.
+- Event translation.
+- Runtime-specific networking hooks.
+- Save and data handoff points.
+- Compatibility checks for Native Loader, NeoForge fallback, and Standalone parity targets.
+
+## What Should Stay Above It
+
+ECHO modules should prefer platform contracts where possible:
+
+- Mission services should not need to know every runtime detail.
+- Terminal tabs should integrate through UI contracts.
+- Lens providers should describe scan data and requirements.
+- HoloMap overlays should describe markers, routes, and hazards.
+- PackOS metadata should describe target requirements without embedding unrelated runtime code.
+
+## Design Rule
+
+If a system would need to be rewritten for every runtime target, it probably belongs behind an adapter boundary or needs a platform contract above it.
+
+If a system describes ECHO gameplay, progression, data, UI intent, or package metadata, it should usually live above AdapterCore.
+
+## Current Status
+
+AdapterCore is active as the shared gameplay contract. It should be documented as the place where calls enter the selected runtime host: `NativeLoaderRuntimeHost` first, `NeoForgeRuntimeHost` as fallback, and `StandaloneRuntimeHost` for parity.

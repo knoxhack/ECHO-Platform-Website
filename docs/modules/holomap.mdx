@@ -1,0 +1,28 @@
+## Role
+
+ECHO: HoloMap is the spatial intelligence layer. It shows routes, points of interest, crash sites, relays, hazards, missions, bases, anomalies, and world overlays.
+
+HoloMap should make the world feel readable without removing the mystery of exploration.
+
+## Overlay Types
+
+HoloMap can support:
+
+- Mission route overlays.
+- Crash site markers.
+- Hazard regions.
+- Relay locations.
+- Faction-controlled areas.
+- Base and shelter markers.
+- Anomaly zones.
+- Discovered resource sites.
+
+## Developer Integration
+
+Modules should publish map data through overlays, markers, routes, or region providers. HoloMap should decide presentation, while the module owns the meaning and lifecycle of the data.
+
+A marker should include a label, category, state, visibility rules, and enough metadata for future filters or route planning.
+
+## Ashfall Use
+
+Ashfall can use HoloMap for Gridfall routes, orbital debris zones, signal towers, toxic storm regions, faction paths, relay chains, hidden caches, and Nexus anomaly fields.

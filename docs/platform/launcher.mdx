@@ -1,0 +1,40 @@
+## Role
+
+ECHO Launcher is the player-facing gateway for official ECHO experiences. It is also a platform tool: it should understand what it installs, what it updates, what it repairs, and which runtime path an experience needs.
+
+For players, this should feel simple. For the platform, it creates the foundation for reliable delivery and diagnostics.
+
+## Current Flow
+
+The current launcher flow is:
+
+1. Select an official experience such as Ashfall.
+2. Choose or follow the default release channel.
+3. Install, update, or repair the local package files.
+4. Prepare the supported Minecraft/NeoForge-compatible profile.
+5. Hand off to the runtime launcher.
+6. Start the experience.
+
+## Future Flow
+
+As PackOS matures, the launcher should be able to add:
+
+- Manifest and lockfile validation.
+- Channel-aware release selection.
+- Snapshot comparison.
+- Missing or stale file repair.
+- Integrity checks.
+- Runtime adapter selection.
+- Better diagnostics and support reports.
+
+## Player Rules
+
+Players should not need to manage internal module files by hand.
+
+Players should not need to know whether a missing dependency is a jar, metadata entry, or release artifact.
+
+Players should see clear states: installed, update available, repair needed, validation failed, launch ready, or unsupported.
+
+## Developer Relationship
+
+Developers should treat the launcher as the final player delivery path. Command Center, PackOS metadata, module outputs, release exports, and GitHub release assets should eventually converge into launcher-readable package state.

@@ -1,0 +1,5 @@
+site: out
+glob: "docs/**/*.html"
+force_language: en
+exclude_selectors:
+  - "[data-pagefind-ignore]"

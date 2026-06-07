@@ -1,0 +1,86 @@
+[
+  {
+    "phase": "Now",
+    "description": "Public platform identity and the first official website surface.",
+    "items": [
+      {
+        "title": "Official website",
+        "status": "Active",
+        "description": "Homepage, platform positioning, launcher portal, Ashfall page, modules catalog, docs home, and roadmap."
+      },
+      {
+        "title": "Ashfall player page",
+        "status": "Active",
+        "description": "Player-facing world, systems, module, and install messaging for the first official experience."
+      },
+      {
+        "title": "Basic docs",
+        "status": "In Progress",
+        "description": "Player, developer, platform, and troubleshooting docs stubs ready for MDX expansion."
+      }
+    ]
+  },
+  {
+    "phase": "Next",
+    "description": "Make the platform more operational and release-aware.",
+    "items": [
+      {
+        "title": "PackOS docs",
+        "status": "Planned",
+        "description": "Document manifests, channels, lockfiles, snapshots, integrity checks, and release gates."
+      },
+      {
+        "title": "Launcher repair docs",
+        "status": "Planned",
+        "description": "Clear install, repair, profile handoff, Linux, and dependency troubleshooting paths."
+      },
+      {
+        "title": "Module registry metadata",
+        "status": "Planned",
+        "description": "Expand status, dependencies, docs links, GitHub paths, release notes, and Ashfall usage metadata."
+      }
+    ]
+  },
+  {
+    "phase": "Later",
+    "description": "Grow the site into a real developer and release portal.",
+    "items": [
+      {
+        "title": "Versioned docs",
+        "status": "Planned",
+        "description": "Separate docs by launcher, PackOS, module, and runtime contract versions."
+      },
+      {
+        "title": "SDK templates",
+        "status": "Planned",
+        "description": "Scaffold module templates, starter manifests, example providers, and integration samples."
+      },
+      {
+        "title": "Pack builder UI",
+        "status": "Planned",
+        "description": "A future interface for assembling ECHO-aware experiences from validated modules."
+      }
+    ]
+  },
+  {
+    "phase": "Research",
+    "description": "Long-term native runtime direction without promising finished runtime support.",
+    "items": [
+      {
+        "title": "Standalone runtime",
+        "status": "Research",
+        "description": "Explore native loader, renderer, world runtime, entity runtime, networking, and save format foundations."
+      },
+      {
+        "title": "Runtime-independent saves",
+        "status": "Research",
+        "description": "Investigate save contracts that can outlive a single adapter target."
+      },
+      {
+        "title": "Community catalog",
+        "status": "Research",
+        "description": "Marketplace-style discovery for official and community modules after validation systems mature."
+      }
+    ]
+  }
+]

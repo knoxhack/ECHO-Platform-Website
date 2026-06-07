@@ -1,0 +1,28 @@
+## Role
+
+ECHO: Index is the discovery and knowledge system for items, recipes, usage, archives, and progression clues.
+
+Index should help players understand what they have found and why it matters without forcing them to leave the experience for scattered external notes.
+
+## What Index Can Contain
+
+Index entries can cover:
+
+- Items and blocks.
+- Recipes and usage paths.
+- Machine inputs and outputs.
+- Archive logs.
+- Discovered technologies.
+- Faction or world records.
+- Progression hints.
+- Module-provided references.
+
+## Developer Integration
+
+Modules should provide Index data through providers rather than hard-coding one global list. A module that adds a machine, relic, scanner target, or recipe family should be able to describe that content to Index.
+
+Entries should include enough context to help players act. A recipe without source, requirement, or unlock information is less useful than a short explanation tied to the current progression state.
+
+## Ashfall Use
+
+Ashfall can use Index for recovered pre-Gridfall records, orbital cache data, Nexus fragments, machine documentation, survival recipes, faction documents, and hidden unlock knowledge.

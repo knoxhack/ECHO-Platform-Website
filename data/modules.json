@@ -1,0 +1,1561 @@
+[
+  {
+    "id": "echocore",
+    "name": "ECHO: Core",
+    "category": "Core Platform",
+    "group": "Core",
+    "status": "Stable",
+    "version": "1.1.0",
+    "description": "Shared services, contracts, registry utilities, and platform bootstrap infrastructure.",
+    "dependencies": [],
+    "standalone": true,
+    "usedByAshfall": true,
+    "docs": "/docs/modules/core",
+    "github": "https://github.com/knoxhack/ECHO/tree/main/addons/echocore",
+    "overview": [
+      "ECHO: Core is the shared platform foundation for first-party ECHO modules. It defines the contracts, bootstrap vocabulary, and service patterns that let modules behave like parts of one ecosystem.",
+      "Core should stay boring and dependable: other modules rely on it for consistent registration, lifecycle, and platform identity while ECHO remains Minecraft/NeoForge-compatible today and evolves toward runtime-independent systems."
+    ],
+    "capabilities": [
+      "Platform bootstrap",
+      "Shared contracts",
+      "Service registration",
+      "Registry utilities",
+      "Common identifiers",
+      "Base diagnostics"
+    ],
+    "integrations": [
+      "NetCore",
+      "DataCore",
+      "MissionCore",
+      "WorldCore",
+      "RenderCore",
+      "PackOS metadata"
+    ],
+    "statusNote": "Stable for the current public scope and treated as the baseline dependency for official modules.",
+    "roadmap": [
+      "Keep shared contracts narrow and documented.",
+      "Improve diagnostics for missing or incompatible platform services.",
+      "Prepare contract boundaries for AdapterCore and future runtime work."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Core registry foundation",
+        "version": "1.1.0",
+        "notes": [
+          "Defines base platform identity and shared service vocabulary.",
+          "Used by Ashfall and all current first-party module groups."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "echonetcore",
+    "name": "ECHO: NetCore",
+    "category": "Core Platform",
+    "group": "Core",
+    "status": "Active",
+    "version": "1.1.0",
+    "description": "Networking, packets, server actions, sync, rate limiting, and debug tools.",
+    "dependencies": [
+      "echocore"
+    ],
+    "standalone": true,
+    "usedByAshfall": true,
+    "docs": "/docs/modules/core",
+    "github": "https://github.com/knoxhack/ECHO/tree/main/addons/echonetcore",
+    "overview": [
+      "ECHO: NetCore provides the shared networking surface for packets, server actions, sync, and debug flows.",
+      "It keeps player-facing systems such as Terminal, Lens, HoloMap, and Ashfall route logic from inventing separate networking paths."
+    ],
+    "capabilities": [
+      "Packet contracts",
+      "Server actions",
+      "State sync",
+      "Rate limiting hooks",
+      "Network diagnostics",
+      "Safety checks"
+    ],
+    "integrations": [
+      "ECHO: Core",
+      "Terminal",
+      "MissionCore",
+      "Logistics Network",
+      "Launcher diagnostics"
+    ],
+    "statusNote": "Active and usable, with APIs expected to evolve as more modules share networking behavior.",
+    "roadmap": [
+      "Document packet ownership rules.",
+      "Expose safer server action helpers.",
+      "Improve debug visibility for launcher and support reports."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Shared networking surface",
+        "version": "1.1.0",
+        "notes": [
+          "Provides common networking language for first-party modules.",
+          "Supports current Minecraft/NeoForge-compatible module sync needs."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "echodatacore",
+    "name": "ECHO: DataCore",
+    "category": "Core Platform",
+    "group": "Core",
+    "status": "Active",
+    "version": "1.1.0",
+    "description": "Persistent player and world data ownership, storage contracts, and migration-safe data structure.",
+    "dependencies": [
+      "echocore"
+    ],
+    "standalone": true,
+    "usedByAshfall": true,
+    "docs": "/docs/modules/core",
+    "github": "https://github.com/knoxhack/ECHO/tree/main/addons/echodatacore",
+    "overview": [
+      "ECHO: DataCore owns persistent player and world data contracts for ECHO modules.",
+      "It exists so discoveries, mission state, unlocks, world markers, and Ashfall progression can be stored and migrated intentionally instead of becoming private module blobs."
+    ],
+    "capabilities": [
+      "Player data ownership",
+      "World data ownership",
+      "Storage contracts",
+      "Migration markers",
+      "Persistence diagnostics",
+      "Save compatibility vocabulary"
+    ],
+    "integrations": [
+      "ECHO: Core",
+      "MissionCore",
+      "WorldCore",
+      "Index",
+      "Ashfall Protocol"
+    ],
+    "statusNote": "Active and central to Ashfall progression, with migration guidance still expanding.",
+    "roadmap": [
+      "Add clearer ownership examples.",
+      "Improve module migration guidance.",
+      "Prepare PackOS compatibility checks for persistent data expectations."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Persistent data contracts",
+        "version": "1.1.0",
+        "notes": [
+          "Defines shared persistence expectations for player and world state.",
+          "Supports mission, discovery, and progression systems."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "echomissioncore",
+    "name": "ECHO: MissionCore",
+    "category": "Core Platform",
+    "group": "Core",
+    "status": "Active",
+    "version": "1.1.0",
+    "description": "Mission, objective, reward, route, and feed backend for connected ECHO experiences.",
+    "dependencies": [
+      "echocore",
+      "echodatacore"
+    ],
+    "standalone": true,
+    "usedByAshfall": true,
+    "docs": "/docs/modules/core",
+    "github": "https://github.com/knoxhack/ECHO/tree/main/addons/echomissioncore",
+    "overview": [
+      "ECHO: MissionCore provides the mission, objective, route, reward, and feed backend for connected ECHO experiences.",
+      "It lets Terminal, HoloMap, and Ashfall content share progression state instead of each system tracking its own disconnected quest model."
+    ],
+    "capabilities": [
+      "Mission records",
+      "Objective state",
+      "Route progress",
+      "Reward hooks",
+      "Intel feeds",
+      "Progression events"
+    ],
+    "integrations": [
+      "Terminal",
+      "HoloMap",
+      "DataCore",
+      "Ashfall Protocol",
+      "Orbital Remnants"
+    ],
+    "statusNote": "Active and important for Ashfall route identity; behavior may evolve as more official experiences appear.",
+    "roadmap": [
+      "Document route and objective contracts.",
+      "Add clearer reward and feed examples.",
+      "Prepare mission validation for PackOS-aware releases."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Mission backend foundation",
+        "version": "1.1.0",
+        "notes": [
+          "Supports route, objective, reward, and feed behavior.",
+          "Used by Terminal and Ashfall progression surfaces."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "echoworldcore",
+    "name": "ECHO: WorldCore",
+    "category": "Core Platform",
+    "group": "Core",
+    "status": "Active",
+    "version": "1.1.0",
+    "description": "Regions, hazards, markers, discoveries, overlays, and shared world vocabulary.",
+    "dependencies": [
+      "echocore",
+      "echodatacore"
+    ],
+    "standalone": true,
+    "usedByAshfall": true,
+    "docs": "/docs/modules/core",
+    "github": "https://github.com/knoxhack/ECHO/tree/main/addons/echoworldcore",
+    "overview": [
+      "ECHO: WorldCore defines shared world vocabulary: regions, hazards, markers, discoveries, overlays, and spatial state.",
+      "It helps Lens, HoloMap, Terminal, and Ashfall content talk about the same world facts without hard-coding every location into one UI."
+    ],
+    "capabilities": [
+      "Regions",
+      "Hazard vocabulary",
+      "World markers",
+      "Discoveries",
+      "Overlay data",
+      "Spatial state"
+    ],
+    "integrations": [
+      "HoloMap",
+      "Lens",
+      "MissionCore",
+      "Ashfall Protocol",
+      "WeatherCore"
+    ],
+    "statusNote": "Active and used by Ashfall-facing systems; expected to grow as more world modules appear.",
+    "roadmap": [
+      "Clarify marker and region contracts.",
+      "Add examples for hazards and discoveries.",
+      "Prepare adapter-safe world state boundaries."
+    ],
+    "releaseNotes": [
+      {
+        "title": "World vocabulary layer",
+        "version": "1.1.0",
+        "notes": [
+          "Defines shared spatial and hazard language.",
+          "Supports map, scanner, and progression systems."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "echorendercore",
+    "name": "ECHO: RenderCore",
+    "category": "Core Platform",
+    "group": "Core",
+    "status": "Prototype",
+    "version": "0.8.0",
+    "description": "Shared rendering, particles, animation hooks, glow systems, and overlay helpers.",
+    "dependencies": [
+      "echocore"
+    ],
+    "standalone": true,
+    "usedByAshfall": true,
+    "docs": "/docs/modules/core",
+    "github": "https://github.com/knoxhack/ECHO/tree/main/addons/echorendercore",
+    "overview": [
+      "ECHO: RenderCore provides shared rendering helpers for particles, overlays, glow systems, and animation hooks.",
+      "It is intentionally a support layer: official modules should use it for consistent visual effects without each feature inventing its own rendering conventions."
+    ],
+    "capabilities": [
+      "Overlay helpers",
+      "Particle hooks",
+      "Glow systems",
+      "Animation hooks",
+      "Visual diagnostics",
+      "Render utilities"
+    ],
+    "integrations": [
+      "Lens",
+      "HoloMap",
+      "SignalOS",
+      "ScreenCore",
+      "ThemeCore"
+    ],
+    "statusNote": "Prototype: useful direction exists, but rendering APIs are expected to change as UI systems mature.",
+    "roadmap": [
+      "Stabilize overlay helper APIs.",
+      "Document safe render lifecycle usage.",
+      "Prepare future ScreenCore and ThemeCore integration points."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Rendering helper prototype",
+        "version": "0.8.0",
+        "notes": [
+          "Introduces shared rendering support for interface and world modules.",
+          "Marked prototype while the UI platform continues to evolve."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "echoterminal",
+    "name": "ECHO: Terminal",
+    "category": "Player Interface",
+    "group": "Interface",
+    "status": "Active",
+    "version": "1.1.0",
+    "description": "Mission, route, intel, reward, inbox, and addon-tab interface for ECHO experiences.",
+    "dependencies": [
+      "echocore",
+      "echonetcore",
+      "echomissioncore"
+    ],
+    "standalone": true,
+    "usedByAshfall": true,
+    "docs": "/docs/modules/terminal",
+    "github": "https://github.com/knoxhack/ECHO/tree/main/addons/echoterminal",
+    "overview": [
+      "ECHO: Terminal is the player command center for missions, routes, intel, rewards, inboxes, and addon tabs.",
+      "It is one of the clearest player-facing signals that ECHO is a platform: multiple modules can contribute to one coherent interface."
+    ],
+    "capabilities": [
+      "Mission panels",
+      "Route status",
+      "Faction intel",
+      "Inbox entries",
+      "Reward views",
+      "Addon tabs"
+    ],
+    "integrations": [
+      "MissionCore",
+      "NetCore",
+      "DataCore",
+      "Index",
+      "Ashfall Protocol"
+    ],
+    "statusNote": "Active and player-facing; used by Ashfall as a primary progression and intel surface.",
+    "roadmap": [
+      "Document addon tab patterns.",
+      "Improve mission and route presentation examples.",
+      "Prepare themed UI support through future ThemeCore and ScreenCore."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Terminal command center",
+        "version": "1.1.0",
+        "notes": [
+          "Supports mission, route, intel, reward, and inbox surfaces.",
+          "Designed for first-party modules to add tabs without forking the interface."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "echoholomap",
+    "name": "ECHO: HoloMap",
+    "category": "Player Interface",
+    "group": "Interface",
+    "status": "Active",
+    "version": "1.0.0",
+    "description": "Map interface for routes, crash sites, hazards, missions, bases, relays, and anomalies.",
+    "dependencies": [
+      "echocore",
+      "echoworldcore",
+      "echomissioncore"
+    ],
+    "standalone": true,
+    "usedByAshfall": true,
+    "docs": "/docs/modules/holomap",
+    "github": "https://github.com/knoxhack/ECHO/tree/main/addons/echoholomap",
+    "overview": [
+      "ECHO: HoloMap is the spatial intelligence layer for routes, crash sites, hazards, relays, missions, bases, and anomalies.",
+      "It helps official experiences make world state readable while keeping discovery and mystery intact."
+    ],
+    "capabilities": [
+      "Route overlays",
+      "POI markers",
+      "Hazard regions",
+      "Mission locations",
+      "Relay chains",
+      "Anomaly fields"
+    ],
+    "integrations": [
+      "WorldCore",
+      "MissionCore",
+      "Ashfall Protocol",
+      "Orbital Remnants",
+      "Nexus Protocol"
+    ],
+    "statusNote": "Active and used by Ashfall route and world systems; overlay contracts may expand as more modules publish map data.",
+    "roadmap": [
+      "Add overlay category guidance.",
+      "Improve marker lifecycle metadata.",
+      "Prepare future filter and route-planning support."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Map overlay surface",
+        "version": "1.0.0",
+        "notes": [
+          "Provides route, hazard, mission, and world marker presentation.",
+          "Designed for modules to publish spatial data through shared providers."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "echolens",
+    "name": "ECHO: Lens",
+    "category": "Player Interface",
+    "group": "Interface",
+    "status": "Active",
+    "version": "1.0.0",
+    "description": "Scanner HUD for blocks, entities, fluids, machines, progression, and discoveries.",
+    "dependencies": [
+      "echocore",
+      "echoworldcore"
+    ],
+    "standalone": true,
+    "usedByAshfall": true,
+    "docs": "/docs/modules/lens",
+    "github": "https://github.com/knoxhack/ECHO/tree/main/addons/echolens",
+    "overview": [
+      "ECHO: Lens is the scanner HUD for reading blocks, entities, fluids, machines, hazards, resources, and progression clues.",
+      "Lens turns discovery into an ECHO platform interaction by connecting scan results to Index, Terminal, HoloMap, and Ashfall progression."
+    ],
+    "capabilities": [
+      "Block scanning",
+      "Entity scanning",
+      "Machine reads",
+      "Hazard detection",
+      "Progression clues",
+      "Provider-based scan data"
+    ],
+    "integrations": [
+      "WorldCore",
+      "Index",
+      "Terminal",
+      "HoloMap",
+      "Ashfall Protocol"
+    ],
+    "statusNote": "Active and central to Ashfall discovery; providers should remain careful about progression-gated information.",
+    "roadmap": [
+      "Document provider reveal levels.",
+      "Add examples for hazards, machines, and hidden clues.",
+      "Connect scan results more directly to Index and HoloMap entries."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Scanner provider surface",
+        "version": "1.0.0",
+        "notes": [
+          "Introduces a shared scanner HUD and provider model.",
+          "Supports world, machine, hazard, and progression discovery."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "echoindex",
+    "name": "ECHO: Index",
+    "category": "Player Interface",
+    "group": "Interface",
+    "status": "Active",
+    "version": "1.0.0",
+    "description": "Item, recipe, usage, archive, and discovery system for ECHO-aware content.",
+    "dependencies": [
+      "echocore",
+      "echodatacore"
+    ],
+    "standalone": true,
+    "usedByAshfall": true,
+    "docs": "/docs/modules/index",
+    "github": "https://github.com/knoxhack/ECHO/tree/main/addons/echoindex",
+    "overview": [
+      "ECHO: Index is the knowledge system for items, recipes, archives, usage data, and discoveries.",
+      "Index gives players a platform-native way to understand what they found and why it matters without leaving the experience."
+    ],
+    "capabilities": [
+      "Item entries",
+      "Recipe discovery",
+      "Usage references",
+      "Archive records",
+      "Unlock context",
+      "Provider-driven content"
+    ],
+    "integrations": [
+      "DataCore",
+      "Lens",
+      "Terminal",
+      "Ashfall Protocol",
+      "RelicTech"
+    ],
+    "statusNote": "Active and useful for Ashfall knowledge recovery; provider conventions should continue to mature.",
+    "roadmap": [
+      "Document entry provider shape.",
+      "Improve unlock and discovery examples.",
+      "Connect archive entries to mission and scan events."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Knowledge index surface",
+        "version": "1.0.0",
+        "notes": [
+          "Provides item, recipe, usage, and archive discovery patterns.",
+          "Supports module-provided entries instead of one manual global list."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "signalos",
+    "name": "SignalOS",
+    "category": "Player Interface",
+    "group": "Interface",
+    "status": "Experimental",
+    "version": "0.4.0",
+    "description": "Terminal and screen framework for experimental signal interface foundations.",
+    "dependencies": [
+      "echocore",
+      "echorendercore"
+    ],
+    "standalone": false,
+    "usedByAshfall": false,
+    "docs": "/docs/modules/overview",
+    "github": "https://github.com/knoxhack/ECHO/tree/main/addons/signalos",
+    "overview": [
+      "SignalOS is an experimental terminal and screen framework for signal-driven interface ideas.",
+      "It is not a default player-facing dependency yet, but it explores the visual and interaction language ECHO interfaces may use later."
+    ],
+    "capabilities": [
+      "Screen framework experiments",
+      "Signal UI vocabulary",
+      "Terminal-adjacent panels",
+      "Diagnostic layouts",
+      "Future UI research"
+    ],
+    "integrations": [
+      "ECHO: Core",
+      "RenderCore",
+      "Terminal",
+      "ScreenCore",
+      "ThemeCore"
+    ],
+    "statusNote": "Experimental: useful for research, but not a stable public integration target.",
+    "roadmap": [
+      "Prototype signal-oriented UI patterns.",
+      "Identify concepts that should move into ScreenCore or ThemeCore.",
+      "Avoid making player-facing stability promises until APIs settle."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Signal UI experiment",
+        "version": "0.4.0",
+        "notes": [
+          "Explores terminal and screen-style interface foundations.",
+          "Marked experimental while interface direction is researched."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "echoashfallprotocol",
+    "name": "ECHO: Ashfall Protocol",
+    "category": "Ashfall Experience",
+    "group": "Ashfall",
+    "status": "Active",
+    "version": "1.0.0",
+    "description": "Root campaign, survival loop, world state, route identity, and official experience layer.",
+    "dependencies": [
+      "echocore",
+      "echoworldcore",
+      "echomissioncore"
+    ],
+    "standalone": false,
+    "usedByAshfall": true,
+    "docs": "/docs/modules/overview",
+    "github": "https://github.com/knoxhack/ECHO/tree/main/addons/echoashfallprotocol",
+    "overview": [
+      "ECHO: Ashfall Protocol is the root experience layer for Ashfall. It defines the survival loop, world state, route identity, and campaign direction.",
+      "This module is intentionally pack-bound: it proves ECHO systems through Ashfall rather than acting as a standalone utility."
+    ],
+    "capabilities": [
+      "Root campaign layer",
+      "Survival loop identity",
+      "Route coordination",
+      "World state rules",
+      "Experience metadata",
+      "Ashfall progression"
+    ],
+    "integrations": [
+      "Core modules",
+      "Terminal",
+      "Lens",
+      "HoloMap",
+      "Index",
+      "PackOS"
+    ],
+    "statusNote": "Active and central to Ashfall; it should be described as the official experience layer, not a standalone platform dependency.",
+    "roadmap": [
+      "Clarify route and survival contracts.",
+      "Connect more Ashfall modules through shared ECHO surfaces.",
+      "Prepare PackOS metadata for official release validation."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Ashfall root layer",
+        "version": "1.0.0",
+        "notes": [
+          "Defines the first official ECHO experience identity.",
+          "Coordinates campaign, survival, and world-state systems."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "echoorbitalremnants",
+    "name": "ECHO: Orbital Remnants",
+    "category": "Ashfall Experience",
+    "group": "Ashfall",
+    "status": "Active",
+    "version": "0.9.0",
+    "description": "Orbital route, launch chain, telemetry, caches, suit support, and crash infrastructure.",
+    "dependencies": [
+      "echoashfallprotocol",
+      "echoworldcore"
+    ],
+    "standalone": false,
+    "usedByAshfall": true,
+    "docs": "/docs/modules/overview",
+    "github": "https://github.com/knoxhack/ECHO/tree/main/addons/echoorbitalremnants",
+    "overview": [
+      "ECHO: Orbital Remnants provides the orbital route, launch chain, telemetry, caches, suit support, and crash infrastructure for Ashfall.",
+      "It gives Ashfall a major progression vector tied to debris, orbital wreckage, and pre-Gridfall systems."
+    ],
+    "capabilities": [
+      "Orbital route content",
+      "Telemetry hooks",
+      "Cache progression",
+      "Suit support",
+      "Crash infrastructure",
+      "Launch-chain state"
+    ],
+    "integrations": [
+      "Ashfall Protocol",
+      "WorldCore",
+      "HoloMap",
+      "Lens",
+      "Terminal"
+    ],
+    "statusNote": "Active Ashfall content layer with progression systems still expected to evolve.",
+    "roadmap": [
+      "Expand orbital route docs.",
+      "Improve cache and telemetry integration examples.",
+      "Connect route state more clearly to HoloMap and Terminal."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Orbital route foundation",
+        "version": "0.9.0",
+        "notes": [
+          "Adds orbital progression vocabulary for Ashfall.",
+          "Supports caches, telemetry, and crash-site infrastructure."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "echonexusprotocol",
+    "name": "ECHO: Nexus Protocol",
+    "category": "Ashfall Experience",
+    "group": "Ashfall",
+    "status": "Prototype",
+    "version": "0.7.0",
+    "description": "Nexus unlocks, anomaly storms, signal systems, route gates, and endgame bridges.",
+    "dependencies": [
+      "echoashfallprotocol",
+      "echomissioncore"
+    ],
+    "standalone": false,
+    "usedByAshfall": true,
+    "docs": "/docs/modules/overview",
+    "github": "https://github.com/knoxhack/ECHO/tree/main/addons/echonexusprotocol",
+    "overview": [
+      "ECHO: Nexus Protocol defines late-game anomaly, signal, route gate, and endgame bridge concepts for Ashfall.",
+      "It should feel mysterious and consequential, while remaining clearly marked as an evolving prototype until systems are stable."
+    ],
+    "capabilities": [
+      "Nexus unlocks",
+      "Anomaly storms",
+      "Signal systems",
+      "Route gates",
+      "Endgame bridges",
+      "Late-game consequences"
+    ],
+    "integrations": [
+      "Ashfall Protocol",
+      "MissionCore",
+      "Terminal",
+      "HoloMap",
+      "Lens"
+    ],
+    "statusNote": "Prototype: the direction is important, but endgame systems should not be treated as stable yet.",
+    "roadmap": [
+      "Prototype anomaly and signal behavior.",
+      "Define route gate contract expectations.",
+      "Document what late-game state other modules may consume."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Nexus prototype layer",
+        "version": "0.7.0",
+        "notes": [
+          "Introduces late-game signal and anomaly direction.",
+          "Marked prototype while endgame systems are refined."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "echoagriculturereclamation",
+    "name": "ECHO: Agriculture Reclamation",
+    "category": "Ashfall Experience",
+    "group": "Ashfall",
+    "status": "Prototype",
+    "version": "0.6.0",
+    "description": "Food, reclamation, farming, survival recovery, and wasteland agriculture systems.",
+    "dependencies": [
+      "echoashfallprotocol",
+      "echodatacore"
+    ],
+    "standalone": false,
+    "usedByAshfall": true,
+    "docs": "/docs/modules/overview",
+    "github": "https://github.com/knoxhack/ECHO/tree/main/addons/echoagriculturereclamation",
+    "overview": [
+      "ECHO: Agriculture Reclamation adds food, reclamation, farming, survival recovery, and wasteland agriculture systems for Ashfall.",
+      "It turns survival recovery into a platform-aware Ashfall subsystem rather than a disconnected farming feature."
+    ],
+    "capabilities": [
+      "Food recovery",
+      "Reclamation loops",
+      "Farming systems",
+      "Survival support",
+      "Wasteland agriculture",
+      "Progression resources"
+    ],
+    "integrations": [
+      "Ashfall Protocol",
+      "DataCore",
+      "Index",
+      "Lens",
+      "Terminal"
+    ],
+    "statusNote": "Prototype: useful survival direction exists, but balance and integration details should keep evolving.",
+    "roadmap": [
+      "Define reclamation progression loops.",
+      "Connect crop and food data to Index and Lens.",
+      "Document survival recovery assumptions."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Reclamation prototype",
+        "version": "0.6.0",
+        "notes": [
+          "Introduces agriculture and survival recovery direction.",
+          "Marked prototype while gameplay balance matures."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "echostationfall",
+    "name": "ECHO: Stationfall",
+    "category": "Ashfall Experience",
+    "group": "Ashfall",
+    "status": "Planned",
+    "version": "0.2.0",
+    "description": "Station route content, ruins, signal fragments, and station-related progression.",
+    "dependencies": [
+      "echoashfallprotocol"
+    ],
+    "standalone": false,
+    "usedByAshfall": true,
+    "docs": "/docs/modules/overview",
+    "github": "https://github.com/knoxhack/ECHO/tree/main/addons/echostationfall",
+    "overview": [
+      "ECHO: Stationfall is an Ashfall experience module focused on station route content, ruins, signal fragments, and station-related progression.",
+      "It is pack-bound by design: the module supports the first official ECHO survival experience while using shared platform systems where possible."
+    ],
+    "capabilities": [
+      "Station route content",
+      "Ruins and fragments",
+      "Station progression",
+      "Signal recovery"
+    ],
+    "integrations": [
+      "ECHO: Ashfall Protocol",
+      "Ashfall",
+      "Terminal",
+      "Lens",
+      "HoloMap"
+    ],
+    "statusNote": "Planned: included for roadmap visibility and registry continuity, not as a released player dependency.",
+    "roadmap": [
+      "Define the first implementation contract.",
+      "Connect metadata to PackOS and docs.",
+      "Promote status only when player-facing behavior is reliable."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Registry placeholder",
+        "version": "0.2.0",
+        "notes": [
+          "Added to the public module registry as planned platform direction.",
+          "Release readiness depends on future implementation and validation."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "echoblackboxprotocol",
+    "name": "ECHO: Blackbox Protocol",
+    "category": "Ashfall Experience",
+    "group": "Ashfall",
+    "status": "Planned",
+    "version": "0.2.0",
+    "description": "Lost data, crash records, recovered logs, and hidden machine history.",
+    "dependencies": [
+      "echoashfallprotocol",
+      "echodatacore"
+    ],
+    "standalone": false,
+    "usedByAshfall": true,
+    "docs": "/docs/modules/overview",
+    "github": "https://github.com/knoxhack/ECHO/tree/main/addons/echoblackboxprotocol",
+    "overview": [
+      "ECHO: Blackbox Protocol is an Ashfall experience module focused on lost data, crash records, recovered logs, and hidden machine history.",
+      "It is pack-bound by design: the module supports the first official ECHO survival experience while using shared platform systems where possible."
+    ],
+    "capabilities": [
+      "Recovered logs",
+      "Crash records",
+      "Lost data",
+      "Hidden machine history"
+    ],
+    "integrations": [
+      "ECHO: Ashfall Protocol",
+      "ECHO: DataCore",
+      "Ashfall",
+      "Terminal",
+      "Lens",
+      "HoloMap"
+    ],
+    "statusNote": "Planned: included for roadmap visibility and registry continuity, not as a released player dependency.",
+    "roadmap": [
+      "Define the first implementation contract.",
+      "Connect metadata to PackOS and docs.",
+      "Promote status only when player-facing behavior is reliable."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Registry placeholder",
+        "version": "0.2.0",
+        "notes": [
+          "Added to the public module registry as planned platform direction.",
+          "Release readiness depends on future implementation and validation."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "echoindustrialnexus",
+    "name": "ECHO: Industrial Nexus",
+    "category": "Ashfall Experience",
+    "group": "Ashfall",
+    "status": "Planned",
+    "version": "0.2.0",
+    "description": "Machines, infrastructure, industry chains, and progression utilities.",
+    "dependencies": [
+      "echoashfallprotocol",
+      "echocore"
+    ],
+    "standalone": false,
+    "usedByAshfall": true,
+    "docs": "/docs/modules/overview",
+    "github": "https://github.com/knoxhack/ECHO/tree/main/addons/echoindustrialnexus",
+    "overview": [
+      "ECHO: Industrial Nexus is an Ashfall experience module focused on machines, infrastructure, industry chains, and progression utilities.",
+      "It is pack-bound by design: the module supports the first official ECHO survival experience while using shared platform systems where possible."
+    ],
+    "capabilities": [
+      "Machine progression",
+      "Infrastructure chains",
+      "Industrial utilities",
+      "Ashfall production loops"
+    ],
+    "integrations": [
+      "ECHO: Ashfall Protocol",
+      "ECHO: Core",
+      "Ashfall",
+      "Terminal",
+      "Lens",
+      "HoloMap"
+    ],
+    "statusNote": "Planned: included for roadmap visibility and registry continuity, not as a released player dependency.",
+    "roadmap": [
+      "Define the first implementation contract.",
+      "Connect metadata to PackOS and docs.",
+      "Promote status only when player-facing behavior is reliable."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Registry placeholder",
+        "version": "0.2.0",
+        "notes": [
+          "Added to the public module registry as planned platform direction.",
+          "Release readiness depends on future implementation and validation."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "echologisticsnetwork",
+    "name": "ECHO: Logistics Network",
+    "category": "Ashfall Experience",
+    "group": "Ashfall",
+    "status": "Planned",
+    "version": "0.2.0",
+    "description": "Storage, routing, transport, automation, and future networked movement.",
+    "dependencies": [
+      "echoashfallprotocol",
+      "echonetcore"
+    ],
+    "standalone": false,
+    "usedByAshfall": true,
+    "docs": "/docs/modules/overview",
+    "github": "https://github.com/knoxhack/ECHO/tree/main/addons/echologisticsnetwork",
+    "overview": [
+      "ECHO: Logistics Network is an Ashfall experience module focused on storage, routing, transport, automation, and future networked movement.",
+      "It is pack-bound by design: the module supports the first official ECHO survival experience while using shared platform systems where possible."
+    ],
+    "capabilities": [
+      "Storage routing",
+      "Transport planning",
+      "Automation direction",
+      "Networked movement"
+    ],
+    "integrations": [
+      "ECHO: Ashfall Protocol",
+      "ECHO: NetCore",
+      "Ashfall",
+      "Terminal",
+      "Lens",
+      "HoloMap"
+    ],
+    "statusNote": "Planned: included for roadmap visibility and registry continuity, not as a released player dependency.",
+    "roadmap": [
+      "Define the first implementation contract.",
+      "Connect metadata to PackOS and docs.",
+      "Promote status only when player-facing behavior is reliable."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Registry placeholder",
+        "version": "0.2.0",
+        "notes": [
+          "Added to the public module registry as planned platform direction.",
+          "Release readiness depends on future implementation and validation."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "echoconvoyprotocol",
+    "name": "ECHO: Convoy Protocol",
+    "category": "Ashfall Experience",
+    "group": "Ashfall",
+    "status": "Planned",
+    "version": "0.2.0",
+    "description": "Convoy systems, route movement, mobile events, and faction transport.",
+    "dependencies": [
+      "echoashfallprotocol",
+      "echoworldcore"
+    ],
+    "standalone": false,
+    "usedByAshfall": true,
+    "docs": "/docs/modules/overview",
+    "github": "https://github.com/knoxhack/ECHO/tree/main/addons/echoconvoyprotocol",
+    "overview": [
+      "ECHO: Convoy Protocol is an Ashfall experience module focused on convoy systems, route movement, mobile events, and faction transport.",
+      "It is pack-bound by design: the module supports the first official ECHO survival experience while using shared platform systems where possible."
+    ],
+    "capabilities": [
+      "Convoy events",
+      "Mobile route movement",
+      "Faction transport",
+      "Roadside encounters"
+    ],
+    "integrations": [
+      "ECHO: Ashfall Protocol",
+      "ECHO: WorldCore",
+      "Ashfall",
+      "Terminal",
+      "Lens",
+      "HoloMap"
+    ],
+    "statusNote": "Planned: included for roadmap visibility and registry continuity, not as a released player dependency.",
+    "roadmap": [
+      "Define the first implementation contract.",
+      "Connect metadata to PackOS and docs.",
+      "Promote status only when player-facing behavior is reliable."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Registry placeholder",
+        "version": "0.2.0",
+        "notes": [
+          "Added to the public module registry as planned platform direction.",
+          "Release readiness depends on future implementation and validation."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "echoarmory",
+    "name": "ECHO: Armory",
+    "category": "Ashfall Experience",
+    "group": "Ashfall",
+    "status": "Planned",
+    "version": "0.2.0",
+    "description": "Weapons, combat gear, tactical progression, and future player defense systems.",
+    "dependencies": [
+      "echoashfallprotocol"
+    ],
+    "standalone": false,
+    "usedByAshfall": true,
+    "docs": "/docs/modules/overview",
+    "github": "https://github.com/knoxhack/ECHO/tree/main/addons/echoarmory",
+    "overview": [
+      "ECHO: Armory is an Ashfall experience module focused on weapons, combat gear, tactical progression, and future player defense systems.",
+      "It is pack-bound by design: the module supports the first official ECHO survival experience while using shared platform systems where possible."
+    ],
+    "capabilities": [
+      "Combat gear",
+      "Weapons progression",
+      "Tactical tools",
+      "Player defense systems"
+    ],
+    "integrations": [
+      "ECHO: Ashfall Protocol",
+      "Ashfall",
+      "Terminal",
+      "Lens",
+      "HoloMap"
+    ],
+    "statusNote": "Planned: included for roadmap visibility and registry continuity, not as a released player dependency.",
+    "roadmap": [
+      "Define the first implementation contract.",
+      "Connect metadata to PackOS and docs.",
+      "Promote status only when player-facing behavior is reliable."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Registry placeholder",
+        "version": "0.2.0",
+        "notes": [
+          "Added to the public module registry as planned platform direction.",
+          "Release readiness depends on future implementation and validation."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "adaptercore",
+    "name": "AdapterCore",
+    "category": "Platform",
+    "group": "Platform",
+    "status": "Active",
+    "version": "0.9.0",
+    "description": "Shared gameplay contract for Native Loader, NeoForge fallback, Standalone parity, resource bridges, registry bridges, and future runtime targets.",
+    "dependencies": [
+      "echocore"
+    ],
+    "standalone": false,
+    "usedByAshfall": true,
+    "docs": "/docs/platform/adaptercore",
+    "github": "https://github.com/knoxhack/ECHO",
+    "overview": [
+      "AdapterCore is the shared gameplay contract between ECHO platform systems and runtime-specific hosts.",
+      "Native Loader is the primary future host, NeoForge remains compatibility fallback, and Standalone Runtime remains the parity harness. Native readiness still requires loaded classes, registered services, and real host mutation evidence."
+    ],
+    "capabilities": [
+      "Runtime boundary",
+      "Registry bridge",
+      "Resource bridge",
+      "Content bridge",
+      "Event translation",
+      "Future adapter direction"
+    ],
+    "integrations": [
+      "ECHO: Core",
+      "PackOS",
+      "Launcher Architecture",
+      "Native Platform docs"
+    ],
+    "statusNote": "Active platform layer; critical to runtime-independent architecture, but not a finished native runtime by itself.",
+    "roadmap": [
+      "Document adapter responsibilities.",
+      "Reduce runtime-specific leakage into modules.",
+      "Prepare future adapter metadata for PackOS and launcher flows."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Adapter boundary direction",
+        "version": "0.9.0",
+        "notes": [
+          "Defines where runtime-specific assumptions should live.",
+          "Supports current Minecraft/NeoForge compatibility messaging."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "packos",
+    "name": "ECHO PackOS",
+    "category": "Platform",
+    "group": "Platform",
+    "status": "In Progress",
+    "version": "0.5.0",
+    "description": "Package metadata, manifests, channels, release gates, lockfiles, and future pack integrity.",
+    "dependencies": [
+      "echocore"
+    ],
+    "standalone": false,
+    "usedByAshfall": true,
+    "docs": "/docs/platform/packos",
+    "github": "https://github.com/knoxhack/ECHO",
+    "overview": [
+      "ECHO PackOS is the validation and package layer for ECHO experiences.",
+      "It is designed around manifests, lockfiles, channels, release gates, snapshots, and integrity checks so official releases can be installed and repaired with confidence."
+    ],
+    "capabilities": [
+      "Package manifests",
+      "Release channels",
+      "Lockfiles",
+      "Snapshots",
+      "Release gates",
+      "Integrity direction"
+    ],
+    "integrations": [
+      "ECHO Launcher",
+      "Command Center",
+      "Module registry",
+      "AdapterCore",
+      "Download portal"
+    ],
+    "statusNote": "In progress: architecture and docs are public-facing, but not every validation feature is implemented yet.",
+    "roadmap": [
+      "Define manifest and lockfile schema.",
+      "Connect release gates to Command Center workflows.",
+      "Feed launcher repair and validation states."
+    ],
+    "releaseNotes": [
+      {
+        "title": "PackOS foundation",
+        "version": "0.5.0",
+        "notes": [
+          "Documents the validation/package layer direction.",
+          "Prepares the website and launcher for future release metadata."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "echoscreencore",
+    "name": "ECHO: ScreenCore",
+    "category": "Future Modules",
+    "group": "Future",
+    "status": "Planned",
+    "version": null,
+    "description": "HTML/CSS-like UI component system for scalable high-fidelity interfaces.",
+    "dependencies": [
+      "echocore",
+      "echorendercore"
+    ],
+    "standalone": true,
+    "usedByAshfall": false,
+    "docs": "/docs/modules/overview",
+    "github": "https://github.com/knoxhack/ECHO",
+    "overview": [
+      "ECHO: ScreenCore is a planned future ECHO module focused on hTML/CSS-like UI component system for scalable high-fidelity interfaces.",
+      "The module is listed publicly to show platform direction, but it should not be treated as a released player dependency until its status changes."
+    ],
+    "capabilities": [
+      "Scalable UI components",
+      "Screen layouts",
+      "Interface contracts",
+      "AAA UI direction"
+    ],
+    "integrations": [
+      "ECHO: Core",
+      "ECHO: RenderCore",
+      "Future native-ready systems"
+    ],
+    "statusNote": "Planned: included for roadmap visibility and registry continuity, not as a released player dependency.",
+    "roadmap": [
+      "Define the first implementation contract.",
+      "Connect metadata to PackOS and docs.",
+      "Promote status only when player-facing behavior is reliable."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Registry placeholder",
+        "version": null,
+        "notes": [
+          "Added to the public module registry as planned platform direction.",
+          "Release readiness depends on future implementation and validation."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "echothemecore",
+    "name": "ECHO: ThemeCore",
+    "category": "Future Modules",
+    "group": "Future",
+    "status": "Planned",
+    "version": null,
+    "description": "Global theming layer for standalone modules and official ECHO experiences.",
+    "dependencies": [
+      "echocore"
+    ],
+    "standalone": true,
+    "usedByAshfall": false,
+    "docs": "/docs/modules/overview",
+    "github": "https://github.com/knoxhack/ECHO",
+    "overview": [
+      "ECHO: ThemeCore is a planned future ECHO module focused on global theming layer for standalone modules and official ECHO experiences.",
+      "The module is listed publicly to show platform direction, but it should not be treated as a released player dependency until its status changes."
+    ],
+    "capabilities": [
+      "Global themes",
+      "Visual tokens",
+      "Experience skinning",
+      "Shared interface mood"
+    ],
+    "integrations": [
+      "ECHO: Core",
+      "Future native-ready systems"
+    ],
+    "statusNote": "Planned: included for roadmap visibility and registry continuity, not as a released player dependency.",
+    "roadmap": [
+      "Define the first implementation contract.",
+      "Connect metadata to PackOS and docs.",
+      "Promote status only when player-facing behavior is reliable."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Registry placeholder",
+        "version": null,
+        "notes": [
+          "Added to the public module registry as planned platform direction.",
+          "Release readiness depends on future implementation and validation."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "echosoundcore",
+    "name": "ECHO: SoundCore",
+    "category": "Future Modules",
+    "group": "Future",
+    "status": "Planned",
+    "version": null,
+    "description": "Music, ambience, mission stingers, UI sounds, biome audio, and content pipeline support.",
+    "dependencies": [
+      "echocore"
+    ],
+    "standalone": true,
+    "usedByAshfall": false,
+    "docs": "/docs/modules/overview",
+    "github": "https://github.com/knoxhack/ECHO",
+    "overview": [
+      "ECHO: SoundCore is a planned future ECHO module focused on music, ambience, mission stingers, UI sounds, biome audio, and content pipeline support.",
+      "The module is listed publicly to show platform direction, but it should not be treated as a released player dependency until its status changes."
+    ],
+    "capabilities": [
+      "Music hooks",
+      "Ambience",
+      "UI sounds",
+      "Mission stingers"
+    ],
+    "integrations": [
+      "ECHO: Core",
+      "Future native-ready systems"
+    ],
+    "statusNote": "Planned: included for roadmap visibility and registry continuity, not as a released player dependency.",
+    "roadmap": [
+      "Define the first implementation contract.",
+      "Connect metadata to PackOS and docs.",
+      "Promote status only when player-facing behavior is reliable."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Registry placeholder",
+        "version": null,
+        "notes": [
+          "Added to the public module registry as planned platform direction.",
+          "Release readiness depends on future implementation and validation."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "echoweathercore",
+    "name": "ECHO: WeatherCore",
+    "category": "Future Modules",
+    "group": "Future",
+    "status": "Planned",
+    "version": null,
+    "description": "Ash storms, toxic rain, radiation storms, cryo fronts, heat surges, and signal storms.",
+    "dependencies": [
+      "echocore",
+      "echoworldcore"
+    ],
+    "standalone": true,
+    "usedByAshfall": false,
+    "docs": "/docs/modules/overview",
+    "github": "https://github.com/knoxhack/ECHO",
+    "overview": [
+      "ECHO: WeatherCore is a planned future ECHO module focused on ash storms, toxic rain, radiation storms, cryo fronts, heat surges, and signal storms.",
+      "The module is listed publicly to show platform direction, but it should not be treated as a released player dependency until its status changes."
+    ],
+    "capabilities": [
+      "Ash storms",
+      "Toxic rain",
+      "Radiation storms",
+      "Signal storms"
+    ],
+    "integrations": [
+      "ECHO: Core",
+      "ECHO: WorldCore",
+      "Future native-ready systems"
+    ],
+    "statusNote": "Planned: included for roadmap visibility and registry continuity, not as a released player dependency.",
+    "roadmap": [
+      "Define the first implementation contract.",
+      "Connect metadata to PackOS and docs.",
+      "Promote status only when player-facing behavior is reliable."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Registry placeholder",
+        "version": null,
+        "notes": [
+          "Added to the public module registry as planned platform direction.",
+          "Release readiness depends on future implementation and validation."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "echotutorialcore",
+    "name": "ECHO: TutorialCore",
+    "category": "Future Modules",
+    "group": "Future",
+    "status": "Planned",
+    "version": null,
+    "description": "Contextual onboarding, hints, first-time guidance, and beginner mode.",
+    "dependencies": [
+      "echocore",
+      "echoterminal"
+    ],
+    "standalone": true,
+    "usedByAshfall": false,
+    "docs": "/docs/modules/overview",
+    "github": "https://github.com/knoxhack/ECHO",
+    "overview": [
+      "ECHO: TutorialCore is a planned future ECHO module focused on contextual onboarding, hints, first-time guidance, and beginner mode.",
+      "The module is listed publicly to show platform direction, but it should not be treated as a released player dependency until its status changes."
+    ],
+    "capabilities": [
+      "Onboarding",
+      "Context hints",
+      "Beginner mode",
+      "First-time guidance"
+    ],
+    "integrations": [
+      "ECHO: Core",
+      "ECHO: Terminal",
+      "Future native-ready systems"
+    ],
+    "statusNote": "Planned: included for roadmap visibility and registry continuity, not as a released player dependency.",
+    "roadmap": [
+      "Define the first implementation contract.",
+      "Connect metadata to PackOS and docs.",
+      "Promote status only when player-facing behavior is reliable."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Registry placeholder",
+        "version": null,
+        "notes": [
+          "Added to the public module registry as planned platform direction.",
+          "Release readiness depends on future implementation and validation."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "echorelictech",
+    "name": "ECHO: RelicTech",
+    "category": "Future Modules",
+    "group": "Future",
+    "status": "Planned",
+    "version": null,
+    "description": "Rare artifacts, unstable prototypes, ancient batteries, relic devices, and risk/reward loot.",
+    "dependencies": [
+      "echocore",
+      "echoindex"
+    ],
+    "standalone": false,
+    "usedByAshfall": false,
+    "docs": "/docs/modules/overview",
+    "github": "https://github.com/knoxhack/ECHO",
+    "overview": [
+      "ECHO: RelicTech is a planned future ECHO module focused on rare artifacts, unstable prototypes, ancient batteries, relic devices, and risk/reward loot.",
+      "The module is listed publicly to show platform direction, but it should not be treated as a released player dependency until its status changes."
+    ],
+    "capabilities": [
+      "Rare artifacts",
+      "Unstable prototypes",
+      "Relic loot",
+      "Risk/reward devices"
+    ],
+    "integrations": [
+      "ECHO: Core",
+      "ECHO: Index",
+      "Future native-ready systems"
+    ],
+    "statusNote": "Planned: included for roadmap visibility and registry continuity, not as a released player dependency.",
+    "roadmap": [
+      "Define the first implementation contract.",
+      "Connect metadata to PackOS and docs.",
+      "Promote status only when player-facing behavior is reliable."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Registry placeholder",
+        "version": null,
+        "notes": [
+          "Added to the public module registry as planned platform direction.",
+          "Release readiness depends on future implementation and validation."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "echotextureforge",
+    "name": "ECHO: TextureForge",
+    "category": "Future Modules",
+    "group": "Future",
+    "status": "Planned",
+    "version": null,
+    "description": "Asset generation, validation, texture specs, naming checks, and asset prompt sheets.",
+    "dependencies": [
+      "echocore"
+    ],
+    "standalone": true,
+    "usedByAshfall": false,
+    "docs": "/docs/modules/overview",
+    "github": "https://github.com/knoxhack/ECHO",
+    "overview": [
+      "ECHO: TextureForge is a planned future ECHO module focused on asset generation, validation, texture specs, naming checks, and asset prompt sheets.",
+      "The module is listed publicly to show platform direction, but it should not be treated as a released player dependency until its status changes."
+    ],
+    "capabilities": [
+      "Asset specs",
+      "Texture validation",
+      "Naming checks",
+      "Prompt sheets"
+    ],
+    "integrations": [
+      "ECHO: Core",
+      "Future native-ready systems"
+    ],
+    "statusNote": "Planned: included for roadmap visibility and registry continuity, not as a released player dependency.",
+    "roadmap": [
+      "Define the first implementation contract.",
+      "Connect metadata to PackOS and docs.",
+      "Promote status only when player-facing behavior is reliable."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Registry placeholder",
+        "version": null,
+        "notes": [
+          "Added to the public module registry as planned platform direction.",
+          "Release readiness depends on future implementation and validation."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "echoguidecore",
+    "name": "ECHO: GuideCore",
+    "category": "Future Modules",
+    "group": "Future",
+    "status": "Planned",
+    "version": null,
+    "description": "In-game guide and manual registry connected to recipes, missions, modules, and unlocks.",
+    "dependencies": [
+      "echocore",
+      "echoindex"
+    ],
+    "standalone": true,
+    "usedByAshfall": false,
+    "docs": "/docs/modules/overview",
+    "github": "https://github.com/knoxhack/ECHO",
+    "overview": [
+      "ECHO: GuideCore is a planned future ECHO module focused on in-game guide and manual registry connected to recipes, missions, modules, and unlocks.",
+      "The module is listed publicly to show platform direction, but it should not be treated as a released player dependency until its status changes."
+    ],
+    "capabilities": [
+      "In-game manuals",
+      "Guide registry",
+      "Unlock-aware help",
+      "Module references"
+    ],
+    "integrations": [
+      "ECHO: Core",
+      "ECHO: Index",
+      "Future native-ready systems"
+    ],
+    "statusNote": "Planned: included for roadmap visibility and registry continuity, not as a released player dependency.",
+    "roadmap": [
+      "Define the first implementation contract.",
+      "Connect metadata to PackOS and docs.",
+      "Promote status only when player-facing behavior is reliable."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Registry placeholder",
+        "version": null,
+        "notes": [
+          "Added to the public module registry as planned platform direction.",
+          "Release readiness depends on future implementation and validation."
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,55 @@
+[
+  {
+    "id": "discord",
+    "name": "Discord",
+    "url": "https://discord.gg/0eXbwPGyRiqemwip",
+    "description": "Support, testing, announcements, feedback, and community discussion.",
+    "status": "Official",
+    "ctaLabel": "Join Discord",
+    "audience": "Players, testers, and community members"
+  },
+  {
+    "id": "github",
+    "name": "GitHub",
+    "url": "https://github.com/knoxhack/ECHO",
+    "description": "Source code, issues, releases, module tracking, and development history.",
+    "status": "Official",
+    "ctaLabel": "View GitHub",
+    "secondaryUrl": "https://github.com/knoxhack/ECHO/issues",
+    "secondaryLabel": "Report Issues",
+    "audience": "Developers and contributors"
+  },
+  {
+    "id": "youtube",
+    "name": "YouTube",
+    "url": "https://www.youtube.com/@echolabs-mc",
+    "description": "Dev Talks, trailers, launcher showcases, module updates, and behind-the-scenes videos.",
+    "status": "Official",
+    "ctaLabel": "Watch ECHO Labs",
+    "secondaryUrl": "/news",
+    "secondaryLabel": "Read News",
+    "audience": "Viewers following ECHO development"
+  },
+  {
+    "id": "releases",
+    "name": "Releases",
+    "url": "/download",
+    "description": "Launcher builds, release notes, checksums, and previous versions.",
+    "status": "Public Releases",
+    "ctaLabel": "Open Download Portal",
+    "secondaryUrl": "https://github.com/knoxhack/ECHO/releases",
+    "secondaryLabel": "GitHub Releases",
+    "audience": "Players, testers, and release verifiers"
+  },
+  {
+    "id": "support",
+    "name": "Support",
+    "url": "/docs/install/troubleshooting",
+    "description": "Install help, troubleshooting, bug reports, and launcher repair guidance.",
+    "status": "Active",
+    "ctaLabel": "Open Troubleshooting",
+    "secondaryUrl": "/docs",
+    "secondaryLabel": "Browse Docs",
+    "audience": "Players who need install or launch help"
+  }
+]

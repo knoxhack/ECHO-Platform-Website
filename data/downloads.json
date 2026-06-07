@@ -1,0 +1,80 @@
+[
+  {
+    "id": "windows",
+    "platform": "Windows",
+    "label": "Download Windows Installer",
+    "actionLabel": "Download Windows Installer",
+    "unavailableLabel": "Windows installer asset not published yet",
+    "unavailableActionLabel": "Read launcher setup",
+    "description": "Recommended player path once a Windows ECHO Launcher installer is published as a release asset.",
+    "status": "Public Releases",
+    "unavailableStatus": "Installer Pending",
+    "href": "/docs/install/launcher",
+    "fallbackHref": "https://github.com/knoxhack/ECHO-Launcher-Public-Alpha/releases",
+    "fallbackLabel": "View Launcher Releases",
+    "assetKind": "windows-installer",
+    "requiresAsset": true,
+    "notes": [
+      "Primary path stays launcher-first for players.",
+      "Direct installer CTA appears only when an .exe or .msi asset exists.",
+      "Use release metadata below for current Ashfall pack assets."
+    ],
+    "requirements": [
+      "Windows 10 or newer recommended.",
+      "Minecraft account and official launcher handoff still apply."
+    ]
+  },
+  {
+    "id": "linux",
+    "platform": "Linux",
+    "label": "Download Linux AppImage",
+    "actionLabel": "Download Linux AppImage",
+    "unavailableLabel": "Linux AppImage asset not published yet",
+    "unavailableActionLabel": "Read launcher setup",
+    "description": "Linux launcher path for supported players once an AppImage is published as a release asset.",
+    "status": "Active",
+    "unavailableStatus": "Installer Pending",
+    "href": "/docs/install/launcher",
+    "fallbackHref": "https://github.com/knoxhack/ECHO-Launcher-Public-Alpha/releases",
+    "fallbackLabel": "View Launcher Releases",
+    "assetKind": "linux-appimage",
+    "requiresAsset": true,
+    "notes": [
+      "Direct AppImage CTA appears only when an .AppImage asset exists.",
+      "Dependency notes and limitations stay in launcher docs.",
+      "Release metadata below exposes current Ashfall package assets."
+    ],
+    "requirements": [
+      "AppImage-compatible Linux desktop.",
+      "Executable permission may be required before launch."
+    ]
+  },
+  {
+    "id": "advanced",
+    "platform": "Advanced",
+    "label": "View All Releases",
+    "actionLabel": "View All Releases",
+    "description": "Release history, checksums, manual downloads, and troubleshooting links.",
+    "status": "Active",
+    "href": "https://github.com/knoxhack/ECHO-Native-Platform-Public-Alpha/releases",
+    "notes": [
+      "Latest release data is pulled from GitHub during static build.",
+      "Pack archives, manifests, and module jars are listed below.",
+      "Manual downloads are advanced paths, not the default player flow."
+    ]
+  },
+  {
+    "id": "source",
+    "platform": "Source",
+    "label": "View GitHub Repository",
+    "actionLabel": "View GitHub Repository",
+    "description": "Developer source access for contributors, module builders, and release work.",
+    "status": "Active",
+    "href": "https://github.com/knoxhack/ECHO-Native-Platform-Public-Alpha",
+    "notes": [
+      "Workspace setup belongs in developer docs.",
+      "Useful for module and launcher contributors.",
+      "Source builds are not the default player path."
+    ]
+  }
+]
