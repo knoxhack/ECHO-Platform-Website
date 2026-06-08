@@ -86,10 +86,10 @@ type ReleaseIndexManifest = {
 
 const CORE_RELEASES_URL =
   process.env.ECHO_CORE_RELEASES_URL ??
-  "https://api.github.com/repos/knoxhack/ECHO-Native-Platform-Public-Alpha/releases";
+  "https://api.github.com/repos/knoxhack/ECHO-Native-Platform/releases";
 const RELEASE_INDEX_URL =
   process.env.ECHO_RELEASE_INDEX_URL ??
-  "https://raw.githubusercontent.com/knoxhack/ECHO-Release-Index-Public-Alpha/main/channels/alpha/release-manifest.json";
+  "https://raw.githubusercontent.com/knoxhack/ECHO-Release-Index/main/channels/alpha/release-manifest.json";
 
 export async function getEchoReleases(): Promise<EchoRelease[]> {
   const indexedRelease = await getReleaseIndexDownloadPortal().catch(() => null);
@@ -143,7 +143,7 @@ function pendingPublicAlphaRelease(): EchoRelease {
     id: -1,
     tag: "v0.1.0-native-public-alpha",
     title: "ECHO Native Platform Public Alpha",
-    htmlUrl: "https://github.com/knoxhack/ECHO-Native-Platform-Public-Alpha/releases",
+    htmlUrl: "https://github.com/knoxhack/ECHO-Native-Platform/releases",
     publishedAt: new Date(0).toISOString(),
     createdAt: new Date(0).toISOString(),
     prerelease: true,
@@ -313,7 +313,7 @@ async function getReleaseIndexDownloadPortal(): Promise<EchoRelease | null> {
     title: "ECHO Native Platform Public Alpha",
     htmlUrl:
       repositories.find((repository) => repository.release?.htmlUrl)?.release?.htmlUrl ??
-      "https://github.com/knoxhack/ECHO-Native-Platform-Public-Alpha/releases",
+      "https://github.com/knoxhack/ECHO-Native-Platform/releases",
     publishedAt: manifest.generatedAt ?? new Date(0).toISOString(),
     createdAt: manifest.generatedAt ?? new Date(0).toISOString(),
     prerelease: true,
