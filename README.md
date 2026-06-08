@@ -1,103 +1,64 @@
 # ECHO Platform Website
 
-Official MVP website for the ECHO Platform ecosystem.
+Public website, docs site, and download routing surface for ECHO, Ashfall, launcher, modules, SDK, and studios.
 
-ECHO Platform is the public home for:
+## Purpose
 
-- ECHO Platform as the operating platform.
-- Ashfall as the first official ECHO survival experience.
-- ECHO Launcher as the player gateway.
-- PackOS as the validation and package layer.
-- ECHO Modules as the building blocks.
-- Docs as the developer and player gateway.
-- Native Platform work as the future runtime-independent direction.
+Public website, docs site, and download routing surface for ECHO, Ashfall, launcher, modules, SDK, and studios.
 
-## Stack
+## What Lives Here
 
-- Next.js App Router
-- TypeScript
-- Tailwind CSS
-- MDX-ready docs architecture
-- Static JSON registries
-- Framer Motion reveal component
-- Lucide icons
-- Static sitemap and robots metadata
-- Pagefind docs-only search
+Next.js app source, MDX docs, website content, download links, and public-facing ecosystem reference pages.
 
-## Getting Started
+## Release And Update Role
 
-Install dependencies:
+Owns website deployments and public documentation routes. It should link to release assets owned by the other repos.
 
-```bash
-npm install
-```
+## Public Or Private
 
-Run the local dev server:
+Public is recommended for website source and docs. Deployment secrets must stay outside the repo.
 
-```bash
-npm run dev
-```
+## Build And Dev Commands
 
-Build for production:
+Run commands from the repository root.
 
-```bash
-npm run build
-```
+- `npm install`
+- `npm run dev`
+- `npm run build`
+- `npm run lint`
 
-The production build is a static export. `next build` writes `out/`, then Pagefind indexes exported docs pages into `out/pagefind`.
+## Artifact Ownership
 
-The download page fetches public release data from `https://api.github.com/repos/knoxhack/ECHO/releases` during the static build. Set `GITHUB_TOKEN` before building if you want authenticated GitHub API limits:
+Website build/deployment outputs belong to the hosting provider. Download binaries stay in their owning GitHub Releases.
 
-```bash
-$env:GITHUB_TOKEN="github_pat_or_token"
-npm run build
-```
+## Docs Index
 
-Run linting:
+- [docs/intro.mdx](docs/intro.mdx)
+- [docs/install/launcher.mdx](docs/install/launcher.mdx)
+- [docs/install/ashfall.mdx](docs/install/ashfall.mdx)
+- [docs/modules/index.mdx](docs/modules/index.mdx)
+- [docs/reference/module-manifest.mdx](docs/reference/module-manifest.mdx)
+- [docs/developers/data-storage.mdx](docs/developers/data-storage.mdx)
+- [docs/developers/getting-started.mdx](docs/developers/getting-started.mdx)
+- [docs/developers/module-template.mdx](docs/developers/module-template.mdx)
+- [docs/developers/networking.mdx](docs/developers/networking.mdx)
+- [docs/developers/release-process.mdx](docs/developers/release-process.mdx)
+- [docs/developers/service-contracts.mdx](docs/developers/service-contracts.mdx)
+- [docs/developers/ui-integration.mdx](docs/developers/ui-integration.mdx)
+- [docs/install/troubleshooting.mdx](docs/install/troubleshooting.mdx)
+- [docs/modules/core.mdx](docs/modules/core.mdx)
+- [PUBLIC_ALPHA_RELEASE_STATUS.md](PUBLIC_ALPHA_RELEASE_STATUS.md)
 
-```bash
-npm run lint
-```
+## Related Repos
 
-## Content Registries
-
-The site is static-first. Edit these files to update the public content:
-
-- `data/modules.json`
-- `data/roadmap.json`
-- `data/downloads.json` for download card copy and fallback CTAs
-- `data/media.json`
-- `data/status.json`
-- `data/socials.json`
-
-GitHub release titles, notes, assets, checksums, and file sizes are pulled at build time for `/download`. Rebuild the site to refresh release data.
-
-News/devlog articles live under `news/` as MDX. The `/news` system also generates release posts from the same GitHub release data.
-
-Global launch metadata lives in `lib/site.ts`. It sets `https://echoplatform.dev` as the canonical domain and centralizes the official Discord, YouTube, GitHub, release, support, docs, and download links. The dedicated social preview image is exported from `public/images/echo-social-card.png`.
-
-## Pages
-
-- `/`
-- `/platform`
-- `/ashfall`
-- `/launcher`
-- `/download`
-- `/modules`
-- `/developers`
-- `/docs`
-- `/roadmap`
-- `/community`
-- `/media`
-- `/news`
-
-## Docs
-
-MDX docs live under `docs/` and are exposed through `/docs` plus nested docs routes.
-
-## Next Phase
-
-Recommended next work:
-
-- Publish dedicated launcher installer assets so `/download` can expose direct Windows and Linux download buttons.
-- Add route-level Open Graph descriptions/images for high-value pages such as Ashfall, Launcher, Docs, and News.
+- [knoxhack/ECHO-Launcher](https://github.com/knoxhack/ECHO-Launcher)
+- [knoxhack/ECHO-Modules](https://github.com/knoxhack/ECHO-Modules)
+- [knoxhack/ECHO-Ashfall-Native-Edition](https://github.com/knoxhack/ECHO-Ashfall-Native-Edition)
+- [knoxhack/ECHO-Ashfall-NeoForge-Edition](https://github.com/knoxhack/ECHO-Ashfall-NeoForge-Edition)
+- [knoxhack/ECHO-Ashfall-Standalone-Edition](https://github.com/knoxhack/ECHO-Ashfall-Standalone-Edition)
+- [knoxhack/ECHO-Release-Index](https://github.com/knoxhack/ECHO-Release-Index)
+- [knoxhack/ECHO-Native-Platform](https://github.com/knoxhack/ECHO-Native-Platform)
+- [knoxhack/ECHO-Standalone-Runtime](https://github.com/knoxhack/ECHO-Standalone-Runtime)
+- [knoxhack/ECHO-SDK](https://github.com/knoxhack/ECHO-SDK)
+- [knoxhack/ECHO-Developer-Studio](https://github.com/knoxhack/ECHO-Developer-Studio)
+- [knoxhack/ECHO-Addons-Studio](https://github.com/knoxhack/ECHO-Addons-Studio)
