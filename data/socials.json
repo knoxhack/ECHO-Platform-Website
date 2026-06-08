@@ -11,11 +11,11 @@
   {
     "id": "github",
     "name": "GitHub",
-    "url": "https://github.com/knoxhack/ECHO",
+    "url": "https://github.com/knoxhack/ECHO-Release-Index",
     "description": "Source code, issues, releases, module tracking, and development history.",
     "status": "Official",
     "ctaLabel": "View GitHub",
-    "secondaryUrl": "https://github.com/knoxhack/ECHO/issues",
+    "secondaryUrl": "https://github.com/knoxhack/ECHO-Release-Index/issues",
     "secondaryLabel": "Report Issues",
     "audience": "Developers and contributors"
   },
@@ -37,7 +37,7 @@
     "description": "Launcher builds, release notes, checksums, and previous versions.",
     "status": "Public Releases",
     "ctaLabel": "Open Download Portal",
-    "secondaryUrl": "https://github.com/knoxhack/ECHO/releases",
+    "secondaryUrl": "https://github.com/knoxhack/ECHO-Release-Index/releases",
     "secondaryLabel": "GitHub Releases",
     "audience": "Players, testers, and release verifiers"
   },
@@ -53,3 +53,4 @@
     "audience": "Players who need install or launch help"
   }
 ]
+

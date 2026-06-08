@@ -1,4 +1,4 @@
-[
+﻿[
   {
     "id": "windows",
     "platform": "Windows",
@@ -56,7 +56,7 @@
     "actionLabel": "View All Releases",
     "description": "Release history, checksums, manual downloads, and troubleshooting links.",
     "status": "Active",
-    "href": "https://github.com/knoxhack/ECHO-Native-Platform/releases",
+    "href": "https://github.com/knoxhack/ECHO-Release-Index/releases",
     "notes": [
       "Latest release data is pulled from GitHub during static build.",
       "Pack archives, manifests, and module jars are listed below.",
@@ -70,7 +70,7 @@
     "actionLabel": "View GitHub Repository",
     "description": "Developer source access for contributors, module builders, and release work.",
     "status": "Active",
-    "href": "https://github.com/knoxhack/ECHO-Native-Platform",
+    "href": "https://github.com/knoxhack/ECHO-Modules",
     "notes": [
       "Workspace setup belongs in developer docs.",
       "Useful for module and launcher contributors.",
@@ -78,3 +78,4 @@
     ]
   }
 ]
+
