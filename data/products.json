@@ -61,7 +61,7 @@
     "issuesUrl": "https://github.com/knoxhack/ECHO-Modules/issues",
     "releasesUrl": "https://github.com/knoxhack/ECHO-Modules/releases",
     "releaseUrl": "https://github.com/knoxhack/ECHO-Modules/releases/tag/modules-v0.1.0-alpha",
-    "assetCount": 4,
+    "assetCount": 6,
     "docsHref": "/docs/release/module-artifacts",
     "downloadHref": "/download",
     "updateFlow": "Publishes one artifact family per runtime so the launcher can update modules independently inside each Ashfall edition.",
