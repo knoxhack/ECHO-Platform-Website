@@ -11,6 +11,7 @@ export type ReleaseAssetKind =
   | "checksums"
   | "qa-report"
   | "windows-installer"
+  | "windows-portable-app"
   | "linux-appimage"
   | "other";
 
@@ -23,6 +24,10 @@ export type ReleaseAsset = {
   digest: string | null;
   downloadUrl: string;
   downloadCount: number;
+  repositoryName?: string;
+  repositoryProduct?: string;
+  repositoryUrl?: string;
+  releaseKind?: string;
 };
 
 export type EchoRelease = {
@@ -72,6 +77,7 @@ type ReleaseIndexRepository = {
   repoName: string;
   product: string;
   repoUrl: string;
+  releaseKind?: string;
   release?: {
     htmlUrl?: string;
     draft?: boolean;
@@ -170,12 +176,16 @@ export function classifyAsset(name: string): ReleaseAssetKind {
   if (normalized === "echo-release.json") return "release-metadata";
   if (normalized.includes("checksum") || normalized === "checksums.txt") return "checksums";
   if (normalized.includes("final-qa") || normalized.includes("release-prep") || normalized.includes("proof-gate")) return "qa-report";
+  if (normalized.endsWith(".blockmap") || normalized === "latest.yml" || normalized.includes("license")) return "other";
   if (normalized.endsWith(".echo-addon")) return "native-addon";
+  if (normalized.includes("ashfall") && normalized.includes("edition") && normalized.endsWith(".zip")) return "echo-pack";
   if (normalized.endsWith("-standalone.jar")) return "module-jar";
   if (normalized.includes("standalone") && (normalized.endsWith(".zip") || normalized.endsWith(".jar"))) return "standalone-runtime";
   if (normalized.includes("native-product") && normalized.endsWith(".zip")) return "native-platform-package";
   if (normalized.endsWith(".jar")) return "module-jar";
-  if (normalized.endsWith(".exe") || normalized.endsWith(".msi")) return "windows-installer";
+  if (normalized.endsWith(".msi")) return "windows-installer";
+  if (normalized.endsWith(".exe") && (normalized.includes("setup") || normalized.includes("install"))) return "windows-installer";
+  if (normalized.endsWith(".exe") && normalized !== "elevate.exe") return "windows-portable-app";
   if (normalized.endsWith(".appimage")) return "linux-appimage";
 
   return "other";
@@ -202,7 +212,9 @@ export function assetKindLabel(kind: ReleaseAssetKind): string {
     case "qa-report":
       return "QA report";
     case "windows-installer":
-      return "Windows launcher installer";
+      return "Windows installer";
+    case "windows-portable-app":
+      return "Windows portable app";
     case "linux-appimage":
       return "Linux AppImage";
     default:
@@ -268,6 +280,7 @@ function normalizeRelease(release: GitHubRelease): EchoRelease {
         "module-jar",
         "checksums",
         "qa-report",
+        "windows-portable-app",
         "other"
       ];
 
@@ -286,7 +299,11 @@ function normalizeAsset(asset: GitHubReleaseAsset): ReleaseAsset {
     size: asset.size,
     digest: asset.digest || null,
     downloadUrl: asset.browser_download_url,
-    downloadCount: asset.download_count || 0
+    downloadCount: asset.download_count || 0,
+    repositoryName: "ECHO-Native-Platform",
+    repositoryProduct: "ECHO Native Platform",
+    repositoryUrl: "https://github.com/knoxhack/ECHO-Native-Platform",
+    releaseKind: "core"
   };
 }
 
@@ -338,6 +355,7 @@ function releaseIndexToDownloadPortal(manifest: ReleaseIndexManifest): EchoRelea
     assets: assets.sort((a, b) => {
       const kindOrder: ReleaseAssetKind[] = [
         "windows-installer",
+        "windows-portable-app",
         "linux-appimage",
         "native-platform-package",
         "standalone-runtime",
@@ -371,6 +389,10 @@ function normalizeIndexedAsset(
     size: asset.size ?? 0,
     digest: asset.sha256 ? `sha256:${asset.sha256}` : null,
     downloadUrl: asset.browserDownloadUrl ?? asset.path ?? repository.repoUrl,
-    downloadCount: 0
+    downloadCount: 0,
+    repositoryName: repository.repoName,
+    repositoryProduct: repository.product,
+    repositoryUrl: repository.repoUrl,
+    releaseKind: repository.releaseKind
   };
 }

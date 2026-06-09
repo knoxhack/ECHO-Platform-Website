@@ -18,7 +18,11 @@ export type DownloadRecord = {
   fallbackHref?: string;
   fallbackLabel?: string;
   assetKind?: ReleaseAssetKind;
+  assetRepoName?: string;
+  assetNameIncludes?: string[];
+  assetNameExcludes?: string[];
   requiresAsset?: boolean;
+  allowMissingAsset?: boolean;
   notes: string[];
   requirements?: string[];
 };
@@ -52,7 +56,7 @@ export function DownloadCard({
       {asset ? (
         <div className="mt-5 rounded-[5px] border border-echo-green/25 bg-echo-green/10 p-3">
           <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-echo-green">
-            Matched release asset
+            Matched release asset{asset.repositoryName ? ` - ${asset.repositoryName}` : ""}
           </p>
           <p className="mt-2 break-all font-mono text-xs leading-5 text-echo-text">{asset.name}</p>
           <p className="mt-1 font-mono text-xs text-echo-muted">{formatBytes(asset.size)}</p>
@@ -61,7 +65,7 @@ export function DownloadCard({
       {unavailable ? (
         <div className="mt-5 flex gap-3 rounded-[5px] border border-echo-amber/25 bg-echo-amber/10 p-3 text-sm leading-6 text-echo-text">
           <AlertTriangle className="mt-0.5 shrink-0 text-echo-amber" size={18} />
-          <span>Installer asset not published yet. Use the launcher setup path or GitHub releases.</span>
+          <span>Required release asset not published yet. Use the docs path or GitHub releases.</span>
         </div>
       ) : null}
       <ul className="mt-5 space-y-2 text-sm text-echo-muted">

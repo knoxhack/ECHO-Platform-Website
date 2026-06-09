@@ -22,6 +22,8 @@ export function ReleaseAssetTable({
     return null;
   }
 
+  const showSource = assets.some((asset) => asset.repositoryName || asset.repositoryProduct);
+
   return (
     <section className="cyber-panel rounded-[6px] p-5">
       <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
@@ -35,10 +37,11 @@ export function ReleaseAssetTable({
       </div>
 
       <div className="mt-5 overflow-x-auto">
-        <table className="w-full min-w-[720px] border-collapse text-sm">
+        <table className="w-full min-w-[820px] border-collapse text-sm">
           <thead>
             <tr className="border-y border-white/10 bg-echo-cyan/10 text-left font-mono text-[11px] uppercase tracking-[0.12em] text-echo-cyan">
               <th className="px-3 py-3 font-semibold">Asset</th>
+              {showSource ? <th className="px-3 py-3 font-semibold">Source</th> : null}
               <th className="px-3 py-3 font-semibold">Type</th>
               <th className="px-3 py-3 font-semibold">Size</th>
               {!compact ? <th className="px-3 py-3 font-semibold">Checksum</th> : null}
@@ -49,6 +52,16 @@ export function ReleaseAssetTable({
             {assets.map((asset) => (
               <tr key={asset.id} className="border-b border-white/10 align-top">
                 <td className="px-3 py-4 font-mono text-xs text-echo-text">{asset.name}</td>
+                {showSource ? (
+                  <td className="px-3 py-4 text-xs text-echo-muted">
+                    <span className="block font-semibold text-echo-text">
+                      {asset.repositoryProduct || asset.repositoryName || "Release"}
+                    </span>
+                    {asset.repositoryName ? (
+                      <span className="mt-1 block font-mono text-[11px]">{asset.repositoryName}</span>
+                    ) : null}
+                  </td>
+                ) : null}
                 <td className="px-3 py-4 text-echo-muted">{assetKindLabel(asset.kind)}</td>
                 <td className="px-3 py-4 font-mono text-xs text-echo-muted">
                   {formatBytes(asset.size)}

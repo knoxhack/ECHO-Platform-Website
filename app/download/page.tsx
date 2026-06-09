@@ -55,17 +55,17 @@ export default async function DownloadPage() {
         actions={[
           { label: "Open Launcher Page", href: "/launcher" },
           { label: "Launcher Setup Docs", href: siteConfig.links.launcherDocs, variant: "secondary" },
-          { label: "Latest GitHub Release", href: latest.htmlUrl, variant: "secondary" }
+          { label: "Release Index Catalog", href: "/release-index", variant: "secondary" }
         ]}
       />
 
       <section className="section-shell py-16">
         <SectionHeading
-          eyebrow="Release Channels"
-          title="Player launcher path first, exact release assets nearby."
-          description="Windows and Linux buttons become direct installer downloads only when matching launcher assets are published. The release catalog below exposes pack, module, studio, runtime, and verification assets for testers and developers."
+          eyebrow="Featured Downloads"
+          title="Correct product, correct file."
+          description="Each button is pinned to an owning repository and filename pattern. Launcher buttons target launcher assets, studio buttons target studio assets, and Ashfall buttons target the selected edition package."
         />
-        <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {downloadRecords.map((download) => (
             <div key={download.id} id={download.id}>
               <DownloadCard download={download} asset={findDownloadAsset(latest.assets, download)} />
@@ -94,7 +94,7 @@ export default async function DownloadPage() {
               />
             </div>
             <div className="grid min-w-0 gap-3 sm:grid-cols-3 lg:min-w-[360px] lg:grid-cols-1">
-              <ReleaseMetric label="Assets" value={latest.assets.length.toString()} />
+          <ReleaseMetric label="Assets" value={latest.assets.length.toString()} />
               <ReleaseMetric label="Package Size" value={formatPackageSize(packAssets)} />
               <ReleaseMetric
                 label="Channel"
@@ -201,7 +201,18 @@ function findDownloadAsset(
   download: DownloadRecord
 ): ReleaseAsset | undefined {
   if (!download.assetKind) return undefined;
-  return assets.find((asset) => asset.kind === download.assetKind);
+
+  const includes = download.assetNameIncludes?.map((value) => value.toLowerCase()) ?? [];
+  const excludes = download.assetNameExcludes?.map((value) => value.toLowerCase()) ?? [];
+
+  return assets.find((asset) => {
+    const name = asset.name.toLowerCase();
+    if (asset.kind !== download.assetKind) return false;
+    if (download.assetRepoName && asset.repositoryName !== download.assetRepoName) return false;
+    if (includes.some((value) => !name.includes(value))) return false;
+    if (excludes.some((value) => name.includes(value))) return false;
+    return true;
+  });
 }
 
 function ReleaseMetric({ label, value }: { label: string; value: string }) {

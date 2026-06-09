@@ -115,6 +115,7 @@ for (const file of walk(root).filter((entry) => /\.(tsx|ts|mdx|md|json)$/i.test(
 
 const products = readJson(path.join(root, "data", "products.json"));
 const modules = readJson(path.join(root, "data", "modules.json"));
+const downloads = readJson(path.join(root, "data", "downloads.json"));
 const moduleManifest = readJson(path.join(root, "data", "module-source-manifest.json"));
 const sdkManifest = readJson(path.join(root, "data", "sdk-docs-manifest.json"));
 const releaseSnapshot = readJson(path.join(root, "data", "release-index-snapshot.json"));
@@ -186,6 +187,20 @@ for (const repoName of ["ECHO-Launcher", "ECHO-Modules", "ECHO-Ashfall-Native-Ed
   }
 }
 
+for (const download of downloads) {
+  if (!download.assetKind) continue;
+  const matches = findDownloadMatches(download, releaseSnapshot);
+  if (download.requiresAsset && !download.allowMissingAsset && matches.length === 0) {
+    errors.push(`download ${download.id} did not match a release asset`);
+    continue;
+  }
+  for (const match of matches) {
+    if (download.assetRepoName && match.repository.repoName !== download.assetRepoName) {
+      errors.push(`download ${download.id} matched wrong repo ${match.repository.repoName}`);
+    }
+  }
+}
+
 const publicFiles = walk(root).filter((file) => /\.(tsx|ts|mdx|md|json)$/i.test(file));
 const staleChecks = [
   { pattern: /docs\/developers\/addons/i, label: "old addon docs route" },
@@ -210,4 +225,44 @@ console.log("Website drift audit passed");
 
 function sdkRoot() {
   return path.join(auditRoot, "ECHO-SDK");
+}
+
+function classifyAsset(name) {
+  const normalized = name.toLowerCase();
+  if (normalized.endsWith(".echo-pack.zip")) return "echo-pack";
+  if (normalized.endsWith(".pack.json")) return "pack-manifest";
+  if (normalized === "echo-release.json") return "release-metadata";
+  if (normalized.includes("checksum") || normalized === "checksums.txt") return "checksums";
+  if (normalized.includes("final-qa") || normalized.includes("release-prep") || normalized.includes("proof-gate")) return "qa-report";
+  if (normalized.endsWith(".blockmap") || normalized === "latest.yml" || normalized.includes("license")) return "other";
+  if (normalized.endsWith(".echo-addon")) return "native-addon";
+  if (normalized.includes("ashfall") && normalized.includes("edition") && normalized.endsWith(".zip")) return "echo-pack";
+  if (normalized.endsWith("-standalone.jar")) return "module-jar";
+  if (normalized.includes("standalone") && (normalized.endsWith(".zip") || normalized.endsWith(".jar"))) return "standalone-runtime";
+  if (normalized.includes("native-product") && normalized.endsWith(".zip")) return "native-platform-package";
+  if (normalized.endsWith(".jar")) return "module-jar";
+  if (normalized.endsWith(".msi")) return "windows-installer";
+  if (normalized.endsWith(".exe") && (normalized.includes("setup") || normalized.includes("install"))) return "windows-installer";
+  if (normalized.endsWith(".exe") && normalized !== "elevate.exe") return "windows-portable-app";
+  if (normalized.endsWith(".appimage")) return "linux-appimage";
+  return "other";
+}
+
+function findDownloadMatches(download, releaseSnapshot) {
+  const includes = (download.assetNameIncludes || []).map((value) => value.toLowerCase());
+  const excludes = (download.assetNameExcludes || []).map((value) => value.toLowerCase());
+  const matches = [];
+
+  for (const repository of releaseSnapshot.repositories || []) {
+    if (download.assetRepoName && repository.repoName !== download.assetRepoName) continue;
+    for (const asset of repository.assets || []) {
+      const name = asset.name.toLowerCase();
+      if (classifyAsset(asset.name) !== download.assetKind) continue;
+      if (includes.some((value) => !name.includes(value))) continue;
+      if (excludes.some((value) => name.includes(value))) continue;
+      matches.push({ repository, asset });
+    }
+  }
+
+  return matches;
 }

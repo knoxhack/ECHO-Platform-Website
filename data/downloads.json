@@ -1,23 +1,26 @@
 [
   {
-    "id": "windows",
-    "platform": "Windows",
-    "label": "Download Windows Installer",
-    "actionLabel": "Download Windows Installer",
-    "unavailableLabel": "Windows installer asset not published yet",
+    "id": "launcher-windows",
+    "platform": "Launcher",
+    "label": "Download Launcher Setup",
+    "actionLabel": "Download Launcher Setup",
+    "unavailableLabel": "Launcher setup not published yet",
     "unavailableActionLabel": "Read launcher setup",
-    "description": "Recommended player path once a Windows ECHO Launcher installer is published as a release asset.",
-    "status": "Public Releases",
-    "unavailableStatus": "Installer Pending",
+    "description": "Recommended Windows player install path for ECHO Launcher.",
+    "status": "Windows Setup",
+    "unavailableStatus": "Setup Pending",
     "href": "/docs/install/launcher",
     "fallbackHref": "https://github.com/knoxhack/ECHO-Launcher/releases",
     "fallbackLabel": "View Launcher Releases",
     "assetKind": "windows-installer",
+    "assetRepoName": "ECHO-Launcher",
+    "assetNameIncludes": ["echo-launcher", "setup"],
+    "assetNameExcludes": ["blockmap", "elevate"],
     "requiresAsset": true,
     "notes": [
-      "Primary path stays launcher-first for players.",
-      "Direct installer CTA appears only when an .exe or .msi asset exists.",
-      "Use release metadata below for current Ashfall pack assets."
+      "Targets only `knoxhack/ECHO-Launcher` release assets.",
+      "Matches the setup installer, not studio installers or helper executables.",
+      "Use this path for normal Windows installs."
     ],
     "requirements": [
       "Windows 10 or newer recommended.",
@@ -25,24 +28,171 @@
     ]
   },
   {
+    "id": "launcher-portable",
+    "platform": "Launcher",
+    "label": "Download Portable Launcher",
+    "actionLabel": "Download Portable Launcher",
+    "unavailableLabel": "Portable launcher not published yet",
+    "unavailableActionLabel": "Read launcher setup",
+    "description": "Portable Windows launcher executable for testers who do not want the setup installer.",
+    "status": "Portable App",
+    "unavailableStatus": "Portable Pending",
+    "href": "/docs/install/launcher",
+    "fallbackHref": "https://github.com/knoxhack/ECHO-Launcher/releases",
+    "fallbackLabel": "View Launcher Releases",
+    "assetKind": "windows-portable-app",
+    "assetRepoName": "ECHO-Launcher",
+    "assetNameIncludes": ["echolauncher.exe"],
+    "assetNameExcludes": ["setup", "elevate"],
+    "requiresAsset": true,
+    "notes": [
+      "Targets the portable launcher executable.",
+      "Does not match Developer Studio, Addons Studio, or `elevate.exe`.",
+      "Installer is still the recommended player path."
+    ],
+    "requirements": [
+      "Windows 10 or newer recommended.",
+      "Run from a writable folder for logs and local config."
+    ]
+  },
+  {
+    "id": "ashfall-native",
+    "platform": "Ashfall",
+    "label": "Download Native Edition Pack",
+    "actionLabel": "Download Native Pack",
+    "unavailableLabel": "Native Edition pack not published yet",
+    "unavailableActionLabel": "Open Native Edition",
+    "description": "Ashfall Native Edition package, using `.echo-addon` module artifacts.",
+    "status": "Native Pack",
+    "unavailableStatus": "Pack Pending",
+    "href": "/ashfall/native-edition",
+    "fallbackHref": "https://github.com/knoxhack/ECHO-Ashfall-Native-Edition/releases",
+    "fallbackLabel": "View Native Releases",
+    "assetKind": "native-platform-package",
+    "assetRepoName": "ECHO-Ashfall-Native-Edition",
+    "assetNameIncludes": ["native-product"],
+    "requiresAsset": true,
+    "notes": [
+      "Targets only the Ashfall Native Edition repo.",
+      "Native modules use the `.echo-addon` artifact family.",
+      "Players should still install through the launcher when possible."
+    ]
+  },
+  {
+    "id": "ashfall-neoforge",
+    "platform": "Ashfall",
+    "label": "Download NeoForge Edition Pack",
+    "actionLabel": "Download NeoForge Pack",
+    "unavailableLabel": "NeoForge Edition pack not published yet",
+    "unavailableActionLabel": "Open NeoForge Edition",
+    "description": "Ashfall NeoForge Edition package, using `-neoforge.jar` module artifacts.",
+    "status": "NeoForge Pack",
+    "unavailableStatus": "Pack Pending",
+    "href": "/ashfall/neoforge-edition",
+    "fallbackHref": "https://github.com/knoxhack/ECHO-Ashfall-NeoForge-Edition/releases",
+    "fallbackLabel": "View NeoForge Releases",
+    "assetKind": "echo-pack",
+    "assetRepoName": "ECHO-Ashfall-NeoForge-Edition",
+    "assetNameIncludes": ["ashfall-neoforge-edition", ".zip"],
+    "requiresAsset": true,
+    "notes": [
+      "Targets only the Ashfall NeoForge Edition repo.",
+      "NeoForge modules use the `-neoforge.jar` artifact family.",
+      "Useful for compatibility testing and Minecraft-runtime installs."
+    ]
+  },
+  {
+    "id": "ashfall-standalone",
+    "platform": "Ashfall",
+    "label": "Download Standalone Edition Pack",
+    "actionLabel": "Download Standalone Pack",
+    "unavailableLabel": "Standalone Edition pack not published yet",
+    "unavailableActionLabel": "Open Standalone Edition",
+    "description": "Ashfall Standalone Edition package, using `-standalone.jar` module artifacts.",
+    "status": "Standalone Pack",
+    "unavailableStatus": "Pack Pending",
+    "href": "/ashfall/standalone-edition",
+    "fallbackHref": "https://github.com/knoxhack/ECHO-Ashfall-Standalone-Edition/releases",
+    "fallbackLabel": "View Standalone Releases",
+    "assetKind": "echo-pack",
+    "assetRepoName": "ECHO-Ashfall-Standalone-Edition",
+    "assetNameIncludes": ["ashfall-standalone-edition", ".zip"],
+    "requiresAsset": true,
+    "notes": [
+      "Targets only the Ashfall Standalone Edition repo.",
+      "Standalone modules use the `-standalone.jar` artifact family.",
+      "Useful for runtime parity and standalone testing."
+    ]
+  },
+  {
+    "id": "developer-studio",
+    "platform": "Studio",
+    "label": "Download Developer Studio Setup",
+    "actionLabel": "Download Developer Studio",
+    "unavailableLabel": "Developer Studio setup not published yet",
+    "unavailableActionLabel": "Open Developer Studio",
+    "description": "Release operations app for validation, reports, release previews, and catalog checks.",
+    "status": "Windows Setup",
+    "unavailableStatus": "Setup Pending",
+    "href": "/developer-studio",
+    "fallbackHref": "https://github.com/knoxhack/ECHO-Developer-Studio/releases",
+    "fallbackLabel": "View Developer Studio Releases",
+    "assetKind": "windows-installer",
+    "assetRepoName": "ECHO-Developer-Studio",
+    "assetNameIncludes": ["developer-studio", "setup"],
+    "assetNameExcludes": ["blockmap", "portable", "elevate"],
+    "requiresAsset": true,
+    "notes": [
+      "Targets only `knoxhack/ECHO-Developer-Studio`.",
+      "Matches the setup installer, not portable zip or helper files.",
+      "Use for release and platform operations."
+    ]
+  },
+  {
+    "id": "addons-studio",
+    "platform": "Studio",
+    "label": "Download Addons Studio Setup",
+    "actionLabel": "Download Addons Studio",
+    "unavailableLabel": "Addons Studio setup not published yet",
+    "unavailableActionLabel": "Open Addons Studio",
+    "description": "Addon creation app for templates, manifest editing, local testing, and publishing.",
+    "status": "Windows Setup",
+    "unavailableStatus": "Setup Pending",
+    "href": "/addons-studio",
+    "fallbackHref": "https://github.com/knoxhack/ECHO-Addons-Studio/releases",
+    "fallbackLabel": "View Addons Studio Releases",
+    "assetKind": "windows-installer",
+    "assetRepoName": "ECHO-Addons-Studio",
+    "assetNameIncludes": ["addon", "studio", "setup"],
+    "assetNameExcludes": ["blockmap", "portable", "elevate"],
+    "requiresAsset": true,
+    "notes": [
+      "Targets only `knoxhack/ECHO-Addons-Studio`.",
+      "Matches the setup installer, not the portable executable.",
+      "Use for creator and addon authoring workflows."
+    ]
+  },
+  {
     "id": "linux",
-    "platform": "Linux",
+    "platform": "Launcher",
     "label": "Download Linux AppImage",
     "actionLabel": "Download Linux AppImage",
     "unavailableLabel": "Linux AppImage asset not published yet",
     "unavailableActionLabel": "Read launcher setup",
     "description": "Linux launcher path for supported players once an AppImage is published as a release asset.",
-    "status": "Active",
-    "unavailableStatus": "Installer Pending",
+    "status": "Linux AppImage",
+    "unavailableStatus": "AppImage Pending",
     "href": "/docs/install/launcher",
     "fallbackHref": "https://github.com/knoxhack/ECHO-Launcher/releases",
     "fallbackLabel": "View Launcher Releases",
     "assetKind": "linux-appimage",
+    "assetRepoName": "ECHO-Launcher",
     "requiresAsset": true,
+    "allowMissingAsset": true,
     "notes": [
-      "Direct AppImage CTA appears only when an .AppImage asset exists.",
+      "Targets only launcher AppImage assets.",
       "Dependency notes and limitations stay in launcher docs.",
-      "Release metadata below exposes current Ashfall package assets."
+      "Windows release assets do not satisfy this card."
     ],
     "requirements": [
       "AppImage-compatible Linux desktop.",
@@ -52,30 +202,29 @@
   {
     "id": "advanced",
     "platform": "Advanced",
-    "label": "View All Releases",
-    "actionLabel": "View All Releases",
-    "description": "Release history, checksums, manual downloads, and troubleshooting links.",
-    "status": "Active",
-    "href": "https://github.com/knoxhack/ECHO-Release-Index/releases",
+    "label": "Open Release Index",
+    "actionLabel": "Open Release Index",
+    "description": "Full release catalog, repo ownership, checksums, manual downloads, and troubleshooting links.",
+    "status": "Catalog",
+    "href": "/release-index",
     "notes": [
-      "Latest release data is pulled from GitHub during static build.",
-      "Pack archives, manifests, and module jars are listed below.",
+      "Release Index is the canonical catalog for the website and launcher.",
+      "Pack archives, manifests, module artifacts, and app releases are listed below.",
       "Manual downloads are advanced paths, not the default player flow."
     ]
   },
   {
     "id": "source",
     "platform": "Source",
-    "label": "View GitHub Repository",
-    "actionLabel": "View GitHub Repository",
-    "description": "Developer source access for contributors, module builders, and release work.",
-    "status": "Active",
+    "label": "View Modules Repository",
+    "actionLabel": "View Modules Repository",
+    "description": "Developer source access for module builders and release artifact work.",
+    "status": "Source",
     "href": "https://github.com/knoxhack/ECHO-Modules",
     "notes": [
-      "Workspace setup belongs in developer docs.",
-      "Useful for module and launcher contributors.",
+      "All shared module source lives in `knoxhack/ECHO-Modules`.",
+      "Per-module artifacts are published through GitHub Releases.",
       "Source builds are not the default player path."
     ]
   }
 ]
-
