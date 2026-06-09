@@ -61,7 +61,7 @@ export default function StandaloneRuntimePage() {
         <CyberGlassCard className="p-8 border-amber-500/30">
           <div className="flex items-start gap-4">
             <div className="mt-1">
-              <StatusBadge label="Public Alpha Warning" />
+              <StatusBadge label="Experimental Runtime Warning" />
             </div>
             <div>
               <h2 className="font-display text-2xl font-bold text-echo-text">

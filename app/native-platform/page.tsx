@@ -113,7 +113,7 @@ export default function NativePlatformPage() {
           <CyberGlassCard className="flex flex-col justify-center p-8">
             <p className="cyber-label">Status</p>
             <h2 className="mt-4 font-display text-3xl font-bold text-echo-text">
-              Public Alpha
+              Public Testing
             </h2>
             <p className="mt-4 text-sm leading-6 text-echo-muted">
               The Native Platform is in public testing. Core services are stable.

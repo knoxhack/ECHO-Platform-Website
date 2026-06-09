@@ -98,7 +98,7 @@ export default function SdkPage() {
                 <span>Best performance and compatibility</span>
               </li>
               <li className="flex items-center gap-2">
-                <StatusBadge label="Public Alpha" />
+                <StatusBadge label="Public Testing" />
                 <span>Ready for testing and early addons</span>
               </li>
             </ul>
