@@ -65,7 +65,7 @@ export default function AddonsStudioPage() {
         actions={[
           { label: "Download", href: "/download", variant: "primary" },
           { label: "Read SDK Docs", href: "/sdk", variant: "secondary" },
-          { label: "View on GitHub", href: siteConfig.links.github, variant: "secondary" }
+          { label: "View on GitHub", href: siteConfig.repositories.addonsStudio, variant: "secondary" }
         ]}
       />
 

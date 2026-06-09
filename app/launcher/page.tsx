@@ -25,7 +25,7 @@ export default function LauncherPage() {
           { label: "Open Download Portal", href: siteConfig.links.download },
           { label: "Launcher Setup Docs", href: siteConfig.links.launcherDocs, variant: "secondary" },
           { label: "View Media", href: siteConfig.links.media, variant: "secondary" },
-          { label: "View GitHub Releases", href: siteConfig.links.githubReleases, variant: "secondary" }
+          { label: "View GitHub Releases", href: `${siteConfig.repositories.launcher}/releases`, variant: "secondary" }
         ]}
       />
 
@@ -112,7 +112,7 @@ export default function LauncherPage() {
             <Link href="/media" className="cyber-button cyber-button-secondary">
               View Media
             </Link>
-            <Link href={siteConfig.links.githubReleases} className="cyber-button cyber-button-secondary">
+            <Link href={`${siteConfig.repositories.launcher}/releases`} className="cyber-button cyber-button-secondary">
               GitHub Releases
             </Link>
           </div>

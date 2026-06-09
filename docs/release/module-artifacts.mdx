@@ -1,0 +1,29 @@
+# Module Artifact Contract
+
+Every first-party module in `knoxhack/ECHO-Modules` is released as a set of runtime-specific files. The launcher and Ashfall editions do not treat a module as one vague blob; they resolve the exact artifact family required by the selected edition.
+
+## Required Files Per Module
+
+For module `<module>` at version `<version>`, release generation produces:
+
+| File | Consumer |
+| --- | --- |
+| `<module>-<version>-neoforge.jar` | Ashfall NeoForge Edition |
+| `<module>-<version>.echo-addon` | Ashfall Native Edition |
+| `<module>-<version>-standalone.jar` | Ashfall Standalone Edition |
+| `<module>-<version>-sources.jar` | Developers, traceability, debugging |
+| `META-INF/echo.mod.json` | All runtime artifacts |
+| `META-INF/neoforge.mods.toml` | NeoForge artifacts when applicable |
+| `echo-addon-package.json` | `.echo-addon` packages when applicable |
+
+## Source Ownership
+
+`ECHO-Modules/addons/<module>` owns the source, `README.md`, `docs/artifacts.md`, and descriptor files. The website module catalog is generated from `src/main/resources/META-INF/echo.mod.json`, so the public catalog changes only when module source metadata changes.
+
+## Launcher Ownership
+
+The launcher does not need a full pack archive when an individual changed module asset can be resolved. It reads the selected pack manifest, expands `moduleRequirements`, chooses the correct artifact family, compares installed files by version/size/hash, then downloads only missing or changed module files.
+
+## Release Index Ownership
+
+The Release Index is the public catalog layer. It maps each Ashfall edition to its pack metadata, release assets, checksums, and module artifact family so the launcher and website can agree on the same download surface.

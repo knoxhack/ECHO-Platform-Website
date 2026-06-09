@@ -1,0 +1,23 @@
+# Ashfall Editions
+
+Ashfall is published as three edition repos because each runtime consumes a different module artifact family.
+
+## Edition Repos
+
+| Repo | Runtime lane | Module artifact family |
+| --- | --- | --- |
+| `ECHO-Ashfall-Native-Edition` | ECHO Native Platform | `.echo-addon` |
+| `ECHO-Ashfall-NeoForge-Edition` | Minecraft/NeoForge | `-neoforge.jar` |
+| `ECHO-Ashfall-Standalone-Edition` | ECHO Standalone Runtime | `-standalone.jar` |
+
+## Launcher Behavior
+
+The launcher presents each edition as a selectable catalog entry. Once selected, it resolves the edition's pack metadata and module artifact family from Release Index metadata, then downloads only changed files when individual asset URLs are available.
+
+## Why The Split Matters
+
+Native, NeoForge, and Standalone are not just marketing labels. They are separate release consumers with different runtime loaders, different package files, and different validation expectations. Keeping those editions in their own repos makes ownership clear and keeps release assets predictable.
+
+## Naming
+
+The standalone product name is Ashfall Standalone Edition. Older temporary naming should not be used for the product surface.

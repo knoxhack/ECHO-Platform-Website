@@ -116,7 +116,7 @@ export default function NativePlatformPage() {
               Public Alpha
             </h2>
             <p className="mt-4 text-sm leading-6 text-echo-muted">
-              The Native Platform is in public alpha. Core services are stable.
+              The Native Platform is in public testing. Core services are stable.
               Addon APIs are maturing. Standalone Runtime is experimental.
             </p>
             <div className="mt-4 flex flex-wrap gap-2">

@@ -26,6 +26,11 @@ import ReferenceGlossary from "@/docs/reference/glossary.mdx";
 import ReferenceModuleManifest from "@/docs/reference/module-manifest.mdx";
 import ReferencePackOSManifest from "@/docs/reference/packos-manifest.mdx";
 import ReferenceStatusBadges from "@/docs/reference/status-badges.mdx";
+import ReleaseAshfallEditions from "@/docs/release/ashfall-editions.mdx";
+import ReleaseLauncherIndividualModuleUpdates from "@/docs/release/launcher-individual-module-updates.mdx";
+import ReleaseModuleArtifacts from "@/docs/release/module-artifacts.mdx";
+import ReleaseIndex from "@/docs/release/release-index.mdx";
+import { sdkDocs } from "@/lib/generated-sdk-docs";
 
 export type DocEntry = {
   title: string;
@@ -233,6 +238,45 @@ export const docsSections: DocSection[] = [
         "PackOS metadata, Command Center validation, launcher packaging, and public release readiness.",
         ["developers", "release-process"],
         DeveloperReleaseProcess
+      )
+    ]
+  },
+  {
+    title: "SDK",
+    description: "Generated mirror of the ECHO-SDK docs for schemas, templates, APIs, and authoring guides.",
+    items: sdkDocs
+  },
+  {
+    title: "Release & Updates",
+    description: "Release ownership, module artifacts, Ashfall editions, and launcher update behavior.",
+    items: [
+      doc(
+        "Release & Updates",
+        "Module Artifact Contract",
+        "Per-module Native, NeoForge, Standalone, sources, and descriptor file expectations.",
+        ["release", "module-artifacts"],
+        ReleaseModuleArtifacts
+      ),
+      doc(
+        "Release & Updates",
+        "Launcher Individual Module Updates",
+        "How the launcher resolves moduleRequirements and updates only changed module files.",
+        ["release", "launcher-individual-module-updates"],
+        ReleaseLauncherIndividualModuleUpdates
+      ),
+      doc(
+        "Release & Updates",
+        "Release Index",
+        "The catalog that connects launcher channels, pack metadata, GitHub Releases, and website downloads.",
+        ["release", "release-index"],
+        ReleaseIndex
+      ),
+      doc(
+        "Release & Updates",
+        "Ashfall Editions",
+        "Native, NeoForge, and Standalone edition ownership and module artifact families.",
+        ["release", "ashfall-editions"],
+        ReleaseAshfallEditions
       )
     ]
   },

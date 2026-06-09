@@ -22,9 +22,11 @@ import statusItems from "@/data/status.json";
 import type { MediaRecord } from "@/components/media-gallery";
 import type { ModuleRecord } from "@/components/module-card";
 import { Reveal } from "@/components/reveal";
+import { ProductGrid } from "@/components/product-grid";
 import type { RoadmapGroup } from "@/components/roadmap-timeline";
 import { StatusBadge } from "@/components/status-badge";
 import { displayNewsDate, getAllNewsEntries, type NewsSummary, toNewsSummary } from "@/lib/news";
+import { allProducts } from "@/lib/products";
 import { pageMetadata, siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
@@ -212,6 +214,7 @@ export default async function HomePage() {
     <>
       <EchoCommandHero signals={signals} moduleCount={moduleRecords.length} />
       <GatewayDock />
+      <EcosystemProductRail />
       <SignalRouteMap signals={signals} />
       <TransmissionBand />
       <OperationsLane />
@@ -219,6 +222,36 @@ export default async function HomePage() {
       <RuntimeStackPanel />
       <TerminalFeed media={mediaPreview} news={newsPreview} roadmap={roadmapPreview} />
     </>
+  );
+}
+
+function EcosystemProductRail() {
+  const products = allProducts.filter((product) => product.repoName !== "ECHO-Platform-Website");
+
+  return (
+    <section className="section-shell py-16">
+      <Reveal>
+        <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="cyber-label">Ecosystem Products</p>
+            <h2 className="mt-4 font-display text-4xl font-black text-echo-text">
+              The official surface now maps every repo to a product.
+            </h2>
+            <p className="mt-4 max-w-4xl text-base leading-7 text-echo-muted">
+              Launcher, modules, Ashfall editions, Release Index, SDK, runtimes, and studios each
+              have an owner, release surface, docs entry, and download role.
+            </p>
+          </div>
+          <Link href="/release-index" className="cyber-button cyber-button-secondary w-fit">
+            Release Index
+            <ArrowRight size={16} />
+          </Link>
+        </div>
+        <div className="mt-8">
+          <ProductGrid products={products} compact />
+        </div>
+      </Reveal>
+    </section>
   );
 }
 
@@ -680,9 +713,9 @@ function DeveloperSurfaceMap({ modules }: { modules: ModuleRecord[] }) {
               <Link href="/docs/developers/getting-started" className="cyber-button cyber-button-secondary">
                 Developer Docs
               </Link>
-              <Link href={siteConfig.links.github} className="cyber-button cyber-button-secondary">
+              <Link href={siteConfig.repositories.sdk} className="cyber-button cyber-button-secondary">
                 <Github size={16} />
-                GitHub
+                SDK GitHub
               </Link>
             </div>
           </div>
@@ -818,7 +851,7 @@ function TerminalFeed({
                   <MessagesSquare size={14} />
                   Discord
                 </Link>
-                <Link href={siteConfig.links.github} className="cyber-button cyber-button-secondary min-h-9 px-3 py-1.5 text-xs">
+                <Link href={siteConfig.repositories.releaseIndex} className="cyber-button cyber-button-secondary min-h-9 px-3 py-1.5 text-xs">
                   <Github size={14} />
                   GitHub
                 </Link>

@@ -1,0 +1,24 @@
+# Release Index
+
+`knoxhack/ECHO-Release-Index` is the catalog that connects launcher channels, Ashfall edition metadata, module artifact families, GitHub Releases, checksums, and the website download portal.
+
+## What It Owns
+
+- `channels/alpha/release-manifest.json` for the full release snapshot.
+- `channels/alpha/repositories.json` for repo-level product, release, and asset summaries.
+- `packs/ashfall-native-edition.json` for Native pack metadata.
+- `packs/ashfall-neoforge-edition.json` for NeoForge pack metadata.
+- `packs/ashfall-standalone-edition.json` for Standalone pack metadata.
+- Module release schemas used by launcher and release tooling.
+
+## Website Snapshot
+
+The website generates `data/release-index-snapshot.json` from the local Release Index checkout. That keeps the public download page working even when raw GitHub access to the source repo is private or temporarily unavailable.
+
+## Launcher Channel Use
+
+Launcher clients read channel metadata, select a product and edition, then use the referenced release and pack manifests to find exact assets. The Release Index is therefore the shared source between players, website downloads, and release validation.
+
+## Product Coverage
+
+The current website product model covers all target repos: Launcher, Modules, Ashfall Native Edition, Ashfall NeoForge Edition, Ashfall Standalone Edition, Release Index, Native Platform, Standalone Runtime, SDK, Developer Studio, Addons Studio, and Platform Website.

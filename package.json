@@ -8,6 +8,8 @@
     "build:next": "next build",
     "search:index": "pagefind --site out --glob \"docs/**/*.html\"",
     "start": "next start",
+    "sync:ecosystem": "node scripts/sync-ecosystem-data.mjs",
+    "audit:site": "node scripts/docs-audit.mjs && node scripts/website-drift-audit.mjs",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit"
   },

@@ -1,3 +1,5 @@
+import releaseIndexSnapshot from "@/data/release-index-snapshot.json";
+
 export type ReleaseAssetKind =
   | "echo-pack"
   | "pack-manifest"
@@ -92,7 +94,14 @@ const RELEASE_INDEX_URL =
   "https://raw.githubusercontent.com/knoxhack/ECHO-Release-Index/main/channels/alpha/release-manifest.json";
 
 export async function getEchoReleases(): Promise<EchoRelease[]> {
-  const indexedRelease = await getReleaseIndexDownloadPortal().catch(() => null);
+  const snapshotRelease = releaseIndexToDownloadPortal(
+    releaseIndexSnapshot as ReleaseIndexManifest
+  );
+  if (snapshotRelease?.assets.length) {
+    return [snapshotRelease];
+  }
+
+  const indexedRelease = await getRemoteReleaseIndexDownloadPortal().catch(() => null);
   if (indexedRelease?.assets.length) {
     return [indexedRelease];
   }
@@ -141,14 +150,14 @@ export async function getEchoReleases(): Promise<EchoRelease[]> {
 function pendingPublicAlphaRelease(): EchoRelease {
   return {
     id: -1,
-    tag: "v0.1.0-native-public-alpha",
-    title: "ECHO Native Platform Public Alpha",
-    htmlUrl: "https://github.com/knoxhack/ECHO-Native-Platform/releases",
+    tag: "release-index-pending",
+    title: "ECHO Release Catalog Pending",
+    htmlUrl: "https://github.com/knoxhack/ECHO-Release-Index/releases",
     publishedAt: new Date(0).toISOString(),
     createdAt: new Date(0).toISOString(),
     prerelease: true,
     body:
-      "Public alpha release assets are not indexed yet. The website will show direct downloads after the release index is published.",
+      "Release assets are not indexed yet. The website will show direct downloads after the release index is published.",
     assets: []
   };
 }
@@ -162,6 +171,7 @@ export function classifyAsset(name: string): ReleaseAssetKind {
   if (normalized.includes("checksum") || normalized === "checksums.txt") return "checksums";
   if (normalized.includes("final-qa") || normalized.includes("release-prep") || normalized.includes("proof-gate")) return "qa-report";
   if (normalized.endsWith(".echo-addon")) return "native-addon";
+  if (normalized.endsWith("-standalone.jar")) return "module-jar";
   if (normalized.includes("standalone") && (normalized.endsWith(".zip") || normalized.endsWith(".jar"))) return "standalone-runtime";
   if (normalized.includes("native-product") && normalized.endsWith(".zip")) return "native-platform-package";
   if (normalized.endsWith(".jar")) return "module-jar";
@@ -280,7 +290,7 @@ function normalizeAsset(asset: GitHubReleaseAsset): ReleaseAsset {
   };
 }
 
-async function getReleaseIndexDownloadPortal(): Promise<EchoRelease | null> {
+async function getRemoteReleaseIndexDownloadPortal(): Promise<EchoRelease | null> {
   const headers: HeadersInit = {
     Accept: "application/json",
     "User-Agent": "ECHO-Platform-Website"
@@ -297,7 +307,10 @@ async function getReleaseIndexDownloadPortal(): Promise<EchoRelease | null> {
 
   if (!response.ok) return null;
 
-  const manifest = (await response.json()) as ReleaseIndexManifest;
+  return releaseIndexToDownloadPortal((await response.json()) as ReleaseIndexManifest);
+}
+
+function releaseIndexToDownloadPortal(manifest: ReleaseIndexManifest): EchoRelease | null {
   const repositories = manifest.repositories ?? [];
   const assets = repositories.flatMap((repository, repoIndex) =>
     (repository.assets ?? [])
@@ -307,18 +320,21 @@ async function getReleaseIndexDownloadPortal(): Promise<EchoRelease | null> {
 
   if (!assets.length) return null;
 
+  const releaseIndexRepository = repositories.find(
+    (repository) => repository.repoName === "ECHO-Release-Index"
+  );
+  const firstRelease = repositories.find((repository) => repository.release?.htmlUrl);
+
   return {
     id: 0,
-    tag: manifest.releaseTag ?? "v0.1.0-native-public-alpha",
-    title: "ECHO Native Platform Public Alpha",
-    htmlUrl:
-      repositories.find((repository) => repository.release?.htmlUrl)?.release?.htmlUrl ??
-      "https://github.com/knoxhack/ECHO-Native-Platform/releases",
+    tag: manifest.releaseTag ?? "release-index-snapshot",
+    title: `ECHO Release Catalog${manifest.releaseTag ? ` ${manifest.releaseTag}` : ""}`,
+    htmlUrl: releaseIndexRepository?.release?.htmlUrl ?? firstRelease?.release?.htmlUrl ?? "https://github.com/knoxhack/ECHO-Release-Index/releases",
     publishedAt: manifest.generatedAt ?? new Date(0).toISOString(),
     createdAt: manifest.generatedAt ?? new Date(0).toISOString(),
     prerelease: true,
     body:
-      "Public alpha download portal generated from the ECHO release index. The official website is the public download hub; GitHub Releases store and verify the assets.",
+      "Download portal generated from the ECHO release index snapshot. The official website is the public download hub; GitHub Releases store and verify the assets.",
     assets: assets.sort((a, b) => {
       const kindOrder: ReleaseAssetKind[] = [
         "windows-installer",

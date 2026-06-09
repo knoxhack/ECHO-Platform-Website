@@ -1,5 +1,5 @@
-﻿# Public Alpha Release Status
+# Website Release Status
 
-This brand-new repository is staged for the ECHO Native Platform public alpha.
+This repository is the official ECHO website, docs, product catalog, and download portal.
 
-Public release assets are staged through GitHub draft releases first. The official ECHO website is the public download hub.
+Release assets are indexed through `knoxhack/ECHO-Release-Index`, then surfaced on the website through a generated static snapshot.

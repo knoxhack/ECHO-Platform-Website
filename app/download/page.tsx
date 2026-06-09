@@ -19,7 +19,7 @@ import {
 export const metadata: Metadata = pageMetadata({
   title: "Download",
   description:
-    "ECHO download portal for launcher setup, release metadata, PackOS assets, checksums, and source access.",
+    "ECHO download portal for launcher setup, Release Index metadata, Ashfall editions, module artifacts, checksums, and source access.",
   path: "/download"
 });
 
@@ -32,10 +32,12 @@ export default async function DownloadPage() {
     ...assetsByKind(latest, "standalone-runtime"),
     ...assetsByKind(latest, "echo-pack"),
     ...assetsByKind(latest, "pack-manifest"),
-    ...assetsByKind(latest, "release-metadata"),
+    ...assetsByKind(latest, "release-metadata")
+  ];
+  const moduleAssets = [
+    ...assetsByKind(latest, "module-jar"),
     ...assetsByKind(latest, "native-addon")
   ];
-  const moduleAssets = assetsByKind(latest, "module-jar");
   const verificationAssets = [
     ...assetsByKind(latest, "checksums"),
     ...assetsByKind(latest, "qa-report")
@@ -47,9 +49,9 @@ export default async function DownloadPage() {
       <HeroSection
         compact
         eyebrow="Downloads"
-        title="Download ECHO Launcher"
-        kicker="The official way to install, update, repair, and launch ECHO experiences."
-        description="Start with the launcher path. Current GitHub releases expose Ashfall pack assets, PackOS metadata, checksums, and module artifacts for advanced verification."
+        title="ECHO Download Portal"
+        kicker="Launcher first, Release Index accurate."
+        description="Start with the launcher path. The page is generated from the Release Index snapshot so Ashfall editions, launcher installers, module artifacts, PackOS metadata, checksums, and studio app releases stay visible together."
         actions={[
           { label: "Open Launcher Page", href: "/launcher" },
           { label: "Launcher Setup Docs", href: siteConfig.links.launcherDocs, variant: "secondary" },
@@ -61,7 +63,7 @@ export default async function DownloadPage() {
         <SectionHeading
           eyebrow="Release Channels"
           title="Player launcher path first, exact release assets nearby."
-          description="Windows and Linux buttons become direct installer downloads only when matching launcher assets are published. Until then, the page keeps players on launcher setup while exposing release metadata for testers and developers."
+          description="Windows and Linux buttons become direct installer downloads only when matching launcher assets are published. The release catalog below exposes pack, module, studio, runtime, and verification assets for testers and developers."
         />
         <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {downloadRecords.map((download) => (
@@ -76,15 +78,15 @@ export default async function DownloadPage() {
         <div className="cyber-panel rounded-[6px] p-6 sm:p-8">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
             <div>
-              <p className="cyber-label">Latest Public Release</p>
+              <p className="cyber-label">Latest Release Catalog</p>
               <h2 className="mt-4 font-display text-3xl font-bold text-echo-text sm:text-4xl">
                 {latest.title}
               </h2>
               <p className="mt-4 max-w-4xl text-base leading-7 text-echo-muted">
-                Published {formatReleaseDate(latest.publishedAt)} from GitHub tag{" "}
-                <span className="font-mono text-echo-text">{latest.tag}</span>. Current public
-                release assets are exposed here as website downloads while GitHub Releases
-                remain the verified storage backend.
+                Snapshot generated {formatReleaseDate(latest.publishedAt)} from tag{" "}
+                <span className="font-mono text-echo-text">{latest.tag}</span>. Release assets
+                are exposed here as website downloads while GitHub Releases remain the verified
+                storage backend.
               </p>
               <ReleaseQuickLinks
                 assets={latest.assets}
@@ -125,7 +127,7 @@ export default async function DownloadPage() {
         <SectionHeading
           eyebrow="Release Assets"
           title="PackOS metadata, pack archive, and module artifacts."
-          description="Checksums come directly from GitHub release asset digests. Manual asset downloads are useful for verification and testing, while normal players should stay with the launcher flow."
+          description="Checksums come directly from GitHub release asset digests. Manual downloads are useful for verification and testing, while normal players should stay with the launcher flow."
         />
         <ReleaseAssetTable
           title="Ashfall Package Assets"
@@ -134,7 +136,7 @@ export default async function DownloadPage() {
         />
         <ReleaseAssetTable
           title="Module Artifacts"
-          description="First-party ECHO module jars included in the latest release. These are advanced artifacts and should not replace launcher-managed installs."
+          description="First-party ECHO module jars and .echo-addon packages included in the latest catalog. The launcher uses these for individual module updates."
           assets={moduleAssets}
           compact
         />
@@ -184,7 +186,7 @@ export default async function DownloadPage() {
                 <StatusBadge label={release.prerelease ? "Prerelease" : "Public"} />
               </div>
               <p className="mt-4 text-sm text-echo-muted">
-                {formatReleaseDate(release.publishedAt)} · {release.assets.length} assets
+                {formatReleaseDate(release.publishedAt)} - {release.assets.length} assets
               </p>
             </Link>
           ))}

@@ -64,7 +64,7 @@ export default function DeveloperStudioPage() {
         description="Developer Studio is the control center for ECHO platform operators. It provides report viewers, QA dashboards, release assistants, and manifest validation tools to ship the platform with confidence."
         actions={[
           { label: "Download", href: "/download", variant: "primary" },
-          { label: "View on GitHub", href: siteConfig.links.github, variant: "secondary" }
+          { label: "View on GitHub", href: siteConfig.repositories.developerStudio, variant: "secondary" }
         ]}
       />
 

@@ -1,0 +1,330 @@
+{
+  "generatedAt": "2026-06-09T00:06:40.691Z",
+  "sourceRepo": "knoxhack/ECHO-SDK",
+  "sourceCommit": "5575eeaf04ab3134b75eece0a761b237294079d6",
+  "docCount": 29,
+  "docs": [
+    {
+      "sourcePath": "docs/API_INDEX.md",
+      "targetPath": "docs/sdk/api-index.mdx",
+      "slug": [
+        "sdk",
+        "api-index"
+      ],
+      "title": "ECHO API Index",
+      "description": "SDK reference mirrored from ECHO-SDK/docs.",
+      "sourceSha256": "d439ef364028036f6049e13d8cd8b7025ba1331ca7f823eae53aa1cd2b09ab77"
+    },
+    {
+      "sourcePath": "docs/API_STABILITY.md",
+      "targetPath": "docs/sdk/api-stability.mdx",
+      "slug": [
+        "sdk",
+        "api-stability"
+      ],
+      "title": "ECHO 1.3.5 API Stability",
+      "description": "Reusable integrations must not require Ashfall unless the module metadata explicitly says Ashfall is required.",
+      "sourceSha256": "c33e9f73e0f6c722d98216c0e2d20b07492986000ecc82092cd348323017a46a"
+    },
+    {
+      "sourcePath": "docs/api/index.md",
+      "targetPath": "docs/sdk/api.mdx",
+      "slug": [
+        "sdk",
+        "api"
+      ],
+      "title": "API Index",
+      "description": "The public API surface is organized around module descriptors, runtime services, registry contracts, diagnostics, lifecycle hooks, and release metadata.",
+      "sourceSha256": "cd45a5e3425f3a390adb815091c80a6f4cc70cccfb45d96723e7cd1d796d1f0b"
+    },
+    {
+      "sourcePath": "docs/api/optional_integrations.md",
+      "targetPath": "docs/sdk/api/optional-integrations.mdx",
+      "slug": [
+        "sdk",
+        "api",
+        "optional-integrations"
+      ],
+      "title": "Optional Integrations",
+      "description": "Optional integrations must be safe when the target module or runtime is absent.",
+      "sourceSha256": "b0c2a77a363e0824daf71c9cc6a5f51cbc25f4fc96277d177e0e3bf9d946aa5d"
+    },
+    {
+      "sourcePath": "docs/creator_guides/build_your_first_echo_pack.md",
+      "targetPath": "docs/sdk/creator-guides/build-your-first-echo-pack.mdx",
+      "slug": [
+        "sdk",
+        "creator-guides",
+        "build-your-first-echo-pack"
+      ],
+      "title": "Build Your First ECHO Pack",
+      "description": "SDK reference mirrored from ECHO-SDK/docs.",
+      "sourceSha256": "862d54fb32d4be38cfd103432010e0305a3e335b37cedc277b8c02d18ac4c720"
+    },
+    {
+      "sourcePath": "docs/CREATOR_START_HERE.md",
+      "targetPath": "docs/sdk/creator-start-here.mdx",
+      "slug": [
+        "sdk",
+        "creator-start-here"
+      ],
+      "title": "Creator Start Here",
+      "description": "ECHO gives creators reusable modules, Pack Builder templates, datapack examples, config presets, theme templates, and validators.",
+      "sourceSha256": "af04bf37c8f271aa5ee81990633b3325a970564579e2cb5b71af457acc637c88"
+    },
+    {
+      "sourcePath": "docs/CREATOR_TEMPLATES.md",
+      "targetPath": "docs/sdk/creator-templates.mdx",
+      "slug": [
+        "sdk",
+        "creator-templates"
+      ],
+      "title": "Creator Templates",
+      "description": "Templates define module lists, starter datapacks, docs, resourcepack/config scaffolds, launcher cards, health rules, and export profiles.",
+      "sourceSha256": "889c3da34fe3eb1cf413da114ab158acc625e40e0efcc23673cd111b5539e814"
+    },
+    {
+      "sourcePath": "docs/CREATOR_TOOLING_API.md",
+      "targetPath": "docs/sdk/creator-tooling-api.mdx",
+      "slug": [
+        "sdk",
+        "creator-tooling-api"
+      ],
+      "title": "Creator Tooling Api",
+      "description": "Creator tools expose metadata schemas and validators. All new validators support text output and --json.",
+      "sourceSha256": "68630bdbd8ae195bd6062846f07a5fa6e3879c4a0ae213093c4ea150e9effeb4"
+    },
+    {
+      "sourcePath": "docs/DEVELOPER_START_HERE.md",
+      "targetPath": "docs/sdk/developer-start-here.mdx",
+      "slug": [
+        "sdk",
+        "developer-start-here"
+      ],
+      "title": "Developer Start Here",
+      "description": "External mods should integrate through ECHO Core services and optional integration checks. Avoid direct hard references to optional addons unless your module declares them as required.",
+      "sourceSha256": "dfc007ca0ba2ec3257f3f5f34c91cc29e7b8c356690e57b5ede31c789929a162"
+    },
+    {
+      "sourcePath": "docs/examples/index.md",
+      "targetPath": "docs/sdk/examples.mdx",
+      "slug": [
+        "sdk",
+        "examples"
+      ],
+      "title": "Examples",
+      "description": "Examples show the smallest useful SDK patterns.",
+      "sourceSha256": "0208d78b34c40edb896c7cf4a5df9b6f6f54ce18049aafbe54236e456f445df6"
+    },
+    {
+      "sourcePath": "docs/examples/integrations/index.md",
+      "targetPath": "docs/sdk/examples/integrations.mdx",
+      "slug": [
+        "sdk",
+        "examples",
+        "integrations"
+      ],
+      "title": "Integration Examples",
+      "description": "Check whether a service/module exists before calling it. If the dependency is optional, the addon must still load when the dependency is absent.",
+      "sourceSha256": "6867ef79ccbbb1dc4413f76a7413687552c7378809d7b4784eb075368f715ea4"
+    },
+    {
+      "sourcePath": "docs/getting-started.md",
+      "targetPath": "docs/sdk/getting-started.mdx",
+      "slug": [
+        "sdk",
+        "getting-started"
+      ],
+      "title": "Getting Started",
+      "description": "Start here when building against the ECHO SDK.",
+      "sourceSha256": "b8818c02edc361da3ee0a6137a742cb6522fe0221903eb67ae8ab5f0bd9b9d0d"
+    },
+    {
+      "sourcePath": "docs/MOD_DEVELOPERS.md",
+      "targetPath": "docs/sdk/mod-developers.mdx",
+      "slug": [
+        "sdk",
+        "mod-developers"
+      ],
+      "title": "Mod Developers",
+      "description": "Depend on ECHO Core for shared service contracts and use optional lookups for every cross-addon connection.",
+      "sourceSha256": "2acbe1937b3b089beabba3425bd81c11c4fb14d97adb5854edd4b1da2d00baa2"
+    },
+    {
+      "sourcePath": "docs/NATIVE_ADAPTERCORE_GUIDE.md",
+      "targetPath": "docs/sdk/native-adaptercore-guide.mdx",
+      "slug": [
+        "sdk",
+        "native-adaptercore-guide"
+      ],
+      "title": "Native AdapterCore Guide",
+      "description": "AdapterCore bridges module contracts across native, NeoForge, and standalone runtimes.",
+      "sourceSha256": "68e18b1e3983269361a67c87d7ad6c8b5a912f7697cbaf4dc5c52db5e8ec330e"
+    },
+    {
+      "sourcePath": "docs/NATIVE_API_REFERENCE.md",
+      "targetPath": "docs/sdk/native-api-reference.mdx",
+      "slug": [
+        "sdk",
+        "native-api-reference"
+      ],
+      "title": "ECHO Native API Reference",
+      "description": "The full public API snapshot is published as:",
+      "sourceSha256": "ac8f131aa4695ff0f92a21d5fb015897a280150417e13451eaf8753babbdfb50"
+    },
+    {
+      "sourcePath": "docs/NATIVE_COMPATIBILITY_MATRIX.md",
+      "targetPath": "docs/sdk/native-compatibility-matrix.mdx",
+      "slug": [
+        "sdk",
+        "native-compatibility-matrix"
+      ],
+      "title": "Native Compatibility Matrix",
+      "description": "SDK reference mirrored from ECHO-SDK/docs.",
+      "sourceSha256": "f2d7d456e34ff132011e4c1bd76ff2da2ae6349993bc30bae15ded4786645a7d"
+    },
+    {
+      "sourcePath": "docs/NATIVE_EXAMPLE_ADDON_WALKTHROUGH.md",
+      "targetPath": "docs/sdk/native-example-addon-walkthrough.mdx",
+      "slug": [
+        "sdk",
+        "native-example-addon-walkthrough"
+      ],
+      "title": "Example Addon Walkthrough: EchoExampleMod",
+      "description": "This walkthrough builds a minimal ECHO Native addon from scratch. It registers a block, an item, a datapack-driven recipe, and an optional Index integration.",
+      "sourceSha256": "3745c231d481f4762a2e694336829378a52891482eb90faf82fb8275de197371"
+    },
+    {
+      "sourcePath": "docs/NATIVE_MOD_AUTHOR_GUIDE.md",
+      "targetPath": "docs/sdk/native-mod-author-guide.mdx",
+      "slug": [
+        "sdk",
+        "native-mod-author-guide"
+      ],
+      "title": "ECHO Native Mod Author Guide",
+      "description": "my-addon/ build.gradle src/main/java/.../MyAddon.java src/main/resources/META-INF/echo-native-addon.descriptor.json src/main/resources/data/myaddon/... src/test/java/.../MyAddonTest.java",
+      "sourceSha256": "843ffbe637c5e008037f00a5d15c45955b5d4b2cddfa2d46387429f899c51fc4"
+    },
+    {
+      "sourcePath": "docs/NATIVE_PORTING_GUIDE.md",
+      "targetPath": "docs/sdk/native-porting-guide.mdx",
+      "slug": [
+        "sdk",
+        "native-porting-guide"
+      ],
+      "title": "Porting Guide from NeoForge to ECHO Native",
+      "description": "ECHO Native gives you service-based optional integrations, policy-driven runtime lanes, and built-in RuntimeGuard budgets. Porting is incremental: you can keep NeoForge compatibility while a",
+      "sourceSha256": "ec4e969c8753b2646e7ace5a727fb36e73bb5a539d2dfa9e82ebf0875966561e"
+    },
+    {
+      "sourcePath": "docs/NATIVE_RELEASE_PACKAGING_GUIDE.md",
+      "targetPath": "docs/sdk/native-release-packaging-guide.mdx",
+      "slug": [
+        "sdk",
+        "native-release-packaging-guide"
+      ],
+      "title": "Native Release Packaging Guide",
+      "description": "Native addon releases use .echo-addon packages generated from module descriptors.",
+      "sourceSha256": "81e0ed63af875603fa947f3969fc0db78549863d5712a4628c64f238026c9365"
+    },
+    {
+      "sourcePath": "docs/NATIVE_SDK_ARTIFACTS.md",
+      "targetPath": "docs/sdk/native-sdk-artifacts.mdx",
+      "slug": [
+        "sdk",
+        "native-sdk-artifacts"
+      ],
+      "title": "ECHO Native SDK Maven Artifacts",
+      "description": "./gradlew publishToMavenLocal",
+      "sourceSha256": "74f56d947bf702985bedce4d53f8cc84bc4a90bf92e66a42f1dceaaf99a6aa4c"
+    },
+    {
+      "sourcePath": "docs/NATIVE_TEMPLATES.md",
+      "targetPath": "docs/sdk/native-templates.mdx",
+      "slug": [
+        "sdk",
+        "native-templates"
+      ],
+      "title": "Native Templates",
+      "description": "Native templates should include an addon descriptor, package metadata, a minimal runtime entrypoint, and validation notes.",
+      "sourceSha256": "7a338657ef754f4e843632a399eb00592bb6c2514e9c2ff4a516830efdc8349a"
+    },
+    {
+      "sourcePath": "docs/NATIVE_TROUBLESHOOTING.md",
+      "targetPath": "docs/sdk/native-troubleshooting.mdx",
+      "slug": [
+        "sdk",
+        "native-troubleshooting"
+      ],
+      "title": "ECHO Native Troubleshooting",
+      "description": "Cause: An addon descriptor is missing a required field or contains invalid JSON. Fix:",
+      "sourceSha256": "9b13337574fbf8952186c4ca277b4b341b0d86c19a11ae0820198877527912bb"
+    },
+    {
+      "sourcePath": "docs/native-addon-guide.md",
+      "targetPath": "docs/sdk/native-addon-guide.mdx",
+      "slug": [
+        "sdk",
+        "native-addon-guide"
+      ],
+      "title": "Native Addon Guide",
+      "description": "Native addons are packaged as .echo-addon files.",
+      "sourceSha256": "e660a2c035e0805f4bda170b9ab4876f276f451fce3f9066a0e89c46786e3d60"
+    },
+    {
+      "sourcePath": "docs/neoforge-module-guide.md",
+      "targetPath": "docs/sdk/neoforge-module-guide.mdx",
+      "slug": [
+        "sdk",
+        "neoforge-module-guide"
+      ],
+      "title": "NeoForge Module Guide",
+      "description": "NeoForge modules are packaged as <module>-<version>-neoforge.jar files.",
+      "sourceSha256": "06ae404cd5752fcdd5bb63f459ff985a3b50e8753bb80032f7f7a76e4e40e912"
+    },
+    {
+      "sourcePath": "docs/OPTIONAL_INTEGRATIONS.md",
+      "targetPath": "docs/sdk/optional-integrations.mdx",
+      "slug": [
+        "sdk",
+        "optional-integrations"
+      ],
+      "title": "Optional Integrations",
+      "description": "Use api/optionalintegrations.md as the implementation guide. This page remains as the stable legacy link target.",
+      "sourceSha256": "e5694d1b591e2e743222ad30bc4f4575137e7eb49e0939ccd42ed512a61a18f0"
+    },
+    {
+      "sourcePath": "docs/release-packaging.md",
+      "targetPath": "docs/sdk/release-packaging.mdx",
+      "slug": [
+        "sdk",
+        "release-packaging"
+      ],
+      "title": "Release Packaging",
+      "description": "Runtime artifacts are owned by their release repos.",
+      "sourceSha256": "1dcb6388e449e8bd079643634ec250e4c4a89760b22fcf661577c003552034d5"
+    },
+    {
+      "sourcePath": "docs/schemas/index.md",
+      "targetPath": "docs/sdk/schemas.mdx",
+      "slug": [
+        "sdk",
+        "schemas"
+      ],
+      "title": "Schemas",
+      "description": "Schemas define the machine-readable contracts used by launchers, modules, packs, and tools.",
+      "sourceSha256": "e4b0b25db5df2348cc1e9aa75144752a56f0927cdc4f20cefd4445421a9d392d"
+    },
+    {
+      "sourcePath": "docs/standalone-module-guide.md",
+      "targetPath": "docs/sdk/standalone-module-guide.mdx",
+      "slug": [
+        "sdk",
+        "standalone-module-guide"
+      ],
+      "title": "Standalone Module Guide",
+      "description": "Standalone modules are packaged as <module>-<version>-standalone.jar files.",
+      "sourceSha256": "683280cde11c43104b3e34c2b9d4774881f4235586afbfb48848b86b8ecdb07d"
+    }
+  ]
+}

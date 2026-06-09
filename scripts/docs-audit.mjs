@@ -83,7 +83,12 @@ if (!exists(path.join(root, "README.md"))) {
   errors.push("Missing root README.md");
 }
 
-const stalePatterns = [/echolabs/i, /ECHOLauncher/, /ECHODEVELOPERSTUDIO/, /standalone showcase/i];
+const stalePatterns = [
+  /echolabs/i,
+  /ECHOLauncher/,
+  /ECHODEVELOPERSTUDIO/,
+  new RegExp("standalone\\s+showcase", "i")
+];
 for (const file of markdownFiles()) {
   const text = fs.readFileSync(file, "utf8");
   for (const pattern of stalePatterns) {

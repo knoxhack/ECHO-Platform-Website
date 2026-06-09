@@ -7,19 +7,31 @@ const footerGroups = [
     title: "Platform",
     links: [
       { href: "/platform", label: "Overview" },
+      { href: "/native-platform", label: "Native Platform" },
+      { href: "/standalone-runtime", label: "Standalone Runtime" },
+      { href: "/release-index", label: "Release Index" },
       { href: "/launcher", label: "Launcher" },
       { href: "/modules", label: "Modules" },
-      { href: "/media", label: "Media" },
-      { href: "/news", label: "News" },
-      { href: "/roadmap", label: "Roadmap" }
+      { href: "/media", label: "Media" }
+    ]
+  },
+  {
+    title: "Ashfall",
+    links: [
+      { href: "/ashfall", label: "Overview" },
+      { href: "/ashfall/native-edition", label: "Native Edition" },
+      { href: "/ashfall/neoforge-edition", label: "NeoForge Edition" },
+      { href: "/ashfall/standalone-edition", label: "Standalone Edition" }
     ]
   },
   {
     title: "Build",
     links: [
       { href: "/developers", label: "Developers" },
+      { href: "/sdk", label: "SDK" },
+      { href: "/developer-studio", label: "Developer Studio" },
+      { href: "/addons-studio", label: "Addons Studio" },
       { href: "/docs", label: "Docs" },
-      { href: "/docs/platform/packos", label: "PackOS" },
       { href: "/download", label: "Downloads" }
     ]
   },
@@ -61,7 +73,7 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="grid gap-8 sm:grid-cols-3">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {footerGroups.map((group) => (
             <div key={group.title}>
               <p className="cyber-label">{group.title}</p>

@@ -10,10 +10,10 @@ const navItems = [
   { href: "/ashfall", label: "Ashfall" },
   { href: "/launcher", label: "Launcher" },
   { href: "/modules", label: "Modules" },
-  { href: "/developers", label: "Developers" },
+  { href: "/sdk", label: "SDK" },
+  { href: "/studios", label: "Studios" },
   { href: "/docs", label: "Docs" },
-  { href: "/roadmap", label: "Roadmap" },
-  { href: "/community", label: "Community" }
+  { href: "/download", label: "Download" }
 ];
 
 export function SiteHeader() {
@@ -59,7 +59,7 @@ export function SiteHeader() {
         <div className="flex items-center gap-2">
           <Link href="/download" className="cyber-button cyber-button-primary hidden sm:inline-flex">
             <Download size={16} />
-            Download Launcher
+            Download
           </Link>
           <button
             type="button"
@@ -92,7 +92,7 @@ export function SiteHeader() {
               className="cyber-button cyber-button-primary mt-1"
             >
               <Download size={16} />
-              Download Launcher
+              Download
             </Link>
           </div>
         </div>

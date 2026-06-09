@@ -182,7 +182,7 @@ export default function DevelopersPage() {
         image="/images/echo-developer-workbench.png"
         actions={[
           { label: "Start Building", href: "/docs/developers/getting-started" },
-          { label: "View GitHub", href: siteConfig.links.github, variant: "secondary" },
+          { label: "View SDK GitHub", href: siteConfig.repositories.sdk, variant: "secondary" },
           { label: "Create a Module", href: "/docs/developers/module-template", variant: "secondary" },
           { label: "Explore APIs", href: "/docs/developers/service-contracts", variant: "secondary" }
         ]}
@@ -265,9 +265,9 @@ export default function DevelopersPage() {
               <Link href="/docs/developers/getting-started" className="cyber-button cyber-button-primary">
                 Start Journey
               </Link>
-              <Link href={siteConfig.links.github} className="cyber-button cyber-button-secondary">
+              <Link href={siteConfig.repositories.sdk} className="cyber-button cyber-button-secondary">
                 <Github size={16} />
-                View GitHub
+                View SDK GitHub
               </Link>
             </div>
           </div>
@@ -367,9 +367,9 @@ export default function DevelopersPage() {
                 <Braces size={16} />
                 Use the Module Template
               </Link>
-              <Link href={siteConfig.links.github} className="cyber-button cyber-button-secondary">
+              <Link href={siteConfig.repositories.modules} className="cyber-button cyber-button-secondary">
                 <Github size={16} />
-                Open GitHub
+                Open Modules GitHub
               </Link>
               <Link href={siteConfig.links.discord} className="cyber-button cyber-button-secondary">
                 <MessageSquare size={16} />

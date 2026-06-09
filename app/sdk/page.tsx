@@ -64,7 +64,7 @@ export default function SdkPage() {
         description="The public SDK provides everything you need to create Native and Standalone addons: templates, manifest editors, build tooling, and a clear path to publishing."
         actions={[
           { label: "Download Addon Studio", href: "/download", variant: "primary" },
-          { label: "Read Addon Docs", href: "/docs/developers/addons", variant: "secondary" },
+          { label: "Read Addon Docs", href: "/docs/sdk/native-addon-guide", variant: "secondary" },
           { label: "View Native Platform", href: "/native-platform", variant: "secondary" }
         ]}
       />
@@ -158,7 +158,7 @@ export default function SdkPage() {
             <Link href="/download" className="cyber-button cyber-button-primary">
               Download Addon Studio
             </Link>
-            <Link href="/docs/developers/addons" className="cyber-button cyber-button-secondary">
+            <Link href="/docs/sdk/native-addon-guide" className="cyber-button cyber-button-secondary">
               Read Addon Docs
             </Link>
           </div>

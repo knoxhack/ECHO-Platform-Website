@@ -1,0 +1,571 @@
+[
+  {
+    "repoName": "ECHO-Launcher",
+    "product": "ECHO Launcher",
+    "releaseKind": "launcher",
+    "route": "/launcher",
+    "tagline": "Install, update, repair, and launch ECHO experiences.",
+    "description": "Launcher source and app releases. It owns player install flow, repair flow, launcher updates, modpack file updates, and individual module updates.",
+    "purpose": "Launcher source and app releases. It owns player install flow, repair flow, launcher updates, modpack file updates, and individual module updates.",
+    "publicRole": "Launcher source and app releases. It owns player install flow, repair flow, launcher updates, modpack file updates, and individual module updates.",
+    "status": "Public Releases",
+    "repoUrl": "https://github.com/knoxhack/ECHO-Launcher",
+    "issuesUrl": "https://github.com/knoxhack/ECHO-Launcher/issues",
+    "releasesUrl": "https://github.com/knoxhack/ECHO-Launcher/releases",
+    "releaseUrl": "https://github.com/knoxhack/ECHO-Launcher/releases/tag/untagged-5beab25150b40d7e296e",
+    "assetCount": 5,
+    "docsHref": "/docs/install/launcher",
+    "downloadHref": "/download",
+    "updateFlow": "Reads the Release Index channel, resolves the selected Ashfall edition, expands moduleRequirements, and downloads only missing or changed files when individual assets are available.",
+    "artifacts": [
+      "Windows installer",
+      "portable launcher app",
+      "latest.yml",
+      "blockmap",
+      "launcher channel metadata"
+    ],
+    "features": [
+      {
+        "title": "Individual module updates",
+        "description": "Compares module path, version, size, and SHA-256 before downloading a changed artifact.",
+        "icon": "download"
+      },
+      {
+        "title": "Pack repair",
+        "description": "Rebuilds missing or corrupt pack files from release metadata without forcing a full reinstall.",
+        "icon": "shield"
+      },
+      {
+        "title": "Edition handoff",
+        "description": "Launches Native, NeoForge, or Standalone Ashfall entries from one catalog.",
+        "icon": "route"
+      }
+    ],
+    "relatedRepos": [
+      "ECHO-Release-Index",
+      "ECHO-Modules",
+      "ECHO-Ashfall-Native-Edition"
+    ]
+  },
+  {
+    "repoName": "ECHO-Modules",
+    "product": "ECHO Modules",
+    "releaseKind": "modules",
+    "route": "/modules",
+    "tagline": "All shared ECHO module source and per-module release artifacts.",
+    "description": "The canonical module repo. Each module owns source, manifests, per-module docs, and generated Native, NeoForge, Standalone, and sources artifacts.",
+    "purpose": "The canonical module repo. Each module owns source, manifests, per-module docs, and generated Native, NeoForge, Standalone, and sources artifacts.",
+    "publicRole": "The canonical module repo. Each module owns source, manifests, per-module docs, and generated Native, NeoForge, Standalone, and sources artifacts.",
+    "status": "95 Modules",
+    "repoUrl": "https://github.com/knoxhack/ECHO-Modules",
+    "issuesUrl": "https://github.com/knoxhack/ECHO-Modules/issues",
+    "releasesUrl": "https://github.com/knoxhack/ECHO-Modules/releases",
+    "releaseUrl": "https://github.com/knoxhack/ECHO-Modules/releases/tag/untagged-224d34047a292a06820a",
+    "assetCount": 4,
+    "docsHref": "/docs/release/module-artifacts",
+    "downloadHref": "/download",
+    "updateFlow": "Publishes one artifact family per runtime so the launcher can update modules independently inside each Ashfall edition.",
+    "artifacts": [
+      "<module>-<version>-neoforge.jar",
+      "<module>-<version>.echo-addon",
+      "<module>-<version>-standalone.jar",
+      "<module>-<version>-sources.jar"
+    ],
+    "features": [
+      {
+        "title": "Runtime families",
+        "description": "Native, NeoForge, and Standalone outputs share one echo.mod.json contract.",
+        "icon": "layers"
+      },
+      {
+        "title": "Per-module docs",
+        "description": "Every addon has a README, artifact notes, descriptor files, and release ownership.",
+        "icon": "file"
+      },
+      {
+        "title": "Launcher addressable",
+        "description": "moduleRequirements identify exact files instead of forcing whole-pack downloads.",
+        "icon": "target"
+      }
+    ],
+    "relatedRepos": [
+      "ECHO-SDK",
+      "ECHO-Release-Index",
+      "ECHO-Launcher"
+    ]
+  },
+  {
+    "repoName": "ECHO-Ashfall-Native-Edition",
+    "product": "Ashfall Native Edition",
+    "releaseKind": "pack",
+    "route": "/ashfall/native-edition",
+    "tagline": "Native runtime Ashfall pack using .echo-addon modules.",
+    "description": "The primary Ashfall edition for the ECHO Native Platform. It consumes .echo-addon module artifacts and native pack metadata.",
+    "purpose": "The primary Ashfall edition for the ECHO Native Platform. It consumes .echo-addon module artifacts and native pack metadata.",
+    "publicRole": "The primary Ashfall edition for the ECHO Native Platform. It consumes .echo-addon module artifacts and native pack metadata.",
+    "status": "Native Edition",
+    "repoUrl": "https://github.com/knoxhack/ECHO-Ashfall-Native-Edition",
+    "issuesUrl": "https://github.com/knoxhack/ECHO-Ashfall-Native-Edition/issues",
+    "releasesUrl": "https://github.com/knoxhack/ECHO-Ashfall-Native-Edition/releases",
+    "releaseUrl": "https://github.com/knoxhack/ECHO-Ashfall-Native-Edition/releases/tag/untagged-db7e918ed149c51f50ae",
+    "assetCount": 3,
+    "docsHref": "/docs/release/ashfall-editions",
+    "downloadHref": "/download",
+    "updateFlow": "Uses moduleArtifactFamily echo-addon; launcher updates changed .echo-addon files independently when release metadata provides asset URLs.",
+    "artifacts": [
+      "ashfall-native-edition pack archive",
+      "pack manifest",
+      ".echo-addon module requirements",
+      "checksums"
+    ],
+    "features": [
+      {
+        "title": "Native loader lane",
+        "description": "Targets the runtime-independent ECHO Native Platform.",
+        "icon": "loader"
+      },
+      {
+        "title": "Addon packages",
+        "description": "Consumes .echo-addon module packages from ECHO-Modules.",
+        "icon": "puzzle"
+      },
+      {
+        "title": "Player catalog entry",
+        "description": "Appears as an official Ashfall install in the launcher catalog.",
+        "icon": "app"
+      }
+    ],
+    "relatedRepos": [
+      "ECHO-Launcher",
+      "ECHO-Modules",
+      "ECHO-Release-Index"
+    ]
+  },
+  {
+    "repoName": "ECHO-Ashfall-NeoForge-Edition",
+    "product": "Ashfall NeoForge Edition",
+    "releaseKind": "pack",
+    "route": "/ashfall/neoforge-edition",
+    "tagline": "Minecraft/NeoForge Ashfall pack using -neoforge.jar modules.",
+    "description": "The compatibility edition for players and testers who need Minecraft/NeoForge runtime behavior while modules migrate to shared contracts.",
+    "purpose": "The compatibility edition for players and testers who need Minecraft/NeoForge runtime behavior while modules migrate to shared contracts.",
+    "publicRole": "The compatibility edition for players and testers who need Minecraft/NeoForge runtime behavior while modules migrate to shared contracts.",
+    "status": "NeoForge Edition",
+    "repoUrl": "https://github.com/knoxhack/ECHO-Ashfall-NeoForge-Edition",
+    "issuesUrl": "https://github.com/knoxhack/ECHO-Ashfall-NeoForge-Edition/issues",
+    "releasesUrl": "https://github.com/knoxhack/ECHO-Ashfall-NeoForge-Edition/releases",
+    "releaseUrl": "https://github.com/knoxhack/ECHO-Ashfall-NeoForge-Edition/releases/tag/v0.1.0-ashfall-neoforge-edition",
+    "assetCount": 4,
+    "docsHref": "/docs/release/ashfall-editions",
+    "downloadHref": "/download",
+    "updateFlow": "Uses moduleArtifactFamily neoforge; launcher updates changed -neoforge.jar module files independently when available.",
+    "artifacts": [
+      "ashfall-neoforge-edition pack archive",
+      "NeoForge pack manifest",
+      "-neoforge.jar module requirements",
+      "checksums"
+    ],
+    "features": [
+      {
+        "title": "Minecraft-compatible",
+        "description": "Keeps the NeoForge fallback lane explicit and documented.",
+        "icon": "network"
+      },
+      {
+        "title": "Jar module family",
+        "description": "Consumes -neoforge.jar module artifacts from ECHO-Modules.",
+        "icon": "box"
+      },
+      {
+        "title": "Parity signal",
+        "description": "Helps compare Native behavior against the Minecraft runtime lane.",
+        "icon": "gauge"
+      }
+    ],
+    "relatedRepos": [
+      "ECHO-Launcher",
+      "ECHO-Modules",
+      "ECHO-Release-Index"
+    ]
+  },
+  {
+    "repoName": "ECHO-Ashfall-Standalone-Edition",
+    "product": "Ashfall Standalone Edition",
+    "releaseKind": "pack",
+    "route": "/ashfall/standalone-edition",
+    "tagline": "Ashfall Standalone Edition using -standalone.jar modules.",
+    "description": "The renamed standalone Ashfall runtime package. It proves standalone module behavior without positioning the old showcase name as the product.",
+    "purpose": "The renamed standalone Ashfall runtime package. It proves standalone module behavior without positioning the old showcase name as the product.",
+    "publicRole": "The renamed standalone Ashfall runtime package. It proves standalone module behavior without positioning the old showcase name as the product.",
+    "status": "Standalone Edition",
+    "repoUrl": "https://github.com/knoxhack/ECHO-Ashfall-Standalone-Edition",
+    "issuesUrl": "https://github.com/knoxhack/ECHO-Ashfall-Standalone-Edition/issues",
+    "releasesUrl": "https://github.com/knoxhack/ECHO-Ashfall-Standalone-Edition/releases",
+    "releaseUrl": "https://github.com/knoxhack/ECHO-Ashfall-Standalone-Edition/releases/tag/v0.1.0-ashfall-standalone-edition",
+    "assetCount": 4,
+    "docsHref": "/docs/release/ashfall-editions",
+    "downloadHref": "/download",
+    "updateFlow": "Uses moduleArtifactFamily standalone; launcher updates changed -standalone.jar module files independently when available.",
+    "artifacts": [
+      "ashfall-standalone-edition pack archive",
+      "standalone pack manifest",
+      "-standalone.jar module requirements",
+      "checksums"
+    ],
+    "features": [
+      {
+        "title": "Standalone runtime lane",
+        "description": "Runs Ashfall systems in the standalone runtime shell.",
+        "icon": "box"
+      },
+      {
+        "title": "Standalone module family",
+        "description": "Consumes -standalone.jar module artifacts from ECHO-Modules.",
+        "icon": "server"
+      },
+      {
+        "title": "Parity harness",
+        "description": "Useful for testing module behavior outside the NeoForge lifecycle.",
+        "icon": "test"
+      }
+    ],
+    "relatedRepos": [
+      "ECHO-Launcher",
+      "ECHO-Modules",
+      "ECHO-Release-Index"
+    ]
+  },
+  {
+    "repoName": "ECHO-Release-Index",
+    "product": "ECHO Release Index",
+    "releaseKind": "index",
+    "route": "/release-index",
+    "tagline": "Public catalog and channel metadata for launcher and website downloads.",
+    "description": "The canonical release catalog for channels, launcher updates, Ashfall editions, module artifacts, and website download snapshots.",
+    "purpose": "The canonical release catalog for channels, launcher updates, Ashfall editions, module artifacts, and website download snapshots.",
+    "publicRole": "The canonical release catalog for channels, launcher updates, Ashfall editions, module artifacts, and website download snapshots.",
+    "status": "Catalog",
+    "repoUrl": "https://github.com/knoxhack/ECHO-Release-Index",
+    "issuesUrl": "https://github.com/knoxhack/ECHO-Release-Index/issues",
+    "releasesUrl": "https://github.com/knoxhack/ECHO-Release-Index/releases",
+    "releaseUrl": "https://github.com/knoxhack/ECHO-Release-Index/releases/tag/untagged-5725e06cf8d4933c29c2",
+    "assetCount": 0,
+    "docsHref": "/docs/release/release-index",
+    "downloadHref": "/download",
+    "updateFlow": "Website builds carry a static snapshot, while launcher clients read channel metadata to resolve pack and module assets.",
+    "artifacts": [
+      "channels/alpha/release-manifest.json",
+      "channels/alpha/repositories.json",
+      "pack manifests",
+      "launcher channel metadata"
+    ],
+    "features": [
+      {
+        "title": "Channel source",
+        "description": "Keeps launcher, website, and release tooling pointed at one catalog.",
+        "icon": "globe"
+      },
+      {
+        "title": "Static website snapshot",
+        "description": "Prevents private raw GitHub access from breaking the public download page.",
+        "icon": "shield"
+      },
+      {
+        "title": "Pack registry",
+        "description": "Maps Ashfall editions to module artifact families and asset URLs.",
+        "icon": "map"
+      }
+    ],
+    "relatedRepos": [
+      "ECHO-Launcher",
+      "ECHO-Platform-Website",
+      "ECHO-Modules"
+    ]
+  },
+  {
+    "repoName": "ECHO-Native-Platform",
+    "product": "ECHO Native Platform",
+    "releaseKind": "core",
+    "route": "/native-platform",
+    "tagline": "Native runtime, platform contracts, loader code, and PackOS integration.",
+    "description": "The runtime-independent platform foundation for Native Loader, core contracts, diagnostics, PackOS integration, and future ECHO runtime work.",
+    "purpose": "The runtime-independent platform foundation for Native Loader, core contracts, diagnostics, PackOS integration, and future ECHO runtime work.",
+    "publicRole": "The runtime-independent platform foundation for Native Loader, core contracts, diagnostics, PackOS integration, and future ECHO runtime work.",
+    "status": "Native Platform",
+    "repoUrl": "https://github.com/knoxhack/ECHO-Native-Platform",
+    "issuesUrl": "https://github.com/knoxhack/ECHO-Native-Platform/issues",
+    "releasesUrl": "https://github.com/knoxhack/ECHO-Native-Platform/releases",
+    "releaseUrl": "https://github.com/knoxhack/ECHO-Native-Platform/releases/tag/untagged-c417930a0526b31543ce",
+    "assetCount": 7,
+    "docsHref": "/docs/platform/native-platform",
+    "downloadHref": "/download",
+    "updateFlow": "Consumes module descriptors and pack metadata from the release index, then hosts native-compatible ECHO modules.",
+    "artifacts": [
+      "native platform package",
+      "runtime diagnostics",
+      "PackOS reports",
+      "native module inventory"
+    ],
+    "features": [
+      {
+        "title": "Runtime-independent",
+        "description": "Keeps module contracts separate from one Minecraft mod loader.",
+        "icon": "cpu"
+      },
+      {
+        "title": "Native loader",
+        "description": "Owns the primary future runtime lane for official experiences.",
+        "icon": "loader"
+      },
+      {
+        "title": "Platform contracts",
+        "description": "Services, registry, lifecycle, networking, and resource contracts live here.",
+        "icon": "braces"
+      }
+    ],
+    "relatedRepos": [
+      "ECHO-Launcher",
+      "ECHO-Release-Index",
+      "ECHO-Modules"
+    ]
+  },
+  {
+    "repoName": "ECHO-Standalone-Runtime",
+    "product": "ECHO Standalone Runtime",
+    "releaseKind": "runtime",
+    "route": "/standalone-runtime",
+    "tagline": "Standalone runtime shell and engine for ECHO modules.",
+    "description": "The standalone runtime shell, runtime contracts, PackOS bridge, parity tools, and standalone addon compatibility surface.",
+    "purpose": "The standalone runtime shell, runtime contracts, PackOS bridge, parity tools, and standalone addon compatibility surface.",
+    "publicRole": "The standalone runtime shell, runtime contracts, PackOS bridge, parity tools, and standalone addon compatibility surface.",
+    "status": "Experimental",
+    "repoUrl": "https://github.com/knoxhack/ECHO-Standalone-Runtime",
+    "issuesUrl": "https://github.com/knoxhack/ECHO-Standalone-Runtime/issues",
+    "releasesUrl": "https://github.com/knoxhack/ECHO-Standalone-Runtime/releases",
+    "releaseUrl": "https://github.com/knoxhack/ECHO-Standalone-Runtime/releases/tag/untagged-ce95550d55c5750b5a27",
+    "assetCount": 4,
+    "docsHref": "/docs/sdk/standalone-module-guide",
+    "downloadHref": "/download",
+    "updateFlow": "Consumes -standalone.jar modules and standalone pack metadata for fast testing and runtime parity work.",
+    "artifacts": [
+      "standalone runtime assets",
+      "parity matrix",
+      "standalone module examples",
+      "readiness gates"
+    ],
+    "features": [
+      {
+        "title": "Fast test loop",
+        "description": "Runs ECHO module behavior outside full Minecraft startup.",
+        "icon": "zap"
+      },
+      {
+        "title": "Headless-friendly",
+        "description": "Useful for automated addon tests and service validation.",
+        "icon": "server"
+      },
+      {
+        "title": "Parity reports",
+        "description": "Tracks behavior against Native and NeoForge expectations.",
+        "icon": "gauge"
+      }
+    ],
+    "relatedRepos": [
+      "ECHO-Launcher",
+      "ECHO-Release-Index",
+      "ECHO-Modules"
+    ]
+  },
+  {
+    "repoName": "ECHO-SDK",
+    "product": "ECHO SDK",
+    "releaseKind": "sdk",
+    "route": "/sdk",
+    "tagline": "SDK, schemas, contracts, templates, and developer docs.",
+    "description": "The source of truth for ECHO schemas, contracts, templates, API docs, native authoring guidance, and release packaging docs.",
+    "purpose": "The source of truth for ECHO schemas, contracts, templates, API docs, native authoring guidance, and release packaging docs.",
+    "publicRole": "The source of truth for ECHO schemas, contracts, templates, API docs, native authoring guidance, and release packaging docs.",
+    "status": "SDK",
+    "repoUrl": "https://github.com/knoxhack/ECHO-SDK",
+    "issuesUrl": "https://github.com/knoxhack/ECHO-SDK/issues",
+    "releasesUrl": "https://github.com/knoxhack/ECHO-SDK/releases",
+    "releaseUrl": "https://github.com/knoxhack/ECHO-SDK/releases/tag/untagged-d8e1f753ff9c46103345",
+    "assetCount": 3,
+    "docsHref": "/docs/sdk/getting-started",
+    "downloadHref": "/download",
+    "updateFlow": "Documents the artifact and manifest contracts consumed by modules, studios, launchers, and Ashfall editions.",
+    "artifacts": [
+      "schemas",
+      "templates",
+      "sample addons",
+      "API docs",
+      "packaging guides"
+    ],
+    "features": [
+      {
+        "title": "Mirrored docs",
+        "description": "Website docs are generated from ECHO-SDK/docs so public SDK docs stay current.",
+        "icon": "file"
+      },
+      {
+        "title": "Schemas",
+        "description": "Manifest contracts and validation surfaces for modules and packs.",
+        "icon": "braces"
+      },
+      {
+        "title": "Templates",
+        "description": "Native, NeoForge, Standalone, and creator templates for addon work.",
+        "icon": "template"
+      }
+    ],
+    "relatedRepos": [
+      "ECHO-Addons-Studio",
+      "ECHO-Developer-Studio",
+      "ECHO-Modules"
+    ]
+  },
+  {
+    "repoName": "ECHO-Developer-Studio",
+    "product": "ECHO Developer Studio",
+    "releaseKind": "studio",
+    "route": "/developer-studio",
+    "tagline": "Developer operations app for release validation and publishing.",
+    "description": "The platform operator app for release validation, manifest checks, SDK metadata, QA reports, and public release workflows.",
+    "purpose": "The platform operator app for release validation, manifest checks, SDK metadata, QA reports, and public release workflows.",
+    "publicRole": "The platform operator app for release validation, manifest checks, SDK metadata, QA reports, and public release workflows.",
+    "status": "Studio",
+    "repoUrl": "https://github.com/knoxhack/ECHO-Developer-Studio",
+    "issuesUrl": "https://github.com/knoxhack/ECHO-Developer-Studio/issues",
+    "releasesUrl": "https://github.com/knoxhack/ECHO-Developer-Studio/releases",
+    "releaseUrl": "https://github.com/knoxhack/ECHO-Developer-Studio/releases/tag/untagged-cfc66e1b94fdabb09ea3",
+    "assetCount": 8,
+    "docsHref": "/docs/release/release-index",
+    "downloadHref": "/download",
+    "updateFlow": "Uses release-index metadata and SDK schemas to validate, preview, and prepare release assets before publication.",
+    "artifacts": [
+      "Windows setup",
+      "portable app",
+      "win-x64 zip",
+      "latest.yml",
+      "blockmap"
+    ],
+    "features": [
+      {
+        "title": "Release validation",
+        "description": "Checks manifests, checksums, assets, and QA evidence before publishing.",
+        "icon": "shield"
+      },
+      {
+        "title": "Catalog preview",
+        "description": "Shows how launcher and website will read release metadata.",
+        "icon": "eye"
+      },
+      {
+        "title": "Operator console",
+        "description": "Focuses on release managers and platform maintainers.",
+        "icon": "monitor"
+      }
+    ],
+    "relatedRepos": [
+      "ECHO-SDK",
+      "ECHO-Release-Index",
+      "ECHO-Platform-Website"
+    ]
+  },
+  {
+    "repoName": "ECHO-Addons-Studio",
+    "product": "ECHO Addons Studio",
+    "releaseKind": "studio",
+    "route": "/addons-studio",
+    "tagline": "Addon creation app for Native and Standalone modules.",
+    "description": "The creator IDE for ECHO addon developers. It owns templates, manifest editing, SDK detection, local testing, and publish assistance.",
+    "purpose": "The creator IDE for ECHO addon developers. It owns templates, manifest editing, SDK detection, local testing, and publish assistance.",
+    "publicRole": "The creator IDE for ECHO addon developers. It owns templates, manifest editing, SDK detection, local testing, and publish assistance.",
+    "status": "Studio",
+    "repoUrl": "https://github.com/knoxhack/ECHO-Addons-Studio",
+    "issuesUrl": "https://github.com/knoxhack/ECHO-Addons-Studio/issues",
+    "releasesUrl": "https://github.com/knoxhack/ECHO-Addons-Studio/releases",
+    "releaseUrl": "https://github.com/knoxhack/ECHO-Addons-Studio/releases/tag/untagged-a9e5acf26c1cd5444d66",
+    "assetCount": 7,
+    "docsHref": "/docs/sdk/creator-start-here",
+    "downloadHref": "/download",
+    "updateFlow": "Uses SDK templates and schemas to produce module projects that can publish Native, NeoForge, and Standalone artifacts.",
+    "artifacts": [
+      "Windows setup",
+      "portable app",
+      "latest.yml",
+      "blockmap",
+      "template metadata"
+    ],
+    "features": [
+      {
+        "title": "Manifest editor",
+        "description": "Validates echo.mod.json and packaging metadata while creators work.",
+        "icon": "file"
+      },
+      {
+        "title": "Multi-target builds",
+        "description": "Guides Native, NeoForge, Standalone, and dual-target addon projects.",
+        "icon": "target"
+      },
+      {
+        "title": "Publish assistant",
+        "description": "Prepares release assets and checksums for GitHub Releases.",
+        "icon": "upload"
+      }
+    ],
+    "relatedRepos": [
+      "ECHO-SDK",
+      "ECHO-Release-Index",
+      "ECHO-Platform-Website"
+    ]
+  },
+  {
+    "repoName": "ECHO-Platform-Website",
+    "product": "Official ECHO Website",
+    "releaseKind": "website",
+    "route": "/",
+    "tagline": "Official website, docs, product pages, and download hub.",
+    "description": "The public website that mirrors SDK docs, renders the module catalog, exposes product pages, and publishes release download links.",
+    "purpose": "The public website that mirrors SDK docs, renders the module catalog, exposes product pages, and publishes release download links.",
+    "publicRole": "The public website that mirrors SDK docs, renders the module catalog, exposes product pages, and publishes release download links.",
+    "status": "Website",
+    "repoUrl": "https://github.com/knoxhack/ECHO-Platform-Website",
+    "issuesUrl": "https://github.com/knoxhack/ECHO-Platform-Website/issues",
+    "releasesUrl": "https://github.com/knoxhack/ECHO-Platform-Website/releases",
+    "releaseUrl": "https://github.com/knoxhack/ECHO-Platform-Website/releases/tag/untagged-2ec639213fab008c7b64",
+    "assetCount": 2,
+    "docsHref": "/docs",
+    "downloadHref": "/download",
+    "updateFlow": "Generates static data from sibling repos and fails audits when modules, SDK docs, routes, or release snapshots drift.",
+    "artifacts": [
+      "static export",
+      "docs index",
+      "release snapshot",
+      "module catalog",
+      "product catalog"
+    ],
+    "features": [
+      {
+        "title": "Static export",
+        "description": "Works as a static website while still rendering release metadata at build time.",
+        "icon": "globe"
+      },
+      {
+        "title": "Generated docs",
+        "description": "Mirrors SDK docs and release update docs into the public docs tree.",
+        "icon": "file"
+      },
+      {
+        "title": "Drift audits",
+        "description": "CI checks route links, module catalog sync, SDK doc sync, and release snapshot health.",
+        "icon": "shield"
+      }
+    ],
+    "relatedRepos": [
+      "ECHO-Launcher",
+      "ECHO-Release-Index",
+      "ECHO-Modules"
+    ]
+  }
+]
