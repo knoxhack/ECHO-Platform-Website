@@ -29,9 +29,16 @@ requirePattern(
   /entry\.validation\s*===\s*"approved"/,
   "approved-entry filtering"
 );
+requireIncludes("lib/release-index.ts", "hasNativeInstallArtifact", "native install artifact guard");
+requireIncludes("lib/release-index.ts", "hasModpackManifestArtifact", "modpack manifest artifact guard");
 requirePattern(
   "lib/release-index.ts",
-  /entry\.kind\s*===\s*"module"[\s\S]+entry\.kind\s*===\s*"addon"/,
+  /hasUrlAndSha256[\s\S]+sha256/,
+  "URL and SHA-256 artifact requirement"
+);
+requirePattern(
+  "lib/release-index.ts",
+  /entry\.kind\s*===\s*"module"[\s\S]+entry\.kind\s*===\s*"addon"[\s\S]+hasNativeInstallArtifact/,
   "installable module/addon filtering"
 );
 requireIncludes("lib/install-links.ts", "echo://install/addon/", "addon install deep link");
