@@ -1,8 +1,25 @@
 ## Role
 
-DataCore is responsible for persistent player and world data ownership. ECHO systems need to know who owns data, how it is stored, how it migrates, and how it survives updates.
+DataCore owns persistent player, world, and team data for ECHO systems. Modules need to know who owns data, how it is keyed, how it migrates, and how it is synchronized.
 
-Data storage is a platform concern because bad persistence breaks progression, support, repair, and future runtime movement. PackOS and launcher validation can eventually detect incompatible package states, but modules still need responsible data evolution.
+Data storage is a platform concern because bad persistence breaks progression, support, repair, and runtime portability. Use stable IDs and versioned records instead of raw runtime objects.
+
+## Descriptor Requirements
+
+Declare DataCore and data permissions when a module persists shared state:
+
+```json
+{
+  "schema": "echo.mod.v1",
+  "id": "echodatacore",
+  "provides": ["echo.data"],
+  "consumes": ["echo.core", "echo.net"],
+  "permissions": ["data.persistence"],
+  "apiStability": "stable"
+}
+```
+
+A consuming module should list `echodatacore` as `requires` when it cannot function without persistence, or `optional` when it can run with read-only or stateless fallback behavior.
 
 ## Ownership
 
@@ -18,22 +35,41 @@ Every persistent field should have an owner. Ownership answers:
 
 If a module cannot answer those questions, the data model is not ready.
 
+## Current DataCore Model
+
+Current first-party DataCore behavior uses:
+
+- Data scopes: player, world, and team.
+- Stable key IDs.
+- Value kinds such as flag, counter, enum, and record.
+- Metadata for titles, descriptions, defaults, and visibility.
+- Dirty tracking and revision-based sync.
+- Migration markers under the DataCore root.
+- Diagnostics for conflicts, stale datapack metadata, and sync pressure.
+
+The internal first-party implementation lives in `ECHO-Modules/addons/echodatacore`. Public docs should describe the contract and metadata expectations; do not copy private storage internals into SDK samples.
+
 ## Player Data
 
 Player data can include discoveries, mission progress, unlocks, scanned targets, Index entries, route state, faction reputation, and tutorial state.
 
 Keep player data scoped and readable. A single unstructured blob is hard to migrate, debug, or validate.
 
-Example player state shape:
+Example player record:
 
-```ts
-export type RelicTechPlayerState = {
-  schemaVersion: 2;
-  discoveredRelics: string[];
-  scannedTargets: Record<string, "unknown" | "partial" | "known">;
-  unlockedIndexEntries: string[];
-  lastTerminalNotice?: string;
-};
+```json
+{
+  "owner": "echorelictech",
+  "scope": "player",
+  "key": "echorelictech:relic_scan_state",
+  "schemaVersion": 2,
+  "valueKind": "record",
+  "defaultValue": {
+    "discoveredRelics": [],
+    "scannedTargets": {},
+    "unlockedIndexEntries": []
+  }
+}
 ```
 
 The version marker matters. Even small modules should assume their data may need to evolve.
@@ -42,51 +78,57 @@ The version marker matters. Even small modules should assume their data may need
 
 World data can include region state, hazard maps, discovered locations, relay networks, route unlocks, global events, and anomaly conditions.
 
-World data should avoid assuming that every chunk, entity, or marker is loaded at all times. A HoloMap overlay may need to show a route even when the underlying region is not loaded. A mission may need to reference a relay before the player visits it again.
+World data should avoid assuming that every chunk, entity, or marker is loaded at all times. A HoloMap overlay may need to show a route even when the underlying region is not loaded.
 
-Example world state shape:
+Example world record:
 
-```ts
-export type RelicTechWorldState = {
-  schemaVersion: 1;
-  knownVaults: Array<{
-    id: string;
-    regionId: string;
-    markerState: "hidden" | "rumored" | "confirmed";
-  }>;
-  activeSignalStorm?: {
-    regionId: string;
-    startedAtTick: number;
-    intensity: "low" | "medium" | "high";
-  };
-};
+```json
+{
+  "owner": "echoworldcore",
+  "scope": "world",
+  "key": "echoworldcore:active_hazards",
+  "schemaVersion": 1,
+  "valueKind": "record",
+  "defaultValue": {
+    "regions": [],
+    "lastUpdatedTick": 0
+  }
+}
 ```
 
 Prefer stable IDs and region references over direct runtime object references.
 
 ## Migration
 
-Any versioned data should have a migration story. Even a small version marker is better than guessing later.
+Any versioned data needs a migration story. Migration notes belong in module docs and release notes before the module ships.
 
-Example migration shape:
+A migration entry should document:
 
-```ts
-dataCore.migrations.register("echorelictech.player", {
-  from: 1,
-  to: 2,
-  migrate(oldState) {
-    return {
-      schemaVersion: 2,
-      discoveredRelics: oldState.discoveredRelics ?? [],
-      scannedTargets: oldState.scannedTargets ?? {},
-      unlockedIndexEntries: [],
-      lastTerminalNotice: oldState.lastNotice
-    };
-  }
-});
-```
+- Old schema version.
+- New schema version.
+- Owner module.
+- Data scope.
+- Fields copied directly.
+- Fields renamed.
+- Fields dropped.
+- Fallback when data cannot be migrated.
+- Whether the migration is idempotent.
 
-Migration code should be boring and explicit. If a field cannot be migrated, document the fallback.
+First-party DataCore records migration markers so repeated login or world-load migration can run safely without changing data again.
+
+## Networking And Sync
+
+Data writes that affect UI should synchronize through NetCore rather than direct UI mutation.
+
+Use small updates:
+
+- Scope and owner ID.
+- Revision.
+- Changed keys.
+- Full snapshot flag only when needed.
+- Redacted or clipped payloads when data is too large.
+
+Terminal, Index, Lens, and HoloMap should read through services or synchronized metadata, not raw persistent roots.
 
 ## Storage Checklist
 
@@ -97,14 +139,16 @@ Migration code should be boring and explicit. If a field cannot be migrated, doc
 - UI surfaces read through services, not raw storage.
 - Network actions validate before mutating state.
 - Migrations are documented before release.
+- Diagnostics can explain duplicate keys, metadata conflicts, and sync pressure.
 
 ## Common Mistakes
 
 - Storing direct runtime objects in long-lived ECHO state.
 - Letting UI modules mutate storage directly.
-- Combining player and world data in one unstructured blob.
+- Combining player, world, and team data in one unstructured blob.
 - Adding new fields without migration notes.
 - Treating missing data as impossible.
+- Synchronizing full state when a key and revision would work.
 
 ## Related Docs
 

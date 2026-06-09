@@ -23,6 +23,8 @@ import {
   moduleHref,
   resolveDependencies
 } from "@/lib/modules";
+import { addonInstallLink } from "@/lib/install-links";
+import { approvedInstallableIds, getReleaseIndexCatalog } from "@/lib/release-index";
 import { pageMetadata } from "@/lib/site";
 
 type ModulePageProps = {
@@ -87,6 +89,9 @@ export default async function ModuleDetailPage({ params }: ModulePageProps) {
 
   const dependencies = resolveDependencies(moduleRecord);
   const { previous, next } = adjacentModules(moduleRecord);
+  const catalog = await getReleaseIndexCatalog();
+  const installableModuleIds = approvedInstallableIds(catalog.entries);
+  const installable = installableModuleIds.includes(moduleRecord.id);
 
   return (
     <>
@@ -118,6 +123,12 @@ export default async function ModuleDetailPage({ params }: ModulePageProps) {
                   <BookOpen size={16} />
                   Read docs
                 </Link>
+                {installable ? (
+                  <a href={addonInstallLink(moduleRecord.id)} className="cyber-button cyber-button-primary">
+                    Install
+                    <ArrowRight size={16} />
+                  </a>
+                ) : null}
                 <Link href={moduleRecord.github} className="cyber-button cyber-button-secondary">
                   <Github size={16} />
                   View GitHub

@@ -1,17 +1,24 @@
 ## Purpose
 
-The release process connects developer outputs to player-ready launcher packages. It should become increasingly PackOS-aware over time.
+The release process connects developer outputs to player-ready launcher packages. The goal is to produce files that are installable, repairable, documented, validated, and truthful on the website download page.
 
-The goal is not only to produce files. The goal is to produce an installable, repairable, documented, and validated official ECHO experience. Today, that means a Minecraft/NeoForge-compatible player path through ECHO Launcher. Future native runtime work should remain clearly marked as future-facing unless a specific feature has shipped.
+The current release path is concrete:
+
+- Module artifacts are built from `ECHO-Modules`.
+- SDK templates, schemas, and docs live in `ECHO-SDK`.
+- Release metadata is published through `ECHO-Release-Index`.
+- The website mirrors the Release Index snapshot into `data/release-index-snapshot.json`.
+- ECHO Launcher is the normal player delivery path.
 
 ## Release Inputs
 
-A release should eventually include:
+A release should include:
 
 - Module builds.
-- Experience metadata.
-- PackOS manifest.
-- Lockfile.
+- `META-INF/echo.mod.json`.
+- `META-INF/echo-addon-package.json` for `.echo-addon` packages.
+- Pack manifest for Ashfall edition packages.
+- Release Index entry.
 - Release channel.
 - Version notes.
 - Dependency list.
@@ -21,68 +28,105 @@ A release should eventually include:
 - Troubleshooting path.
 - Docs links for changed systems.
 
-## Example Release Metadata
+## Artifact Families
 
-The shape below is illustrative until PackOS and SDK formats are formally locked.
+For module `module_id` at version `version`, release generation should produce the exact runtime family needed by the selected edition:
+
+| File | Consumer |
+| --- | --- |
+| `module_id-version.echo-addon` | Ashfall Native Edition |
+| `module_id-version-neoforge.jar` | Ashfall NeoForge Edition |
+| `module_id-version-standalone.jar` | Ashfall Standalone Edition |
+| `module_id-version-sources.jar` | Developers, traceability, debugging |
+
+Every runtime artifact should carry `META-INF/echo.mod.json`. Native packages should also carry `echo-addon-package.json`.
+
+## Release Index Entry
+
+Release Index entries use the SDK schema `release-index-entry.schema.json` and include identity, source, artifacts, compatibility, trust, and validation fields:
 
 ```json
 {
-  "experience": "ashfall",
-  "version": "1.0.1",
-  "channel": "public",
-  "runtime": {
-    "target": "minecraft-neoforge",
-    "adapter": "echoadaptercore"
+  "id": "hello_content_addon",
+  "kind": "addon",
+  "version": "0.1.0",
+  "channel": "alpha",
+  "publisher": "knoxhack",
+  "sourceRepo": "knoxhack/ECHO-SDK",
+  "releaseTag": "v0.1.0-sdk-alpha",
+  "commitSha": "abcdef0",
+  "artifacts": {
+    "native": "hello_content_addon-0.1.0.echo-addon",
+    "neoforge": "hello_content_addon-0.1.0-neoforge.jar",
+    "standalone": "hello_content_addon-0.1.0-standalone.jar",
+    "sources": "hello_content_addon-0.1.0-sources.jar"
   },
-  "artifacts": [
-    {
-      "kind": "echo-pack",
-      "file": "ashfall-1.0.1.echo-pack.zip",
-      "sha256": "..."
-    },
-    {
-      "kind": "packos-manifest",
-      "file": "ashfall-1.0.1.pack.json",
-      "sha256": "..."
-    }
-  ],
-  "modules": ["echocore", "echoterminal", "echolens", "echoholomap"],
-  "knownIssues": ["Launcher installers are published separately when available."]
+  "dependencies": [],
+  "compatibility": ["echo_native", "neoforge", "echo_runtime_standalone"],
+  "trust": "official",
+  "validation": "echoValidate"
 }
 ```
 
-The release metadata should help the launcher and download portal tell the truth about what exists. If Windows or Linux installer assets are not published, the site should not imply that they are.
+Use real asset names and real SHA-256 values in release data. Do not publish placeholder checksums, empty checksums, or generic artifact names.
+
+## Pack Manifest
+
+Ashfall edition packages use `echo.pack.v1` pack metadata:
+
+```json
+{
+  "schemaVersion": "echo.pack.v1",
+  "id": "ashfall-neoforge-edition",
+  "version": "0.1.0",
+  "target": "neoforge",
+  "runtime": {
+    "id": "minecraft-neoforge",
+    "version": "1.21.1"
+  },
+  "requiredArtifacts": [
+    {
+      "id": "echoterminal",
+      "kind": "module",
+      "version": "1.0.0"
+    }
+  ]
+}
+```
+
+The selected `target` controls which module artifact family the launcher resolves.
 
 ## Validation Gates
+
+Run SDK and website validation before release:
+
+```bash
+python tools/echo_sdk.py validate templates --json
+python tools/validate_echo_contracts.py --json
+npm run audit:site
+```
+
+For Gradle addon projects, run:
+
+```bash
+./gradlew echoValidate
+./gradlew echoBuildReleaseBundle
+./gradlew echoVerifyNativeLiveProof
+```
 
 Useful release gates include:
 
 - Required metadata exists.
 - Dependencies resolve.
 - Versions are compatible.
-- No planned-only module is marked stable.
 - Runtime target is clear.
+- Artifact names match target families.
+- Checksums exist for downloadable artifacts.
 - Launcher assets exist when direct installer buttons are shown.
 - Docs links are not broken.
 - Release notes are present.
-- Checksums exist for downloadable artifacts.
 - Known issues are written for players and testers.
-
-Example gate shape:
-
-```ts
-releaseGates.register({
-  id: "packos.required-metadata",
-  severity: "blocker",
-  validate(release) {
-    return release.experience && release.version && release.channel
-      ? pass()
-      : fail("Release is missing experience, version, or channel metadata.");
-  }
-});
-```
-
-Validation should fail loudly for missing release truth. A quiet failure becomes a support problem later.
+- Native live-client proof exists before claiming Native lane readiness.
 
 ## Player Readiness
 
@@ -109,14 +153,21 @@ Before a release is promoted, ask:
 - Did UI provider IDs change?
 - Did PackOS metadata describe the new state?
 - Did docs links still resolve?
+- Did generated website data stay in sync with sibling repos?
 
 This connects release work to [Module Template](/docs/developers/module-template), [Data Storage](/docs/developers/data-storage), and [Networking](/docs/developers/networking).
 
-## Current Status
+## Website Snapshot
 
-Some release data may remain manual until PackOS and release integration are complete. Keep the structure ready now so the workflow can become automated later.
+The website reads the local Release Index checkout during `npm run sync:ecosystem` and writes:
 
-The website currently reads GitHub release data at build time for `/download` and generated release news posts. That makes release metadata visible, but it does not replace PackOS validation.
+- `data/release-index-snapshot.json`
+- `data/products.json`
+- `data/modules.json`
+- `data/sdk-docs-manifest.json`
+- generated `/docs/sdk` pages
+
+Run `npm run audit:site` after sync. The drift audit fails when mirrored SDK docs are stale, product routes are broken, modules do not match `ECHO-Modules`, or release snapshot data loses required coverage.
 
 ## Common Mistakes
 
@@ -124,7 +175,8 @@ The website currently reads GitHub release data at build time for `/download` an
 - Treating advanced assets as normal install instructions.
 - Forgetting known issues because the build passed.
 - Shipping module changes without docs or release notes.
-- Marking future native runtime work as released before it is actually available.
+- Marking a runtime lane player-ready before its artifacts and proof exist.
+- Leaving placeholder checksums, fake artifact names, or generic values in public release metadata.
 
 ## Related Docs
 
@@ -133,7 +185,8 @@ The website currently reads GitHub release data at build time for `/download` an
 - [Module Manifest](/docs/reference/module-manifest)
 - [PackOS Manifest](/docs/reference/packos-manifest)
 - [Troubleshooting](/docs/install/troubleshooting)
+- [Release Index](/docs/release/release-index)
 
 ## Next Step
 
-Write release notes before publishing. Then verify the download portal, launcher setup docs, and troubleshooting docs all describe the same player path.
+Write release notes before publishing. Then verify the download portal, launcher setup docs, Release Index snapshot, and troubleshooting docs all describe the same player path.

@@ -1,10 +1,10 @@
 ## Role
 
-Networking connects player actions, server state, UI updates, and synchronized gameplay systems. ECHO networking should prioritize safety, clear ownership, and debuggable behavior.
+Networking connects player actions, server state, UI updates, and synchronized gameplay systems. ECHO networking should prioritize server authority, clear ownership, rate limiting, and debug-friendly behavior.
 
-NetCore is the expected home for shared networking patterns. Individual modules can define actions and payloads, but they should follow the same rules for authority, validation, rate limiting, and diagnostics.
+NetCore is the current networking backbone for first-party modules that declare custom packets. SDK docs also expose the public Native contract names `EchoNetService`, `PacketDescriptor`, and `EchoPacket` for addon authors targeting the Native API.
 
-## When to Use Networking
+## When To Use Networking
 
 Use networking when a module needs to:
 
@@ -14,65 +14,79 @@ Use networking when a module needs to:
 - Request a server-owned calculation.
 - Confirm that an interaction is allowed.
 
-Do not use networking to bypass service contracts. A packet should usually call into a service that owns the behavior.
+Do not use networking to bypass service contracts. A packet should usually call into the service that owns the behavior.
 
-## Packet and Action Checklist
+## Descriptor Requirements
 
-Every networked action should describe:
+Declare NetCore and packet permissions in `META-INF/echo.mod.json`:
+
+```json
+{
+  "schema": "echo.mod.v1",
+  "id": "my_networked_addon",
+  "requires": ["echoadaptercore", "echocore", "echonetcore"],
+  "consumes": ["echo.core", "echo.net"],
+  "permissions": ["network.payloads"],
+  "runtimeTargets": ["echo_native", "neoforge", "echo_runtime_standalone"]
+}
+```
+
+If networking is optional, move `echonetcore` to `optional` and make every send path no-op when the service is unavailable.
+
+## Public SDK Shape
+
+The Native API reference exposes this service family:
+
+```java
+EchoNetService.registerPacketDescriptor(PacketDescriptor desc);
+EchoNetService.sendToPlayer(ServerPlayer player, EchoPacket packet);
+EchoNetService.broadcastToDimension(ResourceKey<Level> dim, EchoPacket packet);
+```
+
+Packet records should implement `EchoPacket`, carry a stable channel or packet ID, and keep payloads compact.
+
+## First-Party NetCore Shape
+
+First-party NeoForge-compatible modules use NetCore helpers around packet registration, send, debug, and rate-limit behavior:
+
+- `EchoNetPayloads.optional(event)`
+- `EchoNetPayloads.serverboundAction(...)`
+- `EchoNetSend`
+- `EchoNetClientActions`
+- `EchoRateLimiter`
+- `EchoNetDebug`
+
+The same rules apply in either API surface: descriptors are registered up front, serverbound packets are requests, handlers validate authority before mutating state, and debug events record accepted and dropped packets.
+
+## Packet And Action Checklist
+
+Every networked action should document:
 
 - Packet or action ID.
 - Direction of travel.
 - Owning module.
 - Required permission or progression state.
 - Server authority rules.
-- Rate-limit expectations.
+- Rate-limit policy.
 - Validation failures.
 - Debug log fields.
 - Compatibility or migration concerns.
 
 ## Server Authority
 
-Player-facing UI can request actions, but gameplay state should be owned by the authoritative side. A Terminal button, Lens scan, or HoloMap action should not blindly mutate world state without server-side validation.
+Player-facing UI can request actions, but gameplay state should be owned by the authoritative side. A Terminal button, Lens scan, or HoloMap action must not blindly mutate world state.
 
-Example action handler shape:
+Use this flow:
 
-```ts
-netCore.actions.register({
-  id: "echoterminal.claim-reward",
-  direction: "client-to-server",
-  rateLimit: "player:2s",
+1. Client emits a small action packet with stable IDs.
+2. Server handler checks player, target, permission, progression, and runtime support.
+3. Server calls the owning service contract.
+4. Service mutates DataCore or gameplay state.
+5. NetCore sends a compact sync packet back to affected clients.
 
-  validate(request, context) {
-    return context.services.missions.canClaimReward({
-      playerId: request.playerId,
-      missionId: request.payload.missionId,
-      rewardId: request.payload.rewardId
-    });
-  },
+## Failure Codes
 
-  handle(request, context) {
-    return context.services.missions.claimReward({
-      playerId: request.playerId,
-      missionId: request.payload.missionId,
-      rewardId: request.payload.rewardId
-    });
-  }
-});
-```
-
-The example is intentionally service-first. The packet validates and routes the action; MissionCore owns reward behavior.
-
-## Safety Rules
-
-Validate inputs before applying changes.
-
-Rate-limit actions that can be triggered repeatedly.
-
-Avoid sending large payloads when an identifier or compact state update is enough.
-
-Treat missing providers, stale IDs, and unloaded world state as normal failure modes that need clear handling.
-
-Use explicit failure states:
+Use explicit failure states that diagnostics and UI can explain:
 
 - `invalid-payload`
 - `missing-provider`
@@ -80,21 +94,23 @@ Use explicit failure states:
 - `target-unloaded`
 - `rate-limited`
 - `unsupported-runtime`
+- `permission-denied`
+
+Avoid retries without a rate limit. Avoid logging sensitive payload data.
 
 ## Sync Patterns
 
-Prefer small, owned updates:
+Prefer small, owned updates. For DataCore-backed state, synchronize keys or changed records instead of dumping entire world state into a UI packet.
 
-```ts
-netCore.sync.publish("echolens.scan-state", {
-  playerId,
-  targetId,
-  scanState: "known",
-  relatedIndexEntry: "relictech.ancient-capacitor"
-});
-```
+A sync packet should identify:
 
-Avoid dumping full world state into a UI packet. Terminal, Index, Lens, and HoloMap should receive the data they need, not every internal field a module happens to store.
+- Scope: player, world, team, route, mission, or module.
+- Owner ID.
+- Revision or version.
+- Changed keys or compact payload.
+- Whether the payload is a full snapshot or delta.
+
+Terminal, Index, Lens, and HoloMap should receive the data they need, not every internal field a module stores.
 
 ## Debugging
 
@@ -109,15 +125,16 @@ Networking code should make support easier. Useful logs include:
 - Runtime adapter.
 - Module version.
 
-Avoid logging sensitive or excessive data. Logs should help reproduce a problem, not expose private state.
+NetCore debug events should be easy to correlate with user reports and release QA. Keep debug packet handlers permissioned.
 
 ## Common Mistakes
 
 - Trusting client UI state as proof that an action is allowed.
-- Sending large payloads when an ID and version would work.
+- Sending large payloads when an ID and revision would work.
 - Mutating save data directly from packet code.
 - Retrying failed actions without a rate limit.
 - Hiding errors that should become launcher, support, or diagnostics signals.
+- Declaring `network.payloads` without documenting packet IDs.
 
 ## Related Docs
 
@@ -126,6 +143,7 @@ Avoid logging sensitive or excessive data. Logs should help reproduce a problem,
 - [Terminal](/docs/modules/terminal)
 - [Lens](/docs/modules/lens)
 - [Launcher Architecture](/docs/platform/launcher)
+- [Native API Reference](/docs/sdk/native-api-reference)
 
 ## Next Step
 

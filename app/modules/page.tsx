@@ -4,6 +4,7 @@ import { HeroSection } from "@/components/hero-section";
 import { ModuleCatalog } from "@/components/module-catalog";
 import type { ModuleRecord } from "@/components/module-card";
 import { SectionHeading } from "@/components/section-heading";
+import { approvedInstallableIds, getReleaseIndexCatalog } from "@/lib/release-index";
 import { pageMetadata } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
@@ -12,7 +13,10 @@ export const metadata: Metadata = pageMetadata({
   path: "/modules"
 });
 
-export default function ModulesPage() {
+export default async function ModulesPage() {
+  const catalog = await getReleaseIndexCatalog();
+  const installableModuleIds = approvedInstallableIds(catalog.entries);
+
   return (
     <>
       <HeroSection
@@ -34,7 +38,7 @@ export default function ModulesPage() {
           description="Core, interface, Ashfall, platform, and future modules all render from data/modules.json so the site can evolve into a real registry later."
         />
         <div className="mt-8">
-          <ModuleCatalog modules={modules as ModuleRecord[]} />
+          <ModuleCatalog modules={modules as ModuleRecord[]} installableModuleIds={installableModuleIds} />
         </div>
       </section>
     </>

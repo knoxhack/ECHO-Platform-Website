@@ -8,6 +8,8 @@ import { ReleaseNotes } from "@/components/release-notes";
 import { SectionHeading } from "@/components/section-heading";
 import { StatusBadge } from "@/components/status-badge";
 import { pageMetadata, siteConfig } from "@/lib/site";
+import { packUpdateLink } from "@/lib/install-links";
+import { approvedEntries, getReleaseIndexCatalog } from "@/lib/release-index";
 import {
   assetsByKind,
   formatBytes,
@@ -25,8 +27,17 @@ export const metadata: Metadata = pageMetadata({
 
 export default async function DownloadPage() {
   const releases = await getEchoReleases();
+  const releaseIndexCatalog = await getReleaseIndexCatalog();
   const latest = releases[0];
   const downloadRecords = downloads as DownloadRecord[];
+  const indexedModpacks = approvedEntries(releaseIndexCatalog.entries, "modpack");
+  const updateTargets = indexedModpacks.length
+    ? indexedModpacks.map((entry) => ({ id: entry.id, label: `Update ${packLabel(entry.id)}` }))
+    : [
+        { id: "ashfall-native-edition", label: "Update Native Pack" },
+        { id: "ashfall-neoforge-edition", label: "Update NeoForge Pack" },
+        { id: "ashfall-standalone-edition", label: "Update Standalone Pack" }
+      ];
   const packAssets = [
     ...assetsByKind(latest, "native-platform-package"),
     ...assetsByKind(latest, "standalone-runtime"),
@@ -115,6 +126,11 @@ export default async function DownloadPage() {
               <Link href="/launcher" className="cyber-button cyber-button-primary">
                 Open Launcher Page
               </Link>
+              {updateTargets.map((target) => (
+                <a key={target.id} href={packUpdateLink(target.id)} className="cyber-button cyber-button-secondary">
+                  {target.label}
+                </a>
+              ))}
               <Link href={latest.htmlUrl} className="cyber-button cyber-button-secondary">
                 View on GitHub
               </Link>
@@ -227,4 +243,13 @@ function ReleaseMetric({ label, value }: { label: string; value: string }) {
 function formatPackageSize(assets: ReleaseAsset[]) {
   const total = assets.reduce((sum, asset) => sum + asset.size, 0);
   return formatBytes(total);
+}
+
+function packLabel(id: string) {
+  return id
+    .replace(/^ashfall-/, "")
+    .replace(/-edition$/, "")
+    .split("-")
+    .map((part) => part.slice(0, 1).toUpperCase() + part.slice(1))
+    .join(" ");
 }

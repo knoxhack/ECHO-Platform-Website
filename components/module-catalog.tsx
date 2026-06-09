@@ -5,8 +5,15 @@ import { ModuleCard, type ModuleRecord } from "@/components/module-card";
 
 const filters = ["All", "Core", "Interface", "Ashfall", "Platform", "Future"];
 
-export function ModuleCatalog({ modules }: { modules: ModuleRecord[] }) {
+export function ModuleCatalog({
+  modules,
+  installableModuleIds = []
+}: {
+  modules: ModuleRecord[];
+  installableModuleIds?: string[];
+}) {
   const [active, setActive] = useState("All");
+  const installable = useMemo(() => new Set(installableModuleIds), [installableModuleIds]);
   const filtered = useMemo(
     () => (active === "All" ? modules : modules.filter((module) => module.group === active)),
     [active, modules]
@@ -32,7 +39,7 @@ export function ModuleCatalog({ modules }: { modules: ModuleRecord[] }) {
       {filtered.length > 0 ? (
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {filtered.map((module) => (
-            <ModuleCard key={module.id} module={module} />
+            <ModuleCard key={module.id} module={module} installable={installable.has(module.id)} />
           ))}
         </div>
       ) : (

@@ -9,6 +9,7 @@ import SdkCreatorStartHere from "@/docs/sdk/creator-start-here.mdx";
 import SdkCreatorTemplates from "@/docs/sdk/creator-templates.mdx";
 import SdkCreatorToolingApi from "@/docs/sdk/creator-tooling-api.mdx";
 import SdkDeveloperStartHere from "@/docs/sdk/developer-start-here.mdx";
+import SdkEcosystemArtifactOwnership from "@/docs/sdk/ecosystem-artifact-ownership.mdx";
 import SdkExamples from "@/docs/sdk/examples.mdx";
 import SdkExamplesIntegrations from "@/docs/sdk/examples/integrations.mdx";
 import SdkGettingStarted from "@/docs/sdk/getting-started.mdx";
@@ -101,6 +102,13 @@ export const sdkDocs: GeneratedDocEntry[] = [
     section: "SDK",
     slug: ["sdk","developer-start-here"],
     component: SdkDeveloperStartHere
+  },
+  {
+    title: "ECHO Artifact Ownership",
+    description: "GitHub stores source, release assets, and attestations. ECHO stores product policy, trust, compatibility, install UX, and the canonical Release Index.",
+    section: "SDK",
+    slug: ["sdk","ecosystem-artifact-ownership"],
+    component: SdkEcosystemArtifactOwnership
   },
   {
     title: "Examples",

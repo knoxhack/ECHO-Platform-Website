@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight, Box, GitBranch, PackageCheck, ShieldCheck } from "lucide-react";
 import { CyberGlassCard } from "@/components/cyber-glass-card";
 import { StatusBadge } from "@/components/status-badge";
+import { addonInstallLink } from "@/lib/install-links";
 
 export type ModuleReleaseNote = {
   title: string;
@@ -30,7 +31,7 @@ export type ModuleRecord = {
   releaseNotes: ModuleReleaseNote[];
 };
 
-export function ModuleCard({ module }: { module: ModuleRecord }) {
+export function ModuleCard({ module, installable = false }: { module: ModuleRecord; installable?: boolean }) {
   return (
     <CyberGlassCard className="flex h-full flex-col">
       <div className="flex items-start justify-between gap-3">
@@ -65,6 +66,12 @@ export function ModuleCard({ module }: { module: ModuleRecord }) {
       </div>
 
       <div className="mt-5 flex flex-wrap gap-2">
+        {installable ? (
+          <a href={addonInstallLink(module.id)} className="cyber-button cyber-button-primary min-h-9 px-3 py-1.5 text-xs">
+            Install
+            <ArrowRight size={14} />
+          </a>
+        ) : null}
         <Link href={`/modules/${module.id}`} className="cyber-button cyber-button-primary min-h-9 px-3 py-1.5 text-xs">
           Details
           <ArrowRight size={14} />

@@ -96,6 +96,26 @@ for (const file of markdownFiles()) {
   }
 }
 
+const developerDocStalePatterns = [
+  /formally locked/i,
+  /Treat API names/i,
+  /@echo\/sdk/,
+  /defineEchoModule/,
+  /EchoModuleContext/,
+  /EchoServiceContext/,
+  /RuntimeTargetRef/,
+  /releaseGates\.register/,
+  /dataCore\.migrations/,
+  /netCore\.(actions|sync)/,
+  /(terminal\.tabs|index\.providers|lens\.providers|holomap\.overlays)\.register/
+];
+for (const file of markdownFiles().filter((entry) => rel(entry).startsWith("docs/developers/"))) {
+  const text = fs.readFileSync(file, "utf8");
+  for (const pattern of developerDocStalePatterns) {
+    if (pattern.test(text)) errors.push(rel(file) + " contains placeholder developer API reference " + pattern);
+  }
+}
+
 if (repoName === "ECHO-Modules") {
   const addonsDir = path.join(root, "addons");
   for (const entry of fs.readdirSync(addonsDir, { withFileTypes: true })) {

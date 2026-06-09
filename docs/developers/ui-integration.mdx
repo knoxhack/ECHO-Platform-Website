@@ -2,7 +2,25 @@
 
 ECHO UI integration lets modules contribute player-facing information without forking the whole interface.
 
-The main integration surfaces today are [Terminal](/docs/modules/terminal), [Index](/docs/modules/index), [Lens](/docs/modules/lens), and [HoloMap](/docs/modules/holomap). Future systems such as ScreenCore and ThemeCore can make this layer more flexible, but current player-facing claims should stay grounded in Minecraft/NeoForge-compatible experiences.
+The main integration surfaces today are [Terminal](/docs/modules/terminal), [Index](/docs/modules/index), [Lens](/docs/modules/lens), and [HoloMap](/docs/modules/holomap). Public addon work should contribute data, service providers, or optional integrations to those surfaces instead of taking over presentation.
+
+## Descriptor Requirements
+
+Declare the UI surface a module provides or consumes in `META-INF/echo.mod.json`:
+
+```json
+{
+  "schema": "echo.mod.v1",
+  "id": "echoindex",
+  "requires": ["echoadaptercore", "echocore", "echonetcore"],
+  "optional": ["echoholomap", "echolens", "echomissioncore", "echoterminal", "echothemecore"],
+  "provides": ["index.recipes", "index.inventory_overlay", "echoindex:inventory_overlay"],
+  "permissions": ["index.recipes", "index.inventory_overlay", "ui.overlays", "inventory.overlay", "ui.screens"],
+  "apiStability": "beta"
+}
+```
+
+Use optional dependencies when the UI can disappear safely. Use required dependencies only when the feature cannot operate without that surface.
 
 ## Design Rule
 
@@ -19,43 +37,43 @@ Good UI integrations are:
 
 ## Terminal
 
-Use Terminal for missions, route state, intel, inbox entries, rewards, and addon tabs.
+Use Terminal for missions, route state, intel, inbox entries, rewards, diagnostics, and addon dashboards.
 
-A Terminal integration should help the player understand what changed or what to do next.
+Data-driven Terminal pages can be published as pack resources:
 
-```ts
-terminal.tabs.register({
-  id: "relictech.signal-log",
-  title: "Signal Log",
-  icon: "signal",
-  isVisible: ({ player }) => player.hasUnlock("relictech.signal-log"),
-  getData: ({ player, services }) => {
-    return services.relicTech.getSignalSummary(player.id);
-  }
-});
+```json
+{
+  "id": "echo_template_full_ashfall:ashfall_showcase_dashboard",
+  "title": "Ashfall Field Dashboard",
+  "summary": "Next step: open the active mission, read Index, scan wreckage, pin the low-risk field marker, then return before the weather warning peaks.",
+  "nextSteps": [
+    "Open Index: Ashfall Showcase Flow.",
+    "Scan drop-pod wreckage with Lens.",
+    "Pin HoloMap marker: First Field Objective.",
+    "Track MissionCore: Ashfall Showcase Opening."
+  ],
+  "theme": "ashfall",
+  "styleTokenSet": "ashfall_cyberglass"
+}
 ```
 
-The module owns the signal meaning. Terminal owns layout, navigation, and presentation.
+The module owns the meaning. Terminal owns layout, navigation, and presentation.
 
 ## Index
 
 Use Index for recipes, item usage, archives, recovered records, technology descriptions, and progression knowledge.
 
-Index entries should include unlock context when possible.
+Index entries should include unlock context and stable cross-links when possible:
 
-```ts
-index.providers.register({
-  id: "relictech.archive-entries",
-  entries(context) {
-    return context.services.relicTech.archives().map((archive) => ({
-      id: archive.id,
-      title: archive.title,
-      summary: archive.summary,
-      unlock: archive.requiredDiscovery,
-      relatedItems: archive.itemIds
-    }));
-  }
-});
+```json
+{
+  "id": "echo_template_full_ashfall:overview",
+  "category": "echo_template_full_ashfall:starter",
+  "title": "Full Ashfall Overview",
+  "subtitle": "The official Ashfall pack profile with Ashfall theme, docs, metadata, and export checks.",
+  "summary": "The official Ashfall profile starter for ECHO Launcher exports, preserving Ashfall as Official ECHO Pack #1 and keeping its content isolated from generic templates.",
+  "tags": ["Official Pack", "template", "creator"]
+}
 ```
 
 Avoid dumping every hidden entry into Index at the start of a playthrough. Locked, rumored, and discovered states should be deliberate.
@@ -64,22 +82,23 @@ Avoid dumping every hidden entry into Index at the start of a playthrough. Locke
 
 Use Lens for scan data on blocks, entities, machines, hazards, fluids, resources, and hidden clues.
 
-Lens providers should reveal only what the player should know at the current progression state.
+Lens scan profiles can link to Index entries, missions, HoloMap markers, route links, and tutorial hints:
 
-```ts
-lens.providers.register({
-  id: "relictech.device-scanner",
-  supports: (target) => target.tags.includes("relictech:device"),
-  scan: async ({ target, player, services }) => {
-    const knowledge = await services.relicTech.identifyDevice(player.id, target.id);
-    return {
-      title: knowledge.title,
-      summary: knowledge.summary,
-      dangerLevel: knowledge.dangerLevel,
-      relatedIndexEntry: knowledge.indexEntryId
-    };
-  }
-});
+```json
+{
+  "id": "echo_template_full_ashfall:ashfall_showcase_scans",
+  "title": "Ashfall Opening Scans",
+  "rows": [
+    {
+      "target": "drop_pod_terminal",
+      "text": "Terminal wake signal detected. Index entry unlocked: Showcase Flow.",
+      "indexEntry": "echo_template_full_ashfall:showcase_flow",
+      "mission": "echo_template_full_ashfall:ashfall_showcase_flow",
+      "holomapMarker": "echo_template_full_ashfall:drop_pod_terminal",
+      "routeLink": "echo_template_full_ashfall:ashfall_depot_bridge"
+    }
+  ]
+}
 ```
 
 If the player has not unlocked enough context, return a limited result instead of leaking hidden progression.
@@ -88,33 +107,52 @@ If the player has not unlocked enough context, return a limited result instead o
 
 Use HoloMap for markers, routes, hazards, relays, bases, missions, anomaly regions, and world overlays.
 
-Map integrations should provide category and state metadata so future filters can remain useful.
+HoloMap layers should provide category and state metadata so filters remain useful:
 
-```ts
-holomap.overlays.register({
-  id: "relictech.vault-markers",
-  category: "anomaly",
-  markers: ({ player, services }) => {
-    return services.relicTech.visibleVaults(player.id).map((vault) => ({
-      id: vault.id,
-      regionId: vault.regionId,
-      label: vault.displayName,
-      state: vault.confirmed ? "confirmed" : "rumored",
-      dangerLevel: vault.dangerLevel
-    }));
-  }
-});
+```json
+{
+  "id": "echo_template_full_ashfall:showcase_flow",
+  "name": "Ashfall Showcase Flow",
+  "description": "Opening route markers for the Ashfall official profile only.",
+  "visibleByDefault": true,
+  "markerStyle": "ashfall_cyberglass",
+  "markers": [
+    {
+      "id": "echo_template_full_ashfall:drop_pod_terminal",
+      "label": "Drop Pod Terminal",
+      "kind": "terminal",
+      "description": "First Terminal dashboard and Index handoff.",
+      "icon": "ashfall_terminal",
+      "riskLabel": "safe return point",
+      "routeLink": "echo_template_full_ashfall:ashfall_depot_bridge",
+      "missionId": "echo_template_full_ashfall:ashfall_showcase_flow",
+      "indexEntry": "echo_template_full_ashfall:showcase_flow"
+    }
+  ]
+}
 ```
 
-HoloMap should decide how markers render. The module should describe what they mean and when they are visible.
+HoloMap decides how markers render. The module describes what they mean and when they are visible.
+
+## Optional Service Integration
+
+For code-driven integration, guard optional surfaces:
+
+```java
+Optional<IndexService> index = EchoOptionalServices.index();
+index.ifPresent(service -> service.registerProvider(myDocsProvider));
+```
+
+The matching module descriptor should list `echoindex` in `optional` and declare the consumed surface in `consumes` or `permissions`.
 
 ## Integration Checklist
 
 - The module uses the shared ECHO surface that best fits the information.
-- The integration has a stable provider or tab ID.
+- The integration has a stable resource, provider, tab, or marker ID.
 - Visibility respects progression and unlock state.
 - The provider reads through services, not raw storage.
-- The UI can explain locked, unknown, or unavailable states.
+- UI mutation paths validate on the server through NetCore when gameplay state changes.
+- The UI can explain locked, unknown, unavailable, and unsupported states.
 - Related Index, Lens, Terminal, and HoloMap entries reference each other where useful.
 
 ## Common Mistakes
@@ -124,6 +162,7 @@ HoloMap should decide how markers render. The module should describe what they m
 - Revealing hidden progression through scanner or archive data.
 - Making a UI provider mutate gameplay state without server validation.
 - Duplicating the same information across surfaces without shared services.
+- Declaring a UI permission without a matching resource, provider, or service path.
 
 ## Related Docs
 
@@ -136,4 +175,4 @@ HoloMap should decide how markers render. The module should describe what they m
 
 ## Next Step
 
-Choose one surface and implement the provider shape first. If the integration triggers gameplay changes, define the server action in [Networking](/docs/developers/networking). If it displays saved state, confirm ownership in [Data Storage](/docs/developers/data-storage).
+Choose one surface and implement the provider or resource shape first. If the integration triggers gameplay changes, define the server action in [Networking](/docs/developers/networking). If it displays saved state, confirm ownership in [Data Storage](/docs/developers/data-storage).

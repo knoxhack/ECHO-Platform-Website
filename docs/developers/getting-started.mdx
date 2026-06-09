@@ -1,89 +1,174 @@
 ## Purpose
 
-The first developer milestone is simple: get the workspace building, understand the platform layers, and create a small module that integrates through ECHO contracts instead of private shortcuts.
+Start here when you want to build an ECHO module or addon against the public SDK instead of copying internal implementation details from another module.
 
-ECHO development should feel like building inside a platform, not assembling disconnected modifications. Today that platform targets Minecraft/NeoForge-compatible experiences. The long-term direction is runtime-independent, but player-facing work should still describe the current compatibility path honestly.
+The current public developer path is concrete:
+
+- Use `ECHO-SDK` for schemas, templates, validation tooling, Gradle task names, and public `dev.echo.api.*` samples.
+- Use `ECHO-Modules` for first-party module source and `META-INF/echo.mod.json` descriptors.
+- Use `ECHO-Release-Index` for public release metadata, asset families, checksums, and launcher download truth.
+- Use ECHO Launcher as the normal player delivery path.
+
+ECHO still supports the Minecraft/NeoForge lane while Native and Standalone lanes mature. Keep runtime-specific code behind AdapterCore or generated adapters, and keep public addon code on the SDK contracts.
 
 ## Before You Build
 
-Start by reading the platform shape, not only the code folders:
+Read these pages first:
 
-- [Platform Overview](/docs/platform/overview) explains the launcher, PackOS, module, contract, adapter, and future runtime layers.
-- [Module System](/docs/modules/overview) explains how first-party modules should relate to each other.
-- [Service Contracts](/docs/developers/service-contracts) explains how modules avoid hard coupling.
-- [AdapterCore](/docs/platform/adaptercore) explains where Minecraft/NeoForge assumptions should be isolated.
+- [Platform Overview](/docs/platform/overview) for launcher, PackOS, modules, contracts, adapters, and runtime lanes.
+- [Module System](/docs/modules/overview) for how first-party modules relate to each other.
+- [Service Contracts](/docs/developers/service-contracts) for the boundary between module behavior and runtime implementation.
+- [Native SDK Artifacts](/docs/sdk/native-sdk-artifacts) for Maven coordinates and the Gradle plugin.
+- [Native Addon Guide](/docs/sdk/native-addon-guide) for `.echo-addon` packaging.
 
-You do not need to understand every system before writing a first module. You do need to know which layer owns your idea.
+You do not need to understand every module before writing a first addon. You do need to know which layer owns your feature, which runtime targets it supports, and which contract IDs it provides or consumes.
 
-## Workspace to First Module
+## Install And Validate The SDK
+
+Run SDK validation from `ECHO-SDK`:
+
+```bash
+python tools/echo_sdk.py validate templates --json
+python tools/validate_echo_contracts.py --json
+```
+
+For a Gradle addon project, apply the SDK plugin and use the current task names:
+
+```groovy
+plugins {
+    id 'dev.echo.native.echo-sdk-gradle-plugin' version '1.0.0-RC'
+}
+
+dependencies {
+    implementation 'dev.echo.native:echoaddonapi:1.0.0-RC'
+    implementation 'dev.echo.native:echo-native-contracts:1.0.0-RC'
+    testImplementation 'dev.echo.native:echo-native-testkit:1.0.0-RC'
+}
+```
+
+Useful SDK tasks:
+
+- `echoInitAddon`
+- `echoValidateManifest`
+- `echoValidateSchemas`
+- `echoValidateImports`
+- `echoValidatePermissions`
+- `echoValidateRuntimeTargets`
+- `echoValidate`
+- `echoGenerateAdapters`
+- `echoPackageNativeAddon`
+- `echoPackageNeoForge`
+- `echoPackageStandalone`
+- `echoParityTest`
+- `echoBuildReleaseBundle`
+
+## Workspace To First Addon
 
 Use this flow for the first pass:
 
-1. Install the workspace and dependencies.
-2. Build the core modules.
-3. Copy or create a module from the expected [Module Template](/docs/developers/module-template).
-4. Define module identity, category, status, and dependencies.
-5. Register services or providers through ECHO contracts.
-6. Integrate with Terminal, Index, Lens, or HoloMap if the module exposes player-facing information.
-7. Add PackOS-aware metadata.
-8. Validate with current build checks and future Command Center checks.
-9. Package for ECHO Launcher when the release path is ready.
+1. Validate `ECHO-SDK` templates and contracts.
+2. Pick a target from [Native Addon Guide](/docs/sdk/native-addon-guide), [NeoForge Module Guide](/docs/sdk/neoforge-module-guide), or [Standalone Module Guide](/docs/sdk/standalone-module-guide).
+3. Create an addon from a template or mirror the sample structure in `ECHO-SDK/samples/hello-content-addon`.
+4. Define `META-INF/echo.mod.json`.
+5. Define `META-INF/echo-addon-package.json` when producing `.echo-addon` packages.
+6. Implement the addon through `dev.echo.api.*` and JDK imports.
+7. Register content, services, events, or optional integrations through SDK and module contracts.
+8. Run `echoValidate` and focused tests.
+9. Package the selected runtime families.
+10. Publish release metadata through the Release Index path when the artifact is player-facing.
 
-## Starter Module Shape
+## Current Addon Shape
 
-The example below shows the intended shape of an ECHO module. Treat API names as developer-facing examples until the SDK is formally locked.
+The SDK sample addon uses `dev.echo.api.*` public types and a registry context. This is the public shape developers should copy before reaching for first-party internals.
 
-```ts
-import { defineEchoModule } from "@echo/sdk/module";
-import { indexProvider, lensProvider } from "@echo/sdk/integration";
+```java
+package dev.echo.samples.hello;
 
-export default defineEchoModule({
-  id: "echorelictech",
-  name: "ECHO: RelicTech",
-  category: "Progression",
-  status: "Prototype",
-  version: "0.1.0",
-  dependsOn: ["echocore", "echodatacore", "echoindex", "echolens"],
+import dev.echo.api.addon.EchoAddon;
+import dev.echo.api.addon.EchoAddonDescriptor;
+import dev.echo.api.addon.EchoAddonId;
+import dev.echo.api.addon.EchoAddonKind;
+import dev.echo.api.addon.EchoAddonRole;
+import dev.echo.api.addon.EchoAddonRuntimeTarget;
+import dev.echo.api.addon.EchoAddonVersion;
+import dev.echo.api.context.EchoRegistryContext;
+import java.util.Set;
 
-  register(context) {
-    context.provide(indexProvider("relictech.entries", createRelicIndexEntries));
-    context.provide(lensProvider("relictech.scans", createRelicScanResults));
-  }
-});
+public final class HelloContentAddon implements EchoAddon {
+    private static final EchoAddonDescriptor DESCRIPTOR = new EchoAddonDescriptor(
+            new EchoAddonId("hello_content_addon"),
+            new EchoAddonVersion("0.1.0"),
+            "Hello Content Add-on",
+            EchoAddonKind.CONTENT,
+            EchoAddonRole.SAMPLE,
+            Set.of(
+                    EchoAddonRuntimeTarget.ECHO_NATIVE,
+                    EchoAddonRuntimeTarget.NEOFORGE,
+                    EchoAddonRuntimeTarget.ECHO_RUNTIME_STANDALONE
+            )
+    );
+
+    @Override
+    public EchoAddonDescriptor descriptor() {
+        return DESCRIPTOR;
+    }
+
+    @Override
+    public void register(EchoRegistryContext context) {
+        // Register items, blocks, recipes, services, or providers through SDK contexts.
+    }
+}
 ```
 
-The important part is not the exact import path. The important part is the behavior: the module declares identity, dependencies, and integration points in one visible place.
+The matching module manifest is `META-INF/echo.mod.json`:
 
-## Good First Modules
+```json
+{
+  "schema": "echo.mod.v1",
+  "id": "hello_content_addon",
+  "name": "Hello Content Add-on",
+  "version": "0.1.0",
+  "kind": "content",
+  "role": "sample",
+  "runtimeTargets": ["echo_native", "neoforge", "echo_runtime_standalone"],
+  "domains": ["items", "blocks", "recipes"],
+  "permissions": ["registry.items", "registry.blocks", "registry.recipes"],
+  "entrypoint": "dev.echo.samples.hello.HelloContentAddon"
+}
+```
 
-A good first module does one thing clearly:
+## Good First Addons
 
-- Add an Index provider for a new content category.
-- Add a Lens scanner provider for one hazard type.
-- Add a Terminal tab that reads mission or route state.
-- Add HoloMap markers for a known world system.
-- Add PackOS metadata for an existing module.
+A good first addon does one thing clearly:
 
-Avoid starting with a module that owns networking, persistent saves, custom UI, and world generation all at once. That hides the contract boundaries you are trying to learn.
+- Adds registry content through `EchoRegistryContext`.
+- Publishes data-driven Index, Lens, Terminal, or HoloMap resources.
+- Registers one service contract through `EchoNativeAddonRuntime`.
+- Adds a small NetCore action with explicit server validation.
+- Adds PackOS-aware metadata for an existing module or pack.
+
+Avoid starting with an addon that owns networking, persistent saves, custom UI, and world generation at the same time. That hides the contract boundaries you are trying to learn.
 
 ## Implementation Checklist
 
-- The module has a stable ID and clear display name.
-- The dependency list matches what the module actually consumes.
-- Player-facing information goes through Terminal, Index, Lens, or HoloMap where possible.
-- Persistent state has an owner and version plan.
-- Runtime-specific logic is isolated near AdapterCore or a runtime bridge.
-- PackOS metadata describes package intent, channel, dependency, and artifact expectations.
-- The module has docs and release notes before it is treated as public.
+- `META-INF/echo.mod.json` exists and uses `schema: "echo.mod.v1"`.
+- The addon ID is lowercase and stable.
+- `runtimeTargets` match the artifacts you actually build.
+- `permissions` match the registries, networking, data, or UI surfaces the addon uses.
+- Public sample code imports `dev.echo.api.*` and JDK types only.
+- Optional integrations use service lookup or no-op behavior.
+- Runtime-specific code is isolated in AdapterCore, generated adapters, or runtime entrypoints.
+- Tests cover the service or registry behavior before release.
+- Docs and release notes are present before the addon is public.
 
 ## Common Mistakes
 
-- Importing another module's internals instead of using a service contract.
-- Saving data without an owner or version marker.
-- Adding a custom screen when an existing ECHO interface could carry the information.
-- Calling native or runtime-independent work finished before a shipped target exists.
-- Treating a GitHub release asset as the normal player install path instead of routing players through ECHO Launcher.
+- Copying `com.knoxhack.*` internals into third-party SDK samples.
+- Declaring `echo_native`, `neoforge`, and `echo_runtime_standalone` when only one artifact builds.
+- Publishing a `.jar` without `META-INF/echo.mod.json`.
+- Hard-requiring an optional module instead of using `EchoOptionalServices`.
+- Treating GitHub release assets as the normal player install path instead of routing players through ECHO Launcher.
 
 ## Next Step
 
-Create the module shape first, then choose one integration surface. If the module is mostly content or discovery, start with [Index](/docs/modules/index) or [Lens](/docs/modules/lens). If it is mission or route related, start with [Terminal](/docs/modules/terminal) and [MissionCore through service contracts](/docs/developers/service-contracts).
+Create the module descriptor first, then choose one integration surface. If the addon is mostly content or discovery, start with [Index](/docs/modules/index) or [Lens](/docs/modules/lens). If it is mission or route related, start with [Terminal](/docs/modules/terminal) and [MissionCore through service contracts](/docs/developers/service-contracts).

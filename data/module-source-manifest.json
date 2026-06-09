@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-09T00:06:40.616Z",
+  "generatedAt": "2026-06-09T08:12:01.829Z",
   "sourceRepo": "knoxhack/ECHO-Modules",
   "sourceCommit": "60f5339eaadb7847a12e14fa0dafed5d0e8487c1",
   "moduleCount": 95,
@@ -27,6 +27,7 @@
     "echocommunitybridge",
     "echocontentcore",
     "echoconvoyprotocol",
+    "echocore",
     "echocreatorcore",
     "echocreaturecore",
     "echocursecore",
@@ -53,7 +54,6 @@
     "echomachinecore",
     "echometadatacore",
     "echomissioncore",
-    "echomodpackcommandcenter",
     "echomodulegraph",
     "echomultiblockcore",
     "echonetcore",

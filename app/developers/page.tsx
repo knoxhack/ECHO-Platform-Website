@@ -57,7 +57,7 @@ const journey = [
   },
   {
     title: "Validate release state",
-    description: "Use docs and future Command Center checks to catch broken packaging early."
+    description: "Use SDK validation, release-index metadata, and site audits to catch broken packaging early."
   },
   {
     title: "Package for launcher",

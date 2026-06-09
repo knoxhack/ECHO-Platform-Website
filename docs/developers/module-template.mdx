@@ -1,127 +1,185 @@
 ## Purpose
 
-The module template is the expected shape for an ECHO module. It should make identity, dependencies, integration points, docs, and release readiness visible before a module is treated as part of the platform.
+The module template is the expected public shape for an ECHO module or addon. It makes identity, runtime targets, dependencies, permissions, entrypoints, docs, and release artifacts visible before the module is treated as part of the platform.
 
-The exact build files may evolve, but the information model should remain stable. A module that can be described consistently can later be validated by PackOS, listed in the website registry, packaged for ECHO Launcher, and reasoned about by other modules.
+The source of truth is the descriptor and package metadata, not a prose-only checklist:
 
-## When to Use This Guide
+- `META-INF/echo.mod.json` describes module identity and runtime contract.
+- `META-INF/echo-addon-package.json` describes `.echo-addon`, NeoForge, Standalone, and sources artifacts when packaged through the SDK.
+- `build.gradle` applies the ECHO SDK Gradle plugin for validation, generation, packaging, parity, and release bundle tasks.
+
+## When To Use This Guide
 
 Use this guide when you are:
 
-- Creating a new ECHO module.
-- Moving an existing system into a first-party module shape.
-- Adding docs or release metadata to a module.
-- Preparing a module for launcher-managed packaging.
-- Checking whether a module has hidden dependencies.
+- Creating a new ECHO addon.
+- Moving an existing first-party system into a releaseable module shape.
+- Adding public docs or release metadata to a module.
+- Preparing Native, NeoForge, or Standalone artifacts.
+- Checking whether a module has hidden dependencies or undeclared permissions.
 
-For the wider platform model, read [Module System](/docs/modules/overview), [Core Modules](/docs/modules/core), and [PackOS](/docs/platform/packos).
+For the wider platform model, read [Module System](/docs/modules/overview), [Core Modules](/docs/modules/core), [PackOS](/docs/platform/packos), and [Native SDK Artifacts](/docs/sdk/native-sdk-artifacts).
 
 ## Required Module Identity
 
 Every public module should define:
 
-- Stable identifier.
-- Display name.
-- Category.
-- Status.
-- Version or planned version.
-- Short description.
-- Owner or package source.
-- GitHub path.
+- Stable `id`.
+- Human-readable `name`.
+- `version`.
+- `kind` and `role`.
+- `entrypoint`.
+- Runtime targets.
+- Permissions.
+- Required and optional dependencies when applicable.
+- Provided and consumed contract IDs when applicable.
 - Docs path.
 - Release notes.
-- Whether it can run standalone.
-- Whether Ashfall uses it.
+- Runtime artifact family.
 
-Stable IDs matter. Changing a module ID should be treated as a compatibility event because docs, manifests, saves, dependencies, and release metadata may all reference it.
+Stable IDs matter. Changing a module ID is a compatibility event because docs, manifests, saves, dependencies, package metadata, and release-index entries can all reference it.
 
-## Example Module Descriptor
+## `META-INF/echo.mod.json`
 
-The example below shows the intended metadata shape. Treat API names as examples until the SDK is formally locked.
+Use the SDK schema value `echo.mod.v1`. A small content addon looks like this:
 
-```ts
-import { defineEchoModule } from "@echo/sdk/module";
-
-export default defineEchoModule({
-  id: "echoterminal",
-  name: "ECHO: Terminal",
-  category: "Player Interface",
-  status: "Active",
-  version: "1.1.0",
-  description: "Mission, route, intel, reward, inbox, and addon-tab interface.",
-  dependsOn: ["echocore", "echonetcore", "echomissioncore"],
-  standalone: true,
-  usedByAshfall: true,
-  docs: "/docs/modules/terminal",
-  source: "https://github.com/knoxhack/ECHO/tree/main/addons/echoterminal"
-});
-```
-
-The descriptor should be boring, explicit, and machine-readable. PackOS and launcher tooling become stronger when module state is easy to inspect.
-
-## Dependencies
-
-Dependencies should be explicit. If a module consumes MissionCore, DataCore, Terminal, Lens, HoloMap, Index, NetCore, or RenderCore, that relationship belongs in metadata.
-
-Avoid hidden dependencies created by direct imports or runtime assumptions. Hidden dependencies make PackOS validation and launcher repair weaker because tools cannot explain what is missing.
-
-Use dependency metadata to answer:
-
-- What must load before this module?
-- Which services does this module consume?
-- Which optional integrations can be disabled safely?
-- Which modules are required by Ashfall?
-- Which modules are internal and not player-facing?
-
-## Integration Points
-
-A module template should leave obvious places for:
-
-- Service registration.
-- Event listeners.
-- Data providers.
-- Network messages.
-- Terminal tabs.
-- Index providers.
-- Lens providers.
-- HoloMap overlays.
-- PackOS metadata.
-
-Example integration shape:
-
-```ts
-export function registerRelicTech(context: EchoModuleContext) {
-  context.services.register("relictech.catalog", new RelicCatalogService());
-  context.integrations.index.addProvider(createRelicIndexProvider());
-  context.integrations.lens.addProvider(createRelicLensProvider());
-  context.packos.describe(createRelicTechPackageMetadata());
+```json
+{
+  "schema": "echo.mod.v1",
+  "id": "hello_content_addon",
+  "name": "Hello Content Add-on",
+  "version": "0.1.0",
+  "kind": "content",
+  "role": "sample",
+  "runtimeTargets": ["echo_native", "neoforge", "echo_runtime_standalone"],
+  "domains": ["items", "blocks", "recipes"],
+  "permissions": ["registry.items", "registry.blocks", "registry.recipes"],
+  "entrypoint": "dev.echo.samples.hello.HelloContentAddon"
 }
 ```
 
-This keeps integration visible. A reviewer should not have to search the entire codebase to find how a module enters the platform.
+First-party modules may include additional platform fields used by the website and release tooling:
 
-## Docs and Release Notes
+```json
+{
+  "schema": "echo.mod.v1",
+  "id": "echoterminal",
+  "name": "ECHO: Terminal",
+  "version": "1.0.0",
+  "type": "addon",
+  "kind": "ui_pack",
+  "role": "terminal_surface",
+  "entrypoint": "com.knoxhack.echoterminal.EchoTerminal",
+  "channel": "beta",
+  "official": true,
+  "standalone": true,
+  "side": "common",
+  "requires": ["echoadaptercore", "echocore", "echonetcore"],
+  "optional": ["echodatacore", "echoholomap", "echoindex", "echolens", "echomissioncore"],
+  "provides": ["terminal.surface"],
+  "consumes": ["echo.core", "echo.net", "pack.profile"],
+  "permissions": ["ui.screens", "diagnostics.read", "pack.read"],
+  "apiStability": "beta"
+}
+```
 
-Each module should include public-facing docs and release notes. A platform registry is more useful when users and developers can see what changed, not only the latest version number.
+Use the smaller SDK sample shape for third-party authoring unless you intentionally own first-party platform fields.
+
+## `META-INF/echo-addon-package.json`
+
+The `.echo-addon` package descriptor uses `schemaVersion: "echo.addon.package.v1"` and names each runtime artifact explicitly.
+
+```json
+{
+  "schemaVersion": "echo.addon.package.v1",
+  "id": "hello_content_addon",
+  "version": "0.1.0",
+  "publisher": {
+    "githubOwner": "knoxhack",
+    "githubRepo": "ECHO-SDK"
+  },
+  "targets": ["native", "neoforge", "standalone"],
+  "dependencies": [],
+  "entrypoint": "dev.echo.samples.hello.HelloContentAddon",
+  "artifacts": {
+    "native": "hello_content_addon-0.1.0.echo-addon",
+    "neoforge": "hello_content_addon-0.1.0-neoforge.jar",
+    "standalone": "hello_content_addon-0.1.0-standalone.jar",
+    "sources": "hello_content_addon-0.1.0-sources.jar"
+  }
+}
+```
+
+Artifact names matter because the launcher and Release Index resolve exact runtime families:
+
+- Native Edition consumes `.echo-addon`.
+- NeoForge Edition consumes `-neoforge.jar`.
+- Standalone Edition consumes `-standalone.jar`.
+- Developers and QA use `-sources.jar`.
+
+## Build File
+
+Use the SDK Gradle plugin and current Maven coordinates:
+
+```groovy
+plugins {
+    id 'dev.echo.native.echo-sdk-gradle-plugin' version '1.0.0-RC'
+}
+
+echoSdk {
+    addonId = 'hello_content_addon'
+}
+
+dependencies {
+    implementation 'dev.echo.native:echoaddonapi:1.0.0-RC'
+    implementation 'dev.echo.native:echo-native-contracts:1.0.0-RC'
+    testImplementation 'dev.echo.native:echo-native-testkit:1.0.0-RC'
+}
+```
+
+Run `echoValidate` before packaging, then build only the runtime families that match your descriptor.
+
+## Dependencies
+
+Dependencies should be explicit.
+
+Use `requires` for modules that must load first. Use `optional` for integrations that must degrade cleanly when absent. Use `provides` and `consumes` to make service contracts visible to reviewers, diagnostics, and future validation.
+
+Dependency metadata should answer:
+
+- What must load before this module?
+- Which contracts does it provide?
+- Which contracts does it consume?
+- Which optional integrations can be disabled safely?
+- Which permissions explain its registry, data, networking, or UI access?
+- Which runtime targets are actually supported?
+
+## Docs And Release Notes
+
+Each public module should include public-facing docs and release notes. A platform registry is more useful when users and developers can see what changed, not only the latest version number.
 
 Minimum docs should cover:
 
 - What the module owns.
-- Which modules it depends on.
-- Which player-facing systems it integrates with.
-- Whether it is stable, active, prototype, experimental, planned, deprecated, or internal.
+- Which modules it requires.
+- Which optional integrations it uses.
+- Which player-facing systems it contributes to.
+- Which runtime targets are packaged.
 - What changed in the current release.
 
 ## Implementation Checklist
 
-- The ID is lowercase, stable, and unique.
-- The category matches the module catalog.
-- Status is honest and not inflated.
-- Dependencies include both core and interface modules.
-- Optional integrations are marked as optional where possible.
+- `id` is lowercase, stable, and unique.
+- `schema` or `schemaVersion` matches the SDK schema.
+- `entrypoint` exists and points to the actual addon class.
+- Runtime targets match packaged artifacts.
+- Required and optional dependencies are declared.
+- Permissions match actual access.
+- `provides` and `consumes` identify service boundaries.
+- Public sample code imports `dev.echo.api.*` and JDK types.
 - Docs and GitHub paths are present.
 - Release notes are understandable.
-- PackOS metadata can describe the module without guessing.
+- PackOS and Release Index metadata can describe the module without guessing.
 
 ## Common Mistakes
 
@@ -129,7 +187,8 @@ Minimum docs should cover:
 - Marking a prototype module as stable because it builds.
 - Adding a UI integration without documenting which surface owns presentation.
 - Depending on another module's internal classes instead of using a contract.
-- Leaving planned modules with fake versions that imply release readiness.
+- Leaving planned modules with versions that imply release readiness.
+- Packaging only one runtime family while declaring all three targets.
 
 ## Next Step
 

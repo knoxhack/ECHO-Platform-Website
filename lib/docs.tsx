@@ -235,7 +235,7 @@ export const docsSections: DocSection[] = [
       doc(
         "Developers",
         "Release Process",
-        "PackOS metadata, Command Center validation, launcher packaging, and public release readiness.",
+        "PackOS metadata, SDK validation, launcher packaging, and public release readiness.",
         ["developers", "release-process"],
         DeveloperReleaseProcess
       )

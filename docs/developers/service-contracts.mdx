@@ -1,10 +1,10 @@
 ## Purpose
 
-Service contracts are the boundary between ECHO behavior and runtime-specific implementation. They let modules talk to shared systems without needing to know every detail of the current adapter.
+Service contracts are the boundary between ECHO behavior and runtime-specific implementation. They let modules talk to shared systems without importing another module's internals or assuming one runtime lane.
 
-Contracts are one of the main ways ECHO grows beyond a single pack. Today, they still need to work well inside Minecraft/NeoForge-compatible experiences. Over time, they also create cleaner boundaries for AdapterCore and future runtime-independent systems.
+The public SDK path uses Java contracts, descriptor metadata, and optional service lookup. First-party modules may contain `com.knoxhack.*` implementation classes, but public addon samples should stay on `dev.echo.api.*`, `dev.echo.nativeplatform.contracts.*`, and JDK types unless a guide says otherwise.
 
-## When to Create a Contract
+## When To Create A Contract
 
 Create a contract when more than one module needs the same behavior or when a player-facing surface needs data from another system.
 
@@ -14,80 +14,124 @@ Good candidates include:
 - Index entries and unlock state.
 - Lens scan results.
 - HoloMap markers and overlays.
-- Persistent player or world data.
+- Persistent player, world, or team data.
 - Networked actions.
 - Package metadata used by PackOS or launcher tooling.
 
 Avoid creating a contract only to rename a private method. A contract should describe platform behavior, not implementation trivia.
 
-## Good Contract Traits
+## Contract IDs
 
-A good service contract:
+Use stable IDs that include the owning module namespace and the contract domain:
 
-- Names the behavior it provides.
-- Defines ownership and lifecycle.
-- Describes inputs and outputs.
-- Avoids leaking runtime-only types where possible.
-- Handles missing or unavailable services gracefully.
-- Can be tested without launching the full experience.
-- Makes failure states visible to diagnostics.
+- `echonetcore:network/packet_service`
+- `hello_content_addon:registry_service`
+- `echoterminal:terminal/surface`
+- `echolens:lens/scanners`
 
-## Example Contract Shape
+Keep IDs lowercase and version behavior through docs, metadata, and migration notes instead of changing IDs casually.
 
-The example below shows the intended pattern. Treat names as examples until the SDK is formally locked.
+## Contract Metadata
 
-```ts
-export type ScanTarget = {
-  id: string;
-  runtimeRef: RuntimeTargetRef;
-  playerId: string;
-};
+Declare service boundaries in `META-INF/echo.mod.json`:
 
-export type ScanResult = {
-  title: string;
-  summary: string;
-  dangerLevel: "none" | "low" | "medium" | "high";
-  relatedIndexEntry?: string;
-};
-
-export interface LensScanProvider {
-  id: string;
-  supports(target: ScanTarget): boolean;
-  scan(target: ScanTarget, context: EchoServiceContext): Promise<ScanResult | null>;
+```json
+{
+  "schema": "echo.mod.v1",
+  "id": "echomissioncore",
+  "requires": ["echoadaptercore", "echocore", "echonetcore"],
+  "optional": ["echodatacore", "echoindex", "echoterminal", "echotutorialcore"],
+  "provides": ["missions.objectives", "missions.routes"],
+  "consumes": ["echo.core", "echo.net"],
+  "permissions": ["missions.objectives", "missions.routes"],
+  "apiStability": "beta"
 }
 ```
 
-The contract does not require the UI to know how scan data is produced. It also does not require the provider to draw its own scanner screen. Lens owns presentation; the provider owns meaning.
+This metadata is what reviewers, diagnostics, website pages, and release tooling can inspect without scanning every Java file.
 
-## Provider Registration
+## Java Contract Shape
 
-Services should be registered through visible module entry points:
+Define a narrow Java interface for behavior other modules need:
 
-```ts
-export function register(context: EchoModuleContext) {
-  context.services.require("echocore.lifecycle");
-  context.integrations.lens.addProvider({
-    id: "relictech.ancient-device-scan",
-    supports: isAncientDeviceTarget,
-    scan: scanAncientDevice
-  });
+```java
+package dev.echo.example.contract;
+
+import java.util.Optional;
+
+public interface RelicScanService {
+    boolean supports(String targetId);
+
+    Optional<RelicScanResult> scan(String playerId, String targetId);
 }
 ```
 
-This style makes dependencies reviewable. It also gives future PackOS and Command Center tooling a path to explain what a module contributes.
+Use records for stable payloads:
+
+```java
+package dev.echo.example.contract;
+
+public record RelicScanResult(
+        String title,
+        String summary,
+        String dangerLevel,
+        String relatedIndexEntry
+) {}
+```
+
+Keep runtime objects out of the contract whenever possible. Pass stable IDs, resource keys, or adapter references instead of loader-specific objects.
+
+## Service Registration
+
+Register services through the runtime during addon initialization:
+
+```java
+import dev.echo.nativeplatform.contracts.EchoNativeAddon;
+import dev.echo.nativeplatform.contracts.EchoNativeAddonRuntime;
+
+public final class RelicTechAddon implements EchoNativeAddon {
+    @Override
+    public void onInitialize(EchoNativeAddonRuntime runtime) {
+        runtime.registerService(
+                "echorelictech:relic_scan_service",
+                new RelicScanServiceImpl()
+        );
+    }
+}
+```
+
+For content-style SDK addons, use `EchoRegistryContext` to register blocks, items, recipes, and registry-backed descriptors. For service-style native addons, use `EchoNativeAddonRuntime.registerService`.
+
+## Optional Integration
+
+Never hard-reference optional addons. Use optional service lookup or no-op fallback behavior:
+
+```java
+Optional<IndexService> index = EchoOptionalServices.index();
+index.ifPresent(service -> service.registerProvider(myDocsProvider));
+```
+
+The module descriptor should also list the optional module:
+
+```json
+{
+  "optional": ["echoindex"],
+  "consumes": ["index.recipes"]
+}
+```
+
+If a dependency is truly required, put it in `requires` and fail validation when it is missing.
 
 ## Adapter Boundary
 
-If a contract needs Minecraft, NeoForge, or future runtime-specific data, isolate the translation as close to [AdapterCore](/docs/platform/adaptercore) as possible.
+If a contract needs Minecraft, NeoForge, Native, or Standalone runtime data, isolate the translation close to [AdapterCore](/docs/platform/adaptercore).
 
-The goal is not abstraction for its own sake. The goal is to keep ECHO systems portable enough that PackOS, the launcher, docs, and modules can reason about them consistently.
+Runtime references should stay narrow:
 
-Runtime references should be narrow:
-
-- A block, entity, or item may enter through an adapter reference.
+- A block, entity, item, or packet may enter through an adapter reference.
 - The service contract should describe ECHO meaning.
-- Player interfaces should receive already-normalized data.
-- Save data should avoid storing adapter-only objects directly.
+- Player interfaces should receive normalized data.
+- Save data should avoid storing runtime objects directly.
 
 ## Failure Behavior
 
@@ -95,19 +139,21 @@ Contracts should define what happens when:
 
 - A dependency is missing.
 - A provider returns no data.
-- A feature is unsupported on the current runtime.
+- A feature is unsupported on the selected runtime target.
 - A runtime reference cannot be resolved.
 - Player progression does not allow full information yet.
 
-Silent failure makes diagnostics and launcher repair harder. Prefer explicit unknown, unavailable, locked, or unsupported states.
+Prefer explicit states such as `unknown`, `unavailable`, `locked`, `unsupported-runtime`, or `missing-provider`. Silent failure makes diagnostics and launcher repair harder.
 
 ## Implementation Checklist
 
-- The contract name describes behavior, not implementation.
-- Inputs and outputs are stable and documented.
+- The contract ID is stable and names behavior.
+- Inputs and outputs are documented.
 - Runtime-specific references are isolated.
-- Optional dependencies degrade cleanly.
-- Logging records enough context for support.
+- Required and optional dependencies are declared in `echo.mod.json`.
+- Optional integrations degrade cleanly.
+- Registration happens in an addon entrypoint, not hidden static initialization.
+- Logs include enough context for support.
 - The contract has at least one provider and one consumer path.
 - Related docs link to the contract.
 
@@ -117,7 +163,8 @@ Silent failure makes diagnostics and launcher repair harder. Prefer explicit unk
 - Letting a UI module own data that belongs to a gameplay module.
 - Returning `null` without a reason code or fallback state.
 - Registering providers in hidden static initializers.
-- Adding a contract without documenting who owns lifecycle and data.
+- Adding a contract without documenting lifecycle and data ownership.
+- Copying first-party implementation packages into public SDK examples.
 
 ## Related Docs
 

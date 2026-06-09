@@ -199,7 +199,7 @@
     "github": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echoagentcore",
     "overview": [
       "ECHO: AgentCore is sourced from ECHO-Modules/addons/echoagentcore.",
-      "It declares 8 required modules and 3 optional integrations.",
+      "It declares 8 required modules and 2 optional integrations.",
       "Release output is generated per runtime family so the launcher can update this module independently."
     ],
     "capabilities": [
@@ -221,10 +221,10 @@
       "echohealthcore",
       "echobridgecore",
       "echoreportcore",
-      "echomodpackcommandcenter",
       "ai.tasks",
       "ai.task_queue",
-      "ai.prompt_bundle"
+      "ai.prompt_bundle",
+      "ai.next_phase_prompt"
     ],
     "statusNote": "Generated from src/main/resources/META-INF/echo.mod.json in ECHO-Modules. The launcher resolves this module through moduleRequirements and downloads only changed artifacts when URLs are present.",
     "roadmap": [
@@ -979,7 +979,7 @@
     "github": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echobridgecore",
     "overview": [
       "ECHO: BridgeCore is sourced from ECHO-Modules/addons/echobridgecore.",
-      "It declares 6 required modules and 2 optional integrations.",
+      "It declares 6 required modules and 1 optional integration.",
       "Release output is generated per runtime family so the launcher can update this module independently."
     ],
     "capabilities": [
@@ -997,7 +997,6 @@
       "echovalidationcore",
       "echohealthcore",
       "echoagentcore",
-      "echomodpackcommandcenter",
       "echocodexcore",
       "bridge.codex",
       "bridge.cyberdex",
@@ -1474,6 +1473,66 @@
           "echoconvoyprotocol-1.0.0.echo-addon for Ashfall Native Edition.",
           "echoconvoyprotocol-1.0.0-standalone.jar for Ashfall Standalone Edition.",
           "echoconvoyprotocol-1.0.0-sources.jar for traceability and developer debugging.",
+          "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "echocore",
+    "name": "ECHO: Core",
+    "category": "Foundation",
+    "group": "Core",
+    "status": "Stable",
+    "version": "1.0.0",
+    "description": "Provides echo.core, echo.services, echo.runtimemodules, echo.spine, echo.config, echo.missions, echo.network, echo.index, echo.world, echo.map, echo.factions, and echo.diagnostics for the ECHO module graph.",
+    "dependencies": [],
+    "standalone": true,
+    "usedByAshfall": true,
+    "docs": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echocore",
+    "github": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echocore",
+    "overview": [
+      "ECHO: Core is sourced from ECHO-Modules/addons/echocore.",
+      "It declares 0 required modules and 0 optional integrations.",
+      "Release output is generated per runtime family so the launcher can update this module independently."
+    ],
+    "capabilities": [
+      "Native artifact: echocore-1.0.0.echo-addon",
+      "NeoForge artifact: echocore-1.0.0-neoforge.jar",
+      "Standalone artifact: echocore-1.0.0-standalone.jar",
+      "Sources artifact: echocore-1.0.0-sources.jar",
+      "Provides: echo.core, echo.services, echo.runtime_modules",
+      "API stability: stable"
+    ],
+    "integrations": [
+      "echo.core",
+      "echo.services",
+      "echo.runtime_modules",
+      "echo.spine",
+      "echo.config",
+      "echo.missions",
+      "echo.network",
+      "echo.index",
+      "echo.world",
+      "echo.map",
+      "echo.factions",
+      "echo.diagnostics"
+    ],
+    "statusNote": "Generated from src/main/resources/META-INF/echo.mod.json in ECHO-Modules. The launcher resolves this module through moduleRequirements and downloads only changed artifacts when URLs are present.",
+    "roadmap": [
+      "Keep echo.mod.json, README.md, docs/artifacts.md, and release artifacts in sync for every release.",
+      "Publish Native, NeoForge, Standalone, and sources artifacts with checksums before marking an edition player-ready.",
+      "Use Release Index metadata as the public source for launcher and website download links."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Generated release files",
+        "version": "1.0.0",
+        "notes": [
+          "echocore-1.0.0-neoforge.jar for Ashfall NeoForge Edition.",
+          "echocore-1.0.0.echo-addon for Ashfall Native Edition.",
+          "echocore-1.0.0-standalone.jar for Ashfall Standalone Edition.",
+          "echocore-1.0.0-sources.jar for traceability and developer debugging.",
           "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
         ]
       }
@@ -3154,65 +3213,6 @@
           "echomissioncore-1.0.0.echo-addon for Ashfall Native Edition.",
           "echomissioncore-1.0.0-standalone.jar for Ashfall Standalone Edition.",
           "echomissioncore-1.0.0-sources.jar for traceability and developer debugging.",
-          "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
-        ]
-      }
-    ]
-  },
-  {
-    "id": "echomodpackcommandcenter",
-    "name": "Command Center",
-    "category": "Gameplay",
-    "group": "Future",
-    "status": "Beta",
-    "version": "1.0.0",
-    "description": "Provides commandcenter.catalog, commandcenter.reports, commandcenter.readiness, commandcenter.launchermetadata, commandcenter.localtooling for the ECHO module graph.",
-    "dependencies": [],
-    "standalone": true,
-    "usedByAshfall": false,
-    "docs": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echomodpackcommandcenter",
-    "github": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echomodpackcommandcenter",
-    "overview": [
-      "Command Center is sourced from ECHO-Modules/addons/echomodpackcommandcenter.",
-      "It declares 0 required modules and 6 optional integrations.",
-      "Release output is generated per runtime family so the launcher can update this module independently."
-    ],
-    "capabilities": [
-      "Native artifact: echomodpackcommandcenter-1.0.0.echo-addon",
-      "NeoForge artifact: echomodpackcommandcenter-1.0.0-neoforge.jar",
-      "Standalone artifact: echomodpackcommandcenter-1.0.0-standalone.jar",
-      "Sources artifact: echomodpackcommandcenter-1.0.0-sources.jar",
-      "Provides: command_center.catalog, command_center.reports, command_center.readiness",
-      "API stability: beta"
-    ],
-    "integrations": [
-      "echoagentcore",
-      "echobridgecore",
-      "echometadatacore",
-      "echomodulegraph",
-      "echoreportcore",
-      "echotextureforge",
-      "command_center.catalog",
-      "command_center.reports",
-      "command_center.readiness",
-      "command_center.launcher_metadata",
-      "command_center.local_tooling"
-    ],
-    "statusNote": "Generated from src/main/resources/META-INF/echo.mod.json in ECHO-Modules. The launcher resolves this module through moduleRequirements and downloads only changed artifacts when URLs are present.",
-    "roadmap": [
-      "Keep echo.mod.json, README.md, docs/artifacts.md, and release artifacts in sync for every release.",
-      "Publish Native, NeoForge, Standalone, and sources artifacts with checksums before marking an edition player-ready.",
-      "Use Release Index metadata as the public source for launcher and website download links."
-    ],
-    "releaseNotes": [
-      {
-        "title": "Generated release files",
-        "version": "1.0.0",
-        "notes": [
-          "echomodpackcommandcenter-1.0.0-neoforge.jar for Ashfall NeoForge Edition.",
-          "echomodpackcommandcenter-1.0.0.echo-addon for Ashfall Native Edition.",
-          "echomodpackcommandcenter-1.0.0-standalone.jar for Ashfall Standalone Edition.",
-          "echomodpackcommandcenter-1.0.0-sources.jar for traceability and developer debugging.",
           "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
         ]
       }
@@ -5511,7 +5511,7 @@
     "github": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echotextureforge",
     "overview": [
       "ECHO: TextureForge is sourced from ECHO-Modules/addons/echotextureforge.",
-      "It declares 3 required modules and 4 optional integrations.",
+      "It declares 3 required modules and 3 optional integrations.",
       "Release output is generated per runtime family so the launcher can update this module independently."
     ],
     "capabilities": [
@@ -5526,7 +5526,6 @@
       "echoadaptercore",
       "echocore",
       "echonetcore",
-      "echomodpackcommandcenter",
       "echorendercore",
       "echoscreencore",
       "echothemecore",
