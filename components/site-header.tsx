@@ -8,6 +8,7 @@ import { useState } from "react";
 const navItems = [
   { href: "/platform", label: "Platform" },
   { href: "/ashfall", label: "Ashfall" },
+  { href: "/sky-relay", label: "Sky Relay" },
   { href: "/launcher", label: "Launcher" },
   { href: "/modules", label: "Modules" },
   { href: "/sdk", label: "SDK" },

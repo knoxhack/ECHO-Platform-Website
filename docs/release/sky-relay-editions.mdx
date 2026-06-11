@@ -1,0 +1,38 @@
+# Sky Relay Editions
+
+Sky Relay ships through three thin edition repositories that consume the same
+`echoskyrelayprotocol` source contract from `ECHO-Modules`.
+
+## Editions
+
+- Sky Relay Native Edition consumes `.echo-addon` artifacts for `ECHO-Native-Platform`.
+- Sky Relay NeoForge Edition consumes `-neoforge.jar` artifacts for NeoForge compatibility.
+- Sky Relay Standalone Edition consumes `-standalone.jar` artifacts for `ECHO-Standalone-Runtime`.
+
+## Release Status
+
+All Sky Relay edition entries are blocked preview entries until real manual
+gameplay evidence exists for each runtime track. Required evidence includes
+fresh-world creation, first 30 minutes, first 2 hours, Signal Crown completion,
+save reload verification, no-crash review, screenshots, launcher and client
+logs, save snapshots, and real tester/run metadata.
+
+## Launcher And Promotion Gate
+
+The launcher can render Sky Relay as a visible preview, but public install/play
+promotion is blocked until the Release Index pipeline passes:
+
+```text
+node scripts/verify-sky-relay-release-pipeline.mjs --write --require-release-ready
+```
+
+That pipeline checks edition manifests, edition-local manual evidence, central
+gameplay evidence, public alpha readiness, work-order refresh, promotion dry-run,
+strict index validation, and public alpha sync.
+
+## Contract
+
+Sky Relay IDs from `echoskyrelayprotocol` are the source of truth. Edition
+adapters may transform packaging and runtime wiring, but they may not claim
+release readiness until the manual gameplay evidence files are captured from a
+real playthrough.

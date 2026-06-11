@@ -18,6 +18,9 @@ export const siteConfig = {
     platformWebsite: "https://github.com/knoxhack/ECHO-Platform-Website",
     releaseIndex: "https://github.com/knoxhack/ECHO-Release-Index",
     sdk: "https://github.com/knoxhack/ECHO-SDK",
+    skyRelayNativeEdition: "https://github.com/knoxhack/ECHO-Sky-Relay-Native-Edition",
+    skyRelayNeoForgeEdition: "https://github.com/knoxhack/ECHO-Sky-Relay-NeoForge-Edition",
+    skyRelayStandaloneEdition: "https://github.com/knoxhack/ECHO-Sky-Relay-Standalone-Edition",
     standaloneRuntime: "https://github.com/knoxhack/ECHO-Standalone-Runtime"
   },
   links: {
@@ -41,6 +44,10 @@ export const mainSiteRoutes = [
   { path: "/ashfall/native-edition", priority: 0.82 },
   { path: "/ashfall/neoforge-edition", priority: 0.82 },
   { path: "/ashfall/standalone-edition", priority: 0.82 },
+  { path: "/sky-relay", priority: 0.84 },
+  { path: "/sky-relay/native-edition", priority: 0.76 },
+  { path: "/sky-relay/neoforge-edition", priority: 0.76 },
+  { path: "/sky-relay/standalone-edition", priority: 0.76 },
   { path: "/launcher", priority: 0.9 },
   { path: "/download", priority: 0.95 },
   { path: "/modules", priority: 0.85 },

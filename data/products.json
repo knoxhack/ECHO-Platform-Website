@@ -12,8 +12,8 @@
     "repoUrl": "https://github.com/knoxhack/ECHO-Launcher",
     "issuesUrl": "https://github.com/knoxhack/ECHO-Launcher/issues",
     "releasesUrl": "https://github.com/knoxhack/ECHO-Launcher/releases",
-    "releaseUrl": "https://github.com/knoxhack/ECHO-Launcher/releases/tag/v1.0.1",
-    "assetCount": 5,
+    "releaseUrl": "https://github.com/knoxhack/ECHO-Launcher/releases/tag/v1.0.4",
+    "assetCount": 3,
     "docsHref": "/docs/install/launcher",
     "downloadHref": "/download",
     "updateFlow": "Reads the Release Index channel, resolves the selected Ashfall edition, expands moduleRequirements, and downloads only missing or changed files when individual assets are available.",
@@ -56,7 +56,7 @@
     "description": "The canonical module repo. Each module owns source, manifests, per-module docs, and generated Native, NeoForge, Standalone, and sources artifacts.",
     "purpose": "The canonical module repo. Each module owns source, manifests, per-module docs, and generated Native, NeoForge, Standalone, and sources artifacts.",
     "publicRole": "The canonical module repo. Each module owns source, manifests, per-module docs, and generated Native, NeoForge, Standalone, and sources artifacts.",
-    "status": "95 Modules",
+    "status": "96 Modules",
     "repoUrl": "https://github.com/knoxhack/ECHO-Modules",
     "issuesUrl": "https://github.com/knoxhack/ECHO-Modules/issues",
     "releasesUrl": "https://github.com/knoxhack/ECHO-Modules/releases",
@@ -227,6 +227,288 @@
         "title": "Parity harness",
         "description": "Useful for testing module behavior outside the NeoForge lifecycle.",
         "icon": "test"
+      }
+    ],
+    "relatedRepos": [
+      "ECHO-Launcher",
+      "ECHO-Modules",
+      "ECHO-Release-Index"
+    ]
+  },
+  {
+    "repoName": "ECHO-Openlands-Native-Edition",
+    "product": "Openlands Native Edition",
+    "releaseKind": "pack",
+    "route": "/openlands/native-edition",
+    "tagline": "Native runtime Openlands pack using .echo-addon modules.",
+    "description": "The ECHO Native Platform edition for Openlands. It consumes .echo-addon artifacts from ECHO-Modules and keeps echoopenlandsprotocol as the source of truth.",
+    "purpose": "The ECHO Native Platform edition for Openlands. It consumes .echo-addon artifacts from ECHO-Modules and keeps echoopenlandsprotocol as the source of truth.",
+    "publicRole": "Planned Openlands Native Edition release lane. Preview only until artifacts and parity tests are approved.",
+    "status": "Planned Preview",
+    "repoUrl": "https://github.com/knoxhack/ECHO-Openlands-Native-Edition",
+    "issuesUrl": "https://github.com/knoxhack/ECHO-Openlands-Native-Edition/issues",
+    "releasesUrl": "https://github.com/knoxhack/ECHO-Openlands-Native-Edition/releases",
+    "releaseUrl": "https://github.com/knoxhack/ECHO-Openlands-Native-Edition/releases",
+    "assetCount": 0,
+    "docsHref": "/docs/release/openlands-editions",
+    "downloadHref": "/download",
+    "updateFlow": "Uses moduleArtifactFamily echo-addon; launcher updates changed .echo-addon files independently after release metadata provides asset URLs.",
+    "artifacts": [
+      "openlands-native-edition pack archive",
+      "pack manifest",
+      ".echo-addon module requirements",
+      "checksums"
+    ],
+    "features": [
+      {
+        "title": "Native loader lane",
+        "description": "Targets the runtime-independent ECHO Native Platform.",
+        "icon": "layers"
+      },
+      {
+        "title": "Relaxed default",
+        "description": "Keeps Openlands Standard gentle and non-hardcore by default.",
+        "icon": "shield"
+      },
+      {
+        "title": "Waystone parity",
+        "description": "Uses the same waystone state and map discovery IDs as Standalone and NeoForge.",
+        "icon": "route"
+      }
+    ],
+    "relatedRepos": [
+      "ECHO-Modules",
+      "ECHO-Release-Index",
+      "ECHO-SDK"
+    ]
+  },
+  {
+    "repoName": "ECHO-Openlands-NeoForge-Edition",
+    "product": "Openlands NeoForge Edition",
+    "releaseKind": "pack",
+    "route": "/openlands/neoforge-edition",
+    "tagline": "NeoForge adapter edition using original Openlands content.",
+    "description": "The NeoForge edition for Openlands. It adapts Echo IDs into NeoForge runtime/data output without making Minecraft assets or branding the Openlands source.",
+    "purpose": "The NeoForge edition for Openlands. It adapts Echo IDs into NeoForge runtime/data output without making Minecraft assets or branding the Openlands source.",
+    "publicRole": "Planned Openlands NeoForge Edition release lane. Preview only until artifacts and parity tests are approved.",
+    "status": "Planned Preview",
+    "repoUrl": "https://github.com/knoxhack/ECHO-Openlands-NeoForge-Edition",
+    "issuesUrl": "https://github.com/knoxhack/ECHO-Openlands-NeoForge-Edition/issues",
+    "releasesUrl": "https://github.com/knoxhack/ECHO-Openlands-NeoForge-Edition/releases",
+    "releaseUrl": "https://github.com/knoxhack/ECHO-Openlands-NeoForge-Edition/releases",
+    "assetCount": 0,
+    "docsHref": "/docs/release/openlands-editions",
+    "downloadHref": "/download",
+    "updateFlow": "Uses moduleArtifactFamily neoforge; launcher updates changed -neoforge.jar files independently after release metadata provides asset URLs.",
+    "artifacts": [
+      "openlands-neoforge-edition pack archive",
+      "pack manifest",
+      "-neoforge.jar module requirements",
+      "checksums"
+    ],
+    "features": [
+      {
+        "title": "NeoForge lane",
+        "description": "Provides Minecraft/NeoForge compatibility while keeping Openlands names, assets, and gameplay contracts original.",
+        "icon": "blocks"
+      },
+      {
+        "title": "Generated data",
+        "description": "Converts Echo registries into NeoForge resources from echoopenlandsprotocol.",
+        "icon": "file"
+      },
+      {
+        "title": "Parity target",
+        "description": "Matches Native and Standalone block, item, recipe, biome, creature, and waystone IDs.",
+        "icon": "target"
+      }
+    ],
+    "relatedRepos": [
+      "ECHO-Modules",
+      "ECHO-Release-Index",
+      "ECHO-SDK"
+    ]
+  },
+  {
+    "repoName": "ECHO-Openlands-Standalone-Edition",
+    "product": "Openlands Standalone Edition",
+    "releaseKind": "pack",
+    "route": "/openlands/standalone-edition",
+    "tagline": "Standalone runtime Openlands pack with no Minecraft dependency.",
+    "description": "The Standalone Runtime edition for Openlands. It proves the Openlands experience can run natively in the ECHO standalone runtime using the same shared protocol data.",
+    "purpose": "The Standalone Runtime edition for Openlands. It proves the Openlands experience can run natively in the ECHO standalone runtime using the same shared protocol data.",
+    "publicRole": "Planned Openlands Standalone Edition release lane. Preview only until artifacts and parity tests are approved.",
+    "status": "Planned Preview",
+    "repoUrl": "https://github.com/knoxhack/ECHO-Openlands-Standalone-Edition",
+    "issuesUrl": "https://github.com/knoxhack/ECHO-Openlands-Standalone-Edition/issues",
+    "releasesUrl": "https://github.com/knoxhack/ECHO-Openlands-Standalone-Edition/releases",
+    "releaseUrl": "https://github.com/knoxhack/ECHO-Openlands-Standalone-Edition/releases",
+    "assetCount": 0,
+    "docsHref": "/docs/release/openlands-editions",
+    "downloadHref": "/download",
+    "updateFlow": "Uses moduleArtifactFamily standalone; launcher updates changed -standalone.jar files independently after release metadata provides asset URLs.",
+    "artifacts": [
+      "openlands-standalone-edition pack archive",
+      "pack manifest",
+      "-standalone.jar module requirements",
+      "checksums"
+    ],
+    "features": [
+      {
+        "title": "Standalone lane",
+        "description": "Runs Openlands through ECHO Standalone Runtime without Minecraft or NeoForge.",
+        "icon": "monitor"
+      },
+      {
+        "title": "Full runtime proof",
+        "description": "Validates worldgen, inventory, crafting, building, map, save/load, and waystone state in the standalone engine.",
+        "icon": "check"
+      },
+      {
+        "title": "Shared protocol",
+        "description": "Consumes the same echoopenlandsprotocol registries as Native and NeoForge.",
+        "icon": "layers"
+      }
+    ],
+    "relatedRepos": [
+      "ECHO-Modules",
+      "ECHO-Release-Index",
+      "ECHO-SDK"
+    ]
+  },
+  {
+    "repoName": "ECHO-Sky-Relay-Native-Edition",
+    "product": "Sky Relay Native Edition",
+    "releaseKind": "pack",
+    "route": "/sky-relay/native-edition",
+    "tagline": "Native runtime Sky Relay pack using .echo-addon modules.",
+    "description": "The ECHO Native Platform edition for Sky Relay. It consumes echoskyrelayprotocol as the source-backed contract for fragments, storm routes, power stability, and recovery.",
+    "purpose": "The ECHO Native Platform edition for Sky Relay. It consumes echoskyrelayprotocol as the source-backed contract for fragments, storm routes, power stability, and recovery.",
+    "publicRole": "Sky Relay Native Edition public prerelease lane. Warning-gated until gameplay evidence is attached.",
+    "status": "Blocked Preview",
+    "repoUrl": "https://github.com/knoxhack/ECHO-Sky-Relay-Native-Edition",
+    "issuesUrl": "https://github.com/knoxhack/ECHO-Sky-Relay-Native-Edition/issues",
+    "releasesUrl": "https://github.com/knoxhack/ECHO-Sky-Relay-Native-Edition/releases",
+    "releaseUrl": "https://github.com/knoxhack/ECHO-Sky-Relay-Native-Edition/releases/tag/sky-relay-native-0.1.0-alpha",
+    "assetCount": 7,
+    "docsHref": "/docs/release/sky-relay-editions",
+    "downloadHref": "/download",
+    "updateFlow": "Uses moduleArtifactFamily echo-addon; launcher visibility remains preview-only until manual gameplay evidence, checksums, install, update, repair, and rollback gates pass.",
+    "artifacts": [
+      "sky-relay-native-edition pack archive",
+      "pack manifest",
+      ".echo-addon module requirements",
+      "manual gameplay evidence"
+    ],
+    "features": [
+      {
+        "title": "Native loader lane",
+        "description": "Targets the runtime-independent ECHO Native Platform for the Sky Relay restoration loop.",
+        "icon": "layers"
+      },
+      {
+        "title": "Fragment contracts",
+        "description": "Keeps anchor costs, scans, storm risk, and fragment unlock state source-backed.",
+        "icon": "route"
+      },
+      {
+        "title": "Fail-closed release gate",
+        "description": "Public alpha stays blocked until the release pipeline proves real gameplay evidence.",
+        "icon": "shield"
+      }
+    ],
+    "relatedRepos": [
+      "ECHO-Launcher",
+      "ECHO-Modules",
+      "ECHO-Release-Index"
+    ]
+  },
+  {
+    "repoName": "ECHO-Sky-Relay-NeoForge-Edition",
+    "product": "Sky Relay NeoForge Edition",
+    "releaseKind": "pack",
+    "route": "/sky-relay/neoforge-edition",
+    "tagline": "NeoForge Sky Relay pack for Minecraft-compatible validation.",
+    "description": "The Minecraft/NeoForge edition for Sky Relay. It validates the same relay, fragment, storm, and Signal Crown contracts through the modded-client lane.",
+    "purpose": "The Minecraft/NeoForge edition for Sky Relay. It validates the same relay, fragment, storm, and Signal Crown contracts through the modded-client lane.",
+    "publicRole": "Sky Relay NeoForge Edition public prerelease lane. Warning-gated until gameplay evidence is attached.",
+    "status": "Blocked Preview",
+    "repoUrl": "https://github.com/knoxhack/ECHO-Sky-Relay-NeoForge-Edition",
+    "issuesUrl": "https://github.com/knoxhack/ECHO-Sky-Relay-NeoForge-Edition/issues",
+    "releasesUrl": "https://github.com/knoxhack/ECHO-Sky-Relay-NeoForge-Edition/releases",
+    "releaseUrl": "https://github.com/knoxhack/ECHO-Sky-Relay-NeoForge-Edition/releases/tag/sky-relay-neoforge-0.1.0-alpha",
+    "assetCount": 7,
+    "docsHref": "/docs/release/sky-relay-editions",
+    "downloadHref": "/download",
+    "updateFlow": "Uses moduleArtifactFamily neoforge; launcher install remains gated until strict release assets and manual playthrough evidence are attached.",
+    "artifacts": [
+      "sky-relay-neoforge-edition pack archive",
+      "pack manifest",
+      "-neoforge.jar module requirements",
+      "manual gameplay evidence"
+    ],
+    "features": [
+      {
+        "title": "NeoForge lane",
+        "description": "Provides the Minecraft-compatible validation route for Sky Relay systems.",
+        "icon": "blocks"
+      },
+      {
+        "title": "Signal Crown parity",
+        "description": "Checks late-route completion against the same source data as Native and Standalone.",
+        "icon": "target"
+      },
+      {
+        "title": "Launcher smoke path",
+        "description": "Install, update, repair, rollback, and deep-link checks remain required before promotion.",
+        "icon": "download"
+      }
+    ],
+    "relatedRepos": [
+      "ECHO-Launcher",
+      "ECHO-Modules",
+      "ECHO-Release-Index"
+    ]
+  },
+  {
+    "repoName": "ECHO-Sky-Relay-Standalone-Edition",
+    "product": "Sky Relay Standalone Edition",
+    "releaseKind": "pack",
+    "route": "/sky-relay/standalone-edition",
+    "tagline": "Standalone runtime Sky Relay pack with no Minecraft dependency.",
+    "description": "The Standalone Runtime edition for Sky Relay. It proves the relay-restoration loop can run against ECHO runtime contracts without Minecraft or NeoForge.",
+    "purpose": "The Standalone Runtime edition for Sky Relay. It proves the relay-restoration loop can run against ECHO runtime contracts without Minecraft or NeoForge.",
+    "publicRole": "Sky Relay Standalone Edition public prerelease lane. Warning-gated until gameplay evidence is attached.",
+    "status": "Blocked Preview",
+    "repoUrl": "https://github.com/knoxhack/ECHO-Sky-Relay-Standalone-Edition",
+    "issuesUrl": "https://github.com/knoxhack/ECHO-Sky-Relay-Standalone-Edition/issues",
+    "releasesUrl": "https://github.com/knoxhack/ECHO-Sky-Relay-Standalone-Edition/releases",
+    "releaseUrl": "https://github.com/knoxhack/ECHO-Sky-Relay-Standalone-Edition/releases/tag/sky-relay-standalone-0.1.0-alpha",
+    "assetCount": 7,
+    "docsHref": "/docs/release/sky-relay-editions",
+    "downloadHref": "/download",
+    "updateFlow": "Uses moduleArtifactFamily standalone; promotion is blocked until runtime harness evidence and manual gameplay proof are complete.",
+    "artifacts": [
+      "sky-relay-standalone-edition pack archive",
+      "pack manifest",
+      "-standalone.jar module requirements",
+      "manual gameplay evidence"
+    ],
+    "features": [
+      {
+        "title": "Standalone lane",
+        "description": "Runs Sky Relay through ECHO Standalone Runtime for fast parity checks.",
+        "icon": "monitor"
+      },
+      {
+        "title": "Storm route proof",
+        "description": "Validates storms, shelters, condensers, collectors, and recovery contracts outside NeoForge.",
+        "icon": "gauge"
+      },
+      {
+        "title": "Release pipeline gate",
+        "description": "The central verifier refuses public alpha while evidence is still template-only.",
+        "icon": "shield"
       }
     ],
     "relatedRepos": [

@@ -179,6 +179,8 @@ export function classifyAsset(name: string): ReleaseAssetKind {
   if (normalized.endsWith(".blockmap") || normalized === "latest.yml" || normalized.includes("license")) return "other";
   if (normalized.endsWith(".echo-addon")) return "native-addon";
   if (normalized.includes("ashfall") && normalized.includes("edition") && normalized.endsWith(".zip")) return "echo-pack";
+  if (normalized.includes("openlands") && normalized.includes("edition") && normalized.endsWith(".zip")) return "echo-pack";
+  if (normalized.includes("sky-relay") && normalized.includes("edition") && normalized.endsWith(".zip")) return "echo-pack";
   if (normalized.endsWith("-standalone.jar")) return "module-jar";
   if (normalized.includes("standalone") && (normalized.endsWith(".zip") || normalized.endsWith(".jar"))) return "standalone-runtime";
   if (normalized.includes("native-product") && normalized.endsWith(".zip")) return "native-platform-package";

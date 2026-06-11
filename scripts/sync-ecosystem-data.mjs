@@ -15,6 +15,12 @@ const targetRepos = [
   "ECHO-Ashfall-Native-Edition",
   "ECHO-Ashfall-NeoForge-Edition",
   "ECHO-Ashfall-Standalone-Edition",
+  "ECHO-Openlands-Native-Edition",
+  "ECHO-Openlands-NeoForge-Edition",
+  "ECHO-Openlands-Standalone-Edition",
+  "ECHO-Sky-Relay-Native-Edition",
+  "ECHO-Sky-Relay-NeoForge-Edition",
+  "ECHO-Sky-Relay-Standalone-Edition",
   "ECHO-Release-Index",
   "ECHO-Native-Platform",
   "ECHO-Standalone-Runtime",
@@ -47,7 +53,7 @@ const productSeed = {
     tagline: "All shared ECHO module source and per-module release artifacts.",
     description:
       "The canonical module repo. Each module owns source, manifests, per-module docs, and generated Native, NeoForge, Standalone, and sources artifacts.",
-    status: "95 Modules",
+    status: "96 Modules",
     docsHref: "/docs/release/module-artifacts",
     downloadHref: "/download",
     updateFlow:
@@ -108,6 +114,108 @@ const productSeed = {
       ["Standalone runtime lane", "Runs Ashfall systems in the standalone runtime shell.", "box"],
       ["Standalone module family", "Consumes -standalone.jar module artifacts from ECHO-Modules.", "server"],
       ["Parity harness", "Useful for testing module behavior outside the NeoForge lifecycle.", "test"]
+    ]
+  },
+  "ECHO-Openlands-Native-Edition": {
+    route: "/openlands/native-edition",
+    tagline: "Native runtime Openlands pack using .echo-addon modules.",
+    description:
+      "The ECHO Native Platform edition for Openlands. It consumes .echo-addon artifacts from ECHO-Modules and keeps echoopenlandsprotocol as the source of truth.",
+    status: "Planned Preview",
+    docsHref: "/docs/release/openlands-editions",
+    downloadHref: "/download",
+    updateFlow:
+      "Uses moduleArtifactFamily echo-addon; launcher updates changed .echo-addon files independently after release metadata provides asset URLs.",
+    artifacts: ["openlands-native-edition pack archive", "pack manifest", ".echo-addon module requirements", "checksums"],
+    features: [
+      ["Native loader lane", "Targets the runtime-independent ECHO Native Platform.", "layers"],
+      ["Relaxed default", "Keeps Openlands Standard gentle and non-hardcore by default.", "shield"],
+      ["Waystone parity", "Uses the same waystone state and map discovery IDs as Standalone and NeoForge.", "route"]
+    ]
+  },
+  "ECHO-Openlands-NeoForge-Edition": {
+    route: "/openlands/neoforge-edition",
+    tagline: "NeoForge adapter edition using original Openlands content.",
+    description:
+      "The NeoForge edition for Openlands. It adapts Echo IDs into NeoForge runtime/data output without making Minecraft assets or branding the Openlands source.",
+    status: "Planned Preview",
+    docsHref: "/docs/release/openlands-editions",
+    downloadHref: "/download",
+    updateFlow:
+      "Uses moduleArtifactFamily neoforge; launcher updates changed -neoforge.jar files independently after release metadata provides asset URLs.",
+    artifacts: ["openlands-neoforge-edition pack archive", "pack manifest", "-neoforge.jar module requirements", "checksums"],
+    features: [
+      ["NeoForge lane", "Provides Minecraft/NeoForge compatibility while keeping Openlands names, assets, and gameplay contracts original.", "blocks"],
+      ["Generated data", "Converts Echo registries into NeoForge resources from echoopenlandsprotocol.", "file"],
+      ["Parity target", "Matches Native and Standalone block, item, recipe, biome, creature, and waystone IDs.", "target"]
+    ]
+  },
+  "ECHO-Openlands-Standalone-Edition": {
+    route: "/openlands/standalone-edition",
+    tagline: "Standalone runtime Openlands pack with no Minecraft dependency.",
+    description:
+      "The Standalone Runtime edition for Openlands. It proves the Openlands experience can run natively in the ECHO standalone runtime using the same shared protocol data.",
+    status: "Planned Preview",
+    docsHref: "/docs/release/openlands-editions",
+    downloadHref: "/download",
+    updateFlow:
+      "Uses moduleArtifactFamily standalone; launcher updates changed -standalone.jar files independently after release metadata provides asset URLs.",
+    artifacts: ["openlands-standalone-edition pack archive", "pack manifest", "-standalone.jar module requirements", "checksums"],
+    features: [
+      ["Standalone lane", "Runs Openlands through ECHO Standalone Runtime without Minecraft or NeoForge.", "monitor"],
+      ["Full runtime proof", "Validates worldgen, inventory, crafting, building, map, save/load, and waystone state in the standalone engine.", "check"],
+      ["Shared protocol", "Consumes the same echoopenlandsprotocol registries as Native and NeoForge.", "layers"]
+    ]
+  },
+  "ECHO-Sky-Relay-Native-Edition": {
+    route: "/sky-relay/native-edition",
+    tagline: "Native runtime Sky Relay pack using .echo-addon modules.",
+    description:
+      "The ECHO Native Platform edition for Sky Relay. It consumes echoskyrelayprotocol as the source-backed contract for fragments, storm routes, power stability, and recovery.",
+    status: "Blocked Preview",
+    docsHref: "/docs/release/sky-relay-editions",
+    downloadHref: "/download",
+    updateFlow:
+      "Uses moduleArtifactFamily echo-addon; launcher visibility remains preview-only until manual gameplay evidence, checksums, install, update, repair, and rollback gates pass.",
+    artifacts: ["sky-relay-native-edition pack archive", "pack manifest", ".echo-addon module requirements", "manual gameplay evidence"],
+    features: [
+      ["Native loader lane", "Targets the runtime-independent ECHO Native Platform for the Sky Relay restoration loop.", "layers"],
+      ["Fragment contracts", "Keeps anchor costs, scans, storm risk, and fragment unlock state source-backed.", "route"],
+      ["Fail-closed release gate", "Public alpha stays blocked until the release pipeline proves real gameplay evidence.", "shield"]
+    ]
+  },
+  "ECHO-Sky-Relay-NeoForge-Edition": {
+    route: "/sky-relay/neoforge-edition",
+    tagline: "NeoForge Sky Relay pack for Minecraft-compatible validation.",
+    description:
+      "The Minecraft/NeoForge edition for Sky Relay. It validates the same relay, fragment, storm, and Signal Crown contracts through the modded-client lane.",
+    status: "Blocked Preview",
+    docsHref: "/docs/release/sky-relay-editions",
+    downloadHref: "/download",
+    updateFlow:
+      "Uses moduleArtifactFamily neoforge; launcher install remains gated until strict release assets and manual playthrough evidence are attached.",
+    artifacts: ["sky-relay-neoforge-edition pack archive", "pack manifest", "-neoforge.jar module requirements", "manual gameplay evidence"],
+    features: [
+      ["NeoForge lane", "Provides the Minecraft-compatible validation route for Sky Relay systems.", "blocks"],
+      ["Signal Crown parity", "Checks late-route completion against the same source data as Native and Standalone.", "target"],
+      ["Launcher smoke path", "Install, update, repair, rollback, and deep-link checks remain required before promotion.", "download"]
+    ]
+  },
+  "ECHO-Sky-Relay-Standalone-Edition": {
+    route: "/sky-relay/standalone-edition",
+    tagline: "Standalone runtime Sky Relay pack with no Minecraft dependency.",
+    description:
+      "The Standalone Runtime edition for Sky Relay. It proves the relay-restoration loop can run against ECHO runtime contracts without Minecraft or NeoForge.",
+    status: "Blocked Preview",
+    docsHref: "/docs/release/sky-relay-editions",
+    downloadHref: "/download",
+    updateFlow:
+      "Uses moduleArtifactFamily standalone; promotion is blocked until runtime harness evidence and manual gameplay proof are complete.",
+    artifacts: ["sky-relay-standalone-edition pack archive", "pack manifest", "-standalone.jar module requirements", "manual gameplay evidence"],
+    features: [
+      ["Standalone lane", "Runs Sky Relay through ECHO Standalone Runtime for fast parity checks.", "monitor"],
+      ["Storm route proof", "Validates storms, shelters, condensers, collectors, and recovery contracts outside NeoForge.", "gauge"],
+      ["Release pipeline gate", "The central verifier refuses public alpha while evidence is still template-only.", "shield"]
     ]
   },
   "ECHO-Release-Index": {
@@ -258,6 +366,20 @@ function repoCommit(repoPath) {
   }
 }
 
+function isTrackedFile(repoPath, filePath) {
+  const relativeFile = path.relative(repoPath, filePath).replace(/\\/g, "/");
+  try {
+    execFileSync("git", ["ls-files", "--error-unmatch", "--", relativeFile], {
+      cwd: repoPath,
+      encoding: "utf8",
+      stdio: ["ignore", "pipe", "ignore"]
+    });
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 function sha256(text) {
   return crypto.createHash("sha256").update(text).digest("hex");
 }
@@ -323,7 +445,10 @@ function groupFor(meta) {
     "signalos"
   ]);
 
-  if (id.includes("ashfall") || role.includes("official_pack")) return "Ashfall";
+  if (id.includes("ashfall")) return "Ashfall";
+  if (id.includes("openlands")) return "Openlands";
+  if (id.includes("skyrelay") || id.includes("sky-relay")) return "Sky Relay";
+  if (role.includes("official_pack")) return "Experience";
   if (platformIds.has(id) || role.includes("platform") || role.includes("adapter")) return "Platform";
   if (interfaceIds.has(id) || role.includes("ui") || role.includes("surface")) return "Interface";
   if (id.endsWith("core") || role.includes("core") || role.includes("library")) return "Core";
@@ -369,6 +494,15 @@ function buildDescription(meta, readmeText) {
   return `${meta.name || titleFromId(meta.id)} participates in the ECHO module graph.`;
 }
 
+function releaseExperienceName(meta, id) {
+  const gameModes = Array.isArray(meta.gameModes) ? meta.gameModes.map((mode) => String(mode).toLowerCase()) : [];
+  if (id.includes("skyrelay") || id.includes("sky-relay") || gameModes.some((mode) => mode.startsWith("skyrelay"))) {
+    return "Sky Relay";
+  }
+  if (id.includes("openlands") || gameModes.some((mode) => mode.includes("openlands"))) return "Openlands";
+  return "Ashfall";
+}
+
 function moduleRecord(addonDir) {
   const id = path.basename(addonDir);
   const metaPath = path.join(addonDir, "src", "main", "resources", "META-INF", "echo.mod.json");
@@ -382,6 +516,7 @@ function moduleRecord(addonDir) {
   const provides = Array.isArray(meta.provides) ? meta.provides : [];
   const gameModes = Array.isArray(meta.gameModes) ? meta.gameModes : [];
   const artifactPrefix = `${meta.id}-${version || "version"}`;
+  const releaseExperience = releaseExperienceName(meta, id);
 
   return {
     id: meta.id || id,
@@ -422,9 +557,9 @@ function moduleRecord(addonDir) {
         title: "Generated release files",
         version,
         notes: [
-          `${artifactPrefix}-neoforge.jar for Ashfall NeoForge Edition.`,
-          `${artifactPrefix}.echo-addon for Ashfall Native Edition.`,
-          `${artifactPrefix}-standalone.jar for Ashfall Standalone Edition.`,
+          `${artifactPrefix}-neoforge.jar for ${releaseExperience} NeoForge Edition.`,
+          `${artifactPrefix}.echo-addon for ${releaseExperience} Native Edition.`,
+          `${artifactPrefix}-standalone.jar for ${releaseExperience} Standalone Edition.`,
           `${artifactPrefix}-sources.jar for traceability and developer debugging.`,
           "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
         ]
@@ -439,7 +574,10 @@ function syncModules() {
     .readdirSync(addonsDir, { withFileTypes: true })
     .filter((entry) => entry.isDirectory())
     .map((entry) => path.join(addonsDir, entry.name))
-    .filter((dir) => fs.existsSync(path.join(dir, "src", "main", "resources", "META-INF", "echo.mod.json")))
+    .filter((dir) => {
+      const descriptor = path.join(dir, "src", "main", "resources", "META-INF", "echo.mod.json");
+      return fs.existsSync(descriptor) && isTrackedFile(modulesRoot, descriptor);
+    })
     .map(moduleRecord)
     .sort((a, b) => a.id.localeCompare(b.id));
 
@@ -505,6 +643,8 @@ function productName(repoName) {
 
 function relatedRepos(repoName) {
   if (repoName.includes("Ashfall")) return ["ECHO-Launcher", "ECHO-Modules", "ECHO-Release-Index"];
+  if (repoName.includes("Openlands")) return ["ECHO-Modules", "ECHO-Release-Index", "ECHO-SDK"];
+  if (repoName.includes("Sky-Relay")) return ["ECHO-Launcher", "ECHO-Modules", "ECHO-Release-Index"];
   if (repoName === "ECHO-Launcher") return ["ECHO-Release-Index", "ECHO-Modules", "ECHO-Ashfall-Native-Edition"];
   if (repoName === "ECHO-Modules") return ["ECHO-SDK", "ECHO-Release-Index", "ECHO-Launcher"];
   if (repoName === "ECHO-SDK") return ["ECHO-Addons-Studio", "ECHO-Developer-Studio", "ECHO-Modules"];

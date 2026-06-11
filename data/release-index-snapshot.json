@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-09T20:08:11.991Z",
+  "generatedAt": "2026-06-11T09:52:47.115Z",
   "owner": "knoxhack",
   "releaseTag": "v0.1.0-native-public-alpha",
   "private": false,
@@ -236,22 +236,28 @@
       },
       "assets": [
         {
+          "name": "ashfall-native-edition-0.1.0.zip",
+          "size": 93423349,
+          "sha256": "941848f5d4b47bfb279bd0134cd87cf9f6b06b1b0886f71e355d7da3340a2cdc",
+          "browserDownloadUrl": "https://github.com/knoxhack/ECHO-Ashfall-Native-Edition/releases/download/v0.1.0-ashfall-native-edition/ashfall-native-edition-0.1.0.zip"
+        },
+        {
+          "name": "ashfall-native-edition-alpha-0.1.0.pack.json",
+          "size": 9233,
+          "sha256": "ea024a32c083b14b1205ac53f905597a7fc110df658692b79712046c1c299a01",
+          "browserDownloadUrl": "https://github.com/knoxhack/ECHO-Ashfall-Native-Edition/releases/download/v0.1.0-ashfall-native-edition/ashfall-native-edition-alpha-0.1.0.pack.json"
+        },
+        {
           "name": "checksums.txt",
-          "size": 195,
-          "sha256": "bb600fb4f75e2cc557aeae44c4a9febddedcc18a6f2823d5c8fb12b2fac7f19c",
+          "size": 374,
+          "sha256": "54b68bfc62d27ef7c75972b89da3302df1367739e78413654160416c68ce5e18",
           "browserDownloadUrl": "https://github.com/knoxhack/ECHO-Ashfall-Native-Edition/releases/download/v0.1.0-ashfall-native-edition/checksums.txt"
         },
         {
-          "name": "echo-native-product-1.0.0-existing-layout-rc.zip",
-          "size": 27875,
-          "sha256": "16d1af3195ccd11b342a976ea5e29bb02cf27c1ac721417d9a346e884bfef03b",
-          "browserDownloadUrl": "https://github.com/knoxhack/ECHO-Ashfall-Native-Edition/releases/download/v0.1.0-ashfall-native-edition/echo-native-product-1.0.0-existing-layout-rc.zip"
-        },
-        {
-          "name": "manifest.json",
-          "size": 275,
-          "sha256": "e62eff3b329c253bf0abd3cd89a9cc7c42e608130ce58a97b428cbad3b5a97eb",
-          "browserDownloadUrl": "https://github.com/knoxhack/ECHO-Ashfall-Native-Edition/releases/download/v0.1.0-ashfall-native-edition/manifest.json"
+          "name": "echo-release.json",
+          "size": 3948,
+          "sha256": "91ec930514ef1732d2dfb9181f4e960c42e67fb6e00b5dd1e401a84d9bc1e9df",
+          "browserDownloadUrl": "https://github.com/knoxhack/ECHO-Ashfall-Native-Edition/releases/download/v0.1.0-ashfall-native-edition/echo-release.json"
         }
       ]
     },
@@ -348,42 +354,30 @@
       "repoUrl": "https://github.com/knoxhack/ECHO-Launcher",
       "snapshotPath": "C:\\Experimental\\Codex\\ECHONATIVEPLATFORM\\tmp\\github-public-release\\staging\\ECHO-Launcher",
       "release": {
-        "id": 336834270,
-        "htmlUrl": "https://github.com/knoxhack/ECHO-Launcher/releases/tag/v1.0.1",
-        "uploadUrl": "https://uploads.github.com/repos/knoxhack/ECHO-Launcher/releases/336834270/assets{?name,label}",
+        "id": 337663169,
+        "htmlUrl": "https://github.com/knoxhack/ECHO-Launcher/releases/tag/v1.0.4",
+        "uploadUrl": "https://uploads.github.com/repos/knoxhack/ECHO-Launcher/releases/337663169/assets{?name,label}",
         "draft": false,
-        "prerelease": true
+        "prerelease": false
       },
       "assets": [
         {
-          "name": "ECHO-Launcher-1.0.1-Setup.exe",
-          "size": 106905253,
-          "sha256": "54d57067f73fe633b2a15b30165d3a12a4c994ef4742b01dd8de92bc6ab1c11e",
-          "browserDownloadUrl": "https://github.com/knoxhack/ECHO-Launcher/releases/download/v1.0.1/ECHO-Launcher-1.0.1-Setup.exe"
+          "name": "ECHO-Launcher-1.0.4-Setup.exe",
+          "size": 106900054,
+          "sha256": "f38d6270bb75e874a91e8d138dcc8fb931253ff9168a26ae26a42960fc0a7a8f",
+          "browserDownloadUrl": "https://github.com/knoxhack/ECHO-Launcher/releases/download/v1.0.4/ECHO-Launcher-1.0.4-Setup.exe"
         },
         {
-          "name": "ECHO-Launcher-1.0.1-Setup.exe.blockmap",
-          "size": 112057,
-          "sha256": "67a4a3466aa0418269b9a02059148e3ea649c4e13236d11d9c214f6676c77619",
-          "browserDownloadUrl": "https://github.com/knoxhack/ECHO-Launcher/releases/download/v1.0.1/ECHO-Launcher-1.0.1-Setup.exe.blockmap"
-        },
-        {
-          "name": "ECHOLauncher.exe",
-          "size": 226659328,
-          "sha256": "09242a76b1cc29a1428f2b0bddc91e07dc13412a49c18d3120d94c42fe7fe7bb",
-          "browserDownloadUrl": "https://github.com/knoxhack/ECHO-Launcher/releases/download/v1.0.1/ECHOLauncher.exe"
-        },
-        {
-          "name": "elevate.exe",
-          "size": 107520,
-          "sha256": "9b1fbf0c11c520ae714af8aa9af12cfd48503eedecd7398d8992ee94d1b4dc37",
-          "browserDownloadUrl": "https://github.com/knoxhack/ECHO-Launcher/releases/download/v1.0.1/elevate.exe"
+          "name": "ECHO-Launcher-1.0.4-Setup.exe.blockmap",
+          "size": 112187,
+          "sha256": "5c29fbf16e2c6c5936e2d5c84501fd6540d1a0d685d6735a168dd57d83247e0e",
+          "browserDownloadUrl": "https://github.com/knoxhack/ECHO-Launcher/releases/download/v1.0.4/ECHO-Launcher-1.0.4-Setup.exe.blockmap"
         },
         {
           "name": "latest.yml",
           "size": 355,
-          "sha256": "3f208409af533d16e14d3b3d6af5587e8f7cdc914bdf2f42523032742d291823",
-          "browserDownloadUrl": "https://github.com/knoxhack/ECHO-Launcher/releases/download/v1.0.1/latest.yml"
+          "sha256": "327d6e455de1e77f4ad08ef9872967b4a458d389c6c9fbfc39d9e32a1c16d6b6",
+          "browserDownloadUrl": "https://github.com/knoxhack/ECHO-Launcher/releases/download/v1.0.4/latest.yml"
         }
       ]
     },

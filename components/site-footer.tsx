@@ -21,7 +21,8 @@ const footerGroups = [
       { href: "/ashfall", label: "Overview" },
       { href: "/ashfall/native-edition", label: "Native Edition" },
       { href: "/ashfall/neoforge-edition", label: "NeoForge Edition" },
-      { href: "/ashfall/standalone-edition", label: "Standalone Edition" }
+      { href: "/ashfall/standalone-edition", label: "Standalone Edition" },
+      { href: "/sky-relay", label: "Sky Relay" }
     ]
   },
   {

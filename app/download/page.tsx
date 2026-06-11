@@ -21,7 +21,7 @@ import {
 export const metadata: Metadata = pageMetadata({
   title: "Download",
   description:
-    "ECHO download portal for launcher setup, Release Index metadata, Ashfall editions, module artifacts, checksums, and source access.",
+    "ECHO download portal for launcher setup, Release Index metadata, official experience editions, module artifacts, checksums, and source access.",
   path: "/download"
 });
 
@@ -62,7 +62,7 @@ export default async function DownloadPage() {
         eyebrow="Downloads"
         title="ECHO Download Portal"
         kicker="Launcher first, Release Index accurate."
-        description="Start with the launcher path. The page is generated from the Release Index snapshot so Ashfall editions, launcher installers, module artifacts, PackOS metadata, checksums, and studio app releases stay visible together."
+        description="Start with the launcher path. The page is generated from the Release Index snapshot so official experience editions, launcher installers, module artifacts, PackOS metadata, checksums, and studio app releases stay visible together."
         actions={[
           { label: "Open Launcher Page", href: "/launcher" },
           { label: "Launcher Setup Docs", href: siteConfig.links.launcherDocs, variant: "secondary" },
@@ -74,7 +74,7 @@ export default async function DownloadPage() {
         <SectionHeading
           eyebrow="Featured Downloads"
           title="Correct product, correct file."
-          description="Each button is pinned to an owning repository and filename pattern. Launcher buttons target launcher assets, studio buttons target studio assets, and Ashfall buttons target the selected edition package."
+          description="Each button is pinned to an owning repository and filename pattern. Launcher buttons target launcher assets, studio buttons target studio assets, and experience buttons target the selected edition package."
         />
         <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {downloadRecords.map((download) => (
@@ -146,7 +146,7 @@ export default async function DownloadPage() {
           description="Checksums come directly from GitHub release asset digests. Manual downloads are useful for verification and testing, while normal players should stay with the launcher flow."
         />
         <ReleaseAssetTable
-          title="Ashfall Package Assets"
+          title="Official Experience Package Assets"
           description="Native Platform, Standalone Runtime, SDK/addon, PackOS, and release metadata assets used by the launcher-managed install path."
           assets={packAssets}
         />

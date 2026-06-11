@@ -4958,6 +4958,73 @@
     ]
   },
   {
+    "id": "echoskyrelayprotocol",
+    "name": "ECHO: Sky Relay Protocol",
+    "category": "Experience",
+    "group": "Sky Relay",
+    "status": "Alpha",
+    "version": "0.1.0",
+    "description": "Sky Relay Protocol is the first-party pack-root contract for ECHO: Sky Relay, Official ECHO Pack #3. It owns the Sky Relay content IDs, platform fragment progression, terminal pages, Lens scan profiles, HoloMap layers, weather routes, anchor rules, release gates, and cross-runtime parity contracts.",
+    "dependencies": [
+      "echoadaptercore",
+      "echocore",
+      "echonetcore",
+      "echoruntimeguard"
+    ],
+    "standalone": true,
+    "usedByAshfall": false,
+    "docs": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echoskyrelayprotocol",
+    "github": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echoskyrelayprotocol",
+    "overview": [
+      "ECHO: Sky Relay Protocol is sourced from ECHO-Modules/addons/echoskyrelayprotocol.",
+      "It declares 4 required modules and 21 optional integrations.",
+      "Release output is generated per runtime family so the launcher can update this module independently."
+    ],
+    "capabilities": [
+      "Native artifact: echoskyrelayprotocol-0.1.0.echo-addon",
+      "NeoForge artifact: echoskyrelayprotocol-0.1.0-neoforge.jar",
+      "Standalone artifact: echoskyrelayprotocol-0.1.0-standalone.jar",
+      "Sources artifact: echoskyrelayprotocol-0.1.0-sources.jar",
+      "Provides: skyrelay.anchors, skyrelay.content, skyrelay.fragments",
+      "API stability: alpha"
+    ],
+    "integrations": [
+      "echoadaptercore",
+      "echocore",
+      "echonetcore",
+      "echoruntimeguard",
+      "echoagriculturereclamation",
+      "echoeconomycore",
+      "echogalacticcore",
+      "echoholomap",
+      "echoindex",
+      "echoindustrialnexus",
+      "echolens",
+      "echologisticsnetwork",
+      "echomissioncore",
+      "echomultiblockcore"
+    ],
+    "statusNote": "Generated from src/main/resources/META-INF/echo.mod.json in ECHO-Modules. The launcher resolves this module through moduleRequirements and downloads only changed artifacts when URLs are present.",
+    "roadmap": [
+      "Keep echo.mod.json, README.md, docs/artifacts.md, and release artifacts in sync for every release.",
+      "Publish Native, NeoForge, Standalone, and sources artifacts with checksums before marking an edition player-ready.",
+      "Use Release Index metadata as the public source for launcher and website download links."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Generated release files",
+        "version": "0.1.0",
+        "notes": [
+          "echoskyrelayprotocol-0.1.0-neoforge.jar for Sky Relay NeoForge Edition.",
+          "echoskyrelayprotocol-0.1.0.echo-addon for Sky Relay Native Edition.",
+          "echoskyrelayprotocol-0.1.0-standalone.jar for Sky Relay Standalone Edition.",
+          "echoskyrelayprotocol-0.1.0-sources.jar for traceability and developer debugging.",
+          "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
+        ]
+      }
+    ]
+  },
+  {
     "id": "echosocialcore",
     "name": "ECHO: SocialCore",
     "category": "Foundation",

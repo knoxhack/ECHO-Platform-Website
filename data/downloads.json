@@ -45,6 +45,7 @@
     "assetNameIncludes": ["echolauncher.exe"],
     "assetNameExcludes": ["setup", "elevate"],
     "requiresAsset": true,
+    "allowMissingAsset": true,
     "notes": [
       "Targets the portable launcher executable.",
       "Does not match Developer Studio, Addons Studio, or `elevate.exe`.",
@@ -68,9 +69,9 @@
     "href": "/ashfall/native-edition",
     "fallbackHref": "https://github.com/knoxhack/ECHO-Ashfall-Native-Edition/releases",
     "fallbackLabel": "View Native Releases",
-    "assetKind": "native-platform-package",
+    "assetKind": "echo-pack",
     "assetRepoName": "ECHO-Ashfall-Native-Edition",
-    "assetNameIncludes": ["native-product"],
+    "assetNameIncludes": ["ashfall-native-edition", ".zip"],
     "requiresAsset": true,
     "notes": [
       "Targets only the Ashfall Native Edition repo.",

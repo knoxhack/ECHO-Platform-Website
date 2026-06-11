@@ -1,6 +1,7 @@
 import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
+import { execFileSync } from "node:child_process";
 
 const root = process.cwd();
 const auditRoot = path.resolve(root, "..");
@@ -21,6 +22,20 @@ function sha256(text) {
 
 function rel(file) {
   return path.relative(root, file).replace(/\\/g, "/");
+}
+
+function isTrackedFile(repoPath, filePath) {
+  const relativeFile = path.relative(repoPath, filePath).replace(/\\/g, "/");
+  try {
+    execFileSync("git", ["ls-files", "--error-unmatch", "--", relativeFile], {
+      cwd: repoPath,
+      encoding: "utf8",
+      stdio: ["ignore", "pipe", "ignore"]
+    });
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 function walk(dir, out = []) {
@@ -120,7 +135,7 @@ const moduleManifest = readJson(path.join(root, "data", "module-source-manifest.
 const sdkManifest = readJson(path.join(root, "data", "sdk-docs-manifest.json"));
 const releaseSnapshot = readJson(path.join(root, "data", "release-index-snapshot.json"));
 
-if (products.length !== 12) errors.push(`Expected 12 products, found ${products.length}`);
+if (products.length !== 18) errors.push(`Expected 18 products, found ${products.length}`);
 for (const product of products) {
   if (!routeExists(product.route)) errors.push(`Product ${product.repoName} has missing route ${product.route}`);
   if (!product.repoUrl.includes(`/knoxhack/${product.repoName}`)) {
@@ -138,12 +153,16 @@ if (moduleIds.join("\n") !== manifestIds.join("\n")) {
   errors.push("modules.json ids do not match module-source-manifest.json");
 }
 
-const modulesSourceDir = path.join(auditRoot, "ECHO-Modules", "addons");
+const modulesRepoRoot = path.join(auditRoot, "ECHO-Modules");
+const modulesSourceDir = path.join(modulesRepoRoot, "addons");
 if (exists(modulesSourceDir)) {
   const sourceIds = fs
     .readdirSync(modulesSourceDir, { withFileTypes: true })
     .filter((entry) => entry.isDirectory())
-    .filter((entry) => exists(path.join(modulesSourceDir, entry.name, "src/main/resources/META-INF/echo.mod.json")))
+    .filter((entry) => {
+      const descriptor = path.join(modulesSourceDir, entry.name, "src/main/resources/META-INF/echo.mod.json");
+      return exists(descriptor) && isTrackedFile(modulesRepoRoot, descriptor);
+    })
     .map((entry) => {
       const descriptor = readJson(path.join(modulesSourceDir, entry.name, "src/main/resources/META-INF/echo.mod.json"));
       return descriptor.id;
@@ -237,6 +256,8 @@ function classifyAsset(name) {
   if (normalized.endsWith(".blockmap") || normalized === "latest.yml" || normalized.includes("license")) return "other";
   if (normalized.endsWith(".echo-addon")) return "native-addon";
   if (normalized.includes("ashfall") && normalized.includes("edition") && normalized.endsWith(".zip")) return "echo-pack";
+  if (normalized.includes("openlands") && normalized.includes("edition") && normalized.endsWith(".zip")) return "echo-pack";
+  if (normalized.includes("sky-relay") && normalized.includes("edition") && normalized.endsWith(".zip")) return "echo-pack";
   if (normalized.endsWith("-standalone.jar")) return "module-jar";
   if (normalized.includes("standalone") && (normalized.endsWith(".zip") || normalized.endsWith(".jar"))) return "standalone-runtime";
   if (normalized.includes("native-product") && normalized.endsWith(".zip")) return "native-platform-package";
