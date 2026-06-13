@@ -59,70 +59,58 @@
   {
     "id": "ashfall-native",
     "platform": "Ashfall",
-    "label": "Download Native Edition Pack",
-    "actionLabel": "Download Native Pack",
+    "label": "Native Edition Readiness",
+    "actionLabel": "Open Native Status",
     "unavailableLabel": "Native Edition pack not published yet",
     "unavailableActionLabel": "Open Native Edition",
-    "description": "Ashfall Native Edition package, using `.echo-addon` module artifacts.",
-    "status": "Native Pack",
+    "description": "Ashfall Native assets are checksum-backed, but launcher installs are locked until Phase 7-10 readiness evidence passes.",
+    "status": "Readiness Blocked",
     "unavailableStatus": "Pack Pending",
     "href": "/ashfall/native-edition",
     "fallbackHref": "https://github.com/knoxhack/ECHO-Ashfall-Native-Edition/releases",
     "fallbackLabel": "View Native Releases",
-    "assetKind": "echo-pack",
-    "assetRepoName": "ECHO-Ashfall-Native-Edition",
-    "assetNameIncludes": ["ashfall-native-edition", ".zip"],
-    "requiresAsset": true,
     "notes": [
       "Targets only the Ashfall Native Edition repo.",
       "Native modules use the `.echo-addon` artifact family.",
-      "Players should still install through the launcher when possible."
+      "Release Index validation is warning, not approved, until the readiness audit is green."
     ]
   },
   {
     "id": "ashfall-neoforge",
     "platform": "Ashfall",
-    "label": "Download NeoForge Edition Pack",
-    "actionLabel": "Download NeoForge Pack",
+    "label": "NeoForge Edition Readiness",
+    "actionLabel": "Open NeoForge Status",
     "unavailableLabel": "NeoForge Edition pack not published yet",
     "unavailableActionLabel": "Open NeoForge Edition",
-    "description": "Ashfall NeoForge Edition package, using `-neoforge.jar` module artifacts.",
-    "status": "NeoForge Pack",
+    "description": "Ashfall NeoForge assets are checksum-backed, but the live pack manifest is missing moduleRequirements and readiness evidence is not green.",
+    "status": "Manifest Blocked",
     "unavailableStatus": "Pack Pending",
     "href": "/ashfall/neoforge-edition",
     "fallbackHref": "https://github.com/knoxhack/ECHO-Ashfall-NeoForge-Edition/releases",
     "fallbackLabel": "View NeoForge Releases",
-    "assetKind": "echo-pack",
-    "assetRepoName": "ECHO-Ashfall-NeoForge-Edition",
-    "assetNameIncludes": ["ashfall-neoforge-edition", ".zip"],
-    "requiresAsset": true,
     "notes": [
       "Targets only the Ashfall NeoForge Edition repo.",
       "NeoForge modules use the `-neoforge.jar` artifact family.",
-      "Useful for compatibility testing and Minecraft-runtime installs."
+      "Rebuild the pack manifest with moduleRequirements before launcher installs are approved."
     ]
   },
   {
     "id": "ashfall-standalone",
     "platform": "Ashfall",
-    "label": "Download Standalone Edition Pack",
-    "actionLabel": "Download Standalone Pack",
+    "label": "Standalone Edition Readiness",
+    "actionLabel": "Open Standalone Status",
     "unavailableLabel": "Standalone Edition pack not published yet",
     "unavailableActionLabel": "Open Standalone Edition",
-    "description": "Ashfall Standalone Edition package, using `-standalone.jar` module artifacts.",
-    "status": "Standalone Pack",
+    "description": "Ashfall Standalone assets are checksum-backed, but the live pack manifest is missing moduleRequirements and readiness evidence is not green.",
+    "status": "Manifest Blocked",
     "unavailableStatus": "Pack Pending",
     "href": "/ashfall/standalone-edition",
     "fallbackHref": "https://github.com/knoxhack/ECHO-Ashfall-Standalone-Edition/releases",
     "fallbackLabel": "View Standalone Releases",
-    "assetKind": "echo-pack",
-    "assetRepoName": "ECHO-Ashfall-Standalone-Edition",
-    "assetNameIncludes": ["ashfall-standalone-edition", ".zip"],
-    "requiresAsset": true,
     "notes": [
       "Targets only the Ashfall Standalone Edition repo.",
       "Standalone modules use the `-standalone.jar` artifact family.",
-      "Useful for runtime parity and standalone testing."
+      "Rebuild the pack manifest with moduleRequirements before launcher installs are approved."
     ]
   },
   {

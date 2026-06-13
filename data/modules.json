@@ -1,5 +1,70 @@
 [
   {
+    "id": "echoaccessibilitycore",
+    "name": "ECHO: AccessibilityCore",
+    "category": "Foundation",
+    "group": "Core",
+    "status": "Alpha",
+    "version": "0.1.0",
+    "description": "Readable HUD scale, reduced motion, contrast themes, captions, prompt remaps, and narration metadata contracts.",
+    "dependencies": [
+      "echocore",
+      "echoadaptercore",
+      "echothemecore",
+      "echoscreencore",
+      "echoinputcore",
+      "echosoundcore"
+    ],
+    "standalone": true,
+    "usedByAshfall": true,
+    "docs": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echoaccessibilitycore",
+    "github": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echoaccessibilitycore",
+    "overview": [
+      "ECHO: AccessibilityCore is sourced from ECHO-Modules/addons/echoaccessibilitycore.",
+      "It declares 6 required modules and 1 optional integration.",
+      "Release output is generated per runtime family so the launcher can update this module independently."
+    ],
+    "capabilities": [
+      "Native artifact: echoaccessibilitycore-0.1.0.echo-addon",
+      "NeoForge artifact: echoaccessibilitycore-0.1.0-neoforge.jar",
+      "Standalone artifact: echoaccessibilitycore-0.1.0-standalone.jar",
+      "Sources artifact: echoaccessibilitycore-0.1.0-sources.jar",
+      "Provides: accessibility.settings, accessibility.validation, accessibility.narration_metadata",
+      "API stability: alpha"
+    ],
+    "integrations": [
+      "echocore",
+      "echoadaptercore",
+      "echothemecore",
+      "echoscreencore",
+      "echoinputcore",
+      "echosoundcore",
+      "echolocalizationcore",
+      "accessibility.settings",
+      "accessibility.validation",
+      "accessibility.narration_metadata"
+    ],
+    "statusNote": "Generated from src/main/resources/META-INF/echo.mod.json in ECHO-Modules. The launcher resolves this module through moduleRequirements and downloads only changed artifacts when URLs are present.",
+    "roadmap": [
+      "Keep echo.mod.json, README.md, docs/artifacts.md, and release artifacts in sync for every release.",
+      "Publish Native, NeoForge, Standalone, and sources artifacts with checksums before marking an edition player-ready.",
+      "Use Release Index metadata as the public source for launcher and website download links."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Generated release files",
+        "version": "0.1.0",
+        "notes": [
+          "echoaccessibilitycore-0.1.0-neoforge.jar for Sky Relay NeoForge Edition.",
+          "echoaccessibilitycore-0.1.0.echo-addon for Sky Relay Native Edition.",
+          "echoaccessibilitycore-0.1.0-standalone.jar for Sky Relay Standalone Edition.",
+          "echoaccessibilitycore-0.1.0-sources.jar for traceability and developer debugging.",
+          "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
+        ]
+      }
+    ]
+  },
+  {
     "id": "echoadaptercore",
     "name": "ECHO: AdapterCore",
     "category": "Platform",
@@ -141,7 +206,7 @@
       "Standalone artifact: echoaetherworks-1.0.0-standalone.jar",
       "Sources artifact: echoaetherworks-1.0.0-sources.jar",
       "Provides: arcana.aetherworks, arcana.aether_machines, arcana.aether_storage",
-      "API stability: experimental"
+      "API stability: beta"
     ],
     "integrations": [
       "echoadaptercore",
@@ -376,6 +441,93 @@
     ]
   },
   {
+    "id": "echoarcanadivisionprotocol",
+    "name": "ECHO: Arcana Division Protocol",
+    "category": "Experience",
+    "group": "Experience",
+    "status": "Beta",
+    "version": "1.0.0",
+    "description": "Arcana Division is the official experience owner for magical research, rituals, familiars, curses, rifts, anomaly containment, Arcana stations, Arcana loot, and Arcana world rules.",
+    "dependencies": [
+      "echoadaptercore",
+      "echocore",
+      "echonetcore",
+      "echofoundationcore",
+      "echomaterialcore",
+      "echotoolcore",
+      "echostationcore",
+      "echoworldstarter",
+      "echocommonloot",
+      "echocreatureroles",
+      "echoarcanacore",
+      "echoaetherworks",
+      "echocursecore",
+      "echofamiliarcore",
+      "echogrimoire",
+      "echoriftworlds",
+      "echoritualcore",
+      "echospellcore",
+      "echoholomap",
+      "echoindex",
+      "echolens",
+      "echoterminal",
+      "echothemecore",
+      "echomissioncore"
+    ],
+    "standalone": true,
+    "usedByAshfall": false,
+    "docs": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echoarcanadivisionprotocol",
+    "github": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echoarcanadivisionprotocol",
+    "overview": [
+      "ECHO: Arcana Division Protocol is sourced from ECHO-Modules/addons/echoarcanadivisionprotocol.",
+      "It declares 24 required modules and 0 optional integrations.",
+      "Release output is generated per runtime family so the launcher can update this module independently."
+    ],
+    "capabilities": [
+      "Native artifact: echoarcanadivisionprotocol-1.0.0.echo-addon",
+      "NeoForge artifact: echoarcanadivisionprotocol-1.0.0-neoforge.jar",
+      "Standalone artifact: echoarcanadivisionprotocol-1.0.0-standalone.jar",
+      "Sources artifact: echoarcanadivisionprotocol-1.0.0-sources.jar",
+      "Provides: arcana_division.protocol, arcana_division.research, arcana_division.rituals",
+      "API stability: beta"
+    ],
+    "integrations": [
+      "echoadaptercore",
+      "echocore",
+      "echonetcore",
+      "echofoundationcore",
+      "echomaterialcore",
+      "echotoolcore",
+      "echostationcore",
+      "echoworldstarter",
+      "echocommonloot",
+      "echocreatureroles",
+      "echoarcanacore",
+      "echoaetherworks",
+      "echocursecore",
+      "echofamiliarcore"
+    ],
+    "statusNote": "Generated from src/main/resources/META-INF/echo.mod.json in ECHO-Modules. The launcher resolves this module through moduleRequirements and downloads only changed artifacts when URLs are present.",
+    "roadmap": [
+      "Keep echo.mod.json, README.md, docs/artifacts.md, and release artifacts in sync for every release.",
+      "Publish Native, NeoForge, Standalone, and sources artifacts with checksums before marking an edition player-ready.",
+      "Use Release Index metadata as the public source for launcher and website download links."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Generated release files",
+        "version": "1.0.0",
+        "notes": [
+          "echoarcanadivisionprotocol-1.0.0-neoforge.jar for Ashfall NeoForge Edition.",
+          "echoarcanadivisionprotocol-1.0.0.echo-addon for Ashfall Native Edition.",
+          "echoarcanadivisionprotocol-1.0.0-standalone.jar for Ashfall Standalone Edition.",
+          "echoarcanadivisionprotocol-1.0.0-sources.jar for traceability and developer debugging.",
+          "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
+        ]
+      }
+    ]
+  },
+  {
     "id": "echoarcaneindex",
     "name": "ECHO: Arcane Index",
     "category": "Player Interface",
@@ -513,7 +665,14 @@
       "echoadaptercore",
       "echoblockworks",
       "echocore",
-      "echonetcore"
+      "echofoundationcore",
+      "echomaterialcore",
+      "echonetcore",
+      "echotoolcore",
+      "echostationcore",
+      "echoworldstarter",
+      "echocommonloot",
+      "echocreatureroles"
     ],
     "standalone": true,
     "usedByAshfall": true,
@@ -521,7 +680,7 @@
     "github": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echoashfallprotocol",
     "overview": [
       "ECHO: Ashfall Protocol is sourced from ECHO-Modules/addons/echoashfallprotocol.",
-      "It declares 4 required modules and 14 optional integrations.",
+      "It declares 11 required modules and 14 optional integrations.",
       "Release output is generated per runtime family so the launcher can update this module independently."
     ],
     "capabilities": [
@@ -536,17 +695,17 @@
       "echoadaptercore",
       "echoblockworks",
       "echocore",
+      "echofoundationcore",
+      "echomaterialcore",
       "echonetcore",
+      "echotoolcore",
+      "echostationcore",
+      "echoworldstarter",
+      "echocommonloot",
+      "echocreatureroles",
       "echodatacore",
       "echoholomap",
-      "echoindex",
-      "echolens",
-      "echomissioncore",
-      "echonpcore",
-      "echopresencelink",
-      "echorendercore",
-      "echoruntimeguard",
-      "echosoundcore"
+      "echoindex"
     ],
     "statusNote": "Generated from src/main/resources/META-INF/echo.mod.json in ECHO-Modules. The launcher resolves this module through moduleRequirements and downloads only changed artifacts when URLs are present.",
     "roadmap": [
@@ -634,6 +793,69 @@
     ]
   },
   {
+    "id": "echoassetpipeline",
+    "name": "ECHO: AssetPipeline",
+    "category": "Gameplay",
+    "group": "Future",
+    "status": "Alpha",
+    "version": "0.1.0",
+    "description": "Asset import, naming validation, thumbnails, texture and sound manifests, and missing asset report contracts.",
+    "dependencies": [
+      "echocore",
+      "echoadaptercore",
+      "echoassetcore",
+      "echotextureforge",
+      "echosoundcore"
+    ],
+    "standalone": true,
+    "usedByAshfall": true,
+    "docs": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echoassetpipeline",
+    "github": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echoassetpipeline",
+    "overview": [
+      "ECHO: AssetPipeline is sourced from ECHO-Modules/addons/echoassetpipeline.",
+      "It declares 5 required modules and 1 optional integration.",
+      "Release output is generated per runtime family so the launcher can update this module independently."
+    ],
+    "capabilities": [
+      "Native artifact: echoassetpipeline-0.1.0.echo-addon",
+      "NeoForge artifact: echoassetpipeline-0.1.0-neoforge.jar",
+      "Standalone artifact: echoassetpipeline-0.1.0-standalone.jar",
+      "Sources artifact: echoassetpipeline-0.1.0-sources.jar",
+      "Provides: assetpipeline.audit, assetpipeline.thumbnails, assetpipeline.manifests",
+      "API stability: alpha"
+    ],
+    "integrations": [
+      "echocore",
+      "echoadaptercore",
+      "echoassetcore",
+      "echotextureforge",
+      "echosoundcore",
+      "echoreportcore",
+      "assetpipeline.audit",
+      "assetpipeline.thumbnails",
+      "assetpipeline.manifests"
+    ],
+    "statusNote": "Generated from src/main/resources/META-INF/echo.mod.json in ECHO-Modules. The launcher resolves this module through moduleRequirements and downloads only changed artifacts when URLs are present.",
+    "roadmap": [
+      "Keep echo.mod.json, README.md, docs/artifacts.md, and release artifacts in sync for every release.",
+      "Publish Native, NeoForge, Standalone, and sources artifacts with checksums before marking an edition player-ready.",
+      "Use Release Index metadata as the public source for launcher and website download links."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Generated release files",
+        "version": "0.1.0",
+        "notes": [
+          "echoassetpipeline-0.1.0-neoforge.jar for Sky Relay NeoForge Edition.",
+          "echoassetpipeline-0.1.0.echo-addon for Sky Relay Native Edition.",
+          "echoassetpipeline-0.1.0-standalone.jar for Sky Relay Standalone Edition.",
+          "echoassetpipeline-0.1.0-sources.jar for traceability and developer debugging.",
+          "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
+        ]
+      }
+    ]
+  },
+  {
     "id": "echoatmospherecore",
     "name": "ECHO: AtmosphereCore",
     "category": "Foundation",
@@ -695,6 +917,71 @@
           "echoatmospherecore-1.0.0.echo-addon for Ashfall Native Edition.",
           "echoatmospherecore-1.0.0-standalone.jar for Ashfall Standalone Edition.",
           "echoatmospherecore-1.0.0-sources.jar for traceability and developer debugging.",
+          "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "echobalancecore",
+    "name": "ECHO: BalanceCore",
+    "category": "Foundation",
+    "group": "Core",
+    "status": "Alpha",
+    "version": "0.1.0",
+    "description": "Balance tables and audits for recipes, progression pacing, combat stats, economy, loot, energy, and survival pressure.",
+    "dependencies": [
+      "echocore",
+      "echoadaptercore",
+      "echorecipecore",
+      "echolootcore",
+      "echoeconomycore",
+      "echoprogressioncore"
+    ],
+    "standalone": true,
+    "usedByAshfall": true,
+    "docs": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echobalancecore",
+    "github": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echobalancecore",
+    "overview": [
+      "ECHO: BalanceCore is sourced from ECHO-Modules/addons/echobalancecore.",
+      "It declares 6 required modules and 1 optional integration.",
+      "Release output is generated per runtime family so the launcher can update this module independently."
+    ],
+    "capabilities": [
+      "Native artifact: echobalancecore-0.1.0.echo-addon",
+      "NeoForge artifact: echobalancecore-0.1.0-neoforge.jar",
+      "Standalone artifact: echobalancecore-0.1.0-standalone.jar",
+      "Sources artifact: echobalancecore-0.1.0-sources.jar",
+      "Provides: balance.tables, balance.audits, balance.recommended_ranges",
+      "API stability: alpha"
+    ],
+    "integrations": [
+      "echocore",
+      "echoadaptercore",
+      "echorecipecore",
+      "echolootcore",
+      "echoeconomycore",
+      "echoprogressioncore",
+      "echoreportcore",
+      "balance.tables",
+      "balance.audits",
+      "balance.recommended_ranges"
+    ],
+    "statusNote": "Generated from src/main/resources/META-INF/echo.mod.json in ECHO-Modules. The launcher resolves this module through moduleRequirements and downloads only changed artifacts when URLs are present.",
+    "roadmap": [
+      "Keep echo.mod.json, README.md, docs/artifacts.md, and release artifacts in sync for every release.",
+      "Publish Native, NeoForge, Standalone, and sources artifacts with checksums before marking an edition player-ready.",
+      "Use Release Index metadata as the public source for launcher and website download links."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Generated release files",
+        "version": "0.1.0",
+        "notes": [
+          "echobalancecore-0.1.0-neoforge.jar for Sky Relay NeoForge Edition.",
+          "echobalancecore-0.1.0.echo-addon for Sky Relay Native Edition.",
+          "echobalancecore-0.1.0-standalone.jar for Sky Relay Standalone Edition.",
+          "echobalancecore-0.1.0-sources.jar for traceability and developer debugging.",
           "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
         ]
       }
@@ -958,6 +1245,69 @@
     ]
   },
   {
+    "id": "echoblueprintcore",
+    "name": "ECHO: BlueprintCore",
+    "category": "Foundation",
+    "group": "Core",
+    "status": "Alpha",
+    "version": "0.1.0",
+    "description": "Reusable authoring blueprints for common content types and Studio template generation.",
+    "dependencies": [
+      "echocore",
+      "echoadaptercore",
+      "echoschemacore",
+      "echocreatorcore",
+      "echocontentcore"
+    ],
+    "standalone": true,
+    "usedByAshfall": true,
+    "docs": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echoblueprintcore",
+    "github": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echoblueprintcore",
+    "overview": [
+      "ECHO: BlueprintCore is sourced from ECHO-Modules/addons/echoblueprintcore.",
+      "It declares 5 required modules and 1 optional integration.",
+      "Release output is generated per runtime family so the launcher can update this module independently."
+    ],
+    "capabilities": [
+      "Native artifact: echoblueprintcore-0.1.0.echo-addon",
+      "NeoForge artifact: echoblueprintcore-0.1.0-neoforge.jar",
+      "Standalone artifact: echoblueprintcore-0.1.0-standalone.jar",
+      "Sources artifact: echoblueprintcore-0.1.0-sources.jar",
+      "Provides: blueprint.schemas, blueprint.templates, blueprint.studio_generation",
+      "API stability: alpha"
+    ],
+    "integrations": [
+      "echocore",
+      "echoadaptercore",
+      "echoschemacore",
+      "echocreatorcore",
+      "echocontentcore",
+      "echolocalizationcore",
+      "blueprint.schemas",
+      "blueprint.templates",
+      "blueprint.studio_generation"
+    ],
+    "statusNote": "Generated from src/main/resources/META-INF/echo.mod.json in ECHO-Modules. The launcher resolves this module through moduleRequirements and downloads only changed artifacts when URLs are present.",
+    "roadmap": [
+      "Keep echo.mod.json, README.md, docs/artifacts.md, and release artifacts in sync for every release.",
+      "Publish Native, NeoForge, Standalone, and sources artifacts with checksums before marking an edition player-ready.",
+      "Use Release Index metadata as the public source for launcher and website download links."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Generated release files",
+        "version": "0.1.0",
+        "notes": [
+          "echoblueprintcore-0.1.0-neoforge.jar for Sky Relay NeoForge Edition.",
+          "echoblueprintcore-0.1.0.echo-addon for Sky Relay Native Edition.",
+          "echoblueprintcore-0.1.0-standalone.jar for Sky Relay Standalone Edition.",
+          "echoblueprintcore-0.1.0-sources.jar for traceability and developer debugging.",
+          "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
+        ]
+      }
+    ]
+  },
+  {
     "id": "echobridgecore",
     "name": "ECHO: BridgeCore",
     "category": "Foundation",
@@ -1087,6 +1437,68 @@
           "echocameracore-1.0.0.echo-addon for Ashfall Native Edition.",
           "echocameracore-1.0.0-standalone.jar for Ashfall Standalone Edition.",
           "echocameracore-1.0.0-sources.jar for traceability and developer debugging.",
+          "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "echocapabilitycore",
+    "name": "ECHO: CapabilityCore",
+    "category": "Foundation",
+    "group": "Core",
+    "status": "Alpha",
+    "version": "0.1.0",
+    "description": "Runtime capability negotiation over descriptor provides and consumes so optional integrations are clean, inspectable, and fallback-safe.",
+    "dependencies": [
+      "echocore",
+      "echoadaptercore",
+      "echomodulegraph",
+      "echoplatformcore"
+    ],
+    "standalone": true,
+    "usedByAshfall": true,
+    "docs": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echocapabilitycore",
+    "github": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echocapabilitycore",
+    "overview": [
+      "ECHO: CapabilityCore is sourced from ECHO-Modules/addons/echocapabilitycore.",
+      "It declares 4 required modules and 1 optional integration.",
+      "Release output is generated per runtime family so the launcher can update this module independently."
+    ],
+    "capabilities": [
+      "Native artifact: echocapabilitycore-0.1.0.echo-addon",
+      "NeoForge artifact: echocapabilitycore-0.1.0-neoforge.jar",
+      "Standalone artifact: echocapabilitycore-0.1.0-standalone.jar",
+      "Sources artifact: echocapabilitycore-0.1.0-sources.jar",
+      "Provides: capability.registry, capability.negotiation, capability.missing_diagnostics",
+      "API stability: alpha"
+    ],
+    "integrations": [
+      "echocore",
+      "echoadaptercore",
+      "echomodulegraph",
+      "echoplatformcore",
+      "echoreportcore",
+      "capability.registry",
+      "capability.negotiation",
+      "capability.missing_diagnostics",
+      "capability.fallbacks"
+    ],
+    "statusNote": "Generated from src/main/resources/META-INF/echo.mod.json in ECHO-Modules. The launcher resolves this module through moduleRequirements and downloads only changed artifacts when URLs are present.",
+    "roadmap": [
+      "Keep echo.mod.json, README.md, docs/artifacts.md, and release artifacts in sync for every release.",
+      "Publish Native, NeoForge, Standalone, and sources artifacts with checksums before marking an edition player-ready.",
+      "Use Release Index metadata as the public source for launcher and website download links."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Generated release files",
+        "version": "0.1.0",
+        "notes": [
+          "echocapabilitycore-0.1.0-neoforge.jar for Sky Relay NeoForge Edition.",
+          "echocapabilitycore-0.1.0.echo-addon for Sky Relay Native Edition.",
+          "echocapabilitycore-0.1.0-standalone.jar for Sky Relay Standalone Edition.",
+          "echocapabilitycore-0.1.0-sources.jar for traceability and developer debugging.",
           "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
         ]
       }
@@ -1285,6 +1697,72 @@
           "echocombatcore-1.0.0.echo-addon for Ashfall Native Edition.",
           "echocombatcore-1.0.0-standalone.jar for Ashfall Standalone Edition.",
           "echocombatcore-1.0.0-sources.jar for traceability and developer debugging.",
+          "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "echocommonloot",
+    "name": "ECHO Common Loot",
+    "category": "Gameplay",
+    "group": "Core",
+    "status": "Active",
+    "version": "0.1.0",
+    "description": "Generic loot pools, baseline block drops, and starter cache contracts.",
+    "dependencies": [
+      "echoadaptercore",
+      "echocore",
+      "echonetcore",
+      "echofoundationcore",
+      "echomaterialcore",
+      "echotoolcore",
+      "echostationcore"
+    ],
+    "standalone": true,
+    "usedByAshfall": false,
+    "docs": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echocommonloot",
+    "github": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echocommonloot",
+    "overview": [
+      "ECHO Common Loot is sourced from ECHO-Modules/addons/echocommonloot.",
+      "It declares 7 required modules and 0 optional integrations.",
+      "Release output is generated per runtime family so the launcher can update this module independently."
+    ],
+    "capabilities": [
+      "Native artifact: echocommonloot-0.1.0.echo-addon",
+      "NeoForge artifact: echocommonloot-0.1.0-neoforge.jar",
+      "Standalone artifact: echocommonloot-0.1.0-standalone.jar",
+      "Sources artifact: echocommonloot-0.1.0-sources.jar",
+      "Provides: foundation.common_loot, foundation.block_drops, foundation.starter_caches",
+      "API stability: alpha"
+    ],
+    "integrations": [
+      "echoadaptercore",
+      "echocore",
+      "echonetcore",
+      "echofoundationcore",
+      "echomaterialcore",
+      "echotoolcore",
+      "echostationcore",
+      "foundation.common_loot",
+      "foundation.block_drops",
+      "foundation.starter_caches"
+    ],
+    "statusNote": "Generated from src/main/resources/META-INF/echo.mod.json in ECHO-Modules. The launcher resolves this module through moduleRequirements and downloads only changed artifacts when URLs are present.",
+    "roadmap": [
+      "Keep echo.mod.json, README.md, docs/artifacts.md, and release artifacts in sync for every release.",
+      "Publish Native, NeoForge, Standalone, and sources artifacts with checksums before marking an edition player-ready.",
+      "Use Release Index metadata as the public source for launcher and website download links."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Generated release files",
+        "version": "0.1.0",
+        "notes": [
+          "echocommonloot-0.1.0-neoforge.jar for Openlands NeoForge Edition.",
+          "echocommonloot-0.1.0.echo-addon for Openlands Native Edition.",
+          "echocommonloot-0.1.0-standalone.jar for Openlands Standalone Edition.",
+          "echocommonloot-0.1.0-sources.jar for traceability and developer debugging.",
           "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
         ]
       }
@@ -1672,6 +2150,129 @@
     ]
   },
   {
+    "id": "echocreatureroles",
+    "name": "ECHO Creature Roles",
+    "category": "Gameplay",
+    "group": "Core",
+    "status": "Active",
+    "version": "0.1.0",
+    "description": "Shared creature role taxonomy for experience-specific mobs.",
+    "dependencies": [
+      "echoadaptercore",
+      "echocore",
+      "echonetcore",
+      "echofoundationcore"
+    ],
+    "standalone": true,
+    "usedByAshfall": false,
+    "docs": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echocreatureroles",
+    "github": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echocreatureroles",
+    "overview": [
+      "ECHO Creature Roles is sourced from ECHO-Modules/addons/echocreatureroles.",
+      "It declares 4 required modules and 0 optional integrations.",
+      "Release output is generated per runtime family so the launcher can update this module independently."
+    ],
+    "capabilities": [
+      "Native artifact: echocreatureroles-0.1.0.echo-addon",
+      "NeoForge artifact: echocreatureroles-0.1.0-neoforge.jar",
+      "Standalone artifact: echocreatureroles-0.1.0-standalone.jar",
+      "Sources artifact: echocreatureroles-0.1.0-sources.jar",
+      "Provides: foundation.creature_roles, foundation.spawn_roles, foundation.ai_pressure_roles",
+      "API stability: alpha"
+    ],
+    "integrations": [
+      "echoadaptercore",
+      "echocore",
+      "echonetcore",
+      "echofoundationcore",
+      "foundation.creature_roles",
+      "foundation.spawn_roles",
+      "foundation.ai_pressure_roles"
+    ],
+    "statusNote": "Generated from src/main/resources/META-INF/echo.mod.json in ECHO-Modules. The launcher resolves this module through moduleRequirements and downloads only changed artifacts when URLs are present.",
+    "roadmap": [
+      "Keep echo.mod.json, README.md, docs/artifacts.md, and release artifacts in sync for every release.",
+      "Publish Native, NeoForge, Standalone, and sources artifacts with checksums before marking an edition player-ready.",
+      "Use Release Index metadata as the public source for launcher and website download links."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Generated release files",
+        "version": "0.1.0",
+        "notes": [
+          "echocreatureroles-0.1.0-neoforge.jar for Openlands NeoForge Edition.",
+          "echocreatureroles-0.1.0.echo-addon for Openlands Native Edition.",
+          "echocreatureroles-0.1.0-standalone.jar for Openlands Standalone Edition.",
+          "echocreatureroles-0.1.0-sources.jar for traceability and developer debugging.",
+          "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "echocurationcore",
+    "name": "ECHO: CurationCore",
+    "category": "Foundation",
+    "group": "Core",
+    "status": "Alpha",
+    "version": "0.1.0",
+    "description": "Launcher and Studio recommendations for module fit, bundle previews, dependency explanations, and readiness badges.",
+    "dependencies": [
+      "echocore",
+      "echoadaptercore",
+      "echocapabilitycore",
+      "echodependencydoctor",
+      "echometadatacore"
+    ],
+    "standalone": true,
+    "usedByAshfall": true,
+    "docs": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echocurationcore",
+    "github": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echocurationcore",
+    "overview": [
+      "ECHO: CurationCore is sourced from ECHO-Modules/addons/echocurationcore.",
+      "It declares 5 required modules and 1 optional integration.",
+      "Release output is generated per runtime family so the launcher can update this module independently."
+    ],
+    "capabilities": [
+      "Native artifact: echocurationcore-0.1.0.echo-addon",
+      "NeoForge artifact: echocurationcore-0.1.0-neoforge.jar",
+      "Standalone artifact: echocurationcore-0.1.0-standalone.jar",
+      "Sources artifact: echocurationcore-0.1.0-sources.jar",
+      "Provides: curation.recommendations, curation.bundle_previews, curation.readiness_badges",
+      "API stability: alpha"
+    ],
+    "integrations": [
+      "echocore",
+      "echoadaptercore",
+      "echocapabilitycore",
+      "echodependencydoctor",
+      "echometadatacore",
+      "echoreportcore",
+      "curation.recommendations",
+      "curation.bundle_previews",
+      "curation.readiness_badges"
+    ],
+    "statusNote": "Generated from src/main/resources/META-INF/echo.mod.json in ECHO-Modules. The launcher resolves this module through moduleRequirements and downloads only changed artifacts when URLs are present.",
+    "roadmap": [
+      "Keep echo.mod.json, README.md, docs/artifacts.md, and release artifacts in sync for every release.",
+      "Publish Native, NeoForge, Standalone, and sources artifacts with checksums before marking an edition player-ready.",
+      "Use Release Index metadata as the public source for launcher and website download links."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Generated release files",
+        "version": "0.1.0",
+        "notes": [
+          "echocurationcore-0.1.0-neoforge.jar for Sky Relay NeoForge Edition.",
+          "echocurationcore-0.1.0.echo-addon for Sky Relay Native Edition.",
+          "echocurationcore-0.1.0-standalone.jar for Sky Relay Standalone Edition.",
+          "echocurationcore-0.1.0-sources.jar for traceability and developer debugging.",
+          "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
+        ]
+      }
+    ]
+  },
+  {
     "id": "echocursecore",
     "name": "ECHO: CurseCore",
     "category": "Foundation",
@@ -1794,6 +2395,70 @@
     ]
   },
   {
+    "id": "echodependencydoctor",
+    "name": "ECHO: DependencyDoctor",
+    "category": "Gameplay",
+    "group": "Future",
+    "status": "Alpha",
+    "version": "0.1.0",
+    "description": "Human-readable explanations for broken module graphs, conflicts, version gaps, missing artifacts, and bad optional integrations.",
+    "dependencies": [
+      "echocore",
+      "echoadaptercore",
+      "echomodulegraph",
+      "echocapabilitycore",
+      "echoreportcore"
+    ],
+    "standalone": true,
+    "usedByAshfall": true,
+    "docs": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echodependencydoctor",
+    "github": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echodependencydoctor",
+    "overview": [
+      "ECHO: DependencyDoctor is sourced from ECHO-Modules/addons/echodependencydoctor.",
+      "It declares 5 required modules and 1 optional integration.",
+      "Release output is generated per runtime family so the launcher can update this module independently."
+    ],
+    "capabilities": [
+      "Native artifact: echodependencydoctor-0.1.0.echo-addon",
+      "NeoForge artifact: echodependencydoctor-0.1.0-neoforge.jar",
+      "Standalone artifact: echodependencydoctor-0.1.0-standalone.jar",
+      "Sources artifact: echodependencydoctor-0.1.0-sources.jar",
+      "Provides: dependency.explanations, dependency.launch_report, dependency.conflict_diagnostics",
+      "API stability: alpha"
+    ],
+    "integrations": [
+      "echocore",
+      "echoadaptercore",
+      "echomodulegraph",
+      "echocapabilitycore",
+      "echoreportcore",
+      "echopolicycore",
+      "dependency.explanations",
+      "dependency.launch_report",
+      "dependency.conflict_diagnostics",
+      "dependency.artifact_diagnostics"
+    ],
+    "statusNote": "Generated from src/main/resources/META-INF/echo.mod.json in ECHO-Modules. The launcher resolves this module through moduleRequirements and downloads only changed artifacts when URLs are present.",
+    "roadmap": [
+      "Keep echo.mod.json, README.md, docs/artifacts.md, and release artifacts in sync for every release.",
+      "Publish Native, NeoForge, Standalone, and sources artifacts with checksums before marking an edition player-ready.",
+      "Use Release Index metadata as the public source for launcher and website download links."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Generated release files",
+        "version": "0.1.0",
+        "notes": [
+          "echodependencydoctor-0.1.0-neoforge.jar for Sky Relay NeoForge Edition.",
+          "echodependencydoctor-0.1.0.echo-addon for Sky Relay Native Edition.",
+          "echodependencydoctor-0.1.0-standalone.jar for Sky Relay Standalone Edition.",
+          "echodependencydoctor-0.1.0-sources.jar for traceability and developer debugging.",
+          "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
+        ]
+      }
+    ]
+  },
+  {
     "id": "echodifficultycore",
     "name": "ECHO: DifficultyCore",
     "category": "Foundation",
@@ -1854,6 +2519,72 @@
           "echodifficultycore-1.0.0.echo-addon for Ashfall Native Edition.",
           "echodifficultycore-1.0.0-standalone.jar for Ashfall Standalone Edition.",
           "echodifficultycore-1.0.0-sources.jar for traceability and developer debugging.",
+          "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "echodisastercore",
+    "name": "ECHO: DisasterCore",
+    "category": "Foundation",
+    "group": "Core",
+    "status": "Alpha",
+    "version": "0.1.0",
+    "description": "Blackouts, earthquakes, station failures, storm disasters, and recovery event contracts.",
+    "dependencies": [
+      "echocore",
+      "echoadaptercore",
+      "echohazardcore",
+      "echoweathercore",
+      "echosessioncore",
+      "echoworldcore"
+    ],
+    "standalone": true,
+    "usedByAshfall": true,
+    "docs": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echodisastercore",
+    "github": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echodisastercore",
+    "overview": [
+      "ECHO: DisasterCore is sourced from ECHO-Modules/addons/echodisastercore.",
+      "It declares 6 required modules and 1 optional integration.",
+      "Release output is generated per runtime family so the launcher can update this module independently."
+    ],
+    "capabilities": [
+      "Native artifact: echodisastercore-0.1.0.echo-addon",
+      "NeoForge artifact: echodisastercore-0.1.0-neoforge.jar",
+      "Standalone artifact: echodisastercore-0.1.0-standalone.jar",
+      "Sources artifact: echodisastercore-0.1.0-sources.jar",
+      "Provides: disaster.events, disaster.recovery, disaster.station_failures",
+      "API stability: alpha"
+    ],
+    "integrations": [
+      "echocore",
+      "echoadaptercore",
+      "echohazardcore",
+      "echoweathercore",
+      "echosessioncore",
+      "echoworldcore",
+      "echosupplycore",
+      "disaster.events",
+      "disaster.recovery",
+      "disaster.station_failures",
+      "disaster.world_impacts"
+    ],
+    "statusNote": "Generated from src/main/resources/META-INF/echo.mod.json in ECHO-Modules. The launcher resolves this module through moduleRequirements and downloads only changed artifacts when URLs are present.",
+    "roadmap": [
+      "Keep echo.mod.json, README.md, docs/artifacts.md, and release artifacts in sync for every release.",
+      "Publish Native, NeoForge, Standalone, and sources artifacts with checksums before marking an edition player-ready.",
+      "Use Release Index metadata as the public source for launcher and website download links."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Generated release files",
+        "version": "0.1.0",
+        "notes": [
+          "echodisastercore-0.1.0-neoforge.jar for Sky Relay NeoForge Edition.",
+          "echodisastercore-0.1.0.echo-addon for Sky Relay Native Edition.",
+          "echodisastercore-0.1.0-standalone.jar for Sky Relay Standalone Edition.",
+          "echodisastercore-0.1.0-sources.jar for traceability and developer debugging.",
           "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
         ]
       }
@@ -1993,6 +2724,70 @@
     ]
   },
   {
+    "id": "echoequipmentcore",
+    "name": "ECHO: EquipmentCore",
+    "category": "Player Interface",
+    "group": "Interface",
+    "status": "Alpha",
+    "version": "0.1.0",
+    "description": "Gear slots, durability rules, upgrades, modifiers, and loadout validation contracts.",
+    "dependencies": [
+      "echocore",
+      "echoadaptercore",
+      "echoarmory",
+      "echocombatcore",
+      "echotoolcore"
+    ],
+    "standalone": true,
+    "usedByAshfall": true,
+    "docs": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echoequipmentcore",
+    "github": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echoequipmentcore",
+    "overview": [
+      "ECHO: EquipmentCore is sourced from ECHO-Modules/addons/echoequipmentcore.",
+      "It declares 5 required modules and 1 optional integration.",
+      "Release output is generated per runtime family so the launcher can update this module independently."
+    ],
+    "capabilities": [
+      "Native artifact: echoequipmentcore-0.1.0.echo-addon",
+      "NeoForge artifact: echoequipmentcore-0.1.0-neoforge.jar",
+      "Standalone artifact: echoequipmentcore-0.1.0-standalone.jar",
+      "Sources artifact: echoequipmentcore-0.1.0-sources.jar",
+      "Provides: equipment.slots, equipment.durability, equipment.upgrades",
+      "API stability: alpha"
+    ],
+    "integrations": [
+      "echocore",
+      "echoadaptercore",
+      "echoarmory",
+      "echocombatcore",
+      "echotoolcore",
+      "echoaccessibilitycore",
+      "equipment.slots",
+      "equipment.durability",
+      "equipment.upgrades",
+      "equipment.loadout_validation"
+    ],
+    "statusNote": "Generated from src/main/resources/META-INF/echo.mod.json in ECHO-Modules. The launcher resolves this module through moduleRequirements and downloads only changed artifacts when URLs are present.",
+    "roadmap": [
+      "Keep echo.mod.json, README.md, docs/artifacts.md, and release artifacts in sync for every release.",
+      "Publish Native, NeoForge, Standalone, and sources artifacts with checksums before marking an edition player-ready.",
+      "Use Release Index metadata as the public source for launcher and website download links."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Generated release files",
+        "version": "0.1.0",
+        "notes": [
+          "echoequipmentcore-0.1.0-neoforge.jar for Sky Relay NeoForge Edition.",
+          "echoequipmentcore-0.1.0.echo-addon for Sky Relay Native Edition.",
+          "echoequipmentcore-0.1.0-standalone.jar for Sky Relay Standalone Edition.",
+          "echoequipmentcore-0.1.0-sources.jar for traceability and developer debugging.",
+          "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
+        ]
+      }
+    ]
+  },
+  {
     "id": "echoeventcore",
     "name": "ECHO: EventCore",
     "category": "Foundation",
@@ -2059,6 +2854,136 @@
     ]
   },
   {
+    "id": "echoexpeditioncore",
+    "name": "ECHO: ExpeditionCore",
+    "category": "Foundation",
+    "group": "Core",
+    "status": "Alpha",
+    "version": "0.1.0",
+    "description": "Route preparation, risk budgets, extraction loops, and travel contract surfaces.",
+    "dependencies": [
+      "echocore",
+      "echoadaptercore",
+      "echosessioncore",
+      "echohazardcore",
+      "echomissioncore",
+      "echoworldcore"
+    ],
+    "standalone": true,
+    "usedByAshfall": true,
+    "docs": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echoexpeditioncore",
+    "github": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echoexpeditioncore",
+    "overview": [
+      "ECHO: ExpeditionCore is sourced from ECHO-Modules/addons/echoexpeditioncore.",
+      "It declares 6 required modules and 1 optional integration.",
+      "Release output is generated per runtime family so the launcher can update this module independently."
+    ],
+    "capabilities": [
+      "Native artifact: echoexpeditioncore-0.1.0.echo-addon",
+      "NeoForge artifact: echoexpeditioncore-0.1.0-neoforge.jar",
+      "Standalone artifact: echoexpeditioncore-0.1.0-standalone.jar",
+      "Sources artifact: echoexpeditioncore-0.1.0-sources.jar",
+      "Provides: expedition.routes, expedition.risk_budget, expedition.extraction",
+      "API stability: alpha"
+    ],
+    "integrations": [
+      "echocore",
+      "echoadaptercore",
+      "echosessioncore",
+      "echohazardcore",
+      "echomissioncore",
+      "echoworldcore",
+      "echosupplycore",
+      "expedition.routes",
+      "expedition.risk_budget",
+      "expedition.extraction",
+      "expedition.travel_contracts"
+    ],
+    "statusNote": "Generated from src/main/resources/META-INF/echo.mod.json in ECHO-Modules. The launcher resolves this module through moduleRequirements and downloads only changed artifacts when URLs are present.",
+    "roadmap": [
+      "Keep echo.mod.json, README.md, docs/artifacts.md, and release artifacts in sync for every release.",
+      "Publish Native, NeoForge, Standalone, and sources artifacts with checksums before marking an edition player-ready.",
+      "Use Release Index metadata as the public source for launcher and website download links."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Generated release files",
+        "version": "0.1.0",
+        "notes": [
+          "echoexpeditioncore-0.1.0-neoforge.jar for Sky Relay NeoForge Edition.",
+          "echoexpeditioncore-0.1.0.echo-addon for Sky Relay Native Edition.",
+          "echoexpeditioncore-0.1.0-standalone.jar for Sky Relay Standalone Edition.",
+          "echoexpeditioncore-0.1.0-sources.jar for traceability and developer debugging.",
+          "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "echofactioncore",
+    "name": "ECHO: FactionCore",
+    "category": "Foundation",
+    "group": "Core",
+    "status": "Alpha",
+    "version": "0.1.0",
+    "description": "Factions, reputation, standings, vendors, hostility, alliances, territory hooks, and mission consequence contracts.",
+    "dependencies": [
+      "echocore",
+      "echoadaptercore",
+      "echomissioncore",
+      "echoeconomycore",
+      "echosocialcore"
+    ],
+    "standalone": true,
+    "usedByAshfall": true,
+    "docs": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echofactioncore",
+    "github": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echofactioncore",
+    "overview": [
+      "ECHO: FactionCore is sourced from ECHO-Modules/addons/echofactioncore.",
+      "It declares 5 required modules and 1 optional integration.",
+      "Release output is generated per runtime family so the launcher can update this module independently."
+    ],
+    "capabilities": [
+      "Native artifact: echofactioncore-0.1.0.echo-addon",
+      "NeoForge artifact: echofactioncore-0.1.0-neoforge.jar",
+      "Standalone artifact: echofactioncore-0.1.0-standalone.jar",
+      "Sources artifact: echofactioncore-0.1.0-sources.jar",
+      "Provides: faction.registry, faction.reputation, faction.standings",
+      "API stability: alpha"
+    ],
+    "integrations": [
+      "echocore",
+      "echoadaptercore",
+      "echomissioncore",
+      "echoeconomycore",
+      "echosocialcore",
+      "echoterritorycore",
+      "faction.registry",
+      "faction.reputation",
+      "faction.standings",
+      "faction.mission_consequences"
+    ],
+    "statusNote": "Generated from src/main/resources/META-INF/echo.mod.json in ECHO-Modules. The launcher resolves this module through moduleRequirements and downloads only changed artifacts when URLs are present.",
+    "roadmap": [
+      "Keep echo.mod.json, README.md, docs/artifacts.md, and release artifacts in sync for every release.",
+      "Publish Native, NeoForge, Standalone, and sources artifacts with checksums before marking an edition player-ready.",
+      "Use Release Index metadata as the public source for launcher and website download links."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Generated release files",
+        "version": "0.1.0",
+        "notes": [
+          "echofactioncore-0.1.0-neoforge.jar for Sky Relay NeoForge Edition.",
+          "echofactioncore-0.1.0.echo-addon for Sky Relay Native Edition.",
+          "echofactioncore-0.1.0-standalone.jar for Sky Relay Standalone Edition.",
+          "echofactioncore-0.1.0-sources.jar for traceability and developer debugging.",
+          "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
+        ]
+      }
+    ]
+  },
+  {
     "id": "echofamiliarcore",
     "name": "ECHO: FamiliarCore",
     "category": "Foundation",
@@ -2086,7 +3011,7 @@
       "Standalone artifact: echofamiliarcore-1.0.0-standalone.jar",
       "Sources artifact: echofamiliarcore-1.0.0-sources.jar",
       "Provides: familiar.bonds, familiar.commands, familiar.companions",
-      "API stability: scaffold"
+      "API stability: beta"
     ],
     "integrations": [
       "echoadaptercore",
@@ -2123,6 +3048,66 @@
     ]
   },
   {
+    "id": "echofoundationcore",
+    "name": "ECHO Foundation Core",
+    "category": "Foundation",
+    "group": "Core",
+    "status": "Active",
+    "version": "0.1.0",
+    "description": "Shared survival/content ownership, dependency, alias, and legal identity contracts.",
+    "dependencies": [
+      "echoadaptercore",
+      "echocore",
+      "echonetcore"
+    ],
+    "standalone": true,
+    "usedByAshfall": false,
+    "docs": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echofoundationcore",
+    "github": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echofoundationcore",
+    "overview": [
+      "ECHO Foundation Core is sourced from ECHO-Modules/addons/echofoundationcore.",
+      "It declares 3 required modules and 0 optional integrations.",
+      "Release output is generated per runtime family so the launcher can update this module independently."
+    ],
+    "capabilities": [
+      "Native artifact: echofoundationcore-0.1.0.echo-addon",
+      "NeoForge artifact: echofoundationcore-0.1.0-neoforge.jar",
+      "Standalone artifact: echofoundationcore-0.1.0-standalone.jar",
+      "Sources artifact: echofoundationcore-0.1.0-sources.jar",
+      "Provides: foundation.core, foundation.ownership, foundation.aliases",
+      "API stability: alpha"
+    ],
+    "integrations": [
+      "echoadaptercore",
+      "echocore",
+      "echonetcore",
+      "foundation.core",
+      "foundation.ownership",
+      "foundation.aliases",
+      "foundation.legal_identity",
+      "foundation.registry_contracts"
+    ],
+    "statusNote": "Generated from src/main/resources/META-INF/echo.mod.json in ECHO-Modules. The launcher resolves this module through moduleRequirements and downloads only changed artifacts when URLs are present.",
+    "roadmap": [
+      "Keep echo.mod.json, README.md, docs/artifacts.md, and release artifacts in sync for every release.",
+      "Publish Native, NeoForge, Standalone, and sources artifacts with checksums before marking an edition player-ready.",
+      "Use Release Index metadata as the public source for launcher and website download links."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Generated release files",
+        "version": "0.1.0",
+        "notes": [
+          "echofoundationcore-0.1.0-neoforge.jar for Openlands NeoForge Edition.",
+          "echofoundationcore-0.1.0.echo-addon for Openlands Native Edition.",
+          "echofoundationcore-0.1.0-standalone.jar for Openlands Standalone Edition.",
+          "echofoundationcore-0.1.0-sources.jar for traceability and developer debugging.",
+          "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
+        ]
+      }
+    ]
+  },
+  {
     "id": "echogalacticcore",
     "name": "ECHO: GalacticCore",
     "category": "Foundation",
@@ -2149,7 +3134,7 @@
       "Standalone artifact: echogalacticcore-0.1.0-native-alpha-standalone.jar",
       "Sources artifact: echogalacticcore-0.1.0-native-alpha-sources.jar",
       "Provides: galacticcore.content, galacticcore.celestial_routes, galacticcore.life_support",
-      "API stability: BETA"
+      "API stability: beta"
     ],
     "integrations": [
       "echoaddonapi",
@@ -2310,6 +3295,72 @@
           "echoguidecore-1.0.0.echo-addon for Ashfall Native Edition.",
           "echoguidecore-1.0.0-standalone.jar for Ashfall Standalone Edition.",
           "echoguidecore-1.0.0-sources.jar for traceability and developer debugging.",
+          "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "echohazardcore",
+    "name": "ECHO: HazardCore",
+    "category": "Foundation",
+    "group": "Core",
+    "status": "Alpha",
+    "version": "0.1.0",
+    "description": "Generic hazards for heat, cold, radiation, oxygen, pressure, corruption, disease, and storm exposure.",
+    "dependencies": [
+      "echocore",
+      "echoadaptercore",
+      "echostatuscore",
+      "echohealthcore",
+      "echoweathercore",
+      "echoworldcore"
+    ],
+    "standalone": true,
+    "usedByAshfall": true,
+    "docs": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echohazardcore",
+    "github": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echohazardcore",
+    "overview": [
+      "ECHO: HazardCore is sourced from ECHO-Modules/addons/echohazardcore.",
+      "It declares 6 required modules and 1 optional integration.",
+      "Release output is generated per runtime family so the launcher can update this module independently."
+    ],
+    "capabilities": [
+      "Native artifact: echohazardcore-0.1.0.echo-addon",
+      "NeoForge artifact: echohazardcore-0.1.0-neoforge.jar",
+      "Standalone artifact: echohazardcore-0.1.0-standalone.jar",
+      "Sources artifact: echohazardcore-0.1.0-sources.jar",
+      "Provides: hazard.registry, hazard.exposure, hazard.resistance",
+      "API stability: alpha"
+    ],
+    "integrations": [
+      "echocore",
+      "echoadaptercore",
+      "echostatuscore",
+      "echohealthcore",
+      "echoweathercore",
+      "echoworldcore",
+      "echosessioncore",
+      "hazard.registry",
+      "hazard.exposure",
+      "hazard.resistance",
+      "hazard.world_hooks"
+    ],
+    "statusNote": "Generated from src/main/resources/META-INF/echo.mod.json in ECHO-Modules. The launcher resolves this module through moduleRequirements and downloads only changed artifacts when URLs are present.",
+    "roadmap": [
+      "Keep echo.mod.json, README.md, docs/artifacts.md, and release artifacts in sync for every release.",
+      "Publish Native, NeoForge, Standalone, and sources artifacts with checksums before marking an edition player-ready.",
+      "Use Release Index metadata as the public source for launcher and website download links."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Generated release files",
+        "version": "0.1.0",
+        "notes": [
+          "echohazardcore-0.1.0-neoforge.jar for Sky Relay NeoForge Edition.",
+          "echohazardcore-0.1.0.echo-addon for Sky Relay Native Edition.",
+          "echohazardcore-0.1.0-standalone.jar for Sky Relay Standalone Edition.",
+          "echohazardcore-0.1.0-sources.jar for traceability and developer debugging.",
           "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
         ]
       }
@@ -2759,6 +3810,67 @@
     ]
   },
   {
+    "id": "echolocalizationcore",
+    "name": "ECHO: LocalizationCore",
+    "category": "Foundation",
+    "group": "Core",
+    "status": "Alpha",
+    "version": "0.1.0",
+    "description": "Translation validation, fallback text, missing-key reports, language-pack exports, and Studio localization workflow contracts.",
+    "dependencies": [
+      "echocore",
+      "echoadaptercore",
+      "echoschemacore",
+      "echoreportcore"
+    ],
+    "standalone": true,
+    "usedByAshfall": true,
+    "docs": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echolocalizationcore",
+    "github": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echolocalizationcore",
+    "overview": [
+      "ECHO: LocalizationCore is sourced from ECHO-Modules/addons/echolocalizationcore.",
+      "It declares 4 required modules and 1 optional integration.",
+      "Release output is generated per runtime family so the launcher can update this module independently."
+    ],
+    "capabilities": [
+      "Native artifact: echolocalizationcore-0.1.0.echo-addon",
+      "NeoForge artifact: echolocalizationcore-0.1.0-neoforge.jar",
+      "Standalone artifact: echolocalizationcore-0.1.0-standalone.jar",
+      "Sources artifact: echolocalizationcore-0.1.0-sources.jar",
+      "Provides: localization.validation, localization.fallbacks, localization.language_pack_overlay",
+      "API stability: alpha"
+    ],
+    "integrations": [
+      "echocore",
+      "echoadaptercore",
+      "echoschemacore",
+      "echoreportcore",
+      "echocreatorcore",
+      "localization.validation",
+      "localization.fallbacks",
+      "localization.language_pack_overlay"
+    ],
+    "statusNote": "Generated from src/main/resources/META-INF/echo.mod.json in ECHO-Modules. The launcher resolves this module through moduleRequirements and downloads only changed artifacts when URLs are present.",
+    "roadmap": [
+      "Keep echo.mod.json, README.md, docs/artifacts.md, and release artifacts in sync for every release.",
+      "Publish Native, NeoForge, Standalone, and sources artifacts with checksums before marking an edition player-ready.",
+      "Use Release Index metadata as the public source for launcher and website download links."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Generated release files",
+        "version": "0.1.0",
+        "notes": [
+          "echolocalizationcore-0.1.0-neoforge.jar for Sky Relay NeoForge Edition.",
+          "echolocalizationcore-0.1.0.echo-addon for Sky Relay Native Edition.",
+          "echolocalizationcore-0.1.0-standalone.jar for Sky Relay Standalone Edition.",
+          "echolocalizationcore-0.1.0-sources.jar for traceability and developer debugging.",
+          "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
+        ]
+      }
+    ]
+  },
+  {
     "id": "echologisticscore",
     "name": "ECHO: LogisticsCore",
     "category": "Foundation",
@@ -3094,6 +4206,67 @@
     ]
   },
   {
+    "id": "echomaterialcore",
+    "name": "ECHO Material Core",
+    "category": "Foundation",
+    "group": "Core",
+    "status": "Active",
+    "version": "0.1.0",
+    "description": "Baseline raw materials, refined materials, generic building blocks, and material tags.",
+    "dependencies": [
+      "echoadaptercore",
+      "echocore",
+      "echonetcore",
+      "echofoundationcore"
+    ],
+    "standalone": true,
+    "usedByAshfall": false,
+    "docs": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echomaterialcore",
+    "github": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echomaterialcore",
+    "overview": [
+      "ECHO Material Core is sourced from ECHO-Modules/addons/echomaterialcore.",
+      "It declares 4 required modules and 0 optional integrations.",
+      "Release output is generated per runtime family so the launcher can update this module independently."
+    ],
+    "capabilities": [
+      "Native artifact: echomaterialcore-0.1.0.echo-addon",
+      "NeoForge artifact: echomaterialcore-0.1.0-neoforge.jar",
+      "Standalone artifact: echomaterialcore-0.1.0-standalone.jar",
+      "Sources artifact: echomaterialcore-0.1.0-sources.jar",
+      "Provides: foundation.materials, foundation.generic_blocks, foundation.generic_items",
+      "API stability: alpha"
+    ],
+    "integrations": [
+      "echoadaptercore",
+      "echocore",
+      "echonetcore",
+      "echofoundationcore",
+      "foundation.materials",
+      "foundation.generic_blocks",
+      "foundation.generic_items",
+      "foundation.material_tags"
+    ],
+    "statusNote": "Generated from src/main/resources/META-INF/echo.mod.json in ECHO-Modules. The launcher resolves this module through moduleRequirements and downloads only changed artifacts when URLs are present.",
+    "roadmap": [
+      "Keep echo.mod.json, README.md, docs/artifacts.md, and release artifacts in sync for every release.",
+      "Publish Native, NeoForge, Standalone, and sources artifacts with checksums before marking an edition player-ready.",
+      "Use Release Index metadata as the public source for launcher and website download links."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Generated release files",
+        "version": "0.1.0",
+        "notes": [
+          "echomaterialcore-0.1.0-neoforge.jar for Openlands NeoForge Edition.",
+          "echomaterialcore-0.1.0.echo-addon for Openlands Native Edition.",
+          "echomaterialcore-0.1.0-standalone.jar for Openlands Standalone Edition.",
+          "echomaterialcore-0.1.0-sources.jar for traceability and developer debugging.",
+          "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
+        ]
+      }
+    ]
+  },
+  {
     "id": "echometadatacore",
     "name": "ECHO: MetadataCore",
     "category": "Foundation",
@@ -3152,6 +4325,70 @@
           "echometadatacore-1.0.0.echo-addon for Ashfall Native Edition.",
           "echometadatacore-1.0.0-standalone.jar for Ashfall Standalone Edition.",
           "echometadatacore-1.0.0-sources.jar for traceability and developer debugging.",
+          "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "echomigrationcore",
+    "name": "ECHO: MigrationCore",
+    "category": "Foundation",
+    "group": "Core",
+    "status": "Alpha",
+    "version": "0.1.0",
+    "description": "Versioned save, data-key, renamed-ID, removed-module, deprecated-content, and rollback compatibility migration contracts.",
+    "dependencies": [
+      "echocore",
+      "echoadaptercore",
+      "echodatacore",
+      "echoschemacore",
+      "echovalidationcore"
+    ],
+    "standalone": true,
+    "usedByAshfall": true,
+    "docs": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echomigrationcore",
+    "github": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echomigrationcore",
+    "overview": [
+      "ECHO: MigrationCore is sourced from ECHO-Modules/addons/echomigrationcore.",
+      "It declares 5 required modules and 1 optional integration.",
+      "Release output is generated per runtime family so the launcher can update this module independently."
+    ],
+    "capabilities": [
+      "Native artifact: echomigrationcore-0.1.0.echo-addon",
+      "NeoForge artifact: echomigrationcore-0.1.0-neoforge.jar",
+      "Standalone artifact: echomigrationcore-0.1.0-standalone.jar",
+      "Sources artifact: echomigrationcore-0.1.0-sources.jar",
+      "Provides: migration.manifest, migration.dry_run, migration.rollback_report",
+      "API stability: alpha"
+    ],
+    "integrations": [
+      "echocore",
+      "echoadaptercore",
+      "echodatacore",
+      "echoschemacore",
+      "echovalidationcore",
+      "echoreportcore",
+      "migration.manifest",
+      "migration.dry_run",
+      "migration.rollback_report",
+      "migration.id_aliases"
+    ],
+    "statusNote": "Generated from src/main/resources/META-INF/echo.mod.json in ECHO-Modules. The launcher resolves this module through moduleRequirements and downloads only changed artifacts when URLs are present.",
+    "roadmap": [
+      "Keep echo.mod.json, README.md, docs/artifacts.md, and release artifacts in sync for every release.",
+      "Publish Native, NeoForge, Standalone, and sources artifacts with checksums before marking an edition player-ready.",
+      "Use Release Index metadata as the public source for launcher and website download links."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Generated release files",
+        "version": "0.1.0",
+        "notes": [
+          "echomigrationcore-0.1.0-neoforge.jar for Sky Relay NeoForge Edition.",
+          "echomigrationcore-0.1.0.echo-addon for Sky Relay Native Edition.",
+          "echomigrationcore-0.1.0-standalone.jar for Sky Relay Standalone Edition.",
+          "echomigrationcore-0.1.0-sources.jar for traceability and developer debugging.",
           "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
         ]
       }
@@ -3603,6 +4840,87 @@
     ]
   },
   {
+    "id": "echoopenlandsprotocol",
+    "name": "ECHO: Openlands Protocol",
+    "category": "Experience",
+    "group": "Openlands",
+    "status": "Alpha",
+    "version": "0.1.0",
+    "description": "Openlands Protocol is the first-party relaxed sandbox contract for Openlands, Official ECHO Pack #2. It owns Openlands-specific content, progression, old roads, waystones, first-hour guidance, and cross-runtime parity fixtures.",
+    "dependencies": [
+      "echoadaptercore",
+      "echoassetcore",
+      "echobiomecore",
+      "echocontentcore",
+      "echocore",
+      "echocreaturecore",
+      "echofoundationcore",
+      "echomaterialcore",
+      "echonetcore",
+      "echotoolcore",
+      "echostationcore",
+      "echoworldstarter",
+      "echocommonloot",
+      "echocreatureroles",
+      "echoprogressioncore",
+      "echorecipecore",
+      "echostructurecore",
+      "echoworldcore"
+    ],
+    "standalone": true,
+    "usedByAshfall": false,
+    "docs": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echoopenlandsprotocol",
+    "github": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echoopenlandsprotocol",
+    "overview": [
+      "ECHO: Openlands Protocol is sourced from ECHO-Modules/addons/echoopenlandsprotocol.",
+      "It declares 18 required modules and 15 optional integrations.",
+      "Release output is generated per runtime family so the launcher can update this module independently."
+    ],
+    "capabilities": [
+      "Native artifact: echoopenlandsprotocol-0.1.0.echo-addon",
+      "NeoForge artifact: echoopenlandsprotocol-0.1.0-neoforge.jar",
+      "Standalone artifact: echoopenlandsprotocol-0.1.0-standalone.jar",
+      "Sources artifact: echoopenlandsprotocol-0.1.0-sources.jar",
+      "Provides: openlands.blocks, openlands.creatures, openlands.first_waystone",
+      "API stability: alpha"
+    ],
+    "integrations": [
+      "echoadaptercore",
+      "echoassetcore",
+      "echobiomecore",
+      "echocontentcore",
+      "echocore",
+      "echocreaturecore",
+      "echofoundationcore",
+      "echomaterialcore",
+      "echonetcore",
+      "echotoolcore",
+      "echostationcore",
+      "echoworldstarter",
+      "echocommonloot",
+      "echocreatureroles"
+    ],
+    "statusNote": "Generated from src/main/resources/META-INF/echo.mod.json in ECHO-Modules. The launcher resolves this module through moduleRequirements and downloads only changed artifacts when URLs are present.",
+    "roadmap": [
+      "Keep echo.mod.json, README.md, docs/artifacts.md, and release artifacts in sync for every release.",
+      "Publish Native, NeoForge, Standalone, and sources artifacts with checksums before marking an edition player-ready.",
+      "Use Release Index metadata as the public source for launcher and website download links."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Generated release files",
+        "version": "0.1.0",
+        "notes": [
+          "echoopenlandsprotocol-0.1.0-neoforge.jar for Openlands NeoForge Edition.",
+          "echoopenlandsprotocol-0.1.0.echo-addon for Openlands Native Edition.",
+          "echoopenlandsprotocol-0.1.0-standalone.jar for Openlands Standalone Edition.",
+          "echoopenlandsprotocol-0.1.0-sources.jar for traceability and developer debugging.",
+          "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
+        ]
+      }
+    ]
+  },
+  {
     "id": "echoorbitalremnants",
     "name": "ECHO: Orbital Remnants",
     "category": "Gameplay",
@@ -3728,6 +5046,69 @@
     ]
   },
   {
+    "id": "echopackdiff",
+    "name": "ECHO: PackDiff",
+    "category": "Gameplay",
+    "group": "Future",
+    "status": "Alpha",
+    "version": "0.1.0",
+    "description": "Explains differences between pack or module versions across gameplay, dependencies, migrations, and renamed content.",
+    "dependencies": [
+      "echocore",
+      "echoadaptercore",
+      "echomigrationcore",
+      "echometadatacore",
+      "echoreportcore"
+    ],
+    "standalone": true,
+    "usedByAshfall": true,
+    "docs": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echopackdiff",
+    "github": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echopackdiff",
+    "overview": [
+      "ECHO: PackDiff is sourced from ECHO-Modules/addons/echopackdiff.",
+      "It declares 5 required modules and 1 optional integration.",
+      "Release output is generated per runtime family so the launcher can update this module independently."
+    ],
+    "capabilities": [
+      "Native artifact: echopackdiff-0.1.0.echo-addon",
+      "NeoForge artifact: echopackdiff-0.1.0-neoforge.jar",
+      "Standalone artifact: echopackdiff-0.1.0-standalone.jar",
+      "Sources artifact: echopackdiff-0.1.0-sources.jar",
+      "Provides: packdiff.json, packdiff.markdown, packdiff.changelog",
+      "API stability: alpha"
+    ],
+    "integrations": [
+      "echocore",
+      "echoadaptercore",
+      "echomigrationcore",
+      "echometadatacore",
+      "echoreportcore",
+      "echodependencydoctor",
+      "packdiff.json",
+      "packdiff.markdown",
+      "packdiff.changelog"
+    ],
+    "statusNote": "Generated from src/main/resources/META-INF/echo.mod.json in ECHO-Modules. The launcher resolves this module through moduleRequirements and downloads only changed artifacts when URLs are present.",
+    "roadmap": [
+      "Keep echo.mod.json, README.md, docs/artifacts.md, and release artifacts in sync for every release.",
+      "Publish Native, NeoForge, Standalone, and sources artifacts with checksums before marking an edition player-ready.",
+      "Use Release Index metadata as the public source for launcher and website download links."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Generated release files",
+        "version": "0.1.0",
+        "notes": [
+          "echopackdiff-0.1.0-neoforge.jar for Sky Relay NeoForge Edition.",
+          "echopackdiff-0.1.0.echo-addon for Sky Relay Native Edition.",
+          "echopackdiff-0.1.0-standalone.jar for Sky Relay Standalone Edition.",
+          "echopackdiff-0.1.0-sources.jar for traceability and developer debugging.",
+          "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
+        ]
+      }
+    ]
+  },
+  {
     "id": "echoplatformcore",
     "name": "ECHO: PlatformCore",
     "category": "Platform",
@@ -3840,6 +5221,138 @@
           "echoplayercore-1.0.0.echo-addon for Ashfall Native Edition.",
           "echoplayercore-1.0.0-standalone.jar for Ashfall Standalone Edition.",
           "echoplayercore-1.0.0-sources.jar for traceability and developer debugging.",
+          "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "echoplaytestcore",
+    "name": "ECHO: PlaytestCore",
+    "category": "Foundation",
+    "group": "Core",
+    "status": "Alpha",
+    "version": "0.1.0",
+    "description": "Automated gameplay evidence runner for release readiness, session proof, save/load, install, update, repair, and rollback checks.",
+    "dependencies": [
+      "echocore",
+      "echoadaptercore",
+      "echoreportcore",
+      "echovalidationcore",
+      "echomodulegraph",
+      "echoruntimeguard"
+    ],
+    "standalone": true,
+    "usedByAshfall": true,
+    "docs": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echoplaytestcore",
+    "github": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echoplaytestcore",
+    "overview": [
+      "ECHO: PlaytestCore is sourced from ECHO-Modules/addons/echoplaytestcore.",
+      "It declares 6 required modules and 3 optional integrations.",
+      "Release output is generated per runtime family so the launcher can update this module independently."
+    ],
+    "capabilities": [
+      "Native artifact: echoplaytestcore-0.1.0.echo-addon",
+      "NeoForge artifact: echoplaytestcore-0.1.0-neoforge.jar",
+      "Standalone artifact: echoplaytestcore-0.1.0-standalone.jar",
+      "Sources artifact: echoplaytestcore-0.1.0-sources.jar",
+      "Provides: playtest.scenarios, playtest.evidence_runner, playtest.release_readiness",
+      "API stability: alpha"
+    ],
+    "integrations": [
+      "echocore",
+      "echoadaptercore",
+      "echoreportcore",
+      "echovalidationcore",
+      "echomodulegraph",
+      "echoruntimeguard",
+      "echomigrationcore",
+      "echopolicycore",
+      "echotelemetrycore",
+      "playtest.scenarios",
+      "playtest.evidence_runner",
+      "playtest.release_readiness",
+      "playtest.session_proofs"
+    ],
+    "statusNote": "Generated from src/main/resources/META-INF/echo.mod.json in ECHO-Modules. The launcher resolves this module through moduleRequirements and downloads only changed artifacts when URLs are present.",
+    "roadmap": [
+      "Keep echo.mod.json, README.md, docs/artifacts.md, and release artifacts in sync for every release.",
+      "Publish Native, NeoForge, Standalone, and sources artifacts with checksums before marking an edition player-ready.",
+      "Use Release Index metadata as the public source for launcher and website download links."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Generated release files",
+        "version": "0.1.0",
+        "notes": [
+          "echoplaytestcore-0.1.0-neoforge.jar for Sky Relay NeoForge Edition.",
+          "echoplaytestcore-0.1.0.echo-addon for Sky Relay Native Edition.",
+          "echoplaytestcore-0.1.0-standalone.jar for Sky Relay Standalone Edition.",
+          "echoplaytestcore-0.1.0-sources.jar for traceability and developer debugging.",
+          "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "echopolicycore",
+    "name": "ECHO: PolicyCore",
+    "category": "Foundation",
+    "group": "Core",
+    "status": "Alpha",
+    "version": "0.1.0",
+    "description": "Trust, permissions, write-action approval, server-rule, blocked-module, content-flag, and creator-governance policy contracts.",
+    "dependencies": [
+      "echocore",
+      "echoadaptercore",
+      "echovalidationcore",
+      "echoreportcore",
+      "echometadatacore"
+    ],
+    "standalone": true,
+    "usedByAshfall": true,
+    "docs": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echopolicycore",
+    "github": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echopolicycore",
+    "overview": [
+      "ECHO: PolicyCore is sourced from ECHO-Modules/addons/echopolicycore.",
+      "It declares 5 required modules and 1 optional integration.",
+      "Release output is generated per runtime family so the launcher can update this module independently."
+    ],
+    "capabilities": [
+      "Native artifact: echopolicycore-0.1.0.echo-addon",
+      "NeoForge artifact: echopolicycore-0.1.0-neoforge.jar",
+      "Standalone artifact: echopolicycore-0.1.0-standalone.jar",
+      "Sources artifact: echopolicycore-0.1.0-sources.jar",
+      "Provides: policy.manifest, policy.validation, policy.runtime_hooks",
+      "API stability: alpha"
+    ],
+    "integrations": [
+      "echocore",
+      "echoadaptercore",
+      "echovalidationcore",
+      "echoreportcore",
+      "echometadatacore",
+      "echocapabilitycore",
+      "policy.manifest",
+      "policy.validation",
+      "policy.runtime_hooks",
+      "policy.trust_metadata"
+    ],
+    "statusNote": "Generated from src/main/resources/META-INF/echo.mod.json in ECHO-Modules. The launcher resolves this module through moduleRequirements and downloads only changed artifacts when URLs are present.",
+    "roadmap": [
+      "Keep echo.mod.json, README.md, docs/artifacts.md, and release artifacts in sync for every release.",
+      "Publish Native, NeoForge, Standalone, and sources artifacts with checksums before marking an edition player-ready.",
+      "Use Release Index metadata as the public source for launcher and website download links."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Generated release files",
+        "version": "0.1.0",
+        "notes": [
+          "echopolicycore-0.1.0-neoforge.jar for Sky Relay NeoForge Edition.",
+          "echopolicycore-0.1.0.echo-addon for Sky Relay Native Edition.",
+          "echopolicycore-0.1.0-standalone.jar for Sky Relay Standalone Edition.",
+          "echopolicycore-0.1.0-sources.jar for traceability and developer debugging.",
           "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
         ]
       }
@@ -4607,7 +6120,7 @@
       "Standalone artifact: echoriftworlds-1.0.0-standalone.jar",
       "Sources artifact: echoriftworlds-1.0.0-sources.jar",
       "Provides: riftworlds.arcana_provider, riftworlds.dimensional_hazards, riftworlds.pocket_rifts",
-      "API stability: scaffold"
+      "API stability: beta"
     ],
     "integrations": [
       "echoadaptercore",
@@ -4704,6 +6217,70 @@
           "echoritualcore-1.0.0.echo-addon for Ashfall Native Edition.",
           "echoritualcore-1.0.0-standalone.jar for Ashfall Standalone Edition.",
           "echoritualcore-1.0.0-sources.jar for traceability and developer debugging.",
+          "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "echoruincore",
+    "name": "ECHO: RuinCore",
+    "category": "Player Interface",
+    "group": "Interface",
+    "status": "Alpha",
+    "version": "0.1.0",
+    "description": "Ruins, archaeology, salvage sites, and restoration state contracts.",
+    "dependencies": [
+      "echocore",
+      "echoadaptercore",
+      "echostructurecore",
+      "echolootcore",
+      "echoworldcore"
+    ],
+    "standalone": true,
+    "usedByAshfall": true,
+    "docs": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echoruincore",
+    "github": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echoruincore",
+    "overview": [
+      "ECHO: RuinCore is sourced from ECHO-Modules/addons/echoruincore.",
+      "It declares 5 required modules and 1 optional integration.",
+      "Release output is generated per runtime family so the launcher can update this module independently."
+    ],
+    "capabilities": [
+      "Native artifact: echoruincore-0.1.0.echo-addon",
+      "NeoForge artifact: echoruincore-0.1.0-neoforge.jar",
+      "Standalone artifact: echoruincore-0.1.0-standalone.jar",
+      "Sources artifact: echoruincore-0.1.0-sources.jar",
+      "Provides: ruin.registry, ruin.archaeology, ruin.salvage_sites",
+      "API stability: alpha"
+    ],
+    "integrations": [
+      "echocore",
+      "echoadaptercore",
+      "echostructurecore",
+      "echolootcore",
+      "echoworldcore",
+      "echoexpeditioncore",
+      "ruin.registry",
+      "ruin.archaeology",
+      "ruin.salvage_sites",
+      "ruin.restoration_state"
+    ],
+    "statusNote": "Generated from src/main/resources/META-INF/echo.mod.json in ECHO-Modules. The launcher resolves this module through moduleRequirements and downloads only changed artifacts when URLs are present.",
+    "roadmap": [
+      "Keep echo.mod.json, README.md, docs/artifacts.md, and release artifacts in sync for every release.",
+      "Publish Native, NeoForge, Standalone, and sources artifacts with checksums before marking an edition player-ready.",
+      "Use Release Index metadata as the public source for launcher and website download links."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Generated release files",
+        "version": "0.1.0",
+        "notes": [
+          "echoruincore-0.1.0-neoforge.jar for Sky Relay NeoForge Edition.",
+          "echoruincore-0.1.0.echo-addon for Sky Relay Native Edition.",
+          "echoruincore-0.1.0-standalone.jar for Sky Relay Standalone Edition.",
+          "echoruincore-0.1.0-sources.jar for traceability and developer debugging.",
           "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
         ]
       }
@@ -4952,6 +6529,333 @@
           "echoscriptcore-1.0.0.echo-addon for Ashfall Native Edition.",
           "echoscriptcore-1.0.0-standalone.jar for Ashfall Standalone Edition.",
           "echoscriptcore-1.0.0-sources.jar for traceability and developer debugging.",
+          "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "echoseasoncore",
+    "name": "ECHO: SeasonCore",
+    "category": "Foundation",
+    "group": "Core",
+    "status": "Alpha",
+    "version": "0.1.0",
+    "description": "Rotating objectives, seasonal loot, timed modifiers, and live event contracts.",
+    "dependencies": [
+      "echocore",
+      "echoadaptercore",
+      "echomissioncore",
+      "echolootcore",
+      "echopolicycore"
+    ],
+    "standalone": true,
+    "usedByAshfall": true,
+    "docs": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echoseasoncore",
+    "github": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echoseasoncore",
+    "overview": [
+      "ECHO: SeasonCore is sourced from ECHO-Modules/addons/echoseasoncore.",
+      "It declares 5 required modules and 1 optional integration.",
+      "Release output is generated per runtime family so the launcher can update this module independently."
+    ],
+    "capabilities": [
+      "Native artifact: echoseasoncore-0.1.0.echo-addon",
+      "NeoForge artifact: echoseasoncore-0.1.0-neoforge.jar",
+      "Standalone artifact: echoseasoncore-0.1.0-standalone.jar",
+      "Sources artifact: echoseasoncore-0.1.0-sources.jar",
+      "Provides: season.objectives, season.loot, season.timed_modifiers",
+      "API stability: alpha"
+    ],
+    "integrations": [
+      "echocore",
+      "echoadaptercore",
+      "echomissioncore",
+      "echolootcore",
+      "echopolicycore",
+      "echotelemetrycore",
+      "season.objectives",
+      "season.loot",
+      "season.timed_modifiers",
+      "season.live_events"
+    ],
+    "statusNote": "Generated from src/main/resources/META-INF/echo.mod.json in ECHO-Modules. The launcher resolves this module through moduleRequirements and downloads only changed artifacts when URLs are present.",
+    "roadmap": [
+      "Keep echo.mod.json, README.md, docs/artifacts.md, and release artifacts in sync for every release.",
+      "Publish Native, NeoForge, Standalone, and sources artifacts with checksums before marking an edition player-ready.",
+      "Use Release Index metadata as the public source for launcher and website download links."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Generated release files",
+        "version": "0.1.0",
+        "notes": [
+          "echoseasoncore-0.1.0-neoforge.jar for Sky Relay NeoForge Edition.",
+          "echoseasoncore-0.1.0.echo-addon for Sky Relay Native Edition.",
+          "echoseasoncore-0.1.0-standalone.jar for Sky Relay Standalone Edition.",
+          "echoseasoncore-0.1.0-sources.jar for traceability and developer debugging.",
+          "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "echoserveropscore",
+    "name": "ECHO: ServerOpsCore",
+    "category": "Foundation",
+    "group": "Core",
+    "status": "Alpha",
+    "version": "0.1.0",
+    "description": "Moderation, backups, announcements, support bundles, and player report contracts.",
+    "dependencies": [
+      "echocore",
+      "echoadaptercore",
+      "echopolicycore",
+      "echoreportcore",
+      "echotelemetrycore",
+      "echonetcore"
+    ],
+    "standalone": true,
+    "usedByAshfall": true,
+    "docs": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echoserveropscore",
+    "github": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echoserveropscore",
+    "overview": [
+      "ECHO: ServerOpsCore is sourced from ECHO-Modules/addons/echoserveropscore.",
+      "It declares 6 required modules and 1 optional integration.",
+      "Release output is generated per runtime family so the launcher can update this module independently."
+    ],
+    "capabilities": [
+      "Native artifact: echoserveropscore-0.1.0.echo-addon",
+      "NeoForge artifact: echoserveropscore-0.1.0-neoforge.jar",
+      "Standalone artifact: echoserveropscore-0.1.0-standalone.jar",
+      "Sources artifact: echoserveropscore-0.1.0-sources.jar",
+      "Provides: serverops.moderation, serverops.backups, serverops.announcements",
+      "API stability: alpha"
+    ],
+    "integrations": [
+      "echocore",
+      "echoadaptercore",
+      "echopolicycore",
+      "echoreportcore",
+      "echotelemetrycore",
+      "echonetcore",
+      "echoterritorycore",
+      "serverops.moderation",
+      "serverops.backups",
+      "serverops.announcements",
+      "serverops.player_reports"
+    ],
+    "statusNote": "Generated from src/main/resources/META-INF/echo.mod.json in ECHO-Modules. The launcher resolves this module through moduleRequirements and downloads only changed artifacts when URLs are present.",
+    "roadmap": [
+      "Keep echo.mod.json, README.md, docs/artifacts.md, and release artifacts in sync for every release.",
+      "Publish Native, NeoForge, Standalone, and sources artifacts with checksums before marking an edition player-ready.",
+      "Use Release Index metadata as the public source for launcher and website download links."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Generated release files",
+        "version": "0.1.0",
+        "notes": [
+          "echoserveropscore-0.1.0-neoforge.jar for Sky Relay NeoForge Edition.",
+          "echoserveropscore-0.1.0.echo-addon for Sky Relay Native Edition.",
+          "echoserveropscore-0.1.0-standalone.jar for Sky Relay Standalone Edition.",
+          "echoserveropscore-0.1.0-sources.jar for traceability and developer debugging.",
+          "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "echosessioncore",
+    "name": "ECHO: SessionCore",
+    "category": "Foundation",
+    "group": "Core",
+    "status": "Alpha",
+    "version": "0.1.0",
+    "description": "Shared player session memory for onboarding, objectives, route history, hazards, deaths, and pack phase.",
+    "dependencies": [
+      "echocore",
+      "echoadaptercore",
+      "echodatacore",
+      "echomissioncore",
+      "echoplayercore"
+    ],
+    "standalone": true,
+    "usedByAshfall": true,
+    "docs": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echosessioncore",
+    "github": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echosessioncore",
+    "overview": [
+      "ECHO: SessionCore is sourced from ECHO-Modules/addons/echosessioncore.",
+      "It declares 5 required modules and 4 optional integrations.",
+      "Release output is generated per runtime family so the launcher can update this module independently."
+    ],
+    "capabilities": [
+      "Native artifact: echosessioncore-0.1.0.echo-addon",
+      "NeoForge artifact: echosessioncore-0.1.0-neoforge.jar",
+      "Standalone artifact: echosessioncore-0.1.0-standalone.jar",
+      "Sources artifact: echosessioncore-0.1.0-sources.jar",
+      "Provides: session.snapshot, session.objective_state, session.route_history",
+      "API stability: alpha"
+    ],
+    "integrations": [
+      "echocore",
+      "echoadaptercore",
+      "echodatacore",
+      "echomissioncore",
+      "echoplayercore",
+      "echoterminal",
+      "echoholomap",
+      "echolens",
+      "echotutorialcore",
+      "session.snapshot",
+      "session.objective_state",
+      "session.route_history",
+      "session.pack_phase"
+    ],
+    "statusNote": "Generated from src/main/resources/META-INF/echo.mod.json in ECHO-Modules. The launcher resolves this module through moduleRequirements and downloads only changed artifacts when URLs are present.",
+    "roadmap": [
+      "Keep echo.mod.json, README.md, docs/artifacts.md, and release artifacts in sync for every release.",
+      "Publish Native, NeoForge, Standalone, and sources artifacts with checksums before marking an edition player-ready.",
+      "Use Release Index metadata as the public source for launcher and website download links."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Generated release files",
+        "version": "0.1.0",
+        "notes": [
+          "echosessioncore-0.1.0-neoforge.jar for Sky Relay NeoForge Edition.",
+          "echosessioncore-0.1.0.echo-addon for Sky Relay Native Edition.",
+          "echosessioncore-0.1.0-standalone.jar for Sky Relay Standalone Edition.",
+          "echosessioncore-0.1.0-sources.jar for traceability and developer debugging.",
+          "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "echosettlementcore",
+    "name": "ECHO: SettlementCore",
+    "category": "Foundation",
+    "group": "Core",
+    "status": "Alpha",
+    "version": "0.1.0",
+    "description": "Bases, shelters, NPC jobs, storage needs, defense score, comfort, and logistics request contracts.",
+    "dependencies": [
+      "echocore",
+      "echoadaptercore",
+      "echobasegrid",
+      "echonpcore",
+      "echologisticscore",
+      "echoworldcore"
+    ],
+    "standalone": true,
+    "usedByAshfall": true,
+    "docs": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echosettlementcore",
+    "github": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echosettlementcore",
+    "overview": [
+      "ECHO: SettlementCore is sourced from ECHO-Modules/addons/echosettlementcore.",
+      "It declares 6 required modules and 1 optional integration.",
+      "Release output is generated per runtime family so the launcher can update this module independently."
+    ],
+    "capabilities": [
+      "Native artifact: echosettlementcore-0.1.0.echo-addon",
+      "NeoForge artifact: echosettlementcore-0.1.0-neoforge.jar",
+      "Standalone artifact: echosettlementcore-0.1.0-standalone.jar",
+      "Sources artifact: echosettlementcore-0.1.0-sources.jar",
+      "Provides: settlement.registry, settlement.jobs, settlement.defense_score",
+      "API stability: alpha"
+    ],
+    "integrations": [
+      "echocore",
+      "echoadaptercore",
+      "echobasegrid",
+      "echonpcore",
+      "echologisticscore",
+      "echoworldcore",
+      "echofactioncore",
+      "settlement.registry",
+      "settlement.jobs",
+      "settlement.defense_score",
+      "settlement.logistics_requests"
+    ],
+    "statusNote": "Generated from src/main/resources/META-INF/echo.mod.json in ECHO-Modules. The launcher resolves this module through moduleRequirements and downloads only changed artifacts when URLs are present.",
+    "roadmap": [
+      "Keep echo.mod.json, README.md, docs/artifacts.md, and release artifacts in sync for every release.",
+      "Publish Native, NeoForge, Standalone, and sources artifacts with checksums before marking an edition player-ready.",
+      "Use Release Index metadata as the public source for launcher and website download links."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Generated release files",
+        "version": "0.1.0",
+        "notes": [
+          "echosettlementcore-0.1.0-neoforge.jar for Sky Relay NeoForge Edition.",
+          "echosettlementcore-0.1.0.echo-addon for Sky Relay Native Edition.",
+          "echosettlementcore-0.1.0-standalone.jar for Sky Relay Standalone Edition.",
+          "echosettlementcore-0.1.0-sources.jar for traceability and developer debugging.",
+          "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "echoskillcore",
+    "name": "ECHO: SkillCore",
+    "category": "Foundation",
+    "group": "Core",
+    "status": "Alpha",
+    "version": "0.1.0",
+    "description": "Skills, mastery tracks, passive unlocks, and progression gate contracts.",
+    "dependencies": [
+      "echocore",
+      "echoadaptercore",
+      "echoprogressioncore",
+      "echoplayercore",
+      "echomissioncore"
+    ],
+    "standalone": true,
+    "usedByAshfall": true,
+    "docs": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echoskillcore",
+    "github": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echoskillcore",
+    "overview": [
+      "ECHO: SkillCore is sourced from ECHO-Modules/addons/echoskillcore.",
+      "It declares 5 required modules and 1 optional integration.",
+      "Release output is generated per runtime family so the launcher can update this module independently."
+    ],
+    "capabilities": [
+      "Native artifact: echoskillcore-0.1.0.echo-addon",
+      "NeoForge artifact: echoskillcore-0.1.0-neoforge.jar",
+      "Standalone artifact: echoskillcore-0.1.0-standalone.jar",
+      "Sources artifact: echoskillcore-0.1.0-sources.jar",
+      "Provides: skill.tracks, skill.mastery, skill.passive_unlocks",
+      "API stability: alpha"
+    ],
+    "integrations": [
+      "echocore",
+      "echoadaptercore",
+      "echoprogressioncore",
+      "echoplayercore",
+      "echomissioncore",
+      "echoequipmentcore",
+      "skill.tracks",
+      "skill.mastery",
+      "skill.passive_unlocks",
+      "skill.progression_gates"
+    ],
+    "statusNote": "Generated from src/main/resources/META-INF/echo.mod.json in ECHO-Modules. The launcher resolves this module through moduleRequirements and downloads only changed artifacts when URLs are present.",
+    "roadmap": [
+      "Keep echo.mod.json, README.md, docs/artifacts.md, and release artifacts in sync for every release.",
+      "Publish Native, NeoForge, Standalone, and sources artifacts with checksums before marking an edition player-ready.",
+      "Use Release Index metadata as the public source for launcher and website download links."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Generated release files",
+        "version": "0.1.0",
+        "notes": [
+          "echoskillcore-0.1.0-neoforge.jar for Sky Relay NeoForge Edition.",
+          "echoskillcore-0.1.0.echo-addon for Sky Relay Native Edition.",
+          "echoskillcore-0.1.0-standalone.jar for Sky Relay Standalone Edition.",
+          "echoskillcore-0.1.0-sources.jar for traceability and developer debugging.",
           "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
         ]
       }
@@ -5297,6 +7201,70 @@
     ]
   },
   {
+    "id": "echostationcore",
+    "name": "ECHO Station Core",
+    "category": "Foundation",
+    "group": "Core",
+    "status": "Active",
+    "version": "0.1.0",
+    "description": "Baseline crafting/storage/processing stations and recipe surface contracts.",
+    "dependencies": [
+      "echoadaptercore",
+      "echocore",
+      "echonetcore",
+      "echofoundationcore",
+      "echomaterialcore",
+      "echotoolcore"
+    ],
+    "standalone": true,
+    "usedByAshfall": false,
+    "docs": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echostationcore",
+    "github": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echostationcore",
+    "overview": [
+      "ECHO Station Core is sourced from ECHO-Modules/addons/echostationcore.",
+      "It declares 6 required modules and 0 optional integrations.",
+      "Release output is generated per runtime family so the launcher can update this module independently."
+    ],
+    "capabilities": [
+      "Native artifact: echostationcore-0.1.0.echo-addon",
+      "NeoForge artifact: echostationcore-0.1.0-neoforge.jar",
+      "Standalone artifact: echostationcore-0.1.0-standalone.jar",
+      "Sources artifact: echostationcore-0.1.0-sources.jar",
+      "Provides: foundation.stations, foundation.station_roles, foundation.shared_recipe_surfaces",
+      "API stability: alpha"
+    ],
+    "integrations": [
+      "echoadaptercore",
+      "echocore",
+      "echonetcore",
+      "echofoundationcore",
+      "echomaterialcore",
+      "echotoolcore",
+      "foundation.stations",
+      "foundation.station_roles",
+      "foundation.shared_recipe_surfaces"
+    ],
+    "statusNote": "Generated from src/main/resources/META-INF/echo.mod.json in ECHO-Modules. The launcher resolves this module through moduleRequirements and downloads only changed artifacts when URLs are present.",
+    "roadmap": [
+      "Keep echo.mod.json, README.md, docs/artifacts.md, and release artifacts in sync for every release.",
+      "Publish Native, NeoForge, Standalone, and sources artifacts with checksums before marking an edition player-ready.",
+      "Use Release Index metadata as the public source for launcher and website download links."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Generated release files",
+        "version": "0.1.0",
+        "notes": [
+          "echostationcore-0.1.0-neoforge.jar for Openlands NeoForge Edition.",
+          "echostationcore-0.1.0.echo-addon for Openlands Native Edition.",
+          "echostationcore-0.1.0-standalone.jar for Openlands Standalone Edition.",
+          "echostationcore-0.1.0-sources.jar for traceability and developer debugging.",
+          "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
+        ]
+      }
+    ]
+  },
+  {
     "id": "echostationfall",
     "name": "ECHO: Stationfall",
     "category": "Gameplay",
@@ -5497,6 +7465,133 @@
     ]
   },
   {
+    "id": "echosupplycore",
+    "name": "ECHO: SupplyCore",
+    "category": "Foundation",
+    "group": "Core",
+    "status": "Alpha",
+    "version": "0.1.0",
+    "description": "Scarcity, shortages, stockpiles, rationing, and supply pressure contracts.",
+    "dependencies": [
+      "echocore",
+      "echoadaptercore",
+      "echologisticscore",
+      "echoeconomycore",
+      "echolootcore"
+    ],
+    "standalone": true,
+    "usedByAshfall": true,
+    "docs": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echosupplycore",
+    "github": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echosupplycore",
+    "overview": [
+      "ECHO: SupplyCore is sourced from ECHO-Modules/addons/echosupplycore.",
+      "It declares 5 required modules and 1 optional integration.",
+      "Release output is generated per runtime family so the launcher can update this module independently."
+    ],
+    "capabilities": [
+      "Native artifact: echosupplycore-0.1.0.echo-addon",
+      "NeoForge artifact: echosupplycore-0.1.0-neoforge.jar",
+      "Standalone artifact: echosupplycore-0.1.0-standalone.jar",
+      "Sources artifact: echosupplycore-0.1.0-sources.jar",
+      "Provides: supply.scarcity, supply.stockpiles, supply.rationing",
+      "API stability: alpha"
+    ],
+    "integrations": [
+      "echocore",
+      "echoadaptercore",
+      "echologisticscore",
+      "echoeconomycore",
+      "echolootcore",
+      "echosettlementcore",
+      "supply.scarcity",
+      "supply.stockpiles",
+      "supply.rationing",
+      "supply.pressure"
+    ],
+    "statusNote": "Generated from src/main/resources/META-INF/echo.mod.json in ECHO-Modules. The launcher resolves this module through moduleRequirements and downloads only changed artifacts when URLs are present.",
+    "roadmap": [
+      "Keep echo.mod.json, README.md, docs/artifacts.md, and release artifacts in sync for every release.",
+      "Publish Native, NeoForge, Standalone, and sources artifacts with checksums before marking an edition player-ready.",
+      "Use Release Index metadata as the public source for launcher and website download links."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Generated release files",
+        "version": "0.1.0",
+        "notes": [
+          "echosupplycore-0.1.0-neoforge.jar for Sky Relay NeoForge Edition.",
+          "echosupplycore-0.1.0.echo-addon for Sky Relay Native Edition.",
+          "echosupplycore-0.1.0-standalone.jar for Sky Relay Standalone Edition.",
+          "echosupplycore-0.1.0-sources.jar for traceability and developer debugging.",
+          "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "echotelemetrycore",
+    "name": "ECHO: TelemetryCore",
+    "category": "Foundation",
+    "group": "Core",
+    "status": "Alpha",
+    "version": "0.1.0",
+    "description": "Privacy-safe local and session metrics for crashes, install health, progression checkpoints, and module load failures.",
+    "dependencies": [
+      "echocore",
+      "echoadaptercore",
+      "echopolicycore",
+      "echoreportcore",
+      "echoplaytestcore"
+    ],
+    "standalone": true,
+    "usedByAshfall": true,
+    "docs": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echotelemetrycore",
+    "github": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echotelemetrycore",
+    "overview": [
+      "ECHO: TelemetryCore is sourced from ECHO-Modules/addons/echotelemetrycore.",
+      "It declares 5 required modules and 1 optional integration.",
+      "Release output is generated per runtime family so the launcher can update this module independently."
+    ],
+    "capabilities": [
+      "Native artifact: echotelemetrycore-0.1.0.echo-addon",
+      "NeoForge artifact: echotelemetrycore-0.1.0-neoforge.jar",
+      "Standalone artifact: echotelemetrycore-0.1.0-standalone.jar",
+      "Sources artifact: echotelemetrycore-0.1.0-sources.jar",
+      "Provides: telemetry.local_bundle, telemetry.privacy_policy, telemetry.qa_metrics",
+      "API stability: alpha"
+    ],
+    "integrations": [
+      "echocore",
+      "echoadaptercore",
+      "echopolicycore",
+      "echoreportcore",
+      "echoplaytestcore",
+      "echosessioncore",
+      "telemetry.local_bundle",
+      "telemetry.privacy_policy",
+      "telemetry.qa_metrics"
+    ],
+    "statusNote": "Generated from src/main/resources/META-INF/echo.mod.json in ECHO-Modules. The launcher resolves this module through moduleRequirements and downloads only changed artifacts when URLs are present.",
+    "roadmap": [
+      "Keep echo.mod.json, README.md, docs/artifacts.md, and release artifacts in sync for every release.",
+      "Publish Native, NeoForge, Standalone, and sources artifacts with checksums before marking an edition player-ready.",
+      "Use Release Index metadata as the public source for launcher and website download links."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Generated release files",
+        "version": "0.1.0",
+        "notes": [
+          "echotelemetrycore-0.1.0-neoforge.jar for Sky Relay NeoForge Edition.",
+          "echotelemetrycore-0.1.0.echo-addon for Sky Relay Native Edition.",
+          "echotelemetrycore-0.1.0-standalone.jar for Sky Relay Standalone Edition.",
+          "echotelemetrycore-0.1.0-sources.jar for traceability and developer debugging.",
+          "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
+        ]
+      }
+    ]
+  },
+  {
     "id": "echoterminal",
     "name": "ECHO: Terminal",
     "category": "Player Interface",
@@ -5554,6 +7649,72 @@
           "echoterminal-1.0.0.echo-addon for Ashfall Native Edition.",
           "echoterminal-1.0.0-standalone.jar for Ashfall Standalone Edition.",
           "echoterminal-1.0.0-sources.jar for traceability and developer debugging.",
+          "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "echoterritorycore",
+    "name": "ECHO: TerritoryCore",
+    "category": "Foundation",
+    "group": "Core",
+    "status": "Alpha",
+    "version": "0.1.0",
+    "description": "Region control, claims, contested zones, faction ownership, map overlays, and server rule contracts.",
+    "dependencies": [
+      "echocore",
+      "echoadaptercore",
+      "echofactioncore",
+      "echoholomap",
+      "echoworldcore",
+      "echopolicycore"
+    ],
+    "standalone": true,
+    "usedByAshfall": true,
+    "docs": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echoterritorycore",
+    "github": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echoterritorycore",
+    "overview": [
+      "ECHO: TerritoryCore is sourced from ECHO-Modules/addons/echoterritorycore.",
+      "It declares 6 required modules and 1 optional integration.",
+      "Release output is generated per runtime family so the launcher can update this module independently."
+    ],
+    "capabilities": [
+      "Native artifact: echoterritorycore-0.1.0.echo-addon",
+      "NeoForge artifact: echoterritorycore-0.1.0-neoforge.jar",
+      "Standalone artifact: echoterritorycore-0.1.0-standalone.jar",
+      "Sources artifact: echoterritorycore-0.1.0-sources.jar",
+      "Provides: territory.claims, territory.control, territory.map_overlays",
+      "API stability: alpha"
+    ],
+    "integrations": [
+      "echocore",
+      "echoadaptercore",
+      "echofactioncore",
+      "echoholomap",
+      "echoworldcore",
+      "echopolicycore",
+      "echoserveropscore",
+      "territory.claims",
+      "territory.control",
+      "territory.map_overlays",
+      "territory.server_rules"
+    ],
+    "statusNote": "Generated from src/main/resources/META-INF/echo.mod.json in ECHO-Modules. The launcher resolves this module through moduleRequirements and downloads only changed artifacts when URLs are present.",
+    "roadmap": [
+      "Keep echo.mod.json, README.md, docs/artifacts.md, and release artifacts in sync for every release.",
+      "Publish Native, NeoForge, Standalone, and sources artifacts with checksums before marking an edition player-ready.",
+      "Use Release Index metadata as the public source for launcher and website download links."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Generated release files",
+        "version": "0.1.0",
+        "notes": [
+          "echoterritorycore-0.1.0-neoforge.jar for Sky Relay NeoForge Edition.",
+          "echoterritorycore-0.1.0.echo-addon for Sky Relay Native Edition.",
+          "echoterritorycore-0.1.0-standalone.jar for Sky Relay Standalone Edition.",
+          "echoterritorycore-0.1.0-sources.jar for traceability and developer debugging.",
           "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
         ]
       }
@@ -5679,6 +7840,68 @@
           "echothemecore-1.3.0.echo-addon for Ashfall Native Edition.",
           "echothemecore-1.3.0-standalone.jar for Ashfall Standalone Edition.",
           "echothemecore-1.3.0-sources.jar for traceability and developer debugging.",
+          "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "echotoolcore",
+    "name": "ECHO Tool Core",
+    "category": "Foundation",
+    "group": "Core",
+    "status": "Active",
+    "version": "0.1.0",
+    "description": "Baseline hand tools, tool role tags, and survival tool progression.",
+    "dependencies": [
+      "echoadaptercore",
+      "echocore",
+      "echonetcore",
+      "echofoundationcore",
+      "echomaterialcore"
+    ],
+    "standalone": true,
+    "usedByAshfall": false,
+    "docs": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echotoolcore",
+    "github": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echotoolcore",
+    "overview": [
+      "ECHO Tool Core is sourced from ECHO-Modules/addons/echotoolcore.",
+      "It declares 5 required modules and 0 optional integrations.",
+      "Release output is generated per runtime family so the launcher can update this module independently."
+    ],
+    "capabilities": [
+      "Native artifact: echotoolcore-0.1.0.echo-addon",
+      "NeoForge artifact: echotoolcore-0.1.0-neoforge.jar",
+      "Standalone artifact: echotoolcore-0.1.0-standalone.jar",
+      "Sources artifact: echotoolcore-0.1.0-sources.jar",
+      "Provides: foundation.tools, foundation.tool_roles, foundation.tool_progression",
+      "API stability: alpha"
+    ],
+    "integrations": [
+      "echoadaptercore",
+      "echocore",
+      "echonetcore",
+      "echofoundationcore",
+      "echomaterialcore",
+      "foundation.tools",
+      "foundation.tool_roles",
+      "foundation.tool_progression"
+    ],
+    "statusNote": "Generated from src/main/resources/META-INF/echo.mod.json in ECHO-Modules. The launcher resolves this module through moduleRequirements and downloads only changed artifacts when URLs are present.",
+    "roadmap": [
+      "Keep echo.mod.json, README.md, docs/artifacts.md, and release artifacts in sync for every release.",
+      "Publish Native, NeoForge, Standalone, and sources artifacts with checksums before marking an edition player-ready.",
+      "Use Release Index metadata as the public source for launcher and website download links."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Generated release files",
+        "version": "0.1.0",
+        "notes": [
+          "echotoolcore-0.1.0-neoforge.jar for Openlands NeoForge Edition.",
+          "echotoolcore-0.1.0.echo-addon for Openlands Native Edition.",
+          "echotoolcore-0.1.0-standalone.jar for Openlands Standalone Edition.",
+          "echotoolcore-0.1.0-sources.jar for traceability and developer debugging.",
           "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
         ]
       }
@@ -6063,6 +8286,73 @@
           "echoworldcore-1.0.0.echo-addon for Ashfall Native Edition.",
           "echoworldcore-1.0.0-standalone.jar for Ashfall Standalone Edition.",
           "echoworldcore-1.0.0-sources.jar for traceability and developer debugging.",
+          "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "echoworldstarter",
+    "name": "ECHO World Starter",
+    "category": "Content",
+    "group": "Core",
+    "status": "Active",
+    "version": "0.1.0",
+    "description": "Spawn safety, first-hour survival route, starter shelter, and early light contracts.",
+    "dependencies": [
+      "echoadaptercore",
+      "echocore",
+      "echonetcore",
+      "echofoundationcore",
+      "echomaterialcore",
+      "echotoolcore",
+      "echostationcore"
+    ],
+    "standalone": true,
+    "usedByAshfall": false,
+    "docs": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echoworldstarter",
+    "github": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echoworldstarter",
+    "overview": [
+      "ECHO World Starter is sourced from ECHO-Modules/addons/echoworldstarter.",
+      "It declares 7 required modules and 0 optional integrations.",
+      "Release output is generated per runtime family so the launcher can update this module independently."
+    ],
+    "capabilities": [
+      "Native artifact: echoworldstarter-0.1.0.echo-addon",
+      "NeoForge artifact: echoworldstarter-0.1.0-neoforge.jar",
+      "Standalone artifact: echoworldstarter-0.1.0-standalone.jar",
+      "Sources artifact: echoworldstarter-0.1.0-sources.jar",
+      "Provides: foundation.spawn_safety, foundation.first_hour, foundation.shelter_rules",
+      "API stability: alpha"
+    ],
+    "integrations": [
+      "echoadaptercore",
+      "echocore",
+      "echonetcore",
+      "echofoundationcore",
+      "echomaterialcore",
+      "echotoolcore",
+      "echostationcore",
+      "foundation.spawn_safety",
+      "foundation.first_hour",
+      "foundation.shelter_rules",
+      "foundation.starter_items"
+    ],
+    "statusNote": "Generated from src/main/resources/META-INF/echo.mod.json in ECHO-Modules. The launcher resolves this module through moduleRequirements and downloads only changed artifacts when URLs are present.",
+    "roadmap": [
+      "Keep echo.mod.json, README.md, docs/artifacts.md, and release artifacts in sync for every release.",
+      "Publish Native, NeoForge, Standalone, and sources artifacts with checksums before marking an edition player-ready.",
+      "Use Release Index metadata as the public source for launcher and website download links."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Generated release files",
+        "version": "0.1.0",
+        "notes": [
+          "echoworldstarter-0.1.0-neoforge.jar for Openlands NeoForge Edition.",
+          "echoworldstarter-0.1.0.echo-addon for Openlands Native Edition.",
+          "echoworldstarter-0.1.0-standalone.jar for Openlands Standalone Edition.",
+          "echoworldstarter-0.1.0-sources.jar for traceability and developer debugging.",
           "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
         ]
       }

@@ -31,13 +31,10 @@ export default async function DownloadPage() {
   const latest = releases[0];
   const downloadRecords = downloads as DownloadRecord[];
   const indexedModpacks = approvedEntries(releaseIndexCatalog.entries, "modpack");
-  const updateTargets = indexedModpacks.length
-    ? indexedModpacks.map((entry) => ({ id: entry.id, label: `Update ${packLabel(entry.id)}` }))
-    : [
-        { id: "ashfall-native-edition", label: "Update Native Pack" },
-        { id: "ashfall-neoforge-edition", label: "Update NeoForge Pack" },
-        { id: "ashfall-standalone-edition", label: "Update Standalone Pack" }
-      ];
+  const updateTargets = indexedModpacks.map((entry) => ({
+    id: entry.id,
+    label: `Update ${packLabel(entry.id)}`
+  }));
   const packAssets = [
     ...assetsByKind(latest, "native-platform-package"),
     ...assetsByKind(latest, "standalone-runtime"),
@@ -135,6 +132,12 @@ export default async function DownloadPage() {
                 View on GitHub
               </Link>
             </div>
+            {updateTargets.length === 0 ? (
+              <p className="mt-4 text-sm leading-6 text-echo-muted">
+                No official pack update links are currently approved. Ashfall editions remain
+                warning-gated in the Release Index until readiness evidence is green.
+              </p>
+            ) : null}
           </div>
         </div>
       </section>

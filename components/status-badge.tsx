@@ -13,8 +13,21 @@ export function statusTone(status: string): StatusTone {
   const normalized = status.toLowerCase();
   if (normalized.includes("stable") || normalized.includes("public")) return "green";
   if (normalized.includes("active")) return "cyan";
-  if (normalized.includes("progress") || normalized.includes("foundation")) return "amber";
-  if (normalized.includes("experimental") || normalized.includes("research")) return "red";
+  if (
+    normalized.includes("progress") ||
+    normalized.includes("foundation") ||
+    normalized.includes("warning") ||
+    normalized.includes("gated")
+  ) {
+    return "amber";
+  }
+  if (
+    normalized.includes("experimental") ||
+    normalized.includes("research") ||
+    normalized.includes("blocked")
+  ) {
+    return "red";
+  }
   if (normalized.includes("planned") || normalized.includes("prototype")) return "blue";
   return "muted";
 }

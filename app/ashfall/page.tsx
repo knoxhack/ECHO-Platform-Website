@@ -62,7 +62,7 @@ export default function AshfallPage() {
         kicker="The first official ECHO survival experience."
         description="Survive the Gridfall aftermath in a world of broken relays, toxic storms, orbital wreckage, radiation zones, faction signals, and buried machine intelligence."
         actions={[
-          { label: "Play with ECHO Launcher", href: "/download" },
+          { label: "View Readiness Status", href: "/download" },
           { label: "View Media", href: "/media", variant: "secondary" },
           { label: "Watch Dev Talks", href: "/news", variant: "secondary" },
           { label: "Read Survival Guide", href: "/docs", variant: "secondary" }
@@ -120,15 +120,15 @@ export default function AshfallPage() {
           <CyberGlassCard className="p-8">
             <p className="cyber-label">How to Play</p>
             <h2 className="mt-4 font-display text-3xl font-bold text-echo-text">
-              Install once. Let the launcher do the heavy lifting.
+              Ashfall installs are locked behind readiness evidence.
             </h2>
             <ol className="mt-6 space-y-3 text-sm leading-6 text-echo-muted">
               {[
                 "Download ECHO Launcher.",
-                "Install Ashfall.",
-                "Let the launcher prepare the official profile.",
-                "Launch through the Minecraft Launcher handoff.",
-                "Survive the Gridfall."
+                "Check the Ashfall edition readiness state.",
+                "Wait for Release Index approval before installing a pack.",
+                "Use GitHub release assets only for audit and development work.",
+                "Install through the launcher after Phase 7-10 evidence is green."
               ].map((step, index) => (
                 <li key={step} className="flex gap-3">
                   <span className="grid h-7 w-7 shrink-0 place-items-center rounded-[4px] border border-echo-cyan/25 bg-echo-cyan/10 font-mono text-xs text-echo-cyan">
@@ -142,14 +142,15 @@ export default function AshfallPage() {
           <CyberGlassCard className="flex flex-col justify-center p-8">
             <p className="cyber-label">Player CTA</p>
             <h2 className="mt-4 font-display text-3xl font-bold text-echo-text">
-              Ready for the first official ECHO experience?
+              Ashfall is not approved for player installs yet.
             </h2>
             <p className="mt-4 text-sm leading-6 text-echo-muted">
-              The download page is structured for Windows, Linux, advanced releases,
-              and source access, with GitHub release integration ready for the next phase.
+              Release assets are checksum-backed, but the catalog remains warning-gated
+              until beta session proof, gameplay QA evidence, screenshots, and RC smoke
+              results pass the readiness audit.
             </p>
             <Link href="/download" className="cyber-button cyber-button-primary mt-6 w-fit">
-              Download Launcher
+              Open Download Portal
             </Link>
             <Link href="/media" className="cyber-button cyber-button-secondary mt-3 w-fit">
               View Media

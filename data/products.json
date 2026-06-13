@@ -100,18 +100,18 @@
     "releaseKind": "pack",
     "route": "/ashfall/native-edition",
     "tagline": "Native runtime Ashfall pack using .echo-addon modules.",
-    "description": "The primary Ashfall edition for the ECHO Native Platform. It consumes .echo-addon module artifacts and native pack metadata.",
+    "description": "The primary Ashfall edition for the ECHO Native Platform. Its assets are checksum-backed, but launcher installs are blocked until Phase 7-10 readiness evidence passes.",
     "purpose": "The primary Ashfall edition for the ECHO Native Platform. It consumes .echo-addon module artifacts and native pack metadata.",
-    "publicRole": "The primary Ashfall edition for the ECHO Native Platform. It consumes .echo-addon module artifacts and native pack metadata.",
-    "status": "Native Edition",
+    "publicRole": "Warning-gated Ashfall Native Edition pack source and metadata for launcher pack updates. Consumes .echo-addon artifacts from ECHO-Modules.",
+    "status": "Readiness Blocked",
     "repoUrl": "https://github.com/knoxhack/ECHO-Ashfall-Native-Edition",
     "issuesUrl": "https://github.com/knoxhack/ECHO-Ashfall-Native-Edition/issues",
     "releasesUrl": "https://github.com/knoxhack/ECHO-Ashfall-Native-Edition/releases",
     "releaseUrl": "https://github.com/knoxhack/ECHO-Ashfall-Native-Edition/releases/tag/v0.1.0-ashfall-native-edition",
-    "assetCount": 3,
+    "assetCount": 4,
     "docsHref": "/docs/release/ashfall-editions",
     "downloadHref": "/download",
-    "updateFlow": "Uses moduleArtifactFamily echo-addon; launcher updates changed .echo-addon files independently when release metadata provides asset URLs.",
+    "updateFlow": "Uses moduleArtifactFamily echo-addon after approval; launcher installs stay locked while beta sessions, gameplay QA evidence, screenshots, and RC smoke results are incomplete.",
     "artifacts": [
       "ashfall-native-edition pack archive",
       "pack manifest",
@@ -131,7 +131,7 @@
       },
       {
         "title": "Player catalog entry",
-        "description": "Appears as an official Ashfall install in the launcher catalog.",
+        "description": "Appears in the launcher catalog as warning-gated until release-readiness evidence is green.",
         "icon": "app"
       }
     ],
@@ -147,10 +147,10 @@
     "releaseKind": "pack",
     "route": "/ashfall/neoforge-edition",
     "tagline": "Minecraft/NeoForge Ashfall pack using -neoforge.jar modules.",
-    "description": "The compatibility edition for players and testers who need Minecraft/NeoForge runtime behavior while modules migrate to shared contracts.",
+    "description": "The compatibility edition for players and testers who need Minecraft/NeoForge runtime behavior while modules migrate to shared contracts. Its live pack manifest must be rebuilt with moduleRequirements before approval.",
     "purpose": "The compatibility edition for players and testers who need Minecraft/NeoForge runtime behavior while modules migrate to shared contracts.",
-    "publicRole": "The compatibility edition for players and testers who need Minecraft/NeoForge runtime behavior while modules migrate to shared contracts.",
-    "status": "NeoForge Edition",
+    "publicRole": "Warning-gated Ashfall NeoForge Edition pack source and metadata. Consumes -neoforge.jar artifacts from ECHO-Modules.",
+    "status": "Manifest Blocked",
     "repoUrl": "https://github.com/knoxhack/ECHO-Ashfall-NeoForge-Edition",
     "issuesUrl": "https://github.com/knoxhack/ECHO-Ashfall-NeoForge-Edition/issues",
     "releasesUrl": "https://github.com/knoxhack/ECHO-Ashfall-NeoForge-Edition/releases",
@@ -158,7 +158,7 @@
     "assetCount": 4,
     "docsHref": "/docs/release/ashfall-editions",
     "downloadHref": "/download",
-    "updateFlow": "Uses moduleArtifactFamily neoforge; launcher updates changed -neoforge.jar module files independently when available.",
+    "updateFlow": "Uses moduleArtifactFamily neoforge after approval; the current live .pack.json is missing moduleRequirements and readiness evidence is not green.",
     "artifacts": [
       "ashfall-neoforge-edition pack archive",
       "NeoForge pack manifest",
@@ -178,7 +178,7 @@
       },
       {
         "title": "Parity signal",
-        "description": "Helps compare Native behavior against the Minecraft runtime lane.",
+        "description": "Blocked until moduleRequirements and gameplay readiness evidence are attached.",
         "icon": "gauge"
       }
     ],
@@ -194,10 +194,10 @@
     "releaseKind": "pack",
     "route": "/ashfall/standalone-edition",
     "tagline": "Ashfall Standalone Edition using -standalone.jar modules.",
-    "description": "The renamed standalone Ashfall runtime package. It proves standalone module behavior without positioning the old showcase name as the product.",
+    "description": "The renamed standalone Ashfall runtime package. It proves standalone module behavior without positioning the old showcase name as the product, but the live pack manifest must be rebuilt with moduleRequirements before approval.",
     "purpose": "The renamed standalone Ashfall runtime package. It proves standalone module behavior without positioning the old showcase name as the product.",
-    "publicRole": "The renamed standalone Ashfall runtime package. It proves standalone module behavior without positioning the old showcase name as the product.",
-    "status": "Standalone Edition",
+    "publicRole": "Warning-gated Ashfall Standalone Edition pack source and metadata. Consumes -standalone.jar artifacts from ECHO-Modules.",
+    "status": "Manifest Blocked",
     "repoUrl": "https://github.com/knoxhack/ECHO-Ashfall-Standalone-Edition",
     "issuesUrl": "https://github.com/knoxhack/ECHO-Ashfall-Standalone-Edition/issues",
     "releasesUrl": "https://github.com/knoxhack/ECHO-Ashfall-Standalone-Edition/releases",
@@ -205,7 +205,7 @@
     "assetCount": 4,
     "docsHref": "/docs/release/ashfall-editions",
     "downloadHref": "/download",
-    "updateFlow": "Uses moduleArtifactFamily standalone; launcher updates changed -standalone.jar module files independently when available.",
+    "updateFlow": "Uses moduleArtifactFamily standalone after approval; the current live .pack.json is missing moduleRequirements and readiness evidence is not green.",
     "artifacts": [
       "ashfall-standalone-edition pack archive",
       "standalone pack manifest",
@@ -225,7 +225,7 @@
       },
       {
         "title": "Parity harness",
-        "description": "Useful for testing module behavior outside the NeoForge lifecycle.",
+        "description": "Blocked until moduleRequirements and gameplay readiness evidence are attached.",
         "icon": "test"
       }
     ],

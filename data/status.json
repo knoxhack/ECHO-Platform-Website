@@ -1,5 +1,5 @@
 [
-  { "name": "Ashfall", "status": "Active Development" },
+  { "name": "Ashfall", "status": "Readiness Blocked" },
   { "name": "Launcher", "status": "Public Releases" },
   { "name": "PackOS", "status": "In Progress" },
   { "name": "Native Platform", "status": "Foundation Phase" },
