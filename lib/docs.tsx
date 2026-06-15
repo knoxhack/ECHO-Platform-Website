@@ -18,6 +18,7 @@ import ModulesLens from "@/docs/modules/lens.mdx";
 import ModulesOverview from "@/docs/modules/overview.mdx";
 import ModulesTerminal from "@/docs/modules/terminal.mdx";
 import PlatformAdapterCore from "@/docs/platform/adaptercore.mdx";
+import PlatformContentGraph from "@/docs/platform/content-graph.mdx";
 import PlatformLauncher from "@/docs/platform/launcher.mdx";
 import PlatformNative from "@/docs/platform/native-platform.mdx";
 import PlatformOverview from "@/docs/platform/overview.mdx";
@@ -135,6 +136,13 @@ export const docsSections: DocSection[] = [
         "How ECHO Launcher prepares, repairs, validates, and hands off official experiences.",
         ["platform", "launcher"],
         PlatformLauncher
+      ),
+      doc(
+        "Platform",
+        "Content Graph",
+        "Runtime-neutral semantic model of modules, addons, and gameplay content consumed by launcher, runtimes, and review tools.",
+        ["platform", "content-graph"],
+        PlatformContentGraph
       )
     ]
   },

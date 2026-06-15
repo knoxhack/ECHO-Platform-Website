@@ -6,6 +6,19 @@ export type ProductFeature = {
   icon?: string;
 };
 
+export type ContentGraphEvidenceInfo = {
+  schemaVersion: string;
+  artifact: string;
+  availability: string;
+  graphCount?: number;
+  moduleCount?: number;
+  nodeCount?: number;
+  edgeCount?: number;
+  featureCount?: number;
+  exportPlanCount?: number;
+  hytaleBlockerCount?: number;
+};
+
 export type ProductRecord = {
   repoName: string;
   product: string;
@@ -25,6 +38,7 @@ export type ProductRecord = {
   downloadHref: string;
   updateFlow: string;
   artifacts: string[];
+  contentGraphEvidence?: ContentGraphEvidenceInfo;
   features: ProductFeature[];
   relatedRepos: string[];
 };

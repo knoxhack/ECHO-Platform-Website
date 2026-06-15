@@ -12,9 +12,12 @@ For module `<module>` at version `<version>`, release generation produces:
 | `<module>-<version>.echo-addon` | Ashfall Native Edition |
 | `<module>-<version>-standalone.jar` | Ashfall Standalone Edition |
 | `<module>-<version>-sources.jar` | Developers, traceability, debugging |
+| `<module>-<version>-content-graph.json` | Launcher, runtimes, review tools (Release-Index `content-graph` artifact role) |
+| `content-graph-evidence.json` | Release Index, Website, Mobile Studio, runtime QA gates (Release-Index `content-graph-evidence` artifact role) |
 | `META-INF/echo.mod.json` | All runtime artifacts |
 | `META-INF/neoforge.mods.toml` | NeoForge artifacts when applicable |
 | `echo-addon-package.json` | `.echo-addon` packages when applicable |
+| `.echo/content-graph/*` | Embedded in every runtime archive; mirrors the content-graph sidecar |
 
 ## Source Ownership
 
@@ -27,3 +30,4 @@ The launcher does not need a full pack archive when an individual changed module
 ## Release Index Ownership
 
 The Release Index is the public catalog layer. It maps each Ashfall edition to its pack metadata, release assets, checksums, and module artifact family so the launcher and website can agree on the same download surface.
+When available, it also exposes the release-root `content-graph-evidence.json` artifact so public surfaces can show the same graph, module, node, edge, feature, export-plan, and Hytale blocker counts without parsing every module sidecar.

@@ -4,6 +4,7 @@ export type ReleaseAssetKind =
   | "echo-pack"
   | "pack-manifest"
   | "release-metadata"
+  | "content-graph-evidence"
   | "module-jar"
   | "native-addon"
   | "native-platform-package"
@@ -173,6 +174,7 @@ export function classifyAsset(name: string): ReleaseAssetKind {
 
   if (normalized.endsWith(".echo-pack.zip")) return "echo-pack";
   if (normalized.endsWith(".pack.json")) return "pack-manifest";
+  if (normalized === "content-graph-evidence.json") return "content-graph-evidence";
   if (normalized === "echo-release.json") return "release-metadata";
   if (normalized.includes("checksum") || normalized === "checksums.txt") return "checksums";
   if (normalized.includes("final-qa") || normalized.includes("release-prep") || normalized.includes("proof-gate")) return "qa-report";
@@ -201,6 +203,8 @@ export function assetKindLabel(kind: ReleaseAssetKind): string {
       return "PackOS manifest";
     case "release-metadata":
       return "Release metadata";
+    case "content-graph-evidence":
+      return "Content graph evidence";
     case "module-jar":
       return "Module artifact";
     case "native-addon":
@@ -276,6 +280,7 @@ function normalizeRelease(release: GitHubRelease): EchoRelease {
         "echo-pack",
         "pack-manifest",
         "release-metadata",
+        "content-graph-evidence",
         "native-platform-package",
         "standalone-runtime",
         "native-addon",
@@ -364,6 +369,7 @@ function releaseIndexToDownloadPortal(manifest: ReleaseIndexManifest): EchoRelea
         "echo-pack",
         "pack-manifest",
         "release-metadata",
+        "content-graph-evidence",
         "native-addon",
         "module-jar",
         "checksums",

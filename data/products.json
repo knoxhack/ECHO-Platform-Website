@@ -53,9 +53,9 @@
     "releaseKind": "modules",
     "route": "/modules",
     "tagline": "All shared ECHO module source and per-module release artifacts.",
-    "description": "The canonical module repo. Each module owns source, manifests, per-module docs, and generated Native, NeoForge, Standalone, and sources artifacts.",
-    "purpose": "The canonical module repo. Each module owns source, manifests, per-module docs, and generated Native, NeoForge, Standalone, and sources artifacts.",
-    "publicRole": "The canonical module repo. Each module owns source, manifests, per-module docs, and generated Native, NeoForge, Standalone, and sources artifacts.",
+    "description": "The canonical module repo. Each module owns source, manifests, per-module docs, generated Native, NeoForge, Standalone, and sources artifacts, a canonical `.ECHO Content Graph` sidecar embedded in every runtime archive, and release-root content graph evidence.",
+    "purpose": "The canonical module repo. Each module owns source, manifests, per-module docs, generated Native, NeoForge, Standalone, and sources artifacts, a canonical `.ECHO Content Graph` sidecar embedded in every runtime archive, and release-root content graph evidence.",
+    "publicRole": "The canonical module repo. Each module owns source, manifests, per-module docs, generated Native, NeoForge, Standalone, and sources artifacts, a canonical `.ECHO Content Graph` sidecar embedded in every runtime archive, and release-root content graph evidence.",
     "status": "96 Modules",
     "repoUrl": "https://github.com/knoxhack/ECHO-Modules",
     "issuesUrl": "https://github.com/knoxhack/ECHO-Modules/issues",
@@ -69,8 +69,22 @@
       "<module>-<version>-neoforge.jar",
       "<module>-<version>.echo-addon",
       "<module>-<version>-standalone.jar",
-      "<module>-<version>-sources.jar"
+      "<module>-<version>-sources.jar",
+      "<module>-<version>-content-graph.json",
+      "content-graph-evidence.json"
     ],
+    "contentGraphEvidence": {
+      "schemaVersion": "echo.content_graph.evidence.v1",
+      "artifact": "content-graph-evidence.json",
+      "availability": "Produced by module release generation and consumed by Release Index, runtimes, Launcher, Studio, Website, and Mobile summaries.",
+      "graphCount": 133,
+      "moduleCount": 133,
+      "nodeCount": 4375,
+      "edgeCount": 5911,
+      "featureCount": 1463,
+      "exportPlanCount": 532,
+      "hytaleBlockerCount": 9
+    },
     "features": [
       {
         "title": "Runtime families",

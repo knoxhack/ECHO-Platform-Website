@@ -1,9 +1,20 @@
 {
-  "generatedAt": "2026-06-13T01:04:25.338Z",
+  "generatedAt": "2026-06-14T12:00:00.000Z",
   "sourceRepo": "knoxhack/ECHO-SDK",
   "sourceCommit": "1c6be4c8316cd06e4478d15407210d9218971ce6",
-  "docCount": 30,
+  "docCount": 31,
   "docs": [
+    {
+      "sourcePath": "docs/schemas/content-graph.md",
+      "targetPath": "docs/sdk/content-graph.mdx",
+      "slug": [
+        "sdk",
+        "content-graph"
+      ],
+      "title": "ECHO Content Graph",
+      "description": "Runtime-neutral semantic model of ECHO modules, addons, and gameplay content.",
+      "sourceSha256": "fee39128457eab48033a94351aa00e29000c508bc98adb13ff8db3d34cd93105"
+    },
     {
       "sourcePath": "docs/API_INDEX.md",
       "targetPath": "docs/sdk/api-index.mdx",

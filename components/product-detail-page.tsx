@@ -54,6 +54,31 @@ export function ProductDetailPage({ product }: { product: ProductRecord }) {
               <StatusBadge label={product.releaseKind} />
             </div>
             <p className="mt-5 text-sm leading-6 text-echo-muted">{product.updateFlow}</p>
+            {product.contentGraphEvidence ? (
+              <div className="mt-6 border-t border-white/10 pt-5 text-sm leading-6 text-echo-muted">
+                <p className="cyber-label">Content Graph Evidence</p>
+                <p className="mt-3 text-echo-text">{product.contentGraphEvidence.artifact}</p>
+                <p className="mt-2">{product.contentGraphEvidence.schemaVersion}</p>
+                <p className="mt-2">{product.contentGraphEvidence.availability}</p>
+                {product.contentGraphEvidence.nodeCount !== undefined ? (
+                  <div className="mt-4 grid grid-cols-2 gap-3 text-xs md:grid-cols-4">
+                    {[
+                      { label: "Modules", value: product.contentGraphEvidence.moduleCount },
+                      { label: "Nodes", value: product.contentGraphEvidence.nodeCount },
+                      { label: "Edges", value: product.contentGraphEvidence.edgeCount },
+                      { label: "Features", value: product.contentGraphEvidence.featureCount },
+                      { label: "Export plans", value: product.contentGraphEvidence.exportPlanCount },
+                      { label: "Hytale blockers", value: product.contentGraphEvidence.hytaleBlockerCount }
+                    ].map(({ label, value }) => (
+                      <div key={label} className="rounded-[5px] border border-white/10 bg-white/[0.035] p-3">
+                        <p className="text-echo-muted">{label}</p>
+                        <p className="mt-1 font-display text-lg font-bold text-echo-text">{value}</p>
+                      </div>
+                    ))}
+                  </div>
+                ) : null}
+              </div>
+            ) : null}
           </CyberGlassCard>
         </div>
       </section>

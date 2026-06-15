@@ -3,6 +3,7 @@ import type { ComponentType } from "react";
 import SdkApiIndex from "@/docs/sdk/api-index.mdx";
 import SdkApiStability from "@/docs/sdk/api-stability.mdx";
 import SdkApi from "@/docs/sdk/api.mdx";
+import SdkContentGraph from "@/docs/sdk/content-graph.mdx";
 import SdkApiOptionalIntegrations from "@/docs/sdk/api/optional-integrations.mdx";
 import SdkCreatorGuidesBuildYourFirstEchoPack from "@/docs/sdk/creator-guides/build-your-first-echo-pack.mdx";
 import SdkCreatorStartHere from "@/docs/sdk/creator-start-here.mdx";
@@ -242,6 +243,13 @@ export const sdkDocs: GeneratedDocEntry[] = [
     section: "SDK",
     slug: ["sdk","schemas"],
     component: SdkSchemas
+  },
+  {
+    title: "ECHO Content Graph",
+    description: "Runtime-neutral semantic model of ECHO modules, addons, and gameplay content.",
+    section: "SDK",
+    slug: ["sdk","content-graph"],
+    component: SdkContentGraph
   },
   {
     title: "Standalone Module Guide",
