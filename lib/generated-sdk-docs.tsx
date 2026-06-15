@@ -3,7 +3,6 @@ import type { ComponentType } from "react";
 import SdkApiIndex from "@/docs/sdk/api-index.mdx";
 import SdkApiStability from "@/docs/sdk/api-stability.mdx";
 import SdkApi from "@/docs/sdk/api.mdx";
-import SdkContentGraph from "@/docs/sdk/content-graph.mdx";
 import SdkApiOptionalIntegrations from "@/docs/sdk/api/optional-integrations.mdx";
 import SdkCreatorGuidesBuildYourFirstEchoPack from "@/docs/sdk/creator-guides/build-your-first-echo-pack.mdx";
 import SdkCreatorStartHere from "@/docs/sdk/creator-start-here.mdx";
@@ -29,6 +28,8 @@ import SdkNativeAddonGuide from "@/docs/sdk/native-addon-guide.mdx";
 import SdkNeoforgeModuleGuide from "@/docs/sdk/neoforge-module-guide.mdx";
 import SdkOptionalIntegrations from "@/docs/sdk/optional-integrations.mdx";
 import SdkReleasePackaging from "@/docs/sdk/release-packaging.mdx";
+import SdkSchemasContentGraph from "@/docs/sdk/schemas/content-graph.mdx";
+import SdkSchemasHytaleAdapterRfc from "@/docs/sdk/schemas/hytale-adapter-rfc.mdx";
 import SdkSchemas from "@/docs/sdk/schemas.mdx";
 import SdkStandaloneModuleGuide from "@/docs/sdk/standalone-module-guide.mdx";
 
@@ -148,7 +149,7 @@ export const sdkDocs: GeneratedDocEntry[] = [
   },
   {
     title: "ECHO Native API Reference",
-    description: "The full public API snapshot is published as:",
+    description: "The public RC1 API is published through these artifacts:",
     section: "SDK",
     slug: ["sdk","native-api-reference"],
     component: SdkNativeApiReference
@@ -162,21 +163,21 @@ export const sdkDocs: GeneratedDocEntry[] = [
   },
   {
     title: "Example Addon Walkthrough: EchoExampleMod",
-    description: "This walkthrough builds a minimal ECHO Native addon from scratch. It registers a block, an item, a datapack-driven recipe, and an optional Index integration.",
+    description: "This walkthrough builds a minimal ECHO Native addon from scratch. It declares a content registration through the typed Native registry host, packages a .echo-addon, and remains independent f",
     section: "SDK",
     slug: ["sdk","native-example-addon-walkthrough"],
     component: SdkNativeExampleAddonWalkthrough
   },
   {
     title: "ECHO Native Mod Author Guide",
-    description: "my-addon/ build.gradle src/main/java/.../MyAddon.java src/main/resources/META-INF/echo-native-addon.descriptor.json src/main/resources/data/myaddon/... src/test/java/.../MyAddonTest.java",
+    description: "my-addon/ build.gradle src/main/java/.../MyAddon.java src/main/resources/META-INF/echo.mod.json src/main/resources/data/myaddon/... src/test/java/.../MyAddonTest.java",
     section: "SDK",
     slug: ["sdk","native-mod-author-guide"],
     component: SdkNativeModAuthorGuide
   },
   {
     title: "Porting Guide from NeoForge to ECHO Native",
-    description: "ECHO Native gives you service-based optional integrations, policy-driven runtime lanes, and built-in RuntimeGuard budgets. Porting is incremental: you can keep NeoForge compatibility while a",
+    description: "This guide is for moving a NeoForge-style addon toward the ECHO Native 1.0.0-RC1 workflow. Native-first addons compile against the public SDK, package as .echo-addon, and load in release mod",
     section: "SDK",
     slug: ["sdk","native-porting-guide"],
     component: SdkNativePortingGuide
@@ -238,18 +239,25 @@ export const sdkDocs: GeneratedDocEntry[] = [
     component: SdkReleasePackaging
   },
   {
+    title: "ECHO Content Graph",
+    description: "The .ECHO Content Graph is a runtime-neutral, portable semantic model of ECHO modules, addons, and gameplay content.",
+    section: "SDK",
+    slug: ["sdk","schemas","content-graph"],
+    component: SdkSchemasContentGraph
+  },
+  {
+    title: "Hytale Adapter RFC",
+    description: "Status: planning-only.",
+    section: "SDK",
+    slug: ["sdk","schemas","hytale-adapter-rfc"],
+    component: SdkSchemasHytaleAdapterRfc
+  },
+  {
     title: "Schemas",
     description: "Schemas define the machine-readable contracts used by launchers, modules, packs, and tools.",
     section: "SDK",
     slug: ["sdk","schemas"],
     component: SdkSchemas
-  },
-  {
-    title: "ECHO Content Graph",
-    description: "Runtime-neutral semantic model of ECHO modules, addons, and gameplay content.",
-    section: "SDK",
-    slug: ["sdk","content-graph"],
-    component: SdkContentGraph
   },
   {
     title: "Standalone Module Guide",

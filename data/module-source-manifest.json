@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-06-13T01:04:25.267Z",
+  "generatedAt": "2026-06-15T23:31:22.448Z",
   "sourceRepo": "knoxhack/ECHO-Modules",
-  "sourceCommit": "233d00718090846fa268dfa2e0b7d3a165814dde",
-  "moduleCount": 131,
+  "sourceCommit": "88d17f50dc14915ab3ea21802490bc5e43a69550",
+  "moduleCount": 133,
   "moduleIds": [
     "echoaccessibilitycore",
     "echoadaptercore",
@@ -41,6 +41,7 @@
     "echocurationcore",
     "echocursecore",
     "echodatacore",
+    "echodeepreachprotocol",
     "echodependencydoctor",
     "echodifficultycore",
     "echodisastercore",
@@ -53,6 +54,7 @@
     "echofamiliarcore",
     "echofoundationcore",
     "echogalacticcore",
+    "echogalacticsurveyprotocol",
     "echogrimoire",
     "echoguidecore",
     "echohazardcore",
@@ -109,6 +111,7 @@
     "echoserveropscore",
     "echosessioncore",
     "echosettlementcore",
+    "echosignalos",
     "echoskillcore",
     "echoskyrelayprotocol",
     "echosocialcore",
@@ -133,7 +136,6 @@
     "echowiki",
     "echoworldcore",
     "echoworldstarter",
-    "signalos",
     "signalosexample"
   ]
 }

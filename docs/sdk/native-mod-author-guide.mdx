@@ -8,7 +8,7 @@
 2. Apply the `echo-sdk-gradle-plugin` to your addon project.
 3. Pick a [template](/docs/sdk/native-templates) matching your addon type.
 4. Write your addon descriptor, service registrations, and content.
-5. Validate with `./gradlew validateAddon` and package with `./gradlew packageAddon`.
+5. Validate with `./gradlew check` and package with `./gradlew packageEchoNativeAddon`.
 
 ## Project Structure
 
@@ -16,24 +16,28 @@
 my-addon/
   build.gradle
   src/main/java/.../MyAddon.java
-  src/main/resources/META-INF/echo-native-addon.descriptor.json
+  src/main/resources/META-INF/echo.mod.json
   src/main/resources/data/myaddon/...
   src/test/java/.../MyAddonTest.java
 ```
 
 ## Descriptor
 
-Every addon needs `echo-native-addon.descriptor.json`:
+Every addon needs `echo.mod.json`:
 
 ```json
 {
+  "schema": "echo.mod.v1",
   "id": "myaddon",
   "name": "My Addon",
-  "version": "1.0.0",
-  "nativePolicy": "NATIVE",
-  "services": ["myaddon:registry_service"],
-  "optionalIntegrations": ["echoindex", "echoterminal"],
-  "side": "BOTH"
+  "version": "1.0.0-RC1",
+  "entrypoint": "com.example.myaddon.MyAddon",
+  "side": "common",
+  "provides": ["myaddon.registry"],
+  "access": {
+    "nativeClasspath": ["addon.jar"]
+  },
+  "apiStability": "beta"
 }
 ```
 
@@ -42,19 +46,32 @@ Every addon needs `echo-native-addon.descriptor.json`:
 | `id` | Yes | Unique modid. Lowercase, no spaces. |
 | `name` | Yes | Human-readable name. |
 | `version` | Yes | Semver string. |
-| `nativePolicy` | Yes | `NATIVE`, `NEOFORGE_BRIDGE`, or `STANDALONE`. |
-| `services` | No | List of service contract IDs this addon registers. |
-| `optionalIntegrations` | No | Modids this addon optionally integrates with. |
-| `side` | Yes | `CLIENT`, `SERVER`, or `BOTH`. |
+| `entrypoint` | Yes | Class implementing `EchoNativeModuleEntrypoint`. |
+| `side` | Yes | `common`, `client`, or `server`. |
+| `provides` | No | Feature IDs this addon provides. |
+| `access.nativeClasspath` | Yes | Release-mode classpath entries, usually `addon.jar`. |
 
 ## Service Registration
 
-Use `EchoCoreServices` or `EchoNativeAddonRuntime` to register providers:
+Use `EchoNativeModuleLoadContext` to register addon services, then call typed host services for runtime mutations. Do not mint `MUTATED` receipts yourself; record the receipt returned by the host service.
 
 ```java
-public class MyAddon {
-    public void onInitialize(EchoNativeAddonRuntime runtime) {
-        runtime.registerService("myaddon:registry_service", new MyRegistryService());
+public class MyAddon implements EchoNativeModuleEntrypoint {
+    private static final String SERVICE_ID = "myaddon:registry_service";
+
+    @Override
+    public void registerServices(EchoNativeModuleLoadContext context) {
+        context.registerService(SERVICE_ID, new MyRegistryService(), "registry");
+    }
+
+    @Override
+    public void registerContent(EchoNativeModuleLoadContext context) {
+        EchoNativeServiceMutation mutation = EchoNativeServiceMutation.of(
+                "myaddon", "registry", "declare_content", "myaddon:example", EchoNativeRuntimeSide.COMMON);
+        context.serviceRegistry()
+                .service("echo.native.registry", EchoNativeRegistryService.class)
+                .map(registry -> registry.register(mutation))
+                .ifPresent(context::recordMutation);
     }
 }
 ```
@@ -76,29 +93,27 @@ index.ifPresent(i -> i.registerProvider(myDocsProvider));
 # Compile and run tests
 ./gradlew build
 
-# Validate descriptor and service contracts
-./gradlew validateAddon
-
-# Produce distribution jar
-./gradlew packageAddon
+# Produce .echo-addon distribution
+./gradlew packageEchoNativeAddon
 ```
 
-Output lands in `build/libs/&lt;id&gt;-&lt;version&gt;-echo-native.jar`.
+Output lands in `build/echo-native/addons/&lt;id&gt;-&lt;version&gt;.echo-addon`.
 
 ## Testing
 
 Use the `echo-native-testkit` dependency for in-memory loader tests:
 
 ```groovy
-testImplementation 'dev.echo.native:testkit:1.0.0-RC'
+testImplementation 'dev.echo.native:echo-native-testkit:1.0.0-RC1'
 ```
 
 ```java
 @Test
 public void testBootstrap() {
-    EchoNativeTestLoader loader = new EchoNativeTestLoader();
-    loader.loadAddon("myaddon");
-    assertTrue(loader.isServiceRegistered("myaddon:registry_service"));
+    EchoNativeSdkTestkit.Environment env = EchoNativeSdkTestkit.common("myaddon");
+    EchoNativeModuleLoadContext context = env.loadEntrypoint(new MyAddon());
+    assertTrue(context.serviceRegistry().hasService("myaddon:registry_service"));
+    env.goldenParity().requireOnlyTypedReceipts();
 }
 ```
 

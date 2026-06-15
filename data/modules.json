@@ -1802,7 +1802,7 @@
       "echoadaptercore",
       "echocore",
       "echonetcore",
-      "signalos",
+      "echosignalos",
       "community.discord_relay",
       "community.server_events",
       "community.server_status",
@@ -2395,6 +2395,107 @@
     ]
   },
   {
+    "id": "echodeepreachprotocol",
+    "name": "ECHO: Deep Reach Protocol",
+    "category": "Experience",
+    "group": "Experience",
+    "status": "Alpha",
+    "version": "0.1.0",
+    "description": "Pressure-suit survival pack root module for the ECHO platform.",
+    "dependencies": [
+      "echofoundationcore",
+      "echomaterialcore",
+      "echotoolcore",
+      "echostationcore",
+      "echoworldstarter",
+      "echocommonloot",
+      "echocreatureroles",
+      "echocore",
+      "echonetcore",
+      "echoadaptercore",
+      "echocontentcore",
+      "echoworldcore",
+      "echobiomecore",
+      "echostructurecore",
+      "echocreaturecore",
+      "echocombatcore",
+      "echohealthcore",
+      "echolootcore",
+      "echorecipecore",
+      "echoassetcore",
+      "echosoundcore",
+      "echothemecore",
+      "echoscreencore",
+      "echohudcore",
+      "echoplayercore",
+      "echonpcore",
+      "echoeconomycore",
+      "echohazardcore",
+      "echoequipmentcore",
+      "echosettlementcore",
+      "echoskillcore",
+      "echomissioncore",
+      "echoexpeditioncore",
+      "echoruincore",
+      "echovehiclecore",
+      "echoseasoncore",
+      "echosessioncore",
+      "echotelemetrycore"
+    ],
+    "standalone": true,
+    "usedByAshfall": false,
+    "docs": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echodeepreachprotocol",
+    "github": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echodeepreachprotocol",
+    "overview": [
+      "ECHO: Deep Reach Protocol is sourced from ECHO-Modules/addons/echodeepreachprotocol.",
+      "It declares 38 required modules and 7 optional integrations.",
+      "Release output is generated per runtime family so the launcher can update this module independently."
+    ],
+    "capabilities": [
+      "Native artifact: echodeepreachprotocol-0.1.0.echo-addon",
+      "NeoForge artifact: echodeepreachprotocol-0.1.0-neoforge.jar",
+      "Standalone artifact: echodeepreachprotocol-0.1.0-standalone.jar",
+      "Sources artifact: echodeepreachprotocol-0.1.0-sources.jar",
+      "Provides: deepreach.content, deepreach.missions, deepreach.protocol",
+      "API stability: alpha"
+    ],
+    "integrations": [
+      "echofoundationcore",
+      "echomaterialcore",
+      "echotoolcore",
+      "echostationcore",
+      "echoworldstarter",
+      "echocommonloot",
+      "echocreatureroles",
+      "echocore",
+      "echonetcore",
+      "echoadaptercore",
+      "echocontentcore",
+      "echoworldcore",
+      "echobiomecore",
+      "echostructurecore"
+    ],
+    "statusNote": "Generated from src/main/resources/META-INF/echo.mod.json in ECHO-Modules. The launcher resolves this module through moduleRequirements and downloads only changed artifacts when URLs are present.",
+    "roadmap": [
+      "Keep echo.mod.json, README.md, docs/artifacts.md, and release artifacts in sync for every release.",
+      "Publish Native, NeoForge, Standalone, and sources artifacts with checksums before marking an edition player-ready.",
+      "Use Release Index metadata as the public source for launcher and website download links."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Generated release files",
+        "version": "0.1.0",
+        "notes": [
+          "echodeepreachprotocol-0.1.0-neoforge.jar for Ashfall NeoForge Edition.",
+          "echodeepreachprotocol-0.1.0.echo-addon for Ashfall Native Edition.",
+          "echodeepreachprotocol-0.1.0-standalone.jar for Ashfall Standalone Edition.",
+          "echodeepreachprotocol-0.1.0-sources.jar for traceability and developer debugging.",
+          "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
+        ]
+      }
+    ]
+  },
+  {
     "id": "echodependencydoctor",
     "name": "ECHO: DependencyDoctor",
     "category": "Gameplay",
@@ -2736,7 +2837,8 @@
       "echoadaptercore",
       "echoarmory",
       "echocombatcore",
-      "echotoolcore"
+      "echotoolcore",
+      "echohazardcore"
     ],
     "standalone": true,
     "usedByAshfall": true,
@@ -2744,7 +2846,7 @@
     "github": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echoequipmentcore",
     "overview": [
       "ECHO: EquipmentCore is sourced from ECHO-Modules/addons/echoequipmentcore.",
-      "It declares 5 required modules and 1 optional integration.",
+      "It declares 6 required modules and 1 optional integration.",
       "Release output is generated per runtime family so the launcher can update this module independently."
     ],
     "capabilities": [
@@ -2761,6 +2863,7 @@
       "echoarmory",
       "echocombatcore",
       "echotoolcore",
+      "echohazardcore",
       "echoaccessibilitycore",
       "equipment.slots",
       "equipment.durability",
@@ -3116,7 +3219,6 @@
     "version": "0.1.0-native-alpha",
     "description": "Provides galacticcore.content, galacticcore.celestialroutes, galacticcore.lifesupport, galacticcore.rockets, galacticcore.legacyparitymap for the ECHO module graph.",
     "dependencies": [
-      "echoaddonapi",
       "echoadaptercore"
     ],
     "standalone": true,
@@ -3125,7 +3227,7 @@
     "github": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echogalacticcore",
     "overview": [
       "ECHO: GalacticCore is sourced from ECHO-Modules/addons/echogalacticcore.",
-      "It declares 2 required modules and 13 optional integrations.",
+      "It declares 1 required module and 13 optional integrations.",
       "Release output is generated per runtime family so the launcher can update this module independently."
     ],
     "capabilities": [
@@ -3137,7 +3239,6 @@
       "API stability: beta"
     ],
     "integrations": [
-      "echoaddonapi",
       "echoadaptercore",
       "echopackcore",
       "echoindex",
@@ -3150,7 +3251,8 @@
       "echorendercore",
       "echoatmospherecore",
       "echopowercore",
-      "echomachinecore"
+      "echomachinecore",
+      "echovehiclecore"
     ],
     "statusNote": "Generated from src/main/resources/META-INF/echo.mod.json in ECHO-Modules. The launcher resolves this module through moduleRequirements and downloads only changed artifacts when URLs are present.",
     "roadmap": [
@@ -3167,6 +3269,73 @@
           "echogalacticcore-0.1.0-native-alpha.echo-addon for Ashfall Native Edition.",
           "echogalacticcore-0.1.0-native-alpha-standalone.jar for Ashfall Standalone Edition.",
           "echogalacticcore-0.1.0-native-alpha-sources.jar for traceability and developer debugging.",
+          "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "echogalacticsurveyprotocol",
+    "name": "ECHO: Galactic Survey Protocol",
+    "category": "Experience",
+    "group": "Experience",
+    "status": "Active",
+    "version": "0.1.0",
+    "description": "Galactic Survey Protocol is the first-party pack-root contract for ECHO: Galactic Survey. It owns the pack identity, survey data contracts, starter content IDs, probe-first route, HoloMap layers, Lens profiles, Terminal pages, salvage gates, certification progression, and release-readiness gates.",
+    "dependencies": [
+      "echoadaptercore",
+      "echocore",
+      "echonetcore",
+      "echoruntimeguard"
+    ],
+    "standalone": true,
+    "usedByAshfall": false,
+    "docs": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echogalacticsurveyprotocol",
+    "github": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echogalacticsurveyprotocol",
+    "overview": [
+      "ECHO: Galactic Survey Protocol is sourced from ECHO-Modules/addons/echogalacticsurveyprotocol.",
+      "It declares 4 required modules and 12 optional integrations.",
+      "Release output is generated per runtime family so the launcher can update this module independently."
+    ],
+    "capabilities": [
+      "Native artifact: echogalacticsurveyprotocol-0.1.0.echo-addon",
+      "NeoForge artifact: echogalacticsurveyprotocol-0.1.0-neoforge.jar",
+      "Standalone artifact: echogalacticsurveyprotocol-0.1.0-standalone.jar",
+      "Sources artifact: echogalacticsurveyprotocol-0.1.0-sources.jar",
+      "Provides: galacticsurvey.content, galacticsurvey.sectors, galacticsurvey.bodies",
+      "API stability: alpha"
+    ],
+    "integrations": [
+      "echoadaptercore",
+      "echocore",
+      "echonetcore",
+      "echoruntimeguard",
+      "echogalacticcore",
+      "echoorbitalremnants",
+      "echovehiclecore",
+      "echoholomap",
+      "echoterminal",
+      "echoindex",
+      "echolens",
+      "echomissioncore",
+      "echopowergrid",
+      "echologisticsnetwork"
+    ],
+    "statusNote": "Generated from src/main/resources/META-INF/echo.mod.json in ECHO-Modules. The launcher resolves this module through moduleRequirements and downloads only changed artifacts when URLs are present.",
+    "roadmap": [
+      "Keep echo.mod.json, README.md, docs/artifacts.md, and release artifacts in sync for every release.",
+      "Publish Native, NeoForge, Standalone, and sources artifacts with checksums before marking an edition player-ready.",
+      "Use Release Index metadata as the public source for launcher and website download links."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Generated release files",
+        "version": "0.1.0",
+        "notes": [
+          "echogalacticsurveyprotocol-0.1.0-neoforge.jar for Ashfall NeoForge Edition.",
+          "echogalacticsurveyprotocol-0.1.0.echo-addon for Ashfall Native Edition.",
+          "echogalacticsurveyprotocol-0.1.0-standalone.jar for Ashfall Standalone Edition.",
+          "echogalacticsurveyprotocol-0.1.0-sources.jar for traceability and developer debugging.",
           "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
         ]
       }
@@ -3476,9 +3645,9 @@
         "title": "Generated release files",
         "version": "1.0.0",
         "notes": [
-          "echoholomap-1.0.0-neoforge.jar for Ashfall NeoForge Edition.",
-          "echoholomap-1.0.0.echo-addon for Ashfall Native Edition.",
-          "echoholomap-1.0.0-standalone.jar for Ashfall Standalone Edition.",
+          "echoholomap-1.0.0-neoforge.jar for Openlands NeoForge Edition.",
+          "echoholomap-1.0.0.echo-addon for Openlands Native Edition.",
+          "echoholomap-1.0.0-standalone.jar for Openlands Standalone Edition.",
           "echoholomap-1.0.0-sources.jar for traceability and developer debugging.",
           "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
         ]
@@ -3606,9 +3775,9 @@
         "title": "Generated release files",
         "version": "1.0.0",
         "notes": [
-          "echoindex-1.0.0-neoforge.jar for Ashfall NeoForge Edition.",
-          "echoindex-1.0.0.echo-addon for Ashfall Native Edition.",
-          "echoindex-1.0.0-standalone.jar for Ashfall Standalone Edition.",
+          "echoindex-1.0.0-neoforge.jar for Openlands NeoForge Edition.",
+          "echoindex-1.0.0.echo-addon for Openlands Native Edition.",
+          "echoindex-1.0.0-standalone.jar for Openlands Standalone Edition.",
           "echoindex-1.0.0-sources.jar for traceability and developer debugging.",
           "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
         ]
@@ -3800,9 +3969,9 @@
         "title": "Generated release files",
         "version": "1.0.0",
         "notes": [
-          "echolens-1.0.0-neoforge.jar for Ashfall NeoForge Edition.",
-          "echolens-1.0.0.echo-addon for Ashfall Native Edition.",
-          "echolens-1.0.0-standalone.jar for Ashfall Standalone Edition.",
+          "echolens-1.0.0-neoforge.jar for Openlands NeoForge Edition.",
+          "echolens-1.0.0.echo-addon for Openlands Native Edition.",
+          "echolens-1.0.0-standalone.jar for Openlands Standalone Edition.",
           "echolens-1.0.0-sources.jar for traceability and developer debugging.",
           "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
         ]
@@ -5526,7 +5695,7 @@
       "echoashfallprotocol",
       "echocommunitybridge",
       "echoterminal",
-      "signalos",
+      "echosignalos",
       "presence.discord_rpc",
       "presence.privacy",
       "presence.providers",
@@ -6745,7 +6914,9 @@
       "echobasegrid",
       "echonpcore",
       "echologisticscore",
-      "echoworldcore"
+      "echoworldcore",
+      "echohazardcore",
+      "echoequipmentcore"
     ],
     "standalone": true,
     "usedByAshfall": true,
@@ -6753,7 +6924,7 @@
     "github": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echosettlementcore",
     "overview": [
       "ECHO: SettlementCore is sourced from ECHO-Modules/addons/echosettlementcore.",
-      "It declares 6 required modules and 1 optional integration.",
+      "It declares 8 required modules and 1 optional integration.",
       "Release output is generated per runtime family so the launcher can update this module independently."
     ],
     "capabilities": [
@@ -6771,6 +6942,8 @@
       "echonpcore",
       "echologisticscore",
       "echoworldcore",
+      "echohazardcore",
+      "echoequipmentcore",
       "echofactioncore",
       "settlement.registry",
       "settlement.jobs",
@@ -6792,6 +6965,72 @@
           "echosettlementcore-0.1.0.echo-addon for Sky Relay Native Edition.",
           "echosettlementcore-0.1.0-standalone.jar for Sky Relay Standalone Edition.",
           "echosettlementcore-0.1.0-sources.jar for traceability and developer debugging.",
+          "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "echosignalos",
+    "name": "SignalOS",
+    "category": "Gameplay",
+    "group": "Core",
+    "status": "Beta",
+    "version": "1.0.0",
+    "description": "Provides signalos.archives, signalos.chapters, signalos.datadrives, signalos.missions, signalos.net, signalos.terminal for the ECHO module graph.",
+    "dependencies": [
+      "echoadaptercore",
+      "echocore",
+      "echonetcore"
+    ],
+    "standalone": true,
+    "usedByAshfall": false,
+    "docs": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echosignalos",
+    "github": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echosignalos",
+    "overview": [
+      "SignalOS is sourced from ECHO-Modules/addons/echosignalos.",
+      "It declares 3 required modules and 6 optional integrations.",
+      "Release output is generated per runtime family so the launcher can update this module independently."
+    ],
+    "capabilities": [
+      "Native artifact: echosignalos-1.0.0.echo-addon",
+      "NeoForge artifact: echosignalos-1.0.0-neoforge.jar",
+      "Standalone artifact: echosignalos-1.0.0-standalone.jar",
+      "Sources artifact: echosignalos-1.0.0-sources.jar",
+      "Provides: signalos.archives, signalos.chapters, signalos.data_drives",
+      "API stability: beta"
+    ],
+    "integrations": [
+      "echoadaptercore",
+      "echocore",
+      "echonetcore",
+      "echodatacore",
+      "echoindex",
+      "echomissioncore",
+      "echorendercore",
+      "echoscreencore",
+      "echoterminal",
+      "signalos.archives",
+      "signalos.chapters",
+      "signalos.data_drives",
+      "signalos.missions",
+      "signalos.net"
+    ],
+    "statusNote": "Generated from src/main/resources/META-INF/echo.mod.json in ECHO-Modules. The launcher resolves this module through moduleRequirements and downloads only changed artifacts when URLs are present.",
+    "roadmap": [
+      "Keep echo.mod.json, README.md, docs/artifacts.md, and release artifacts in sync for every release.",
+      "Publish Native, NeoForge, Standalone, and sources artifacts with checksums before marking an edition player-ready.",
+      "Use Release Index metadata as the public source for launcher and website download links."
+    ],
+    "releaseNotes": [
+      {
+        "title": "Generated release files",
+        "version": "1.0.0",
+        "notes": [
+          "echosignalos-1.0.0-neoforge.jar for Ashfall NeoForge Edition.",
+          "echosignalos-1.0.0.echo-addon for Ashfall Native Edition.",
+          "echosignalos-1.0.0-standalone.jar for Ashfall Standalone Edition.",
+          "echosignalos-1.0.0-sources.jar for traceability and developer debugging.",
           "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
         ]
       }
@@ -7631,7 +7870,7 @@
       "echolens",
       "echomissioncore",
       "echothemecore",
-      "signalos",
+      "echosignalos",
       "terminal.surface"
     ],
     "statusNote": "Generated from src/main/resources/META-INF/echo.mod.json in ECHO-Modules. The launcher resolves this module through moduleRequirements and downloads only changed artifacts when URLs are present.",
@@ -7645,9 +7884,9 @@
         "title": "Generated release files",
         "version": "1.0.0",
         "notes": [
-          "echoterminal-1.0.0-neoforge.jar for Ashfall NeoForge Edition.",
-          "echoterminal-1.0.0.echo-addon for Ashfall Native Edition.",
-          "echoterminal-1.0.0-standalone.jar for Ashfall Standalone Edition.",
+          "echoterminal-1.0.0-neoforge.jar for Openlands NeoForge Edition.",
+          "echoterminal-1.0.0.echo-addon for Openlands Native Edition.",
+          "echoterminal-1.0.0-standalone.jar for Openlands Standalone Edition.",
           "echoterminal-1.0.0-sources.jar for traceability and developer debugging.",
           "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
         ]
@@ -7819,7 +8058,7 @@
       "echorendercore",
       "echoruntimeguard",
       "echoscreencore",
-      "signalos",
+      "echosignalos",
       "echosoundcore",
       "echoterminal",
       "theme.asset_kits",
@@ -8154,9 +8393,9 @@
         "title": "Generated release files",
         "version": "1.0.0",
         "notes": [
-          "echoweathercore-1.0.0-neoforge.jar for Ashfall NeoForge Edition.",
-          "echoweathercore-1.0.0.echo-addon for Ashfall Native Edition.",
-          "echoweathercore-1.0.0-standalone.jar for Ashfall Standalone Edition.",
+          "echoweathercore-1.0.0-neoforge.jar for Openlands NeoForge Edition.",
+          "echoweathercore-1.0.0.echo-addon for Openlands Native Edition.",
+          "echoweathercore-1.0.0-standalone.jar for Openlands Standalone Edition.",
           "echoweathercore-1.0.0-sources.jar for traceability and developer debugging.",
           "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
         ]
@@ -8359,72 +8598,6 @@
     ]
   },
   {
-    "id": "signalos",
-    "name": "SignalOS",
-    "category": "Gameplay",
-    "group": "Interface",
-    "status": "Beta",
-    "version": "1.0.0",
-    "description": "Provides signalos.archives, signalos.chapters, signalos.datadrives, signalos.missions, signalos.net, signalos.terminal for the ECHO module graph.",
-    "dependencies": [
-      "echoadaptercore",
-      "echocore",
-      "echonetcore"
-    ],
-    "standalone": true,
-    "usedByAshfall": false,
-    "docs": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echosignalos",
-    "github": "https://github.com/knoxhack/ECHO-Modules/tree/main/addons/echosignalos",
-    "overview": [
-      "SignalOS is sourced from ECHO-Modules/addons/echosignalos.",
-      "It declares 3 required modules and 6 optional integrations.",
-      "Release output is generated per runtime family so the launcher can update this module independently."
-    ],
-    "capabilities": [
-      "Native artifact: signalos-1.0.0.echo-addon",
-      "NeoForge artifact: signalos-1.0.0-neoforge.jar",
-      "Standalone artifact: signalos-1.0.0-standalone.jar",
-      "Sources artifact: signalos-1.0.0-sources.jar",
-      "Provides: signalos.archives, signalos.chapters, signalos.data_drives",
-      "API stability: beta"
-    ],
-    "integrations": [
-      "echoadaptercore",
-      "echocore",
-      "echonetcore",
-      "echodatacore",
-      "echoindex",
-      "echomissioncore",
-      "echorendercore",
-      "echoscreencore",
-      "echoterminal",
-      "signalos.archives",
-      "signalos.chapters",
-      "signalos.data_drives",
-      "signalos.missions",
-      "signalos.net"
-    ],
-    "statusNote": "Generated from src/main/resources/META-INF/echo.mod.json in ECHO-Modules. The launcher resolves this module through moduleRequirements and downloads only changed artifacts when URLs are present.",
-    "roadmap": [
-      "Keep echo.mod.json, README.md, docs/artifacts.md, and release artifacts in sync for every release.",
-      "Publish Native, NeoForge, Standalone, and sources artifacts with checksums before marking an edition player-ready.",
-      "Use Release Index metadata as the public source for launcher and website download links."
-    ],
-    "releaseNotes": [
-      {
-        "title": "Generated release files",
-        "version": "1.0.0",
-        "notes": [
-          "signalos-1.0.0-neoforge.jar for Ashfall NeoForge Edition.",
-          "signalos-1.0.0.echo-addon for Ashfall Native Edition.",
-          "signalos-1.0.0-standalone.jar for Ashfall Standalone Edition.",
-          "signalos-1.0.0-sources.jar for traceability and developer debugging.",
-          "META-INF/echo.mod.json is always required; META-INF/neoforge.mods.toml and echo-addon-package.json are required when applicable."
-        ]
-      }
-    ]
-  },
-  {
     "id": "signalosexample",
     "name": "SignalOS Example Addon",
     "category": "Gameplay",
@@ -8436,7 +8609,7 @@
       "echoadaptercore",
       "echocore",
       "echonetcore",
-      "signalos"
+      "echosignalos"
     ],
     "standalone": true,
     "usedByAshfall": false,
@@ -8459,7 +8632,7 @@
       "echoadaptercore",
       "echocore",
       "echonetcore",
-      "signalos",
+      "echosignalos",
       "echoindex",
       "echoterminal",
       "signalos.example_content"

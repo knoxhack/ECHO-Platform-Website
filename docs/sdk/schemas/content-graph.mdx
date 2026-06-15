@@ -1,3 +1,5 @@
+{/* Generated from ECHO-SDK/docs by scripts/sync-ecosystem-data.mjs. */}
+
 # ECHO Content Graph
 
 The `.ECHO Content Graph` is a runtime-neutral, portable semantic model of ECHO modules, addons, and gameplay content.
@@ -71,7 +73,7 @@ Supported intents:
 
 ## Runtime Hints
 
-Runtime-specific implementation detail belongs only inside `runtimeHints.<target>`:
+Runtime-specific implementation detail belongs only inside `runtimeHints.&lt;target&gt;`:
 
 - `runtimeHints.neoforge`
 - `runtimeHints.echo_native`
@@ -102,7 +104,10 @@ Required aggregate fields:
 - `hytaleBlockerCount` and optional `hytaleSummary`
 - `modules[]` entries with per-module counts, `validationState`, `hytaleBlockers`, and `validationIssues`
 
+Hytale blocker normalization is canonical: prefer explicit `nodes[]` entries where `status === "blocked"` and format them as `&lt;nodeId&gt;: &lt;rationale&gt;`. If only `summary.blocked` is present, report the blocked count as summary evidence. Legacy `blockers[]` arrays may be displayed for compatibility but should not be emitted by new generators.
+
 The evidence summary is diagnostic metadata. It must not be treated as a Hytale runtime export or as proof that target runtime assets were generated.
+Do not introduce or claim a Hytale runtime schema from this evidence document alone; a Hytale adapter/codegen contract and runtime validation gate must exist first.
 
 ## Example Graph Document
 
@@ -396,7 +401,7 @@ An export plan declares how each graph node maps to a target runtime. The Hytale
 
 ## Runtime Hints
 
-Portable fields must never contain NeoForge screen classes, block entity classes, registry classes, or Minecraft package names. Put those values inside `runtimeHints.<target>`.
+Portable fields must never contain NeoForge screen classes, block entity classes, registry classes, or Minecraft package names. Put those values inside `runtimeHints.&lt;target&gt;`.
 
 ### Allowed
 
@@ -446,13 +451,13 @@ node scripts/generate-content-graph.mjs --all --write
 node scripts/validate-content-graph.mjs --strict
 ```
 
-This writes per-module outputs under `dist/echo-module-release/<module>/<version>/.echo/content-graph/`:
+This writes per-module outputs under `dist/echo-module-release/&lt;module&gt;/&lt;version&gt;/.echo/content-graph/`:
 
-- `content-graph.json` — canonical graph
-- `content-graph.md` — human-readable summary
-- `features.json` — derived feature list
-- `provenance.json` — generation provenance
-- `unresolved-references.json` — optional reference audit
+- `content-graph.json` - canonical graph
+- `content-graph.md` - human-readable summary
+- `features.json` - derived feature list
+- `provenance.json` - generation provenance
+- `unresolved-references.json` - optional reference audit
 - `export-plans/{neoforge,echo_native,echo_runtime_standalone,hytale}.json`
 
 It also writes `dist/echo-module-release/content-graph-evidence.json`, the aggregate release artifact validated by `content-graph-evidence.schema.json`.

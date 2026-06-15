@@ -52,13 +52,20 @@ const productSeed = {
     route: "/modules",
     tagline: "All shared ECHO module source and per-module release artifacts.",
     description:
-      "The canonical module repo. Each module owns source, manifests, per-module docs, and generated Native, NeoForge, Standalone, and sources artifacts.",
-    status: "96 Modules",
+      "The canonical module repo. Each module owns source, manifests, per-module docs, generated Native, NeoForge, Standalone, and sources artifacts, per-module content graph sidecars, and release-root content graph evidence.",
+    status: "Modules",
     docsHref: "/docs/release/module-artifacts",
     downloadHref: "/download",
     updateFlow:
       "Publishes one artifact family per runtime so the launcher can update modules independently inside each Ashfall edition.",
-    artifacts: ["<module>-<version>-neoforge.jar", "<module>-<version>.echo-addon", "<module>-<version>-standalone.jar", "<module>-<version>-sources.jar"],
+    artifacts: [
+      "<module>-<version>-neoforge.jar",
+      "<module>-<version>.echo-addon",
+      "<module>-<version>-standalone.jar",
+      "<module>-<version>-sources.jar",
+      "<module>-<version>-content-graph.json",
+      "content-graph-evidence.json"
+    ],
     features: [
       ["Runtime families", "Native, NeoForge, and Standalone outputs share one echo.mod.json contract.", "layers"],
       ["Per-module docs", "Every addon has a README, artifact notes, descriptor files, and release ownership.", "file"],
@@ -69,51 +76,57 @@ const productSeed = {
     route: "/ashfall/native-edition",
     tagline: "Native runtime Ashfall pack using .echo-addon modules.",
     description:
-      "The primary Ashfall edition for the ECHO Native Platform. It consumes .echo-addon module artifacts and native pack metadata.",
-    status: "Native Edition",
+      "The primary Ashfall edition for the ECHO Native Platform. Its assets are checksum-backed, but launcher installs are blocked until Phase 7-10 readiness evidence passes.",
+    publicRole:
+      "Warning-gated Ashfall Native Edition pack source and metadata for launcher pack updates. Consumes .echo-addon artifacts from ECHO-Modules.",
+    status: "Readiness Blocked",
     docsHref: "/docs/release/ashfall-editions",
     downloadHref: "/download",
     updateFlow:
-      "Uses moduleArtifactFamily echo-addon; launcher updates changed .echo-addon files independently when release metadata provides asset URLs.",
+      "Uses moduleArtifactFamily echo-addon after approval; launcher installs stay locked while beta sessions, gameplay QA evidence, screenshots, and RC smoke results are incomplete.",
     artifacts: ["ashfall-native-edition pack archive", "pack manifest", ".echo-addon module requirements", "checksums"],
     features: [
       ["Native loader lane", "Targets the runtime-independent ECHO Native Platform.", "loader"],
       ["Addon packages", "Consumes .echo-addon module packages from ECHO-Modules.", "puzzle"],
-      ["Player catalog entry", "Appears as an official Ashfall install in the launcher catalog.", "app"]
+      ["Player catalog entry", "Appears in the launcher catalog as warning-gated until release-readiness evidence is green.", "app"]
     ]
   },
   "ECHO-Ashfall-NeoForge-Edition": {
     route: "/ashfall/neoforge-edition",
     tagline: "Minecraft/NeoForge Ashfall pack using -neoforge.jar modules.",
     description:
-      "The compatibility edition for players and testers who need Minecraft/NeoForge runtime behavior while modules migrate to shared contracts.",
-    status: "NeoForge Edition",
+      "The compatibility edition for players and testers who need Minecraft/NeoForge runtime behavior while modules migrate to shared contracts. Its live pack manifest must be rebuilt with moduleRequirements before approval.",
+    publicRole:
+      "Warning-gated Ashfall NeoForge Edition pack source and metadata. Consumes -neoforge.jar artifacts from ECHO-Modules.",
+    status: "Manifest Blocked",
     docsHref: "/docs/release/ashfall-editions",
     downloadHref: "/download",
     updateFlow:
-      "Uses moduleArtifactFamily neoforge; launcher updates changed -neoforge.jar module files independently when available.",
+      "Uses moduleArtifactFamily neoforge after approval; the current live .pack.json is missing moduleRequirements and readiness evidence is not green.",
     artifacts: ["ashfall-neoforge-edition pack archive", "NeoForge pack manifest", "-neoforge.jar module requirements", "checksums"],
     features: [
       ["Minecraft-compatible", "Keeps the NeoForge fallback lane explicit and documented.", "network"],
       ["Jar module family", "Consumes -neoforge.jar module artifacts from ECHO-Modules.", "box"],
-      ["Parity signal", "Helps compare Native behavior against the Minecraft runtime lane.", "gauge"]
+      ["Parity signal", "Blocked until moduleRequirements and gameplay readiness evidence are attached.", "gauge"]
     ]
   },
   "ECHO-Ashfall-Standalone-Edition": {
     route: "/ashfall/standalone-edition",
     tagline: "Ashfall Standalone Edition using -standalone.jar modules.",
     description:
-      "The renamed standalone Ashfall runtime package. It proves standalone module behavior without positioning the old showcase name as the product.",
-    status: "Standalone Edition",
+      "The renamed standalone Ashfall runtime package. It proves standalone module behavior without positioning the old showcase name as the product, but the live pack manifest must be rebuilt with moduleRequirements before approval.",
+    publicRole:
+      "Warning-gated Ashfall Standalone Edition pack source and metadata. Consumes -standalone.jar artifacts from ECHO-Modules.",
+    status: "Manifest Blocked",
     docsHref: "/docs/release/ashfall-editions",
     downloadHref: "/download",
     updateFlow:
-      "Uses moduleArtifactFamily standalone; launcher updates changed -standalone.jar module files independently when available.",
+      "Uses moduleArtifactFamily standalone after approval; the current live .pack.json is missing moduleRequirements and readiness evidence is not green.",
     artifacts: ["ashfall-standalone-edition pack archive", "standalone pack manifest", "-standalone.jar module requirements", "checksums"],
     features: [
       ["Standalone runtime lane", "Runs Ashfall systems in the standalone runtime shell.", "box"],
       ["Standalone module family", "Consumes -standalone.jar module artifacts from ECHO-Modules.", "server"],
-      ["Parity harness", "Useful for testing module behavior outside the NeoForge lifecycle.", "test"]
+      ["Parity harness", "Blocked until moduleRequirements and gameplay readiness evidence are attached.", "test"]
     ]
   },
   "ECHO-Openlands-Native-Edition": {
@@ -598,19 +611,99 @@ function releaseRepositoriesByName() {
   return new Map((catalog.repositories || []).map((repository) => [repository.repoName, repository]));
 }
 
+function releaseIndexModules() {
+  const modulesDir = path.join(releaseIndexRoot, "modules");
+  if (!fs.existsSync(modulesDir)) return [];
+
+  return fs
+    .readdirSync(modulesDir)
+    .filter((entry) => entry.endsWith(".json"))
+    .map((entry) => readJson(path.join(modulesDir, entry)))
+    .filter((entry) => entry.kind === "module" && entry.sourceRepo === "knoxhack/ECHO-Modules");
+}
+
+function indexedContentGraphEvidence() {
+  const groups = new Map();
+  for (const moduleRecord of releaseIndexModules()) {
+    const artifact = moduleRecord.artifacts?.["content-graph-evidence"];
+    if (!artifact || artifact.artifactRole !== "content-graph-evidence") continue;
+    const key = artifact.url || artifact.sha256 || artifact.file;
+    if (!key) continue;
+    if (!groups.has(key)) {
+      groups.set(key, {
+        artifact,
+        releaseTag: moduleRecord.releaseTag,
+        moduleIds: new Set(),
+        uniqueArtifactUrls: new Set()
+      });
+    }
+    const group = groups.get(key);
+    group.moduleIds.add(moduleRecord.id);
+    for (const asset of Object.values(moduleRecord.artifacts || {})) {
+      if (asset?.url) group.uniqueArtifactUrls.add(asset.url);
+    }
+  }
+
+  return [...groups.values()].sort((a, b) => b.moduleIds.size - a.moduleIds.size)[0] || null;
+}
+
+function finiteNumber(value) {
+  return Number.isFinite(value) ? value : undefined;
+}
+
+async function readRemoteJson(url) {
+  if (!url || process.env.ECHO_WEBSITE_SKIP_REMOTE_EVIDENCE === "1") return null;
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      console.warn(`Could not fetch content graph evidence ${url}: ${response.status}`);
+      return null;
+    }
+    return await response.json();
+  } catch (error) {
+    console.warn(`Could not fetch content graph evidence ${url}: ${error.message}`);
+    return null;
+  }
+}
+
+async function contentGraphEvidenceForModules() {
+  const indexed = indexedContentGraphEvidence();
+  if (!indexed) return null;
+
+  const evidence = await readRemoteJson(indexed.artifact.url);
+  const moduleCount = finiteNumber(evidence?.moduleCount) ?? indexed.moduleIds.size;
+  return {
+    schemaVersion: evidence?.schemaVersion || indexed.artifact.schemaVersion,
+    artifact: indexed.artifact.file || "content-graph-evidence.json",
+    availability: `Canonical release evidence imported by Release Index from ${indexed.releaseTag}. Hytale values are export planning evidence, not runtime/playable support.`,
+    releaseTag: indexed.releaseTag,
+    url: indexed.artifact.url,
+    sha256: indexed.artifact.sha256,
+    graphCount: finiteNumber(evidence?.graphCount) ?? moduleCount,
+    moduleCount,
+    nodeCount: finiteNumber(evidence?.nodeCount),
+    edgeCount: finiteNumber(evidence?.edgeCount),
+    featureCount: finiteNumber(evidence?.featureCount),
+    exportPlanCount: finiteNumber(evidence?.exportPlanCount),
+    hytaleBlockerCount: finiteNumber(evidence?.hytaleBlockerCount),
+    indexedModuleRows: indexed.moduleIds.size,
+    indexedAssetCount: indexed.uniqueArtifactUrls.size + 4
+  };
+}
+
 function syncReleaseIndexSnapshot() {
   const manifestFile = path.join(releaseIndexRoot, "channels", "alpha", "release-manifest.json");
   const manifest = readJson(manifestFile);
   writeJson(path.join(root, "data", "release-index-snapshot.json"), manifest);
 }
 
-function syncProducts() {
+function syncProducts(contentGraphEvidence) {
   const releaseRepos = releaseRepositoriesByName();
   const products = targetRepos.map((repoName) => {
     const seed = productSeed[repoName];
     const releaseRepo = releaseRepos.get(repoName) || {};
     const repoUrl = releaseRepo.repoUrl || `https://github.com/knoxhack/${repoName}`;
-    return {
+    const product = {
       repoName,
       product: releaseRepo.product || productName(repoName),
       releaseKind: releaseRepo.releaseKind || "source",
@@ -618,7 +711,7 @@ function syncProducts() {
       tagline: seed.tagline,
       description: seed.description,
       purpose: seed.description,
-      publicRole: releaseRepo.publicRole || seed.description,
+      publicRole: releaseRepo.publicRole || seed.publicRole || seed.description,
       status: seed.status,
       repoUrl,
       issuesUrl: `${repoUrl}/issues`,
@@ -632,6 +725,17 @@ function syncProducts() {
       features: seed.features.map(([title, description, icon]) => ({ title, description, icon })),
       relatedRepos: relatedRepos(repoName)
     };
+
+    if (repoName === "ECHO-Modules" && contentGraphEvidence) {
+      product.contentGraphEvidence = contentGraphEvidence;
+      product.status = `${contentGraphEvidence.moduleCount} Modules`;
+      product.releaseUrl = contentGraphEvidence.releaseTag
+        ? `${repoUrl}/releases/tag/${contentGraphEvidence.releaseTag}`
+        : product.releaseUrl;
+      product.assetCount = contentGraphEvidence.indexedAssetCount || product.assetCount;
+    }
+
+    return product;
   });
 
   writeJson(path.join(root, "data", "products.json"), products);
@@ -802,9 +906,10 @@ ${entries}
   });
 }
 
+const contentGraphEvidence = await contentGraphEvidenceForModules();
 syncModules();
 syncReleaseIndexSnapshot();
-syncProducts();
+syncProducts(contentGraphEvidence);
 syncSdkDocs();
 
 console.log("Synced modules, products, release index snapshot, and SDK docs.");

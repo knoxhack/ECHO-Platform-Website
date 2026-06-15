@@ -2,7 +2,7 @@
 
 # Example Addon Walkthrough: EchoExampleMod
 
-This walkthrough builds a minimal ECHO Native addon from scratch. It registers a block, an item, a datapack-driven recipe, and an optional Index integration.
+This walkthrough builds a minimal ECHO Native addon from scratch. It declares a content registration through the typed Native registry host, packages a `.echo-addon`, and remains independent from NeoForge and Native Loader internals.
 
 ## 1. Create the Project
 
@@ -18,21 +18,21 @@ Use the new-addon template:
 
 ## 2. Descriptor
 
-`src/main/resources/META-INF/echo-native-addon.descriptor.json`
+`src/main/resources/META-INF/echo.mod.json`
 
 ```json
 {
-  "schema": "echo.native.descriptor.v1",
+  "schema": "echo.mod.v1",
   "id": "echoexample",
   "name": "Echo Example Mod",
-  "version": "1.0.0",
-  "nativePolicy": "NATIVE",
-  "entryPoints": {
-    "native": "com.example.echoexample.EchoExampleAddon"
+  "version": "1.0.0-RC1",
+  "entrypoint": "com.example.echoexample.EchoExampleAddon",
+  "side": "common",
+  "provides": ["echoexample.content"],
+  "access": {
+    "nativeClasspath": ["addon.jar"]
   },
-  "services": ["echoexample:content_registry"],
-  "optionalIntegrations": ["echoindex"],
-  "side": "BOTH"
+  "apiStability": "beta"
 }
 ```
 
@@ -44,21 +44,21 @@ Use the new-addon template:
 package com.example.echoexample;
 
 import dev.echo.nativeplatform.contracts.*;
-import dev.echo.core.services.*;
 
-public class EchoExampleAddon implements EchoNativeAddon {
+public class EchoExampleAddon implements EchoNativeModuleEntrypoint {
     @Override
-    public void onInitialize(EchoNativeAddonRuntime runtime) {
-        // Register block and item
-        EchoCoreServices.contentRegistry().registerBlock("echoexample:example_block", new ExampleBlock());
-        EchoCoreServices.contentRegistry().registerItem("echoexample:example_item", new ExampleItem());
+    public void registerServices(EchoNativeModuleLoadContext context) {
+        context.registerService("echoexample:content_registry", new ExampleContentService(), "registry");
+    }
 
-        // Register optional Index provider
-        EchoOptionalServices.index().ifPresent(index -> {
-            index.registerProvider(new ExampleIndexProvider());
-        });
-
-        runtime.registerService("echoexample:content_registry", new ExampleContentService());
+    @Override
+    public void registerContent(EchoNativeModuleLoadContext context) {
+        EchoNativeServiceMutation mutation = EchoNativeServiceMutation.of(
+                "echoexample", "registry", "declare_content", "echoexample:example_item", EchoNativeRuntimeSide.COMMON);
+        context.serviceRegistry()
+                .service("echo.native.registry", EchoNativeRegistryService.class)
+                .map(registry -> registry.register(mutation))
+                .ifPresent(context::recordMutation);
     }
 }
 ```
@@ -105,10 +105,11 @@ import static org.junit.jupiter.api.Assertions.*;
 public class EchoExampleAddonTest {
     @Test
     public void testBootstrap() {
-        EchoNativeTestLoader loader = new EchoNativeTestLoader();
-        loader.loadAddon("echoexample");
-        assertTrue(loader.isServiceRegistered("echoexample:content_registry"));
-        assertEquals(2, loader.registeredContentCount());
+        EchoNativeSdkTestkit.Environment env = EchoNativeSdkTestkit.common("echoexample");
+        EchoNativeModuleLoadContext context = env.loadEntrypoint(new EchoExampleAddon());
+        assertTrue(context.serviceRegistry().hasService("echoexample:content_registry"));
+        env.goldenParity().requireMutatedServices("echo.native.registry");
+        env.goldenParity().requireOnlyTypedReceipts();
     }
 }
 ```
@@ -117,17 +118,18 @@ public class EchoExampleAddonTest {
 
 ```bash
 ./gradlew build
-./gradlew validateAddon
-./gradlew packageAddon
+./gradlew packageEchoNativeAddon
 ```
 
 Output:
-- `build/libs/echoexample-1.0.0-echo-native.jar`
+- `build/echo-native/addons/echoexample-1.0.0-RC1.echo-addon`
 - `build/reports/echoexample-parity.json`
 
 ## 8. Install and Verify
 
-Drop the jar into `mods/`. Launch and run:
+Install the `.echo-addon` through the launcher-managed addon store or a release-mode product profile. Do not install the development jar from `build/classes` or an IDE classpath.
+
+Launch and run:
 
 ```
 /give @p echoexample:example_item
@@ -140,4 +142,4 @@ If Index is installed, check `/index` for the new documentation page.
 - The descriptor drives loader behavior; code only runs after validation passes.
 - Optional integrations keep the addon standalone-safe.
 - Datapacks are first-class; prefer JSON over hardcoded recipes.
-- Tests use `EchoNativeTestLoader` for fast, headless validation.
+- Tests use `echo-native-testkit` for fast, headless validation.
