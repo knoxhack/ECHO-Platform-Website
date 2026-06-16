@@ -60,7 +60,7 @@
     "repoUrl": "https://github.com/knoxhack/ECHO-Modules",
     "issuesUrl": "https://github.com/knoxhack/ECHO-Modules/issues",
     "releasesUrl": "https://github.com/knoxhack/ECHO-Modules/releases",
-    "releaseUrl": "https://github.com/knoxhack/ECHO-Modules/releases/tag/modules-content-graph-evidence-repro-20260616",
+    "releaseUrl": "https://github.com/knoxhack/ECHO-Modules/releases/tag/modules-canonical-full-20260616",
     "assetCount": 670,
     "docsHref": "/docs/release/module-artifacts",
     "downloadHref": "/download",
@@ -98,10 +98,10 @@
     "contentGraphEvidence": {
       "schemaVersion": "echo.content_graph.evidence.v1",
       "artifact": "content-graph-evidence.json",
-      "availability": "Canonical full release evidence imported by Release Index from modules-content-graph-evidence-repro-20260616. 46 module row(s) currently use partial hotfix evidence from modules-ashfall-runtime-parity-user-fix-20260616. Hytale values are export planning evidence, not runtime/playable support.",
-      "releaseTag": "modules-content-graph-evidence-repro-20260616",
-      "url": "https://github.com/knoxhack/ECHO-Modules/releases/download/modules-content-graph-evidence-repro-20260616/content-graph-evidence.json",
-      "sha256": "e366172d6fb5d09e6d9cb749698ac51bd536ba6fcd2f84c1cf0ab5169665aa20",
+      "availability": "Canonical full release evidence imported by Release Index from modules-canonical-full-20260616. Hytale values are export planning evidence, not runtime/playable support.",
+      "releaseTag": "modules-canonical-full-20260616",
+      "url": "https://github.com/knoxhack/ECHO-Modules/releases/download/modules-canonical-full-20260616/content-graph-evidence.json",
+      "sha256": "13629e31db9849b0a944b9e2ce986b91b3f8dbd898b2270ad8b3f3d7a574769c",
       "graphCount": 133,
       "moduleCount": 133,
       "nodeCount": 4392,
@@ -113,22 +113,13 @@
       "indexedAssetCount": 670,
       "releaseSources": [
         {
-          "releaseTag": "modules-content-graph-evidence-repro-20260616",
+          "releaseTag": "modules-canonical-full-20260616",
           "releaseSourceState": "full-release-evidence",
           "primaryFullRelease": true,
-          "moduleRows": 87,
+          "moduleRows": 133,
           "artifact": "content-graph-evidence.json",
-          "url": "https://github.com/knoxhack/ECHO-Modules/releases/download/modules-content-graph-evidence-repro-20260616/content-graph-evidence.json",
-          "sha256": "e366172d6fb5d09e6d9cb749698ac51bd536ba6fcd2f84c1cf0ab5169665aa20"
-        },
-        {
-          "releaseTag": "modules-ashfall-runtime-parity-user-fix-20260616",
-          "releaseSourceState": "partial-hotfix-evidence",
-          "primaryFullRelease": false,
-          "moduleRows": 46,
-          "artifact": "content-graph-evidence.json",
-          "url": "https://github.com/knoxhack/ECHO-Modules/releases/download/modules-ashfall-runtime-parity-user-fix-20260616/content-graph-evidence.json",
-          "sha256": "9e162af10a02973026b944982efb8e9c5ad6bf0868f0db0f5a1ac75d69e8f6af"
+          "url": "https://github.com/knoxhack/ECHO-Modules/releases/download/modules-canonical-full-20260616/content-graph-evidence.json",
+          "sha256": "13629e31db9849b0a944b9e2ce986b91b3f8dbd898b2270ad8b3f3d7a574769c"
         }
       ]
     }
