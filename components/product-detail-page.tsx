@@ -60,6 +60,18 @@ export function ProductDetailPage({ product }: { product: ProductRecord }) {
                 <p className="mt-3 text-echo-text">{product.contentGraphEvidence.artifact}</p>
                 <p className="mt-2">{product.contentGraphEvidence.schemaVersion}</p>
                 <p className="mt-2">{product.contentGraphEvidence.availability}</p>
+                {product.contentGraphEvidence.releaseSources?.length ? (
+                  <div className="mt-4 space-y-2">
+                    {product.contentGraphEvidence.releaseSources.map((source) => (
+                      <p key={source.releaseTag} className="text-xs text-echo-muted">
+                        <span className="text-echo-text">
+                          {source.primaryFullRelease ? "Full release evidence" : "Partial hotfix evidence"}
+                        </span>
+                        {`: ${source.moduleRows} module row(s) from ${source.releaseTag}`}
+                      </p>
+                    ))}
+                  </div>
+                ) : null}
                 {product.contentGraphEvidence.nodeCount !== undefined ? (
                   <div className="mt-4 grid grid-cols-2 gap-3 text-xs md:grid-cols-4">
                     {[

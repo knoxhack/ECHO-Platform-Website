@@ -10,6 +10,15 @@ export type ContentGraphEvidenceInfo = {
   schemaVersion: string;
   artifact: string;
   availability: string;
+  releaseSources?: Array<{
+    releaseTag: string;
+    releaseSourceState: string;
+    primaryFullRelease: boolean;
+    moduleRows: number;
+    artifact: string;
+    url?: string;
+    sha256?: string;
+  }>;
   graphCount?: number;
   moduleCount?: number;
   nodeCount?: number;

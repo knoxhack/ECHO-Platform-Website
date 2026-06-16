@@ -611,6 +611,28 @@ function releaseRepositoriesByName() {
   return new Map((catalog.repositories || []).map((repository) => [repository.repoName, repository]));
 }
 
+function releaseManifest() {
+  const manifestFile = path.join(releaseIndexRoot, "channels", "alpha", "release-manifest.json");
+  if (!fs.existsSync(manifestFile)) return {};
+  return readJson(manifestFile);
+}
+
+function parseReleaseTag(value) {
+  if (!value) return "";
+  const match = String(value).match(/\/releases\/tag\/([^/?#]+)/u);
+  return match ? decodeURIComponent(match[1]) : "";
+}
+
+function manifestModuleReleaseTag() {
+  const modulesRepo = (releaseManifest().repositories || []).find((repository) => repository.repoName === "ECHO-Modules");
+  return modulesRepo?.releaseTag || modulesRepo?.release?.tagName || parseReleaseTag(modulesRepo?.release?.htmlUrl);
+}
+
+function manifestModuleReleaseAssetCount() {
+  const modulesRepo = (releaseManifest().repositories || []).find((repository) => repository.repoName === "ECHO-Modules");
+  return Array.isArray(modulesRepo?.assets) ? modulesRepo.assets.length : undefined;
+}
+
 function releaseIndexModules() {
   const modulesDir = path.join(releaseIndexRoot, "modules");
   if (!fs.existsSync(modulesDir)) return [];
@@ -624,6 +646,7 @@ function releaseIndexModules() {
 
 function indexedContentGraphEvidence() {
   const groups = new Map();
+  const primaryReleaseTag = manifestModuleReleaseTag();
   for (const moduleRecord of releaseIndexModules()) {
     const artifact = moduleRecord.artifacts?.["content-graph-evidence"];
     if (!artifact || artifact.artifactRole !== "content-graph-evidence") continue;
@@ -644,7 +667,23 @@ function indexedContentGraphEvidence() {
     }
   }
 
-  return [...groups.values()].sort((a, b) => b.moduleIds.size - a.moduleIds.size)[0] || null;
+  const releaseSources = [...groups.values()]
+    .sort((a, b) => {
+      if (a.releaseTag === primaryReleaseTag) return -1;
+      if (b.releaseTag === primaryReleaseTag) return 1;
+      return b.moduleIds.size - a.moduleIds.size;
+    })
+    .map((group) => ({
+      artifact: group.artifact,
+      releaseTag: group.releaseTag,
+      releaseSourceState: group.releaseTag === primaryReleaseTag ? "full-release-evidence" : "partial-hotfix-evidence",
+      primaryFullRelease: group.releaseTag === primaryReleaseTag,
+      moduleRows: group.moduleIds.size,
+      indexedAssetCount: group.uniqueArtifactUrls.size + 4
+    }));
+
+  const selected = releaseSources.find((source) => source.primaryFullRelease) || releaseSources[0] || null;
+  return selected ? { ...selected, releaseSources } : null;
 }
 
 function finiteNumber(value) {
@@ -671,11 +710,16 @@ async function contentGraphEvidenceForModules() {
   if (!indexed) return null;
 
   const evidence = await readRemoteJson(indexed.artifact.url);
-  const moduleCount = finiteNumber(evidence?.moduleCount) ?? indexed.moduleIds.size;
+  const indexedModuleRows = indexed.releaseSources.reduce((sum, source) => sum + source.moduleRows, 0);
+  const moduleCount = finiteNumber(evidence?.moduleCount) ?? indexedModuleRows;
+  const partialSources = indexed.releaseSources.filter((source) => !source.primaryFullRelease);
+  const partialText = partialSources.length
+    ? ` ${partialSources.reduce((sum, source) => sum + source.moduleRows, 0)} module row(s) currently use partial hotfix evidence from ${partialSources.map((source) => source.releaseTag).join(", ")}.`
+    : "";
   return {
     schemaVersion: evidence?.schemaVersion || indexed.artifact.schemaVersion,
     artifact: indexed.artifact.file || "content-graph-evidence.json",
-    availability: `Canonical release evidence imported by Release Index from ${indexed.releaseTag}. Hytale values are export planning evidence, not runtime/playable support.`,
+    availability: `Canonical full release evidence imported by Release Index from ${indexed.releaseTag}.${partialText} Hytale values are export planning evidence, not runtime/playable support.`,
     releaseTag: indexed.releaseTag,
     url: indexed.artifact.url,
     sha256: indexed.artifact.sha256,
@@ -686,8 +730,17 @@ async function contentGraphEvidenceForModules() {
     featureCount: finiteNumber(evidence?.featureCount),
     exportPlanCount: finiteNumber(evidence?.exportPlanCount),
     hytaleBlockerCount: finiteNumber(evidence?.hytaleBlockerCount),
-    indexedModuleRows: indexed.moduleIds.size,
-    indexedAssetCount: indexed.uniqueArtifactUrls.size + 4
+    indexedModuleRows,
+    indexedAssetCount: manifestModuleReleaseAssetCount() ?? indexed.indexedAssetCount,
+    releaseSources: indexed.releaseSources.map((source) => ({
+      releaseTag: source.releaseTag,
+      releaseSourceState: source.releaseSourceState,
+      primaryFullRelease: source.primaryFullRelease,
+      moduleRows: source.moduleRows,
+      artifact: source.artifact.file || "content-graph-evidence.json",
+      url: source.artifact.url,
+      sha256: source.artifact.sha256
+    }))
   };
 }
 
