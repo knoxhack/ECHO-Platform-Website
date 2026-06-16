@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-06-15T23:31:22.518Z",
+  "generatedAt": "2026-06-16T02:06:13.630Z",
   "sourceRepo": "knoxhack/ECHO-SDK",
-  "sourceCommit": "81fa35c54a74370fce8fa493dede12541c92ea0f",
+  "sourceCommit": "15d6f390d2c3f6241c2997d82c6dd7e7a826c7ea",
   "docCount": 32,
   "docs": [
     {
@@ -114,7 +114,7 @@
       ],
       "title": "ECHO Artifact Ownership",
       "description": "GitHub stores source, release assets, and attestations. ECHO stores product policy, trust, compatibility, install UX, and the canonical Release Index.",
-      "sourceSha256": "05afb8fe0764b5b62caac3fbedaeda37e4393ff8b10400941105312e19abc4d6"
+      "sourceSha256": "1bdea3e754a07c3e01f0c76113c4730f9727e2a84f758f49b98e9386f573f29a"
     },
     {
       "sourcePath": "docs/examples/index.md",
@@ -125,7 +125,7 @@
       ],
       "title": "Examples",
       "description": "Examples show the smallest useful SDK patterns.",
-      "sourceSha256": "6ad7025d9d2e449575753a9b6f7f8260c7515e91dfdd323d83ad34de4bd5666f"
+      "sourceSha256": "3d6f9e227d1513f985af3f8d6f4fc35525bf265f9a8ed05d2b7cb8c94e2354d9"
     },
     {
       "sourcePath": "docs/examples/integrations/index.md",
@@ -170,7 +170,7 @@
       ],
       "title": "Native AdapterCore Guide",
       "description": "AdapterCore bridges module contracts across native, NeoForge, and standalone runtimes.",
-      "sourceSha256": "eef91c601f566f4395687a29dfb7f88d39c778f4897e5bb707e87a4d4cbd4650"
+      "sourceSha256": "0ea1ba418e3ed23b59945b80158d4ecbdf3a94818fdb58b60cbec282d9b7b487"
     },
     {
       "sourcePath": "docs/NATIVE_API_REFERENCE.md",
@@ -181,7 +181,7 @@
       ],
       "title": "ECHO Native API Reference",
       "description": "The public RC1 API is published through these artifacts:",
-      "sourceSha256": "1149b9c7647bcc6c05d73697459f6ae656c1fdb54696e4095e25ebefeaeba40b"
+      "sourceSha256": "62348ba4e7061280567d76b7b0122a90ebb468131a525f26458bcf3c0d6b69ea"
     },
     {
       "sourcePath": "docs/NATIVE_COMPATIBILITY_MATRIX.md",
@@ -203,7 +203,7 @@
       ],
       "title": "Example Addon Walkthrough: EchoExampleMod",
       "description": "This walkthrough builds a minimal ECHO Native addon from scratch. It declares a content registration through the typed Native registry host, packages a .echo-addon, and remains independent f",
-      "sourceSha256": "c052b6fe7475822d943520c25b94bf07f74e1cc8ef12041931d011394de5b508"
+      "sourceSha256": "29ef5b47908e0041e375d6f37e99a668bb8ee31fece55f26704d15336105e0cb"
     },
     {
       "sourcePath": "docs/NATIVE_MOD_AUTHOR_GUIDE.md",
@@ -214,7 +214,7 @@
       ],
       "title": "ECHO Native Mod Author Guide",
       "description": "my-addon/ build.gradle src/main/java/.../MyAddon.java src/main/resources/META-INF/echo.mod.json src/main/resources/data/myaddon/... src/test/java/.../MyAddonTest.java",
-      "sourceSha256": "ed2d85795b6e0e5b1d923801137306854ae47f42a89905b4c67847d0cb1ec958"
+      "sourceSha256": "1de548a347251396ef3b4b8e8756b08c0f69845a60d5f7d3b673de2402f83e36"
     },
     {
       "sourcePath": "docs/NATIVE_PORTING_GUIDE.md",
@@ -225,7 +225,7 @@
       ],
       "title": "Porting Guide from NeoForge to ECHO Native",
       "description": "This guide is for moving a NeoForge-style addon toward the ECHO Native 1.0.0-RC1 workflow. Native-first addons compile against the public SDK, package as .echo-addon, and load in release mod",
-      "sourceSha256": "ca7f5c778edf896341f5078282692444415f32dccc268c02c957039110ca4ed9"
+      "sourceSha256": "99663c0dde8d96898127893c6ab4614ced54d2b7ee4097a6a460bbd7ae91759a"
     },
     {
       "sourcePath": "docs/NATIVE_RELEASE_PACKAGING_GUIDE.md",
@@ -247,7 +247,7 @@
       ],
       "title": "ECHO Native SDK Maven Artifacts",
       "description": "./gradlew publishToMavenLocal",
-      "sourceSha256": "b9ec46a10cd4bdf5e12ad7866e6275b42bca51d948cac12dccf484036da6f75a"
+      "sourceSha256": "2403ccfc673817999aa7608e1168ea665e7d52a4c326d08ad67a8682e1abe3f0"
     },
     {
       "sourcePath": "docs/NATIVE_TEMPLATES.md",
@@ -269,7 +269,7 @@
       ],
       "title": "ECHO Native Troubleshooting",
       "description": "Cause: An addon descriptor is missing a required field or contains invalid JSON. Fix:",
-      "sourceSha256": "b17b97f58d42b4df06d4a968cfb2cf57d92c0da46d11f39e0725354016cd0f09"
+      "sourceSha256": "26dd4e4dc5ad9d563213767f6c4a3edafe68f216d4df3f38ce0f91e44090f8b2"
     },
     {
       "sourcePath": "docs/native-addon-guide.md",
@@ -325,7 +325,7 @@
       ],
       "title": "ECHO Content Graph",
       "description": "The .ECHO Content Graph is a runtime-neutral, portable semantic model of ECHO modules, addons, and gameplay content.",
-      "sourceSha256": "688ae984fbd4f3544127add903abeea5c82058c666ba8b5bcb502c4d0310143b"
+      "sourceSha256": "cf762c76bd6c03144a2e634203a8f018a5d900756c4a586d1d028da8cbe6a6c0"
     },
     {
       "sourcePath": "docs/schemas/hytale-adapter-rfc.md",
@@ -337,7 +337,7 @@
       ],
       "title": "Hytale Adapter RFC",
       "description": "Status: planning-only.",
-      "sourceSha256": "83ed9440003f70b7000fd305b59b85e4bc07b8bd698f67ae739ac2c16a070a56"
+      "sourceSha256": "81fe1ee54d61cbedbf0ebf3de4e04ead13adda5513bda3c0d7d2c0d6d6069ae7"
     },
     {
       "sourcePath": "docs/schemas/index.md",
@@ -348,7 +348,7 @@
       ],
       "title": "Schemas",
       "description": "Schemas define the machine-readable contracts used by launchers, modules, packs, and tools.",
-      "sourceSha256": "c09764dd7550549e5391386da54f1d719f3e3de2ec049d178613ff15d88c4a84"
+      "sourceSha256": "3023c803f205f42e2168701a3b072a158196731d734089408d4facd24f0844fd"
     },
     {
       "sourcePath": "docs/standalone-module-guide.md",

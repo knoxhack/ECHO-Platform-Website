@@ -195,8 +195,9 @@ if (exists(sdkDocsSourceDir)) {
   }
 }
 
-if ((releaseSnapshot.repositories || []).length !== 12) {
-  errors.push(`release-index-snapshot.json expected 12 repositories, found ${(releaseSnapshot.repositories || []).length}`);
+const expectedReleaseRepositoryCount = 24;
+if ((releaseSnapshot.repositories || []).length !== expectedReleaseRepositoryCount) {
+  errors.push(`release-index-snapshot.json expected ${expectedReleaseRepositoryCount} repositories, found ${(releaseSnapshot.repositories || []).length}`);
 }
 const releaseAssetCount = (releaseSnapshot.repositories || []).reduce((sum, repository) => sum + (repository.assets || []).length, 0);
 if (releaseAssetCount === 0) errors.push("release-index-snapshot.json has no downloadable assets");
