@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-16T08:37:15.337Z",
+  "generatedAt": "2026-06-16T10:59:25.033Z",
   "sourceRepo": "knoxhack/ECHO-SDK",
   "sourceCommit": "15d6f390d2c3f6241c2997d82c6dd7e7a826c7ea",
   "docCount": 32,
@@ -325,7 +325,7 @@
       ],
       "title": "ECHO Content Graph",
       "description": "The .ECHO Content Graph is a runtime-neutral, portable semantic model of ECHO modules, addons, and gameplay content.",
-      "sourceSha256": "cf762c76bd6c03144a2e634203a8f018a5d900756c4a586d1d028da8cbe6a6c0"
+      "sourceSha256": "9f9c2413f319fbac741dbcf122c17ad48d007b989d628e2f3f7eec0fb33d9211"
     },
     {
       "sourcePath": "docs/schemas/hytale-adapter-rfc.md",
